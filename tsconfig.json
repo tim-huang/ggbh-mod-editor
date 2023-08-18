@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "typeRoots": [
+      "typings/",
+      "electron/electron-env.d.ts"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "%/*": [
+        "electron/common/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "typings"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
