@@ -4,6 +4,8 @@ export interface IElectronAPI {
   readJsonFile: (fileName: string) => Promise<string | undefined>,
   writeJsonFile: (fileName: string, data: string | object) => void,
   loadProject: () => Promise<Record<string, string>>,
+  readConfig: () => Promise<string>,
+  saveConfig: (data: string) => Promise<void>,
 }
 
 declare global {

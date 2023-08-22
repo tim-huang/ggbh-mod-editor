@@ -1,5 +1,5 @@
 <template>
-  <div v-if="projectData.path" class="flex flex-row w-full text-sm text-left place-items-center ">
+  <div v-if="gameData.path" class="flex flex-row w-full text-sm text-left place-items-center ">
     <div class="flex flex-row w-full h-full border border-transparent border-solid place-items-center border-b-gray-200">
       <!-- context menu  -->
       <a-dropdown :trigger="['hover']">
@@ -18,12 +18,13 @@
       <div
         class="flex flex-row cursor-pointer p-0.5 hover:rounded hover:border-gray-300 border-solid border  border-transparent hover:shadow-sm"
         @click="toggleReadonly">
-        <LockTwoTone two-tone-color="#eb2f96" v-if="projectData.readonly" />
+        <LockTwoTone two-tone-color="#eb2f96" v-if="gameData.readonly" />
         <UnlockTwoTone two-tone-color="#52c41a" v-else />
       </div>
       <!-- path -->
-      <span class="px-1 text-gray-500 whitespace-nowrap overflow-ellipsis" :title="projectData.path">{{
-        projectData.path }}</span>
+      <span class="px-1 text-gray-500 whitespace-nowrap overflow-ellipsis" :title="gameData.path">{{
+          gameData.path
+        }}</span>
     </div>
   </div>
   <div v-else>
@@ -38,10 +39,10 @@
 <script setup lang="ts">
 import { h, computed } from 'vue';
 import { ItemType } from 'ant-design-vue';
-import { useProjectData } from '@/data/customized-game-data';
+import { useGameData } from '@/data/customized-game-data';
 import { FolderOpenOutlined, LockTwoTone, UnlockTwoTone, SettingTwoTone, ReloadOutlined, SaveOutlined, FolderViewOutlined } from '@ant-design/icons-vue'
 
-const projectData = useProjectData()
+const {gameData}= useGameData()
 
 let disabled = false
 const onSelectPath = async () => {
@@ -49,27 +50,21 @@ const onSelectPath = async () => {
     disabled = true
 
     const path = await window.api.selectPath()
-    if (path && path != projectData.path) {
-      await projectData.init(path)
-      console.log(projectData.path)
+    if (path && path != gameData.path) {
+      await gameData.init(path)
+      console.log(gameData.path)
     }
     disabled = false
   }
 }
 
-interface MenuItemClickedParam {
-  item: {
-    action?: () => void
-  }
-}
-
-const menuItemClicked = ({ item }: MenuItemClickedParam) => {
+const menuItemClicked = ({ item }: {item: {action?: () => void}}) => {
   if (item.action) {
     item.action()
   }
 }
 
-const toggleReadonly = () => projectData.readonly = !projectData.readonly
+const toggleReadonly = () => gameData.readonly = !gameData.readonly
 
 const openInSysApp = async () => {
   const data = await window.api.readJsonFile('ArtifactShape.json')
@@ -96,7 +91,7 @@ const contextMenuItems = computed<ItemType[]>(() => {
       id: '4',
       icon: h(SaveOutlined),
       label: "Save",
-      disabled: projectData.readonly,
+      disabled: gameData.readonly,
       action: save
     },
     {

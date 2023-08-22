@@ -31,11 +31,22 @@ import { ApiName } from "../common/api-name";
     return ipcRenderer.invoke(ApiName.loadProject, projectPath)
   }
 
+  // read app config
+  const readConfig = () => {
+    return ipcRenderer.invoke(ApiName.readAppConfig)
+  }
+
+  // save app config
+  const saveConfig = (data: string) => {
+    return ipcRenderer.invoke(ApiName.saveAppConfig, data)
+  }
   const api = {
     selectPath,
     readJsonFile,
     writeJsonFile,
     loadProject,
+    readConfig,
+    saveConfig
   }
   window['api'] = api
 })()

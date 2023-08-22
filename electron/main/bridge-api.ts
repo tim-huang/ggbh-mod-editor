@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog, ipcMain } from "electron";
+import { BrowserWindow, dialog, ipcMain, app } from "electron";
 import { ApiName } from "../common/api-name";
 import { join } from 'node:path'
 import fs from 'node:fs/promises'
@@ -23,7 +23,7 @@ export const useBridgeApi = (win: BrowserWindow) => {
   ipcMain.handle(ApiName.selectPath, handleSelectPath)
 
   // read json file
-  async function readJson(_, projectPath: string, fileName: string): Promise<string | undefined> {
+  async function readJson(_: any, projectPath: string, fileName: string): Promise<string | undefined> {
     const filePath = getConfigPath(projectPath, fileName)
     const stat = await fs.lstat(filePath)
     console.log(filePath, "==>", stat)
@@ -38,20 +38,20 @@ export const useBridgeApi = (win: BrowserWindow) => {
 
 
   // write json file
-  async function writeJson(_, projectPath: string, fileName: string, data: string) {
+  async function writeJson(_: any, projectPath: string, fileName: string, data: string) {
     const filePath = getConfigPath(projectPath, fileName)
     const stat = await fs.lstat(filePath)
-    if (!stat || !stat.isFile()) {
+    if (stat?.isFile()) {
       console.log(filePath, 'is not a file.')
       return '[]'
     }
 
-    fs.writeFile(filePath, data, "utf8")
+    return fs.writeFile(filePath, data, "utf8")
   }
   ipcMain.handle(ApiName.writeJson, writeJson)
 
   // load project json file
-  async function loadProject(_, projectPath: string): Promise<Record<string, string>> {
+  async function loadProject(_: any, projectPath: string): Promise<Record<string, string>> {
     const path = getConfigPath(projectPath)
     // get file list
     const files = (await fs.readdir(path)).filter(file => file.endsWith(".json"))
@@ -67,4 +67,24 @@ export const useBridgeApi = (win: BrowserWindow) => {
     return obj
   }
   ipcMain.handle(ApiName.loadProject, loadProject)
+
+  // read app config file
+  async function readAppConfig(): Promise<string | undefined> {
+    const configPath = join(app.getAppPath(), "config.json")
+    const stat = await fs.lstat(configPath)
+    if (!stat.isFile()) {
+      console.log(configPath, 'is not a file.')
+      return "{}"
+    }
+
+    return fs.readFile(configPath, 'utf8')
+  }
+  ipcMain.handle(ApiName.readAppConfig, readAppConfig)
+
+  // save app config file
+  async function saveAppConfig(_: any, data: string) {
+    const configPath = join(app.getAppPath(), "config.json")
+    return fs.writeFile(configPath, data, 'utf8')
+  }
+  ipcMain.handle(ApiName.saveAppConfig, saveAppConfig)
 }

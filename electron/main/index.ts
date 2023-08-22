@@ -3,6 +3,7 @@ import { release } from 'node:os'
 import { join } from 'node:path'
 import { EditorEvent } from '../common/api-name'
 import { useBridgeApi } from './bridge-api'
+import { session } from 'electron'
 
 // The built directory structure
 //
@@ -42,7 +43,17 @@ const preload = join(__dirname, '../preload/index.js')
 const url = process.env.VITE_DEV_SERVER_URL
 const indexHtml = join(process.env.DIST, 'index.html')
 
+// enable vue devtools
+async function enableVueDevtools() {
+  console.log(import.meta.env.VITE_DEVTOOLS_PATH)
+  if (process.env.NODE_ENV === 'development' && import.meta.env.VITE_DEVTOOLS_PATH) {
+    await session.defaultSession.loadExtension(import.meta.env.VITE_DEVTOOLS_PATH)
+  }
+}
+
 async function createWindow() {
+  enableVueDevtools();
+
   win = new BrowserWindow({
     title: 'Main window',
     icon: join(process.env.VITE_PUBLIC, 'favicon.ico'),

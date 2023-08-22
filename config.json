@@ -1,0 +1,48 @@
+{
+  "objects": {
+    "AbilityPointUp": {
+      "inline": [],
+      "fields": {
+        "id": {
+          "code": "id",
+          "label": "ID",
+          "type": "int"
+        },
+        "exp": {
+          "code": "exp",
+          "label": "需求心得",
+          "type": "int"
+        }
+      },
+      "brief": []
+    },
+    "DramaDialogue": {
+      "fields": {
+        "uiType": {
+          "code": "uiType",
+          "label": "UI类型",
+          "type": "int",
+          "dictionary": "dramaUiType"
+        },
+        "speaker": {
+          "code": "speaker",
+          "label": "说话者",
+          "type": "int",
+          "dictionary": "dramaNpc"
+        },
+        "npcLeft": {
+          "code": "npcLeft",
+          "label": "对话NPC左",
+          "type": "int",
+          "dictionary": "dramaNpc"
+        },
+        "npcRight": {
+          "code": "npcRight",
+          "label": "对话NPC右",
+          "type": "int",
+          "dictionary": "dramaNpc"
+        }
+      }
+    }
+  }
+}

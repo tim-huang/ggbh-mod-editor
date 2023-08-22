@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { MessageOutlined } from '@ant-design/icons-vue'
+import { MessageOutlined, SettingOutlined } from '@ant-design/icons-vue'
 import * as VueRouter from 'vue-router'
 import { ItemType } from 'ant-design-vue'
 
@@ -25,6 +25,12 @@ const editorMenuItems: EditorMenuItem[] = [
     path: '/item',
     label: 'Item',
     component: () => import('@/pages/item.vue')
+  },
+  {
+    path: '/app-config',
+    label: 'App Config',
+    icon: h(SettingOutlined),
+    component: () => import('@/pages/app-config.vue')
   }
 ]
 

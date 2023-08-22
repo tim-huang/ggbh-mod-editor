@@ -18,5 +18,7 @@ export enum ApiName {
   selectPath = "dialog:selectPath",
   loadProject = "project:load",
   readJson = "json:read",
-  writeJson = "json:write"
+  writeJson = "json:write",
+  readAppConfig = "app:readConfig",
+  saveAppConfig = "app:saveConfig",
 }

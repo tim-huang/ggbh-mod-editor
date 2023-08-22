@@ -1,25 +1,57 @@
 <template>
-  <data-table-view :config-key="GameDataKey.DramaDialogue" :data-source="dataSource"></data-table-view>
+  <div>
+    <a-page-header :title="selectedDialogue?.type || 'Drama'" @back="() => null">
+      <template #extra>
+        <drama-search-input @item-selected="onSelected" clear-after-selected></drama-search-input>
+        <!--        <a-button type="primary" :icon="h(SearchOutlined)">Find...</a-button>-->
+      </template>
+    </a-page-header>
+    <a-empty v-if="!selectedDialogue"></a-empty>
+    <drama-dialogue-viewer :dialogue-id="selectedDialogue.id"
+      v-else-if="selectedDialogue.type === GameDataKey.DramaDialogue"></drama-dialogue-viewer>
+    <game-data-viewer v-else-if="selectedData" :data-key="selectedDialogue?.type" :data="selectedData"></game-data-viewer>
+  </div>
 </template>
 
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
-import { useProjectData } from '@/data/customized-game-data'
+import { computed, ref, onUnmounted, watch } from 'vue';
+import { useGameData } from '@/data/customized-game-data'
 import { GameDataKey } from '@/common/ggbh-meta';
-import DataTableView from '@/components/data-table-view.vue'
+import DramaSearchInput from '@/components/drama/drama-search-input.vue'
+import DramaDialogueViewer from '@/components/drama/drama-dialogue-viewer.vue'
+import GameDataViewer from '@/components/game-data-viewer.vue'
+import { useRoute } from "vue-router";
 
-const projectData = useProjectData();
+const currentRoute = useRoute()
 
-if (!projectData.json.DramaDialogue) {
-  projectData.load(GameDataKey.DramaDialogue)
-} else {
-  console.log(projectData.json.DramaDialogue)
+const { gameData } = useGameData();
+const selectedDialogue = ref();
 
+if (!gameData.json.DramaDialogue) {
+  gameData.load(GameDataKey.DramaDialogue)
 }
 
-const dataSource = computed(() => projectData.json.DramaDialogue || [])
+const onSelected = (item: { id: string, type: string }) => {
+  selectedDialogue.value = item
+}
 
-onMounted(() => {
+const selectedData = computed(() => {
+  if (!selectedDialogue.value) return
+  const source: GameConfigDataType[] = (selectedDialogue.value.type === GameDataKey.DramaOptions ?
+    gameData.combined.DramaOptions
+    : gameData.combined.DramaDialogue) || [];
+
+  return source?.find(item => item.id == selectedDialogue.value.id)
+})
+
+let watchHandler = watch([() => currentRoute.query.type, () => currentRoute.query.id], () => {
+  if (currentRoute.query.id && currentRoute.query.type) {
+    selectedDialogue.value = { ...currentRoute.query }
+  }
+})
+
+onUnmounted(() => {
+  watchHandler()
 })
 </script>

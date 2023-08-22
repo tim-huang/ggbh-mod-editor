@@ -9,3 +9,11 @@ declare namespace NodeJS {
     VITE_PUBLIC: string
   }
 }
+
+interface ImportMetaEnv {
+  readonly VITE_DEVTOOLS_PATH: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}

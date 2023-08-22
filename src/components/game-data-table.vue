@@ -3,18 +3,15 @@
 </template>
 
 <script lang="ts" setup>
-import '@surely-vue/table/dist/index.less';
 import { GameDataKey, gameMetaInfo } from '@/common/ggbh-meta';
 import { computed } from 'vue';
-// import TownGril from '@/assets/original-game-data/TownGril.json'
-// console.log(TownGril)
 
 const props = defineProps<{
-  configKey: GameDataKey,
+  dataKey: GameDataKey,
   dataSource: ArrayLike<any>,
 }>()
 
-const fields = gameMetaInfo[props.configKey].fields;
+const fields = gameMetaInfo[props.dataKey].fields;
 
 
 const columns = computed(() => {
