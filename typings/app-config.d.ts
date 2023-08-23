@@ -15,7 +15,7 @@ namespace AppConfig {
             object: string;
             field: string;
             multiple?: boolean;
-        }
+        }[]
     }
     export interface GameObjectConfig {
         // a map from field code to field display label

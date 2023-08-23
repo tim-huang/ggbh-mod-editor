@@ -4,10 +4,14 @@
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'refer'">
           <div class="flex flex-row gap-1">
-            <span v-if="record.refer">{{ record.refer.object }}.{{ record.refer.field }}</span>
-            <span v-else-if="record.dictionary">
-              {{ record.dictionary }}
+            <span v-if="record.refer?.length">
+              <a-tag v-for="refer of record.refer">
+                {{ refer.object }}.{{ refer.field }}
+              </a-tag>
             </span>
+            <a-tag v-else-if="record.dictionary">
+              {{ record.dictionary }}
+            </a-tag>
             <span v-else>None</span>
           </div>
         </template>

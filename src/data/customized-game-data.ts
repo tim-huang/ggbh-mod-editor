@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { GameDataKey } from '@/common/ggbh-meta';
 import JSON5 from 'json5'
 import { originalGameData } from './original-game-data';
+import { IAppConfig } from './app-config';
 
 export interface ProjectData {
   path: string,
@@ -101,9 +102,38 @@ export const useGameData = () => {
     if (!key || key === '0') return []
     return gameData.texts[key]?.map(text => text[lang]) || []
   }
-
+  // 查找一个field对应的对象
+  const getReferenceObjectsByField = (field: AppConfig.IFieldConfig, fieldValue: string): Partial<Record<GameDataKey, GameConfigDataType[]>> | undefined => {
+    const result: Partial<Record<GameDataKey, GameConfigDataType[]>> = {}
+    field.refer?.forEach(refer => {
+      const values = refer.multiple ? fieldValue.split('|') : [fieldValue]
+      const found = gameData.combined[refer.object as GameDataKey]
+        .filter(data => values.includes(data[refer.field]))
+      if (found?.length) {
+        result[refer.object as GameDataKey] = found;
+      }
+    })
+    if (Object.keys(result).length) {
+      return result
+    }
+    return undefined
+  }
+  // 查找一个对象各个列引用的其它对象
+  const getReferenceObjects = (currentObject: GameConfigDataType, fields: AppConfig.IFieldConfig[]) => {
+    const objs: Record<string, Partial<Record<GameDataKey, GameConfigDataType[]>>> = {}
+    fields.filter(field => field.refer?.length)
+      .forEach(referField => {
+        const result = getReferenceObjectsByField(referField, currentObject[referField.code])
+        if (result) {
+          objs[referField.code] = result;
+        }
+      })
+    return objs;
+  }
   return {
     gameData,
+    getReferenceObjectsByField,
+    getReferenceObjects,
     fn: {
       getText
     }

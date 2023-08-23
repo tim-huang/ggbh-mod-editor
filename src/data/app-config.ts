@@ -7,6 +7,13 @@ export interface IAppConfig {
     objects?: Partial<Record<GameDataKey, AppConfig.GameObjectConfig>>,
 }
 
+const swap = (arr: any[] | undefined, index1: number, index2: number) => {
+    if (!arr?.length) return;
+    if (index1 < 0 || index1 > arr.length - 1) return;
+    if (index2 < 0 || index2 > arr.length - 1) return;
+    [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
+}
+
 export const useAppConfig = defineStore({
     id: "app-config",
     state: (): { config: IAppConfig } => ({
@@ -26,40 +33,30 @@ export const useAppConfig = defineStore({
             return this.config.objects[key] as AppConfig.GameObjectConfig;
         },
         removeInlineField(key: GameDataKey, code: string) {
-            if (!this.config.objects) {
-                this.config.objects = {};
-            }
-            const obj = this.config.objects[key] = this.config.objects[key] || {};
+            const obj = this.getObject(key);
             obj.inline = obj.inline?.filter(v => v != code)
         },
         addInlineField(key: GameDataKey, code: string) {
-            if (!this.config.objects) {
-                this.config.objects = {};
-            }
-            const obj = this.config.objects[key] = this.config.objects[key] || {};
-            if (obj.inline) {
-                obj.inline.push(code)
-            } else {
-                obj.inline = [code]
-            }
+            const obj = this.getObject(key)
+            obj.inline = obj.inline || []
+            obj.inline.push(code)
+        },
+        moveInlineField(key: GameDataKey, index: number, offset: -1 | 1) {
+            const obj = this.getObject(key)
+            swap(obj.inline, index, index + offset)
         },
         addBriefField(key: GameDataKey, code: string) {
-            if (!this.config.objects) {
-                this.config.objects = {};
-            }
-            const obj = this.config.objects[key] = this.config.objects[key] || {};
-            if (obj.brief) {
-                obj.brief.push(code)
-            } else {
-                obj.brief = [code]
-            }
+            const obj = this.getObject(key)
+            obj.brief = obj.brief || []
+            obj.brief.push(code)
         },
         removeBriefField(key: GameDataKey, code: string) {
-            if (!this.config.objects) {
-                this.config.objects = {};
-            }
-            const obj = this.config.objects[key] = this.config.objects[key] || {};
+            const obj = this.getObject(key)
             obj.brief = obj.brief?.filter(v => v != code)
+        },
+        moveBriefField(key: GameDataKey, index: number, offset: -1 | 1) {
+            const obj = this.getObject(key)
+            swap(obj.brief, index, index + offset)
         },
 
     }
@@ -96,7 +93,6 @@ export const useGameObject = (key: () => GameDataKey) => {
     })
 
     const briefFields = computed<AppConfig.IFieldConfig[]>(() => {
-        console.log(mergedObjectConfig.value.brief)
         return objectConfig.value.brief?.map(code => mergedObjectConfig.value.fields![code]) || [];
     })
 
@@ -105,7 +101,6 @@ export const useGameObject = (key: () => GameDataKey) => {
     })
 
     const mergedBriefFields = computed<AppConfig.IFieldConfig[]>(() => {
-        console.log(mergedObjectConfig.value.brief)
         return mergedObjectConfig.value.brief?.map(code => mergedObjectConfig.value.fields![code]) || [];
     })
 
@@ -116,7 +111,13 @@ export const useGameObject = (key: () => GameDataKey) => {
         }
         return (obj.fields[code] = obj.fields[code] || { code });
     }
-
+    const setField = (field: AppConfig.IFieldConfig) => {
+        const obj = appConfig.getObject(key());
+        if (!obj.fields) {
+            obj.fields = {}
+        }
+        obj.fields[field.code] = field;
+    }
     return {
         appConfig,
         objectConfig,
@@ -125,6 +126,7 @@ export const useGameObject = (key: () => GameDataKey) => {
         mergedObjectConfig,
         mergedInlineFields,
         mergedBriefFields,
-        getOrCreateField
+        getOrCreateField,
+        setField
     }
 }

@@ -19,11 +19,16 @@
         <div class="cursor-pointer">
           <h4 class="align-bottom text-blue-500">
             <info-circle-outlined></info-circle-outlined>
-            {{ data?.uiType }} - {{ dramaUiType[data?.uiType as string] }}
+            <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('uiType')"
+              :field-value="data?.uiType || ''" />
+            <!-- {{ data?.uiType }} - {{ dramaUiType[data?.uiType as string] }} -->
           </h4>
-          <h4 v-if="titles?.length">{{ titles[0] }}</h4>
+          <h4>
+            <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('title')"
+              :field-value="data?.title || ''" />
+          </h4>
         </div>
-        <template #content>
+        <template #content v-if="data">
           <game-data-viewer :data-key="GameDataKey.DramaDialogue" :data="data" />
         </template>
       </a-popover>
@@ -37,17 +42,24 @@
     <div class="w-full h-32 relative">
       <div v-if="data?.npcLeft && data?.npcLeft !== '0'" class="absolute left-4 flex flex-col">
         <img src="/public/images/human.png" height="128" :class="{ 'blur-sm': data.speaker !== '1' }">
-        <span>{{ data?.npcLeft }} - {{ dramaNpc[data?.npcLeft] }}</span>
+        <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('npcLeft')"
+          :field-value="data?.npcLeft || ''" />
+        <!-- <span>{{ data?.npcLeft }} - {{ dramaNpc[data?.npcLeft] }}</span> -->
       </div>
       <div v-if="data?.npcRight && data?.npcRight !== '0'" class="absolute right-4 flex flex-col">
         <img src="/public/images/human.png" height="128" style="transform: rotateY(180deg)"
           :class="{ 'blur-sm': data.speaker !== '2' }">
-        <span>{{ data?.npcRight }} - {{ dramaNpc[data?.npcRight] }}</span>
+        <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('npcRight')"
+          :field-value="data?.npcRight || ''" />
+        <!-- <span>{{ data?.npcRight }} - {{ dramaNpc[data?.npcRight] }}</span> -->
       </div>
     </div>
     <!-- content -->
     <div class="w-full p-4 bg-gray-200 m-2 rounded-lg border border-gray-500 border-solid">
-      <p v-for="(item, index) in textContents"><message-outlined /> {{ item }} </p>
+      <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('dialogue')"
+        :field-value="data?.dialogue || ''" />
+
+      <!-- <p v-for="(item, index) in textContents"><message-outlined /> {{ item }} </p> -->
     </div>
     <!-- options -->
     <a-list item-layout="horizontal" :data-source="options" v-if="options?.length">
@@ -73,12 +85,13 @@
 
 import { useGameData } from "@/data/customized-game-data";
 import { computed, h } from "vue";
-import { dramaUiType, dramaNpc } from "@/data/dict";
 import GameDataViewer from "@/components/game-data-viewer.vue";
 import { CaretRightOutlined, CaretLeftOutlined, InfoCircleOutlined, MessageOutlined } from "@ant-design/icons-vue";
 import { useRouter } from "vue-router";
 import { GameDataKey } from "@/common/ggbh-meta";
 import { ItemType } from "ant-design-vue";
+import FieldDisplay from "../field-display.vue";
+import { useGameObject } from "@/data/app-config";
 
 const props = defineProps<{
   dialogueId: string
@@ -86,6 +99,17 @@ const props = defineProps<{
 
 const router = useRouter();
 const { gameData, fn } = useGameData();
+const { mergedObjectConfig } = useGameObject(() => GameDataKey.DramaDialogue)
+
+// field
+const getField = computed(() => {
+  return (code: string): AppConfig.IFieldConfig => {
+    if (mergedObjectConfig.value.fields) {
+      return mergedObjectConfig.value.fields[code] || { code }
+    }
+    return { code }
+  }
+})
 // current dialogue data
 const data = computed<DramaDialogue | undefined>(() => {
   return (gameData.combined.DramaDialogue as DramaDialogue[])
@@ -107,14 +131,14 @@ const prev = computed<ItemType[]>(() => {
 })
 
 // current dialogue text contents
-const textContents = computed<string[]>(() => {
-  return fn.getText(data.value?.dialogue)
-})
+// const textContents = computed<string[]>(() => {
+//   return fn.getText(data.value?.dialogue)
+// })
 
 // current dialogue title
-const titles = computed<string[]>(() => {
-  return fn.getText(data.value?.title)
-})
+// const titles = computed<string[]>(() => {
+//   return fn.getText(data.value?.title)
+// })
 
 // options
 type LocalOption = {
@@ -131,7 +155,7 @@ const options = computed<LocalOption[]>(() => {
   const found = (gameData.combined.DramaOptions as DramaOptions[])
     .filter((item) => options.indexOf(item.id) != -1)
   return found.map(item => {
-    const option = {
+    const option: LocalOption = {
       option: item,
       text: fn.getText(item.text),
       to: []

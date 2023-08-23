@@ -28,7 +28,7 @@
           "code": "speaker",
           "label": "说话者",
           "type": "int",
-          "dictionary": "dramaNpc"
+          "dictionary": "dramaSpeaker"
         },
         "npcLeft": {
           "code": "npcLeft",
@@ -41,8 +41,136 @@
           "label": "对话NPC右",
           "type": "int",
           "dictionary": "dramaNpc"
+        },
+        "dialogue": {
+          "code": "dialogue",
+          "label": "对话内容",
+          "type": "string",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            },
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "inline": [
+        "dialogue"
+      ],
+      "brief": [
+        "id",
+        "uiType",
+        "dialogue"
+      ]
+    },
+    "LocalText": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "label": " ",
+          "type": "int",
+          "alias": "ID"
+        }
+      },
+      "brief": [
+        "ch"
+      ]
+    },
+    "RoleLogLocal": {
+      "brief": [
+        "ch"
+      ]
+    },
+    "BattleSkillAttack": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "label": "技能名称",
+          "type": "string",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "label": "技能说明",
+          "type": "string",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "BattleSkillPrefixValue": {
+      "fields": {
+        "skillID": {
+          "code": "skillID",
+          "label": "技能ID",
+          "type": "string",
+          "refer": [
+            {
+              "object": "BattleSkillAttack",
+              "field": "id"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "label": "效果说明",
+          "type": "string",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
         }
       }
+    },
+    "DramaOptions": {
+      "fields": {
+        "nextDialogue": {
+          "code": "nextDialogue",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id",
+              "multiple": true
+            }
+          ],
+          "alias": "后续剧情"
+        },
+        "text": {
+          "code": "text",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            },
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "text",
+        "nextDialogue"
+      ]
     }
   }
 }

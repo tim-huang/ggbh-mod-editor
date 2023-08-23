@@ -1,8 +1,9 @@
 <template>
   <a-space direction="vertical">
     <div>
-      <a-tag v-for="field of inlineFields" :key="field.code" closable @close="onClose(field.code)">{{ field.label
-      }}</a-tag>
+      <a-tag v-for="field of inlineFields" :key="field.code" closable @close="onClose(field.code)">
+        {{ field.alias?.trim() || field.label?.trim() || field.code }}
+      </a-tag>
       <!-- add button -->
       <a-dropdown>
         <a-tag class="cursor-pointer" color="blue">

@@ -1,11 +1,18 @@
 <template>
   <span class="mx-0.5">
     <span v-for="field of mergedBriefFields">
-      <a-tag v-if="!field.refer?.object">{{ data[field.code] }}</a-tag>
-      <span v-else-if="referObjects[field.code]?.length">
-        <BriefViewer :data-key="field.refer.object as GameDataKey" :data="referObjects[field.code]![0]!" />
-      </span>
+      <field-display :data-key="props.dataKey" :field="field" :field-value="data[field.code]" />
     </span>
+    <a-tooltip :title="`${dataKey} - ${data.id}`">
+      <a @click="showDetailModal = true">
+        <info-circle-outlined></info-circle-outlined>
+      </a>
+    </a-tooltip>
+    <a-modal v-model:open="showDetailModal" :title="`${dataKey} - ${data.id}`" width="800px">
+      <div class="overflow-y-scroll w-full" style="max-height: 500px">
+        <game-data-viewer :data-key="dataKey" :data="data"></game-data-viewer>
+      </div>
+    </a-modal>
   </span>
 </template>
 
@@ -13,8 +20,10 @@
 
 import { GameDataKey } from '@/common/ggbh-meta';
 import { useGameObject } from "@/data/app-config";
-import { useGameData } from '@/data/customized-game-data';
-import { computed } from 'vue';
+import { ref } from 'vue';
+import { InfoCircleOutlined } from '@ant-design/icons-vue';
+import FieldDisplay from './field-display.vue';
+import GameDataViewer from './game-data-viewer.vue';
 
 const props = defineProps<{
   dataKey: GameDataKey
@@ -22,25 +31,8 @@ const props = defineProps<{
 }>();
 
 const { mergedBriefFields } = useGameObject(() => props.dataKey);
-const { gameData } = useGameData();
 
-const referObjects = computed(() => {
-  const result: Record<string, GameConfigDataType[] | undefined> = {}
-  mergedBriefFields.value.filter(field => field.refer?.object)
-    .forEach(field => {
-      result[field.code] = gameData.combined[field.refer!.object as GameDataKey]
-        .filter(data => data[field.refer!.field] === props.data[field.code])
-    })
-  return result
-})
-
+const showDetailModal = ref<boolean>(false)
 </script>
-
-<script lang="ts">
-export default {
-  name: 'BriefViewer'
-}
-</script>
-
 
 <style scoped></style>

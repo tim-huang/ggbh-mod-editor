@@ -1,5 +1,6 @@
 <template>
-  <a-modal title="Reference" @ok="saveField" v-model:open="openModel" :ok-button-props="{ disabled: okButtonDisabled }">
+  <a-modal title="Reference" @ok="saveField" v-model:open="openModel" :ok-button-props="{ disabled: okButtonDisabled }"
+    width="850px">
     <a-form :model="dialogModel" v-if="dialogModel" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }" size="small">
       <a-form-item label="Code">{{ dialogModel.code }}</a-form-item>
       <a-form-item label="Name">{{ dialogModel.label }}</a-form-item>
@@ -14,17 +15,64 @@
         </a-radio-group>
       </a-form-item>
       <!-- Reference another object -->
-      <div v-if="dialogModel.referType === 'R' && dialogModel.refer">
-        <a-form-item label="Object" :name="['refer', 'object']" :rules="[{ required: true }]">
-          <a-select v-model:value="dialogModel.refer.object" :options="referenceObjects" show-search />
+      <template v-if="dialogModel.referType === 'R' && dialogModel.refer">
+        <a-form-item :wrapper-col="{ offset: 4, span: 20 }" :hasFeedback="false">
+          <template v-if="dialogModel.refer?.length">
+            <div class="grid grid-cols-12 gap-0.5 font-bold">
+              <span class="col-span-5">Object</span>
+              <span class="col-span-5">Field</span>
+              <span class="col-span-1">Multi</span>
+              <span class="col-span-1"></span>
+            </div>
+            <div v-for="( refer, index ) of  dialogModel.refer " :key="index" class="grid grid-cols-12 gap-0.5">
+              <a-form-item :name="['refer', index, 'object']" :rules="[{ required: true }]" class="col-span-5">
+                <a-select v-model:value="refer.object" :options="referenceObjects" show-search />
+              </a-form-item>
+              <a-form-item :name="['refer', index, 'field']" :rules="[{ required: true }]" class="col-span-5">
+                <a-select v-model:value="refer.field" :options="computeReferenceFields(refer.object as GameDataKey)"
+                  show-search />
+              </a-form-item>
+              <a-form-item :name="['refer', index, 'multiple']">
+                <a-checkbox v-model:checked="refer.multiple"></a-checkbox>
+              </a-form-item>
+              <a title="remove" @click="removeRefer(index)">
+                <close-circle-outlined class="text-red-600"></close-circle-outlined>
+              </a>
+            </div>
+          </template>
         </a-form-item>
-        <a-form-item label="Field" :name="['refer', 'field']" :rules="[{ required: true }]">
-          <a-select v-model:value="dialogModel.refer.field" :options="referenceFields" show-search />
+        <!-- <template v-if=" dialogModel.refer?.length "> -->
+        <!--   <div class="grid grid-cols-12"> -->
+        <!--     <span class="col-span-5">Object</span> -->
+        <!--     <span class="col-span-5">Field</span> -->
+        <!--     <span class="col-span-1">Multiple</span> -->
+        <!--     <span class="col-span-1"></span> -->
+        <!--   </div> -->
+        <!--   <div v-for="( refer, index ) of  dialogModel.refer " :key=" index " class="grid grid-cols-12"> -->
+        <!--     <a-form-item :name=" ['refer', index, 'object'] " :rules=" [{ required: true }] " class="col-span-5"> -->
+        <!--       <a-select v-model:value=" refer.object " :options=" referenceObjects " show-search /> -->
+        <!--     </a-form-item> -->
+        <!--     <a-form-item :name=" ['refer', index, 'field'] " :rules=" [{ required: true }] " class="col-span-5"> -->
+        <!--       <a-select v-model:value=" refer.field " :options=" computeReferenceFields(refer.object as GameDataKey) " -->
+        <!--         show-search /> -->
+        <!--     </a-form-item> -->
+        <!--     <a-form-item :name=" ['refer', index, 'multiple'] " :wrapper-col=" { offset: 4, span: 20 } "> -->
+        <!--       <a-checkbox v-model:checked=" refer.multiple "></a-checkbox> -->
+        <!--     </a-form-item> -->
+        <!--     <a> -->
+        <!--       <close-circle-outlined class="text-red-600"></close-circle-outlined> -->
+        <!--     </a> -->
+        <!--   </div> -->
+        <!-- </template> -->
+        <a-form-item :wrapper-col="{ offset: 4, span: 20 }">
+          <a-button @click="addNewReference">
+            <template #icon>
+              <plus-outlined></plus-outlined>
+            </template>
+            Add Reference
+          </a-button>
         </a-form-item>
-        <a-form-item :name="['refer', 'multiple']" :wrapper-col="{ offset: 4, span: 20 }">
-          <a-checkbox v-model:checked="dialogModel.refer.multiple">Multiple</a-checkbox>
-        </a-form-item>
-      </div>
+      </template>
       <!-- Refer to a dictionary -->
       <div v-else-if="dialogModel.referType === 'D'">
         <a-form-item label="Dictionary" name="dictionary" :rules="[{ required: true }]">
@@ -44,6 +92,7 @@ import { useGameObject } from '@/data/app-config'
 import { GameDataKey, gameMetaInfo } from '@/common/ggbh-meta';
 import { useVModel } from '@vueuse/core';
 import { getSelectOptions } from '@/data/dict';
+import { PlusOutlined, CloseCircleOutlined } from '@ant-design/icons-vue';
 
 const props = defineProps<{
   dataKey: GameDataKey,
@@ -56,10 +105,10 @@ const emit = defineEmits<{
 }>();
 
 const openModel = useVModel(props, 'open', emit)
-const { getOrCreateField, mergedObjectConfig } = useGameObject(() => props.dataKey)
+const { setField, mergedObjectConfig } = useGameObject(() => props.dataKey)
 
 // form model
-type DialogModel = AppConfig.IFieldConfig & { referType?: 'N' | 'D' | 'R' }
+type DialogModel = AppConfig.IFieldConfig & { referType?: 'N' | 'D' | 'R', type?: string }
 const dialogModel = ref<DialogModel>();
 const stopPropsWatch = watchEffect(() => {
   const field: DialogModel = (mergedObjectConfig.value.fields || {})[props.code];
@@ -69,7 +118,7 @@ const stopPropsWatch = watchEffect(() => {
     if (field.dictionary) {
       dialogModel.value.referType = 'D'
     } else if (field.refer) {
-      dialogModel.value.refer = { ...field.refer }
+      dialogModel.value.refer = field.refer.map(r => ({ ...r }))
       dialogModel.value.referType = 'R';
     } else {
       dialogModel.value.referType = 'N'
@@ -89,48 +138,72 @@ const okButtonDisabled = computed<boolean>(() => {
   if (dialogModel.value.referType === 'D') {
     return !dialogModel.value.dictionary
   } else if (dialogModel.value.referType === 'R') {
-    return !(dialogModel.value.refer?.object && dialogModel.value.refer?.field)
+    return !!dialogModel.value.refer?.some((refer) => (refer.object || refer.field) && (!refer.object || !refer.field))
+      || !dialogModel.value.refer?.filter(r => r.object && r.field)?.length
   }
   return false
 })
 
+// add new reference
+const addNewReference = () => {
+  if (!dialogModel.value || dialogModel.value.referType !== 'R') return;
+  if (!dialogModel.value.refer?.length) {
+    dialogModel.value.refer = []
+  }
+  dialogModel.value.refer!.push({
+    object: "",
+    field: "",
+  })
+}
 // refer type changed
 const referTypeChanged = (e: any) => {
   if (!dialogModel.value) return
   if (e.target.value === 'R' && !dialogModel.value?.refer) {
-    dialogModel.value.refer = {
-      object: "",
-      field: ""
-    }
+    dialogModel.value.refer = []
   }
 }
 
+// remove a refer
+const removeRefer = (index: number) => {
+  if (!dialogModel.value?.refer?.length) return;
+  if (index < 0 || index > dialogModel.value.refer.length - 1) {
+    return
+  }
+  dialogModel.value.refer.splice(index, 1)
+}
 // save field
 const saveField = () => {
-  const field = getOrCreateField(props.code);
-  Object.assign(field, dialogModel.value, { referType: undefined })
-  console.log(field, dialogModel.value)
-  if (dialogModel.value?.referType !== 'R') {
+  // const field = getOrCreateField(props.code);
+  const field = Object.assign({}, dialogModel.value);
+  // Object.assign(field, dialogModel.value, { referType: undefined, label: undefined, type: undefined })
+  field.refer = field.refer?.filter((r) => r.field && r.object)
+  if (dialogModel.value?.referType !== 'R' || !field.refer?.length) {
     delete field.refer
   }
   if (dialogModel.value?.referType !== 'D') {
     delete field.dictionary
   }
+  delete field.referType;
+  delete field.label;
+  delete field.type;
+  setField(field);
   openModel.value = false
 }
 
 // datasource for reference object select
 const referenceObjects = Object.keys(gameMetaInfo).filter(key => key != props.dataKey).map(key => ({ value: key, label: key }))
 // datasource for reference field select
-const referenceFields = computed(() => {
-  if (!dialogModel.value?.refer?.object) return []
-  const { mergedObjectConfig } = useGameObject(() => dialogModel.value!.refer!.object! as GameDataKey)
-  return Object.values(mergedObjectConfig.value.fields!).map((field) => {
-    return {
-      value: field.code,
-      label: field.alias || field.label
-    }
-  })
+const computeReferenceFields = computed(() => {
+  return (object: GameDataKey) => {
+    if (!object) return []
+    const { mergedObjectConfig } = useGameObject(() => object)
+    return Object.values(mergedObjectConfig.value.fields!).map((field) => {
+      return {
+        value: field.code,
+        label: field.code + " - " + (field.alias || field.label)
+      }
+    })
+  }
 })
 
 // datasource for dictionary select

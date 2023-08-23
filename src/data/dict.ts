@@ -22,16 +22,21 @@ const dramaNpc: Record<string, string> = {
     "12": "NPC-C",
 }
 
+const dramaSpeaker: Record<string, string> = {
+    "1": "左侧NPC",
+    "2": "右侧NPC",
+}
 
 const dictMetaInfo: Record<string, string> = {
     "dramaUiType": "剧情类型",
-    "dramaNpc": "剧情NPC"
+    "dramaNpc": "剧情NPC",
+    "dramaSpeaker": "发言人"
 }
 
 export type DictionaryId = keyof (typeof dictMetaInfo)
 
 const dictMap: Record<DictionaryId, Record<string, string>> = {
-    dramaUiType, dramaNpc,
+    dramaUiType, dramaNpc, dramaSpeaker,
     dictionary: dictMetaInfo
 }
 

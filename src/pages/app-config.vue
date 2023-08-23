@@ -17,7 +17,7 @@
           <h4>Brief Display</h4>
           <a-descriptions bordered size="small" :column="1">
             <a-descriptions-item label="Display Fields">
-              <brief-viewer-config :data-key="dataKey" />
+              <display-mode-config :data-key="dataKey" display-mode="brief" />
             </a-descriptions-item>
             <a-descriptions-item label="Display Sample">
               <brief-viewer v-if="randomData" :data-key="dataKey" :data="randomData" />
@@ -27,7 +27,7 @@
           <h4>Inline Display</h4>
           <a-descriptions bordered size="small" :column="1">
             <a-descriptions-item label="Display Fields">
-              <inline-viewer-config :data-key="dataKey" />
+              <display-mode-config :data-key="dataKey" display-mode="inline" />
             </a-descriptions-item>
             <a-descriptions-item label="Display Sample">
               <inline-viewer v-if="randomData" :data-key="dataKey" :data="randomData" />
@@ -44,6 +44,7 @@
     <div class="flex flex-row-reverse m-2 gap-2">
       <a-button @click="resetConfig" :disabled="ioBusy">Reset</a-button>
       <a-button type="primary" @click="saveConfig" :disabled="ioBusy">Save</a-button>
+      <a-button @click="randomDataTrigger++" v-if="activeKey === '2'">Refresh Random Data</a-button>
     </div>
   </div>
 </template>
@@ -52,9 +53,8 @@
 import { GameDataKey, gameMetaInfo } from "@/common/ggbh-meta";
 import { computed, onMounted, ref } from 'vue';
 import { useGameData } from '@/data/customized-game-data';
-import InlineViewerConfig from '@/components/app-config/inline-viewer-config.vue'
+import DisplayModeConfig from '@/components/app-config/display-mode-config.vue'
 import InlineViewer from '@/components/inline-viewer.vue';
-import BriefViewerConfig from '@/components/app-config/brief-viewer-config.vue'
 import BriefViewer from '@/components/brief-viewer.vue';
 import FieldsConfig from "@/components/app-config/fields-config.vue";
 import { useAppConfig } from "@/data/app-config";
@@ -68,10 +68,12 @@ const dataKey = ref<GameDataKey>(Object.keys(gameMetaInfo)[0] as GameDataKey)
 
 const options = Object.keys(gameMetaInfo).map((k) => ({ value: k, label: k }))
 
+const randomDataTrigger = ref(0);
+
 const randomData = computed<GameConfigDataType | undefined>(() => {
   const arr = gameData.combined[dataKey.value];
   if (arr?.length) {
-    const idx = Math.floor(Math.random() * arr.length);
+    const idx = Math.floor(Math.random() * arr.length) + randomDataTrigger.value * 0;
     return arr[idx]
   }
 })
