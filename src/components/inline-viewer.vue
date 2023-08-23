@@ -12,6 +12,7 @@
 import { GameDataKey } from '@/common/ggbh-meta';
 import { useGameObject } from "@/data/app-config";
 import FieldDisplay from './field-display.vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
   dataKey: GameDataKey
@@ -20,6 +21,15 @@ const props = defineProps<{
 
 const { mergedInlineFields } = useGameObject(() => props.dataKey);
 
+const columns = computed(() => {
+  mergedInlineFields.value.map(field => {
+    return {
+      label: field.alias?.trim() || field.label?.trim() || field.code,
+      dataIndex: field.code,
+      key: field.code
+    }
+  })
+})
 </script>
 
 

@@ -32,9 +32,9 @@ const useProjectData = defineStore({
           arr.forEach(item => map[item.id] = item);
           (this.json[k as GameDataKey] as GameConfigDataType[])?.forEach(data => {
             if (map[data.id]) {
-              Object.assign(map[data.id], data)
+              Object.assign(map[data.id], data, { customized: 'M' })
             } else {
-              arr.push({ ...data })
+              arr.push({ ...data, customized: 'A' })
             }
           })
         }
@@ -92,6 +92,19 @@ const useProjectData = defineStore({
 
       return this.json[key]
     },
+    updateObject(key: GameDataKey, obj: GameConfigDataType) {
+      const original = originalGameData[key].find(o => o.id === obj.id);
+      this.json[key] = this.json[key] || [];
+      if (!original) {
+        this.json[key]!.push(obj)
+      } else {
+        // compare object
+        const diff: GameConfigDataType = { id: obj.id }
+        Object.entries(obj).filter(([k, v]) => original[k] !== v)
+          .forEach(([k, v]) => diff[k] = v);
+        this.json[key].push(diff);
+      }
+    }
   }
 })
 
@@ -103,7 +116,8 @@ export const useGameData = () => {
     return gameData.texts[key]?.map(text => text[lang]) || []
   }
   // 查找一个field对应的对象
-  const getReferenceObjectsByField = (field: AppConfig.IFieldConfig, fieldValue: string): Partial<Record<GameDataKey, GameConfigDataType[]>> | undefined => {
+  const getReferenceObjectsByField = (field: AppConfig.IFieldConfig, fieldValue?: string): Partial<Record<GameDataKey, GameConfigDataType[]>> | undefined => {
+    if (!fieldValue) return;
     const result: Partial<Record<GameDataKey, GameConfigDataType[]>> = {}
     field.refer?.forEach(refer => {
       const values = refer.multiple ? fieldValue.split('|') : [fieldValue]

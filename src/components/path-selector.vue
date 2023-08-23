@@ -1,32 +1,32 @@
 <template>
   <div v-if="gameData.path" class="flex flex-row w-full text-sm text-left place-items-center ">
-    <div class="flex flex-row w-full h-full border border-transparent border-solid place-items-center border-b-gray-200">
-      <!-- context menu  -->
-      <a-dropdown :trigger="['hover']">
-        <span title="Context menu"
-          class="flex flex-row place-items-center p-0.5 hover:rounded hover:border-gray-300 border-solid border  border-transparent hover:shadow-sm">
-          <SettingTwoTone class="text-blue-600"></SettingTwoTone>
-        </span>
-        <template #overlay>
-          <a-menu class="text-sm" :items="contextMenuItems" @click="menuItemClicked">
-          </a-menu>
-        </template>
-      </a-dropdown>
-      <!-- Project path (static) -->
-      <span class="px-1 text-gray-500 min-w-fit">Project Path:</span>
-      <!-- readonly (icons)-->
-      <div
-        class="flex flex-row cursor-pointer p-0.5 hover:rounded hover:border-gray-300 border-solid border  border-transparent hover:shadow-sm"
-        @click="toggleReadonly">
-        <LockTwoTone two-tone-color="#eb2f96" v-if="gameData.readonly" />
-        <UnlockTwoTone two-tone-color="#52c41a" v-else />
-      </div>
-      <!-- path -->
-      <span class="px-1 text-gray-500 whitespace-nowrap overflow-ellipsis" :title="gameData.path">{{
-          gameData.path
-        }}</span>
+    <!-- <div class="flex flex-row w-full h-full"> -->
+    <!-- context menu  -->
+    <a-dropdown :trigger="['hover']">
+      <span title="Context menu"
+        class="flex flex-row place-items-center p-0.5 hover:rounded hover:border-gray-300 border-solid border  border-transparent hover:shadow-sm">
+        <SettingTwoTone class="text-blue-600"></SettingTwoTone>
+      </span>
+      <template #overlay>
+        <a-menu class="text-sm" :items="contextMenuItems" @click="menuItemClicked">
+        </a-menu>
+      </template>
+    </a-dropdown>
+    <!-- Project path (static) -->
+    <span class="px-1 text-gray-500 min-w-fit">Project Path:</span>
+    <!-- readonly (icons)-->
+    <div
+      class="flex flex-row cursor-pointer p-0.5 hover:rounded hover:border-gray-300 border-solid border  border-transparent hover:shadow-sm"
+      @click="toggleReadonly">
+      <LockTwoTone two-tone-color="#eb2f96" v-if="gameData.readonly" />
+      <UnlockTwoTone two-tone-color="#52c41a" v-else />
     </div>
+    <!-- path -->
+    <span class="px-1 text-gray-500 whitespace-nowrap overflow-ellipsis" :title="gameData.path">{{
+      gameData.path
+    }}</span>
   </div>
+  <!-- </div> -->
   <div v-else>
     <!-- select path -->
     <div class="flex flex-col justify-center h-full place-items-center">
@@ -42,7 +42,7 @@ import { ItemType } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
 import { FolderOpenOutlined, LockTwoTone, UnlockTwoTone, SettingTwoTone, ReloadOutlined, SaveOutlined, FolderViewOutlined } from '@ant-design/icons-vue'
 
-const {gameData}= useGameData()
+const { gameData } = useGameData()
 
 let disabled = false
 const onSelectPath = async () => {
@@ -58,7 +58,7 @@ const onSelectPath = async () => {
   }
 }
 
-const menuItemClicked = ({ item }: {item: {action?: () => void}}) => {
+const menuItemClicked = ({ item }: { item: { action?: () => void } }) => {
   if (item.action) {
     item.action()
   }

@@ -3,8 +3,9 @@ import PathSelector from '@/components/path-selector.vue'
 import MainView from '@/pages/main-view.vue'
 import { useStyleProvider } from 'ant-design-vue';
 import { useGameData } from "@/data/customized-game-data"
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { UseStyleProviderProps } from 'ant-design-vue/es/_util/cssinjs/StyleContext';
+import { useAppConfig } from './data/app-config';
 
 const { gameData } = useGameData();
 
@@ -14,6 +15,9 @@ const styleProvider = reactive<UseStyleProviderProps>({
 })
 useStyleProvider(styleProvider)
 
+// load config
+const appConfig = useAppConfig();
+onMounted(appConfig.init)
 
 </script>
 

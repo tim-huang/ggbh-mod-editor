@@ -56,9 +56,31 @@
               "field": "key"
             }
           ]
+        },
+        "title": {
+          "code": "title",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "options": {
+          "code": "options",
+          "refer": [
+            {
+              "object": "DramaOptions",
+              "field": "id",
+              "multiple": true
+            }
+          ]
         }
       },
       "inline": [
+        "uiType",
+        "title",
+        "options",
         "dialogue"
       ],
       "brief": [
@@ -171,6 +193,32 @@
         "text",
         "nextDialogue"
       ]
+    },
+    "FortuitousEvent": {
+      "inline": [
+        "name",
+        "type",
+        "trigger",
+        "function"
+      ],
+      "brief": [
+        "name"
+      ],
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "type": {
+          "code": "type",
+          "dictionary": "fortuitousEventType"
+        }
+      }
     }
   }
 }
