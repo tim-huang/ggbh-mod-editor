@@ -14,13 +14,7 @@
         <!-- sub title -->
         <div class="text-sm text-gray-500 flex flex-row">
           <!-- project path -->
-          <a-tag color="blue">
-            <template #icon>
-              <folder-open-outlined></folder-open-outlined>
-            </template>
-            <span>{{ gameData.path }}</span>
-          </a-tag>
-          <!-- readonly -->
+          <path-selector></path-selector>
           <a-tag @click="gameData.readonly = !gameData.readonly" class="cursor-pointer"
             :color="gameData.readonly ? 'red' : 'green'">
             <template #icon>
@@ -28,6 +22,11 @@
               <unlock-outlined v-else></unlock-outlined>
             </template>
             <span>{{ gameData.readonly ? "Readonly" : "Writable" }}</span>
+          </a-tag>
+          <!-- dirty -->
+          <a-tag @click="onSaveProject" v-if="gameData.dirty" color="red" class="cursor-pointer">
+            <save-outlined></save-outlined>
+            Dirty
           </a-tag>
           <!-- <path-selector></path-selector> -->
         </div>
@@ -55,10 +54,11 @@
 import { computed, ref } from 'vue';
 import { menuItems } from '@/router'
 import { useRoute, useRouter } from 'vue-router'
-import PathSelector from '@/components/path-selector.vue'
-import { MenuOutlined, FolderOpenOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined } from '@ant-design/icons-vue';
+import { MenuOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined, SaveOutlined } from '@ant-design/icons-vue';
 import { ItemType } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
+import { usePending } from '@/utils/use';
+import PathSelector from './path-selector.vue';
 
 const route = useRoute();
 const { gameData } = useGameData();
@@ -81,6 +81,8 @@ const gotoLink = ({ key }: { key: string }) => {
   }
 }
 
+// save project
+const { fn: onSaveProject } = usePending(gameData.save)
 </script>
 
 <style scoped>

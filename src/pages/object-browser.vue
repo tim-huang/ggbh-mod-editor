@@ -41,7 +41,7 @@
           <a-button @click="editorDrawerVisible = false">Cancel</a-button>
         </a-space>
       </template>
-      <object-editor v-if="dataKey && data" :data-key="dataKey" :object-id="data.id" :ref="editorRef"
+      <object-editor v-if="dataKey && data" :data-key="dataKey" :object-id="data.id" ref="editorRef"
         :labelStyle="{ 'max-width': '300px' }"></object-editor>
     </a-drawer>
   </div>
@@ -56,13 +56,20 @@ import { computed, ref } from 'vue';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import { useWindowSize } from '@vueuse/core';
 import { Modal } from 'ant-design-vue';
+import { useGameData } from '@/data/customized-game-data';
 
 const dataKey = ref<GameDataKey>()
-const data = ref<GameObjectData>()
+const dataId = ref<string>()
 const onNodeSelected = ({ type, item }: { type: GameDataKey, item: GameObjectData }) => {
   dataKey.value = type;
-  data.value = item;
+  dataId.value = item.id;
 }
+
+const { gameData } = useGameData();
+const data = computed(() => {
+  if (!dataKey.value || !dataId.value) return;
+  return gameData.combined[dataKey.value]?.find(o => o.id === dataId.value);
+})
 
 const { width } = useWindowSize();
 
@@ -79,12 +86,14 @@ const onSave = () => {
 }
 // remove customization
 const onRemove = () => {
-  // TODO: remove customization
+  if (!dataKey.value || !dataId.value) return
   Modal.confirm({
     title: 'Remove Customization',
     content: `You are about to remove customization on ${title.value}, are you sure?`,
     onOk: () => {
-      alert('removed')
+      if (dataKey.value && data.value) {
+        gameData.remove(dataKey.value, data.value.id)
+      }
     }
   })
 }

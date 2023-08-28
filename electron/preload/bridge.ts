@@ -20,7 +20,7 @@ import { ApiName } from "../common/api-name";
 
   // write json file
   const writeJsonFile = (fileName: string, jsonData: any) => {
-    return ipcRenderer.invoke(ApiName.writeJson, projectPath, fileName, jsonData)
+    return ipcRenderer.invoke(ApiName.writeJson, projectPath, fileName + ".json", jsonData)
   }
 
   // load project
@@ -40,13 +40,20 @@ import { ApiName } from "../common/api-name";
   const saveConfig = (data: string) => {
     return ipcRenderer.invoke(ApiName.saveAppConfig, data)
   }
+
+  // open project path in sys app
+  const openProjectInSysApp = () => {
+    return ipcRenderer.invoke(ApiName.openProjectInSysApp, projectPath)
+  }
+
   const api = {
     selectPath,
     readJsonFile,
     writeJsonFile,
     loadProject,
     readConfig,
-    saveConfig
+    saveConfig,
+    openProjectInSysApp
   }
   window['api'] = api
 })()

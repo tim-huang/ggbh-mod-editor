@@ -46,6 +46,7 @@ onUnmounted(stopWatchingProps)
 
 // save
 const save = () => {
+  console.log("save", model.value)
   gameData.updateObject(props.dataKey, model.value)
 }
 

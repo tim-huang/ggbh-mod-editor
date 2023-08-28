@@ -6,6 +6,7 @@ export interface IElectronAPI {
   loadProject: () => Promise<Record<string, string>>,
   readConfig: () => Promise<string>,
   saveConfig: (data: string) => Promise<void>,
+  openProjectInSysApp: () => Promise<void>,
 }
 
 declare global {

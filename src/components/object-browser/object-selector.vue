@@ -70,7 +70,13 @@ const customizedOnly = ref<boolean>(false);
 
 const options = computed(() => {
   return (props.dataKeyRestrict?.length ? props.dataKeyRestrict : Object.keys(gameMetaInfo))
-    .map((k) => ({ value: k, label: k }))
+    .filter(k => !customizedOnly.value || gameData.combined[k as GameDataKey]?.some(o => o.customized))
+    .map((k) => {
+      return {
+        value: k,
+        label: k + ' (' + gameData.combined[k as GameDataKey]?.filter(o => !customizedOnly.value || o.customized).length + ')'
+      }
+    })
 });
 
 const dataKey = ref<GameDataKey>(props.dataKeyRestrict?.length ? props.dataKeyRestrict[0] : GameDataKey.ArtifactShape);

@@ -2,13 +2,12 @@ import { defineStore } from 'pinia';
 import { GameDataKey } from '@/common/ggbh-meta';
 import JSON5 from 'json5'
 import { originalGameData } from './original-game-data';
-import { IAppConfig } from './app-config';
 
 export interface ProjectData {
   path: string,
   readonly: boolean,
-  json: Partial<GameConfigDataMap>,
-  dirty: Partial<Record<GameDataKey, boolean>>,
+  json: Partial<Record<GameDataKey, GameObjectData[]>>,
+  dirtyMap: Partial<Record<GameDataKey, boolean>>,
 }
 
 const useProjectData = defineStore({
@@ -17,7 +16,7 @@ const useProjectData = defineStore({
     path: "",
     readonly: false,
     json: {},
-    dirty: {},
+    dirtyMap: {},
   }),
   getters: {
     /**
@@ -56,6 +55,9 @@ const useProjectData = defineStore({
         map[rll.keyID].push(rll)
       })
       return map;
+    },
+    dirty(): boolean {
+      return Object.values(this.dirtyMap).includes(true)
     }
   },
   actions: {
@@ -99,11 +101,44 @@ const useProjectData = defineStore({
         this.json[key]!.push(obj)
       } else {
         // compare object
+        const ignoreFields = ['customized']
         const diff: GameObjectData = { id: obj.id }
-        Object.entries(obj).filter(([k, v]) => original[k] !== v)
+        Object.entries(obj).filter(([k, v]) => !ignoreFields.includes(k) && original[k] !== v)
           .forEach(([k, v]) => diff[k] = v);
-        this.json[key].push(diff);
+
+        if (Object.keys(diff).length > 1) { // obj is diferent from original object
+          // replace customized data
+          this.json[key] = this.json[key] || [];
+          const idx = this.json[key]!.findIndex(o => o.id === obj.id);
+          diff.id = obj.id;
+          if (idx >= 0) {
+            (this.json[key]!)[idx] = diff;
+          } else {
+            this.json[key]!.push(diff);
+          }
+        } else {
+          // remove customized
+          this.json[key] = this.json[key]?.filter(o => o.id !== obj.id)
+        }
       }
+      console.debug(this.json[key])
+      this.dirtyMap[key] = true;
+    },
+    remove(key: GameDataKey, id: string) {
+      if (this.json[key] && this.json[key]!.find(o => o.id === id)) {
+        this.json[key] = this.json[key]?.filter(o => o.id !== id);
+        this.dirtyMap[key] = true;
+      }
+
+    },
+    async save() {
+      const promises = Object.entries(this.dirtyMap).map(([key, dirty]) => {
+        if (dirty) {
+          window.api.writeJsonFile(key, JSON.stringify(this.json[key as GameDataKey] || [], null, 2))
+        }
+      });
+      await Promise.all(promises)
+      this.dirtyMap = {} as Partial<Record<GameDataKey, boolean>>;
     }
   }
 })

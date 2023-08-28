@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog, ipcMain, app } from "electron";
+import { BrowserWindow, dialog, ipcMain, app, shell } from "electron";
 import { ApiName } from "../common/api-name";
 import { join } from 'node:path'
 import fs from 'node:fs/promises'
@@ -41,7 +41,7 @@ export const useBridgeApi = (win: BrowserWindow) => {
   async function writeJson(_: any, projectPath: string, fileName: string, data: string) {
     const filePath = getConfigPath(projectPath, fileName)
     const stat = await fs.lstat(filePath)
-    if (stat?.isFile()) {
+    if (stat && !stat.isFile()) {
       console.log(filePath, 'is not a file.')
       return '[]'
     }
@@ -87,4 +87,10 @@ export const useBridgeApi = (win: BrowserWindow) => {
     return fs.writeFile(configPath, data, 'utf8')
   }
   ipcMain.handle(ApiName.saveAppConfig, saveAppConfig)
+
+  // open project path in sys app
+  async function openInSysApp(_: any, path: string) {
+    shell.openPath(path);
+  }
+  ipcMain.handle(ApiName.openProjectInSysApp, openInSysApp)
 }

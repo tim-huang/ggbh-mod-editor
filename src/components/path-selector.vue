@@ -3,28 +3,18 @@
     <!-- <div class="flex flex-row w-full h-full"> -->
     <!-- context menu  -->
     <a-dropdown :trigger="['hover']">
-      <span title="Context menu"
-        class="flex flex-row place-items-center p-0.5 hover:rounded hover:border-gray-300 border-solid border  border-transparent hover:shadow-sm">
-        <SettingTwoTone class="text-blue-600"></SettingTwoTone>
-      </span>
+      <a><a-tag color="blue" class="cursor-pointer text-xs">
+          <template #icon>
+            <folder-open-outlined></folder-open-outlined>
+          </template>
+          <span>{{ gameData.path }}</span>
+          <span class="text-red-600" v-if="gameData.dirty">*</span>
+        </a-tag></a>
       <template #overlay>
         <a-menu class="text-sm" :items="contextMenuItems" @click="menuItemClicked">
         </a-menu>
       </template>
     </a-dropdown>
-    <!-- Project path (static) -->
-    <span class="px-1 text-gray-500 min-w-fit">Project Path:</span>
-    <!-- readonly (icons)-->
-    <div
-      class="flex flex-row cursor-pointer p-0.5 hover:rounded hover:border-gray-300 border-solid border  border-transparent hover:shadow-sm"
-      @click="toggleReadonly">
-      <LockTwoTone two-tone-color="#eb2f96" v-if="gameData.readonly" />
-      <UnlockTwoTone two-tone-color="#52c41a" v-else />
-    </div>
-    <!-- path -->
-    <span class="px-1 text-gray-500 whitespace-nowrap overflow-ellipsis" :title="gameData.path">{{
-      gameData.path
-    }}</span>
   </div>
   <!-- </div> -->
   <div v-else>
@@ -38,9 +28,9 @@
 
 <script setup lang="ts">
 import { h, computed } from 'vue';
-import { ItemType } from 'ant-design-vue';
+import { ItemType, Modal } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
-import { FolderOpenOutlined, LockTwoTone, UnlockTwoTone, SettingTwoTone, ReloadOutlined, SaveOutlined, FolderViewOutlined } from '@ant-design/icons-vue'
+import { FolderOpenOutlined, ReloadOutlined, SaveOutlined, FolderViewOutlined } from '@ant-design/icons-vue'
 import { usePending } from '@/utils/use';
 
 const emits = defineEmits<{
@@ -53,7 +43,6 @@ const { fn: onSelectPath } = usePending(async () => {
   const path = await window.api.selectPath();
   if (path && path !== gameData.path) {
     await gameData.init(path);
-    console.log(path, "is selected");
     path && emits("selected", path)
   }
 });
@@ -64,19 +53,27 @@ const menuItemClicked = ({ item }: { item: { action?: () => void } }) => {
   }
 }
 
-const toggleReadonly = () => gameData.readonly = !gameData.readonly
-
 const openInSysApp = async () => {
-  const data = await window.api.readJsonFile('ArtifactShape.json')
-  console.log(JSON.parse(data || ''))
+  window.api.openProjectInSysApp();
 }
 
+const { fn: saveProject, pending } = usePending(gameData.save);
+const { fn: reloadProject } = usePending(() => gameData.init(gameData.path));
+
 const reload = () => {
-  window.alert("reload project")
+  if (gameData.dirty) {
+    Modal.confirm({
+      title: 'Reload project',
+      content: 'Unsaved changes will be discarded, are you sure?',
+      onOk() {
+        reloadProject()
+      }
+    })
+  }
 }
 
 const save = () => {
-  window.alert("save project")
+  saveProject()
 }
 
 const contextMenuItems = computed<ItemType[]>(() => {
@@ -85,19 +82,21 @@ const contextMenuItems = computed<ItemType[]>(() => {
       key: '0',
       icon: h(FolderOpenOutlined),
       label: "Open project...",
+      disabled: pending.value,
       action: onSelectPath
     },
     {
       id: '4',
       icon: h(SaveOutlined),
       label: "Save",
-      disabled: gameData.readonly,
+      disabled: gameData.readonly || pending.value || !gameData.dirty,
       action: save
     },
     {
       id: '3',
       icon: h(ReloadOutlined),
       label: "Reload",
+      disabled: pending.value || !gameData.dirty,
       action: reload
     },
     {

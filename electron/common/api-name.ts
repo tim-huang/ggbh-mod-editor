@@ -14,6 +14,10 @@ export interface WindowMessage<T> {
 
 
 
+
+
+
+
 export enum ApiName {
   selectPath = "dialog:selectPath",
   loadProject = "project:load",
@@ -21,4 +25,5 @@ export enum ApiName {
   writeJson = "json:write",
   readAppConfig = "app:readConfig",
   saveAppConfig = "app:saveConfig",
+  openProjectInSysApp = "project:openProjectInSysApp"
 }
