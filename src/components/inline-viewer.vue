@@ -16,7 +16,7 @@ import { computed } from 'vue';
 
 const props = defineProps<{
   dataKey: GameDataKey
-  data: GameConfigDataType
+  data: GameObjectData
 }>();
 
 const { mergedInlineFields } = useGameObject(() => props.dataKey);

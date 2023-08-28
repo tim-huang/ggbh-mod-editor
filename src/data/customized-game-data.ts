@@ -24,13 +24,13 @@ const useProjectData = defineStore({
      * 合并修改数据与原始数据，用于展示、选择
      */
     combined() {
-      const copy: Partial<Record<string, GameConfigDataType[]>> = {};
-      Object.entries(originalGameData).forEach(([k, v]: [string, GameConfigDataType[]]) => {
-        const arr: GameConfigDataType[] = v.map(obj => ({ ...obj }))
+      const copy: Partial<Record<string, GameObjectData[]>> = {};
+      Object.entries(originalGameData).forEach(([k, v]: [string, GameObjectData[]]) => {
+        const arr: GameObjectData[] = v.map(obj => ({ ...obj }))
         if (this.json[k as GameDataKey]) {
-          const map: Record<string, GameConfigDataType> = {};
+          const map: Record<string, GameObjectData> = {};
           arr.forEach(item => map[item.id] = item);
-          (this.json[k as GameDataKey] as GameConfigDataType[])?.forEach(data => {
+          (this.json[k as GameDataKey] as GameObjectData[])?.forEach(data => {
             if (map[data.id]) {
               Object.assign(map[data.id], data, { customized: 'M' })
             } else {
@@ -65,7 +65,7 @@ const useProjectData = defineStore({
      */
     async init(path: string) {
       const data = await window.api.loadProject();
-      const json: Partial<Record<GameDataKey, GameConfigDataType[]>> = {}
+      const json: Partial<Record<GameDataKey, GameObjectData[]>> = {}
       for (let key of Object.keys(data)) {
         if (!data[key] || !data[key].trim()) {
           continue
@@ -92,14 +92,14 @@ const useProjectData = defineStore({
 
       return this.json[key]
     },
-    updateObject(key: GameDataKey, obj: GameConfigDataType) {
+    updateObject(key: GameDataKey, obj: GameObjectData) {
       const original = originalGameData[key].find(o => o.id === obj.id);
       this.json[key] = this.json[key] || [];
       if (!original) {
         this.json[key]!.push(obj)
       } else {
         // compare object
-        const diff: GameConfigDataType = { id: obj.id }
+        const diff: GameObjectData = { id: obj.id }
         Object.entries(obj).filter(([k, v]) => original[k] !== v)
           .forEach(([k, v]) => diff[k] = v);
         this.json[key].push(diff);
@@ -116,11 +116,11 @@ export const useGameData = () => {
     return gameData.texts[key]?.map(text => text[lang]) || []
   }
   // 查找一个field对应的对象
-  const getReferenceObjectsByField = (field: AppConfig.IFieldConfig, fieldValue?: string): Partial<Record<GameDataKey, GameConfigDataType[]>> | undefined => {
+  const getReferenceObjectsByField = (field: AppConfig.IFieldConfig, fieldValue?: string): Partial<Record<GameDataKey, GameObjectData[]>> | undefined => {
     if (!fieldValue) return;
-    const result: Partial<Record<GameDataKey, GameConfigDataType[]>> = {}
+    const result: Partial<Record<GameDataKey, GameObjectData[]>> = {}
     field.refer?.forEach(refer => {
-      const values = refer.multiple ? fieldValue.split('|') : [fieldValue]
+      const values = field.multiple ? fieldValue.split('|') : [fieldValue]
       const found = gameData.combined[refer.object as GameDataKey]
         .filter(data => values.includes(data[refer.field]))
       if (found?.length) {
@@ -133,8 +133,8 @@ export const useGameData = () => {
     return undefined
   }
   // 查找一个对象各个列引用的其它对象
-  const getReferenceObjects = (currentObject: GameConfigDataType, fields: AppConfig.IFieldConfig[]) => {
-    const objs: Record<string, Partial<Record<GameDataKey, GameConfigDataType[]>>> = {}
+  const getReferenceObjects = (currentObject: GameObjectData, fields: AppConfig.IFieldConfig[]) => {
+    const objs: Record<string, Partial<Record<GameDataKey, GameObjectData[]>>> = {}
     fields.filter(field => field.refer?.length)
       .forEach(referField => {
         const result = getReferenceObjectsByField(referField, currentObject[referField.code])

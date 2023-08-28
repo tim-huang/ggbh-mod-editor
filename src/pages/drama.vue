@@ -38,7 +38,7 @@ const onSelected = (item: { id: string, type: string }) => {
 
 const selectedData = computed(() => {
   if (!selectedDialogue.value) return
-  const source: GameConfigDataType[] = (selectedDialogue.value.type === GameDataKey.DramaOptions ?
+  const source: GameObjectData[] = (selectedDialogue.value.type === GameDataKey.DramaOptions ?
     gameData.combined.DramaOptions
     : gameData.combined.DramaDialogue) || [];
 

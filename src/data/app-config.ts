@@ -23,6 +23,14 @@ export const useAppConfig = defineStore({
         async init() {
             const config = await window.api.readConfig();
             this.config = JSON5.parse(config)
+            // Object.values(this.config.objects || {}).forEach(obj => {
+            //     Object.values(obj.fields || {}).forEach(field => {
+            //         if (field.refer?.some(r => r.multiple)) {
+            //             field.multiple = true
+            //         }
+            //         field.refer?.forEach(r => delete r.multiple)
+            //     })
+            // })
         },
         async save() {
             return window.api.saveConfig(JSON.stringify(this.config, null, 2))

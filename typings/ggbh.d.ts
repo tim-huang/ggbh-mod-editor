@@ -1,11 +1,11 @@
-interface AbilityPointUp extends GameConfigDataType {
+interface AbilityPointUp extends GameObjectData {
   // ID int
   id: string;
   // 需求心得 int
   exp: string;
 }
 
-interface AppellationFortuitous extends GameConfigDataType {
+interface AppellationFortuitous extends GameObjectData {
   // 奇遇表ID int
   id: string;
   // 剧情ID int
@@ -18,7 +18,7 @@ interface AppellationFortuitous extends GameConfigDataType {
   worthRate: string;
 }
 
-interface AppellationGrant extends GameConfigDataType {
+interface AppellationGrant extends GameObjectData {
   // 道号ID int
   id: string;
   // 类型 int
@@ -41,14 +41,14 @@ interface AppellationGrant extends GameConfigDataType {
   roleLogID: string;
 }
 
-interface AppellationSymbolNamed extends GameConfigDataType {
+interface AppellationSymbolNamed extends GameObjectData {
   // ID int
   id: string;
   // 符号 string
   name: string;
 }
 
-interface AppellationTitle extends GameConfigDataType {
+interface AppellationTitle extends GameObjectData {
   // ID int
   id: string;
   // 道号类型 int[]
@@ -109,7 +109,7 @@ interface AppellationTitle extends GameConfigDataType {
   lossLogID: string;
 }
 
-interface ArtifactShape extends GameConfigDataType {
+interface ArtifactShape extends GameObjectData {
   // 道具ID int
   id: string;
   // 初始境界 int
@@ -170,7 +170,7 @@ interface ArtifactShape extends GameConfigDataType {
   useRange: string;
 }
 
-interface ArtifactShapeCommon extends GameConfigDataType {
+interface ArtifactShapeCommon extends GameObjectData {
   // 法宝境界 int
   id: string;
   // 标准容纳魂力 int
@@ -183,7 +183,7 @@ interface ArtifactShapeCommon extends GameConfigDataType {
   spCostDuration: string;
 }
 
-interface ArtifactShapeFire extends GameConfigDataType {
+interface ArtifactShapeFire extends GameObjectData {
   // 真火ID int
   id: string;
   // 持续时间 int
@@ -198,7 +198,7 @@ interface ArtifactShapeFire extends GameConfigDataType {
   mixedAdd: string;
 }
 
-interface ArtifactShapeMaterial extends GameConfigDataType {
+interface ArtifactShapeMaterial extends GameObjectData {
   // 炼器图谱技能ID int
   id: string;
   // 炼器资质要求 int
@@ -227,14 +227,14 @@ interface ArtifactShapeMaterial extends GameConfigDataType {
   shape: string;
 }
 
-interface ArtifactShapeMixed extends GameConfigDataType {
+interface ArtifactShapeMixed extends GameObjectData {
   // 道具ID int
   id: string;
   // 杂质值 int
   mixed: string;
 }
 
-interface ArtifactShapeRefine extends GameConfigDataType {
+interface ArtifactShapeRefine extends GameObjectData {
   // 境界ID int
   id: string;
   // 消耗道具 int
@@ -245,7 +245,7 @@ interface ArtifactShapeRefine extends GameConfigDataType {
   money: string;
 }
 
-interface ArtifactShapeRepair extends GameConfigDataType {
+interface ArtifactShapeRepair extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -254,7 +254,7 @@ interface ArtifactShapeRepair extends GameConfigDataType {
   value: string;
 }
 
-interface ArtifactShapeRepairSub extends GameConfigDataType {
+interface ArtifactShapeRepairSub extends GameObjectData {
   // 境界ID int
   id: string;
   // 炼器材料数量 int
@@ -269,7 +269,7 @@ interface ArtifactShapeRepairSub extends GameConfigDataType {
   costMoney: string;
 }
 
-interface ArtifactShapeUpgrade extends GameConfigDataType {
+interface ArtifactShapeUpgrade extends GameObjectData {
   // 境界ID int
   id: string;
   // 升级材料道具ID int
@@ -288,7 +288,7 @@ interface ArtifactShapeUpgrade extends GameConfigDataType {
   materialArea: string;
 }
 
-interface ArtifactSprite extends GameConfigDataType {
+interface ArtifactSprite extends GameObjectData {
   // ID int
   id: string;
   // 名称 string
@@ -341,7 +341,7 @@ interface ArtifactSprite extends GameConfigDataType {
   lifeRequire: string;
 }
 
-interface ArtifactSpriteArt extends GameConfigDataType {
+interface ArtifactSpriteArt extends GameObjectData {
   // 技能ID int
   id: string;
   // 器灵ID int
@@ -368,7 +368,7 @@ interface ArtifactSpriteArt extends GameConfigDataType {
   desc: string;
 }
 
-interface ArtifactSpriteClose extends GameConfigDataType {
+interface ArtifactSpriteClose extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -377,7 +377,7 @@ interface ArtifactSpriteClose extends GameConfigDataType {
   value: string;
 }
 
-interface ArtifactSpriteDialogue extends GameConfigDataType {
+interface ArtifactSpriteDialogue extends GameObjectData {
   // ID int
   id: string;
   // 器灵ID int
@@ -402,7 +402,7 @@ interface ArtifactSpriteDialogue extends GameConfigDataType {
   vocal: string;
 }
 
-interface ArtifactSpriteDialogueSub extends GameConfigDataType {
+interface ArtifactSpriteDialogueSub extends GameObjectData {
   // ID int
   id: string;
   // 器灵ID int
@@ -419,7 +419,7 @@ interface ArtifactSpriteDialogueSub extends GameConfigDataType {
   vocal: string;
 }
 
-interface ArtifactSpriteEquip extends GameConfigDataType {
+interface ArtifactSpriteEquip extends GameObjectData {
   // ID int
   id: string;
   // 修正数值 string
@@ -436,7 +436,7 @@ interface ArtifactSpriteEquip extends GameConfigDataType {
   skillAnim: string;
 }
 
-interface ArtifactSpriteLevel extends GameConfigDataType {
+interface ArtifactSpriteLevel extends GameObjectData {
   // ID int
   id: string;
   // 器灵ID int
@@ -447,7 +447,7 @@ interface ArtifactSpriteLevel extends GameConfigDataType {
   exp: string;
 }
 
-interface ArtifactSpriteSkill extends GameConfigDataType {
+interface ArtifactSpriteSkill extends GameObjectData {
   // ID int
   id: string;
   // 器灵ID int
@@ -458,7 +458,7 @@ interface ArtifactSpriteSkill extends GameConfigDataType {
   skillID: string;
 }
 
-interface ArtifactSpriteStroy extends GameConfigDataType {
+interface ArtifactSpriteStroy extends GameObjectData {
   // 器灵ID int
   id: string;
   // 种族 string
@@ -469,7 +469,7 @@ interface ArtifactSpriteStroy extends GameConfigDataType {
   memory: string;
 }
 
-interface ArtifactSpriteTalent extends GameConfigDataType {
+interface ArtifactSpriteTalent extends GameObjectData {
   // ID int
   id: string;
   // 器灵ID int
@@ -534,14 +534,14 @@ interface ArtifactSpriteTalent extends GameConfigDataType {
   activeCost: string;
 }
 
-interface ArtifactSpriteTalentCost extends GameConfigDataType {
+interface ArtifactSpriteTalentCost extends GameObjectData {
   // 当前激活数量 int
   id: string;
   // 额外激活消耗 string
   addCost: string;
 }
 
-interface BattleAIBossValue extends GameConfigDataType {
+interface BattleAIBossValue extends GameObjectData {
   // ID int
   id: string;
   // 组ID int
@@ -570,7 +570,7 @@ interface BattleAIBossValue extends GameConfigDataType {
   next: string;
 }
 
-interface BattleAIBossValueCrazy extends GameConfigDataType {
+interface BattleAIBossValueCrazy extends GameObjectData {
   // ID int
   id: string;
   // 组ID int
@@ -599,7 +599,7 @@ interface BattleAIBossValueCrazy extends GameConfigDataType {
   next: string;
 }
 
-interface BattleAIDefaultValue extends GameConfigDataType {
+interface BattleAIDefaultValue extends GameObjectData {
   // ID int
   id: string;
   // 警戒范围 string
@@ -640,7 +640,7 @@ interface BattleAIDefaultValue extends GameConfigDataType {
   IdleType: string;
 }
 
-interface BattleAbilityBase extends GameConfigDataType {
+interface BattleAbilityBase extends GameObjectData {
   // 心法ID int
   id: string;
   // 名称 string
@@ -671,7 +671,7 @@ interface BattleAbilityBase extends GameConfigDataType {
   desc: string;
 }
 
-interface BattleAbilityCombine extends GameConfigDataType {
+interface BattleAbilityCombine extends GameObjectData {
   // 组合ID int
   id: string;
   // 心法类型 string
@@ -690,7 +690,7 @@ interface BattleAbilityCombine extends GameConfigDataType {
   itemDesc: string;
 }
 
-interface BattleAbilitySuitBase extends GameConfigDataType {
+interface BattleAbilitySuitBase extends GameObjectData {
   // ID int
   id: string;
   // 套装名称 string
@@ -731,7 +731,7 @@ interface BattleAbilitySuitBase extends GameConfigDataType {
   icon: string;
 }
 
-interface BattleBarrier extends GameConfigDataType {
+interface BattleBarrier extends GameObjectData {
   // 障碍物ID int
   id: string;
   // 生命值 int
@@ -740,7 +740,7 @@ interface BattleBarrier extends GameConfigDataType {
   isThrough: string;
 }
 
-interface BattleBarrierReward extends GameConfigDataType {
+interface BattleBarrierReward extends GameObjectData {
   // ID int
   id: string;
   // 障碍物ID int
@@ -753,7 +753,7 @@ interface BattleBarrierReward extends GameConfigDataType {
   rewardID: string;
 }
 
-interface BattleEffect extends GameConfigDataType {
+interface BattleEffect extends GameObjectData {
   // 效果ID int
   id: string;
   // 效果类型ID int
@@ -808,7 +808,7 @@ interface BattleEffect extends GameConfigDataType {
   valueDesc: string;
 }
 
-interface BattleEffectBasePower extends GameConfigDataType {
+interface BattleEffectBasePower extends GameObjectData {
   // ID int
   id: string;
   // 受到资质影响 int
@@ -817,14 +817,14 @@ interface BattleEffectBasePower extends GameConfigDataType {
   desc: string;
 }
 
-interface BattleEffectClassName extends GameConfigDataType {
+interface BattleEffectClassName extends GameObjectData {
   // ID int
   id: string;
   // 分类名称 string
   name: string;
 }
 
-interface BattleEffectSelection extends GameConfigDataType {
+interface BattleEffectSelection extends GameObjectData {
   // ID int
   id: string;
   // 基准单位 int
@@ -861,7 +861,7 @@ interface BattleEffectSelection extends GameConfigDataType {
   count: string;
 }
 
-interface BattleEffectTrigger extends GameConfigDataType {
+interface BattleEffectTrigger extends GameObjectData {
   // 触发ID int
   id: string;
   // 类型 int
@@ -870,7 +870,7 @@ interface BattleEffectTrigger extends GameConfigDataType {
   value: string;
 }
 
-interface BattleFunctionList extends GameConfigDataType {
+interface BattleFunctionList extends GameObjectData {
   // ID int
   id: string;
   // 延迟执行 int
@@ -885,7 +885,7 @@ interface BattleFunctionList extends GameConfigDataType {
   weight: string;
 }
 
-interface BattleHaloAttack extends GameConfigDataType {
+interface BattleHaloAttack extends GameObjectData {
   // 光环ID int
   id: string;
   // 碰撞位置 int
@@ -912,7 +912,7 @@ interface BattleHaloAttack extends GameConfigDataType {
   haloEffect: string;
 }
 
-interface BattleHaloBase extends GameConfigDataType {
+interface BattleHaloBase extends GameObjectData {
   // 光环ID int
   id: string;
   // 光环类型 int
@@ -961,7 +961,7 @@ interface BattleHaloBase extends GameConfigDataType {
   haloEffectActive: string;
 }
 
-interface BattleHaloSpecialEffect extends GameConfigDataType {
+interface BattleHaloSpecialEffect extends GameObjectData {
   // 效果ID int
   id: string;
   // 效果类型 int
@@ -978,7 +978,7 @@ interface BattleHaloSpecialEffect extends GameConfigDataType {
   value5: string;
 }
 
-interface BattleHaloSummon extends GameConfigDataType {
+interface BattleHaloSummon extends GameObjectData {
   // 光环ID int
   id: string;
   // 召唤物ID string
@@ -1003,7 +1003,7 @@ interface BattleHaloSummon extends GameConfigDataType {
   noAvatar: string;
 }
 
-interface BattleMissile extends GameConfigDataType {
+interface BattleMissile extends GameObjectData {
   // 弹道ID int
   id: string;
   // 弹道类型 int
@@ -1042,7 +1042,7 @@ interface BattleMissile extends GameConfigDataType {
   shakeID: string;
 }
 
-interface BattleShot96 extends GameConfigDataType {
+interface BattleShot96 extends GameObjectData {
   // ID int
   id: string;
   // 初始伤害百分比 string
@@ -1069,7 +1069,7 @@ interface BattleShot96 extends GameConfigDataType {
   lerp: string;
 }
 
-interface BattleShot97 extends GameConfigDataType {
+interface BattleShot97 extends GameObjectData {
   // ID int
   id: string;
   // 初始伤害百分比 string
@@ -1112,7 +1112,7 @@ interface BattleShot97 extends GameConfigDataType {
   sound: string;
 }
 
-interface BattleShot98 extends GameConfigDataType {
+interface BattleShot98 extends GameObjectData {
   // ID int
   id: string;
   // 连发时CD string
@@ -1131,7 +1131,7 @@ interface BattleShot98 extends GameConfigDataType {
   isAutoShot: string;
 }
 
-interface BattleShot99 extends GameConfigDataType {
+interface BattleShot99 extends GameObjectData {
   // ID int
   id: string;
   // 连发次数 string
@@ -1146,7 +1146,7 @@ interface BattleShot99 extends GameConfigDataType {
   rangeCheck: string;
 }
 
-interface BattleSkillAttack extends GameConfigDataType {
+interface BattleSkillAttack extends GameObjectData {
   // 技能ID int
   id: string;
   // 技能名称 string
@@ -1187,7 +1187,7 @@ interface BattleSkillAttack extends GameConfigDataType {
   desc: string;
 }
 
-interface BattleSkillBase extends GameConfigDataType {
+interface BattleSkillBase extends GameObjectData {
   // 技能ID int
   id: string;
   // 主技能 int
@@ -1224,7 +1224,7 @@ interface BattleSkillBase extends GameConfigDataType {
   skillSub: string;
 }
 
-interface BattleSkillCombine extends GameConfigDataType {
+interface BattleSkillCombine extends GameObjectData {
   // 组合ID int
   id: string;
   // 技能类型 string
@@ -1245,7 +1245,7 @@ interface BattleSkillCombine extends GameConfigDataType {
   itemDesc: string;
 }
 
-interface BattleSkillCondition extends GameConfigDataType {
+interface BattleSkillCondition extends GameObjectData {
   // ID int
   id: string;
   // 条件类型 string
@@ -1258,7 +1258,7 @@ interface BattleSkillCondition extends GameConfigDataType {
   desc: string;
 }
 
-interface BattleSkillCost extends GameConfigDataType {
+interface BattleSkillCost extends GameObjectData {
   // ID int
   id: string;
   // 技能境界 int
@@ -1275,7 +1275,7 @@ interface BattleSkillCost extends GameConfigDataType {
   talentExp: string;
 }
 
-interface BattleSkillDifficult extends GameConfigDataType {
+interface BattleSkillDifficult extends GameObjectData {
   // ID int
   id: string;
   // 需求悟性 int
@@ -1284,7 +1284,7 @@ interface BattleSkillDifficult extends GameConfigDataType {
   desc: string;
 }
 
-interface BattleSkillEffect extends GameConfigDataType {
+interface BattleSkillEffect extends GameObjectData {
   // 技能效果ID int
   id: string;
   // 触发条件ID int
@@ -1299,7 +1299,7 @@ interface BattleSkillEffect extends GameConfigDataType {
   effectID: string;
 }
 
-interface BattleSkillFlashCost extends GameConfigDataType {
+interface BattleSkillFlashCost extends GameObjectData {
   // ID int
   id: string;
   // 技能境界 int
@@ -1310,7 +1310,7 @@ interface BattleSkillFlashCost extends GameConfigDataType {
   flashCost: string;
 }
 
-interface BattleSkillForget extends GameConfigDataType {
+interface BattleSkillForget extends GameObjectData {
   // ID int
   id: string;
   // 技能境界 int
@@ -1321,7 +1321,7 @@ interface BattleSkillForget extends GameConfigDataType {
   output: string;
 }
 
-interface BattleSkillLevel extends GameConfigDataType {
+interface BattleSkillLevel extends GameObjectData {
   // 品质ID int
   id: string;
   // 初始境界 int
@@ -1336,7 +1336,7 @@ interface BattleSkillLevel extends GameConfigDataType {
   gradeD: string;
 }
 
-interface BattleSkillMastery extends GameConfigDataType {
+interface BattleSkillMastery extends GameObjectData {
   // ID int
   id: string;
   // 熟练度名称 string
@@ -1363,14 +1363,14 @@ interface BattleSkillMastery extends GameConfigDataType {
   grade10: string;
 }
 
-interface BattleSkillPrefixLevel extends GameConfigDataType {
+interface BattleSkillPrefixLevel extends GameObjectData {
   // 品质ID int
   id: string;
   // 初始权重 int
   weight: string;
 }
 
-interface BattleSkillPrefixName extends GameConfigDataType {
+interface BattleSkillPrefixName extends GameObjectData {
   // ID int
   id: string;
   // 位置 int
@@ -1383,7 +1383,7 @@ interface BattleSkillPrefixName extends GameConfigDataType {
   en: string;
 }
 
-interface BattleSkillPrefixValue extends GameConfigDataType {
+interface BattleSkillPrefixValue extends GameObjectData {
   // ID int
   id: string;
   // 技能类型 int
@@ -1436,7 +1436,7 @@ interface BattleSkillPrefixValue extends GameConfigDataType {
   selectType: string;
 }
 
-interface BattleSkillRealizeCost extends GameConfigDataType {
+interface BattleSkillRealizeCost extends GameObjectData {
   // 技能境界ID int
   id: string;
   // 消耗道具 int
@@ -1447,7 +1447,7 @@ interface BattleSkillRealizeCost extends GameConfigDataType {
   money: string;
 }
 
-interface BattleSkillSub extends GameConfigDataType {
+interface BattleSkillSub extends GameObjectData {
   // 二段ID int
   id: string;
   // 二段技能触发条件 int
@@ -1480,7 +1480,7 @@ interface BattleSkillSub extends GameConfigDataType {
   destroyMainMissile: string;
 }
 
-interface BattleSkillTrain extends GameConfigDataType {
+interface BattleSkillTrain extends GameObjectData {
   // ID int
   id: string;
   // 技能境界 int
@@ -1505,7 +1505,7 @@ interface BattleSkillTrain extends GameConfigDataType {
   forgetMax: string;
 }
 
-interface BattleSkillValue extends GameConfigDataType {
+interface BattleSkillValue extends GameObjectData {
   // ID int
   id: string;
   // 键 string
@@ -1540,7 +1540,7 @@ interface BattleSkillValue extends GameConfigDataType {
   valueScale: string;
 }
 
-interface BattleStepBase extends GameConfigDataType {
+interface BattleStepBase extends GameObjectData {
   // 身法ID int
   id: string;
   // 身法名称 string
@@ -1581,7 +1581,7 @@ interface BattleStepBase extends GameConfigDataType {
   desc: string;
 }
 
-interface BattleStepCombine extends GameConfigDataType {
+interface BattleStepCombine extends GameObjectData {
   // ID int
   id: string;
   // 身法类型 string
@@ -1600,7 +1600,7 @@ interface BattleStepCombine extends GameConfigDataType {
   itemDesc: string;
 }
 
-interface BattleStepEntry extends GameConfigDataType {
+interface BattleStepEntry extends GameObjectData {
   // ID int
   id: string;
   // 关键词 string
@@ -1609,7 +1609,7 @@ interface BattleStepEntry extends GameConfigDataType {
   title: string;
 }
 
-interface BattleStepParameter extends GameConfigDataType {
+interface BattleStepParameter extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -1618,7 +1618,7 @@ interface BattleStepParameter extends GameConfigDataType {
   value: string;
 }
 
-interface BattleSubMissileTrigger extends GameConfigDataType {
+interface BattleSubMissileTrigger extends GameObjectData {
   // 条件ID int
   id: string;
   // 条件类型 int
@@ -1627,7 +1627,7 @@ interface BattleSubMissileTrigger extends GameConfigDataType {
   value: string;
 }
 
-interface BattleTrail10 extends GameConfigDataType {
+interface BattleTrail10 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1636,7 +1636,7 @@ interface BattleTrail10 extends GameConfigDataType {
   bulletDistance: string;
 }
 
-interface BattleTrail11 extends GameConfigDataType {
+interface BattleTrail11 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1645,7 +1645,7 @@ interface BattleTrail11 extends GameConfigDataType {
   bulletDegree: string;
 }
 
-interface BattleTrail12 extends GameConfigDataType {
+interface BattleTrail12 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 螺旋半径 int
@@ -1654,7 +1654,7 @@ interface BattleTrail12 extends GameConfigDataType {
   angularSpeed: string;
 }
 
-interface BattleTrail13 extends GameConfigDataType {
+interface BattleTrail13 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1669,7 +1669,7 @@ interface BattleTrail13 extends GameConfigDataType {
   angularSpeed: string;
 }
 
-interface BattleTrail14 extends GameConfigDataType {
+interface BattleTrail14 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1682,7 +1682,7 @@ interface BattleTrail14 extends GameConfigDataType {
   stayTime: string;
 }
 
-interface BattleTrail15 extends GameConfigDataType {
+interface BattleTrail15 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1693,7 +1693,7 @@ interface BattleTrail15 extends GameConfigDataType {
   resetNearEnemyDire: string;
 }
 
-interface BattleTrail16 extends GameConfigDataType {
+interface BattleTrail16 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 点类型 int
@@ -1702,7 +1702,7 @@ interface BattleTrail16 extends GameConfigDataType {
   isRotation: string;
 }
 
-interface BattleTrail17 extends GameConfigDataType {
+interface BattleTrail17 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1731,7 +1731,7 @@ interface BattleTrail17 extends GameConfigDataType {
   destroyRegression: string;
 }
 
-interface BattleTrail18 extends GameConfigDataType {
+interface BattleTrail18 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 初始偏移角度 int
@@ -1746,7 +1746,7 @@ interface BattleTrail18 extends GameConfigDataType {
   dereeRangeRecover: string;
 }
 
-interface BattleTrail19 extends GameConfigDataType {
+interface BattleTrail19 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 弹道内CD int
@@ -1755,7 +1755,7 @@ interface BattleTrail19 extends GameConfigDataType {
   bulletNum: string;
 }
 
-interface BattleTrail21 extends GameConfigDataType {
+interface BattleTrail21 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1766,7 +1766,7 @@ interface BattleTrail21 extends GameConfigDataType {
   bulletDegreeTrend: string;
 }
 
-interface BattleTrail22 extends GameConfigDataType {
+interface BattleTrail22 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1787,7 +1787,7 @@ interface BattleTrail22 extends GameConfigDataType {
   maxAngleDis: string;
 }
 
-interface BattleTrail23 extends GameConfigDataType {
+interface BattleTrail23 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1812,7 +1812,7 @@ interface BattleTrail23 extends GameConfigDataType {
   endPosiEffect: string;
 }
 
-interface BattleTrail24 extends GameConfigDataType {
+interface BattleTrail24 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1823,7 +1823,7 @@ interface BattleTrail24 extends GameConfigDataType {
   angleTime: string;
 }
 
-interface BattleTrail25 extends GameConfigDataType {
+interface BattleTrail25 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1834,7 +1834,7 @@ interface BattleTrail25 extends GameConfigDataType {
   sceneCentre: string;
 }
 
-interface BattleTrail26 extends GameConfigDataType {
+interface BattleTrail26 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1847,7 +1847,7 @@ interface BattleTrail26 extends GameConfigDataType {
   chase: string;
 }
 
-interface BattleTrail27 extends GameConfigDataType {
+interface BattleTrail27 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1856,7 +1856,7 @@ interface BattleTrail27 extends GameConfigDataType {
   chase: string;
 }
 
-interface BattleTrail28 extends GameConfigDataType {
+interface BattleTrail28 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1875,7 +1875,7 @@ interface BattleTrail28 extends GameConfigDataType {
   target: string;
 }
 
-interface BattleTrail29 extends GameConfigDataType {
+interface BattleTrail29 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 弹射次数 string
@@ -1896,7 +1896,7 @@ interface BattleTrail29 extends GameConfigDataType {
   popEffect: string;
 }
 
-interface BattleTrail30 extends GameConfigDataType {
+interface BattleTrail30 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 持续时间类型 int
@@ -1921,7 +1921,7 @@ interface BattleTrail30 extends GameConfigDataType {
   modifyDmg: string;
 }
 
-interface BattleTrail31 extends GameConfigDataType {
+interface BattleTrail31 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1932,7 +1932,7 @@ interface BattleTrail31 extends GameConfigDataType {
   shotTime: string;
 }
 
-interface BattleTrail32 extends GameConfigDataType {
+interface BattleTrail32 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 持续时间类型 int
@@ -1949,7 +1949,7 @@ interface BattleTrail32 extends GameConfigDataType {
   mulUseSkill: string;
 }
 
-interface BattleTrail33 extends GameConfigDataType {
+interface BattleTrail33 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -1972,7 +1972,7 @@ interface BattleTrail33 extends GameConfigDataType {
   targetPos: string;
 }
 
-interface BattleTrail34 extends GameConfigDataType {
+interface BattleTrail34 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 int
@@ -1987,7 +1987,7 @@ interface BattleTrail34 extends GameConfigDataType {
   landPos: string;
 }
 
-interface BattleTrail35 extends GameConfigDataType {
+interface BattleTrail35 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -2000,7 +2000,7 @@ interface BattleTrail35 extends GameConfigDataType {
   modifyDmg: string;
 }
 
-interface BattleTrail36 extends GameConfigDataType {
+interface BattleTrail36 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -2021,7 +2021,7 @@ interface BattleTrail36 extends GameConfigDataType {
   warnSize: string;
 }
 
-interface BattleTrail37 extends GameConfigDataType {
+interface BattleTrail37 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 到达鼠标位置后停留时间 int
@@ -2034,12 +2034,12 @@ interface BattleTrail37 extends GameConfigDataType {
   backNum: string;
 }
 
-interface BattleTrail38 extends GameConfigDataType {
+interface BattleTrail38 extends GameObjectData {
   // 轨迹ID int
   id: string;
 }
 
-interface BattleTrail39 extends GameConfigDataType {
+interface BattleTrail39 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 左右移动距离 int
@@ -2048,7 +2048,7 @@ interface BattleTrail39 extends GameConfigDataType {
   speed: string;
 }
 
-interface BattleTrail40 extends GameConfigDataType {
+interface BattleTrail40 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 int
@@ -2065,7 +2065,7 @@ interface BattleTrail40 extends GameConfigDataType {
   endPosiEffect: string;
 }
 
-interface BattleTrail41 extends GameConfigDataType {
+interface BattleTrail41 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 反弹次数 string
@@ -2078,7 +2078,7 @@ interface BattleTrail41 extends GameConfigDataType {
   interval: string;
 }
 
-interface BattleTrail70 extends GameConfigDataType {
+interface BattleTrail70 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 是否旋转 int
@@ -2091,7 +2091,7 @@ interface BattleTrail70 extends GameConfigDataType {
   interval: string;
 }
 
-interface BattleTrail802 extends GameConfigDataType {
+interface BattleTrail802 extends GameObjectData {
   // 光环ID int
   id: string;
   // 子弹数量 string
@@ -2106,7 +2106,7 @@ interface BattleTrail802 extends GameConfigDataType {
   interval: string;
 }
 
-interface BattleTrail803 extends GameConfigDataType {
+interface BattleTrail803 extends GameObjectData {
   // 光环ID int
   id: string;
   // 子弹数量 string
@@ -2115,7 +2115,7 @@ interface BattleTrail803 extends GameConfigDataType {
   firstBullet: string;
 }
 
-interface BattleTrail804 extends GameConfigDataType {
+interface BattleTrail804 extends GameObjectData {
   // 光环ID int
   id: string;
   // 小弹道模型 string
@@ -2134,7 +2134,7 @@ interface BattleTrail804 extends GameConfigDataType {
   bigDmgScale: string;
 }
 
-interface BattleTrail805 extends GameConfigDataType {
+interface BattleTrail805 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 是否在最近目标位置出现 int
@@ -2155,7 +2155,7 @@ interface BattleTrail805 extends GameConfigDataType {
   inScreenCheck: string;
 }
 
-interface BattleTrail806 extends GameConfigDataType {
+interface BattleTrail806 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 范围半径 int
@@ -2180,7 +2180,7 @@ interface BattleTrail806 extends GameConfigDataType {
   secSubInterval: string;
 }
 
-interface BattleTrail901 extends GameConfigDataType {
+interface BattleTrail901 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 随机角度范围 string
@@ -2195,7 +2195,7 @@ interface BattleTrail901 extends GameConfigDataType {
   interval: string;
 }
 
-interface BattleTrail902 extends GameConfigDataType {
+interface BattleTrail902 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 宽度 string
@@ -2210,7 +2210,7 @@ interface BattleTrail902 extends GameConfigDataType {
   interval: string;
 }
 
-interface BattleTrail903 extends GameConfigDataType {
+interface BattleTrail903 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -2227,7 +2227,7 @@ interface BattleTrail903 extends GameConfigDataType {
   rotateMax: string;
 }
 
-interface BattleTrail904 extends GameConfigDataType {
+interface BattleTrail904 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 螺旋半径 int
@@ -2240,7 +2240,7 @@ interface BattleTrail904 extends GameConfigDataType {
   angularSpeed: string;
 }
 
-interface BattleTrail905 extends GameConfigDataType {
+interface BattleTrail905 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -2259,7 +2259,7 @@ interface BattleTrail905 extends GameConfigDataType {
   angularSpeed: string;
 }
 
-interface BattleTrail906 extends GameConfigDataType {
+interface BattleTrail906 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹数量 string
@@ -2276,7 +2276,7 @@ interface BattleTrail906 extends GameConfigDataType {
   time: string;
 }
 
-interface BattleTrail907 extends GameConfigDataType {
+interface BattleTrail907 extends GameObjectData {
   // 轨迹ID int
   id: string;
   // 子弹分布类型 int
@@ -2299,7 +2299,7 @@ interface BattleTrail907 extends GameConfigDataType {
   radius: string;
 }
 
-interface BattleUnitAttr extends GameConfigDataType {
+interface BattleUnitAttr extends GameObjectData {
   // 怪物ID int
   id: string;
   // 名称 string
@@ -2320,7 +2320,7 @@ interface BattleUnitAttr extends GameConfigDataType {
   unitDatas: string;
 }
 
-interface BattleUnitBase extends GameConfigDataType {
+interface BattleUnitBase extends GameObjectData {
   // 基础ID int
   id: string;
   // 模型 string
@@ -2409,7 +2409,7 @@ interface BattleUnitBase extends GameConfigDataType {
   aiValueID: string;
 }
 
-interface BattleUnitDrop extends GameConfigDataType {
+interface BattleUnitDrop extends GameObjectData {
   // ID int
   id: string;
   // 掉落ID int
@@ -2420,7 +2420,7 @@ interface BattleUnitDrop extends GameConfigDataType {
   rewards: string;
 }
 
-interface BattleUnitLevel extends GameConfigDataType {
+interface BattleUnitLevel extends GameObjectData {
   // 等级 int
   id: string;
   // 境界 int
@@ -2485,7 +2485,7 @@ interface BattleUnitLevel extends GameConfigDataType {
   power: string;
 }
 
-interface BattleValueScale extends GameConfigDataType {
+interface BattleValueScale extends GameObjectData {
   // ID int
   id: string;
   // 分组 int
@@ -2498,7 +2498,7 @@ interface BattleValueScale extends GameConfigDataType {
   scale: string;
 }
 
-interface BrokenAltar extends GameConfigDataType {
+interface BrokenAltar extends GameObjectData {
   // 层数ID int
   id: string;
   // 层数ID int
@@ -2521,7 +2521,7 @@ interface BrokenAltar extends GameConfigDataType {
   sceneEffect: string;
 }
 
-interface BrokenAltarParamer extends GameConfigDataType {
+interface BrokenAltarParamer extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -2530,7 +2530,7 @@ interface BrokenAltarParamer extends GameConfigDataType {
   value: string;
 }
 
-interface BrokenLevel extends GameConfigDataType {
+interface BrokenLevel extends GameObjectData {
   // id int
   id: string;
   // 难度 int
@@ -2547,7 +2547,7 @@ interface BrokenLevel extends GameConfigDataType {
   needPassCount: string;
 }
 
-interface BuildingBook extends GameConfigDataType {
+interface BuildingBook extends GameObjectData {
   // ID int
   id: string;
   // 产出使用的初始随机数最小值 int
@@ -2568,7 +2568,7 @@ interface BuildingBook extends GameConfigDataType {
   outputCrazy: string;
 }
 
-interface BuildingHospital extends GameConfigDataType {
+interface BuildingHospital extends GameObjectData {
   // ID int
   id: string;
   // 健康恢复Min int
@@ -2587,7 +2587,7 @@ interface BuildingHospital extends GameConfigDataType {
   costDay: string;
 }
 
-interface BuildingMeditation extends GameConfigDataType {
+interface BuildingMeditation extends GameObjectData {
   // ID int
   id: string;
   // 组ID int
@@ -2600,7 +2600,7 @@ interface BuildingMeditation extends GameConfigDataType {
   costContribution: string;
 }
 
-interface BuildingStorageImmortal extends GameConfigDataType {
+interface BuildingStorageImmortal extends GameObjectData {
   // ID int
   id: string;
   // 触发条件 string
@@ -2619,7 +2619,7 @@ interface BuildingStorageImmortal extends GameConfigDataType {
   time: string;
 }
 
-interface ClothChange extends GameConfigDataType {
+interface ClothChange extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -2628,7 +2628,7 @@ interface ClothChange extends GameConfigDataType {
   value: string;
 }
 
-interface ClothItem extends GameConfigDataType {
+interface ClothItem extends GameObjectData {
   // 道具ID int
   id: string;
   // 衣服ID int
@@ -2647,7 +2647,7 @@ interface ClothItem extends GameConfigDataType {
   weight: string;
 }
 
-interface ClothShopBase extends GameConfigDataType {
+interface ClothShopBase extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -2656,7 +2656,7 @@ interface ClothShopBase extends GameConfigDataType {
   value: string;
 }
 
-interface DefaultKeys extends GameConfigDataType {
+interface DefaultKeys extends GameObjectData {
   // ID int
   id: string;
   // 键位分组 int
@@ -2671,7 +2671,7 @@ interface DefaultKeys extends GameConfigDataType {
   keyID: string;
 }
 
-interface DevilDemonAbsorb extends GameConfigDataType {
+interface DevilDemonAbsorb extends GameObjectData {
   // ID int
   id: string;
   // 境界差距 int
@@ -2684,7 +2684,7 @@ interface DevilDemonAbsorb extends GameConfigDataType {
   addRate: string;
 }
 
-interface DevilDemonBase extends GameConfigDataType {
+interface DevilDemonBase extends GameObjectData {
   // ID int
   id: string;
   // 吸收boss数量上限 int
@@ -2695,7 +2695,7 @@ interface DevilDemonBase extends GameConfigDataType {
   devilDemonCount: string;
 }
 
-interface DevilDemonDrama extends GameConfigDataType {
+interface DevilDemonDrama extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -2704,7 +2704,7 @@ interface DevilDemonDrama extends GameConfigDataType {
   value: string;
 }
 
-interface DevilDemonDramaModelScale extends GameConfigDataType {
+interface DevilDemonDramaModelScale extends GameObjectData {
   // 壶灵ID int
   id: string;
   // 兽形缩放比例 float
@@ -2717,7 +2717,7 @@ interface DevilDemonDramaModelScale extends GameConfigDataType {
   heightQ: string;
 }
 
-interface DevilDemonParamer extends GameConfigDataType {
+interface DevilDemonParamer extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -2726,7 +2726,7 @@ interface DevilDemonParamer extends GameConfigDataType {
   value: string;
 }
 
-interface DevilDemonTeam extends GameConfigDataType {
+interface DevilDemonTeam extends GameObjectData {
   // 玩家境界 int
   id: string;
   // 壶妖队伍数量 int
@@ -2737,7 +2737,7 @@ interface DevilDemonTeam extends GameConfigDataType {
   potmonMaxCount: string;
 }
 
-interface DevilDemonWork extends GameConfigDataType {
+interface DevilDemonWork extends GameObjectData {
   // 区域ID int
   id: string;
   // 历练时长（月份） string
@@ -2746,7 +2746,7 @@ interface DevilDemonWork extends GameConfigDataType {
   workdOutput: string;
 }
 
-interface DevilDemonWorkExp extends GameConfigDataType {
+interface DevilDemonWorkExp extends GameObjectData {
   // ID int
   id: string;
   // 历练区域 int
@@ -2761,14 +2761,14 @@ interface DevilDemonWorkExp extends GameConfigDataType {
   maxExp: string;
 }
 
-interface DramaCondition extends GameConfigDataType {
+interface DramaCondition extends GameObjectData {
   // ID int
   id: string;
   // 条件 string
   condition: string;
 }
 
-interface DramaDialogue extends GameConfigDataType {
+interface DramaDialogue extends GameObjectData {
   // ID int
   id: string;
   // UI类型 int
@@ -2803,7 +2803,7 @@ interface DramaDialogue extends GameConfigDataType {
   nextDialogue: string;
 }
 
-interface DramaFunctionGroup extends GameConfigDataType {
+interface DramaFunctionGroup extends GameObjectData {
   // ID int
   id: string;
   // 组ID int
@@ -2816,7 +2816,7 @@ interface DramaFunctionGroup extends GameConfigDataType {
   weight: string;
 }
 
-interface DramaModel extends GameConfigDataType {
+interface DramaModel extends GameObjectData {
   // ID int
   id: string;
   // 性别 int
@@ -2851,7 +2851,7 @@ interface DramaModel extends GameConfigDataType {
   faceRight: string;
 }
 
-interface DramaNpc extends GameConfigDataType {
+interface DramaNpc extends GameObjectData {
   // ID int
   id: string;
   // 类型 int
@@ -2872,7 +2872,7 @@ interface DramaNpc extends GameConfigDataType {
   repatDialogue: string;
 }
 
-interface DramaOptions extends GameConfigDataType {
+interface DramaOptions extends GameObjectData {
   // 选项ID int
   id: string;
   // 剧情条件 string
@@ -2895,7 +2895,7 @@ interface DramaOptions extends GameConfigDataType {
   nextDialogue: string;
 }
 
-interface DramaTrigger extends GameConfigDataType {
+interface DramaTrigger extends GameObjectData {
   // ID int
   id: string;
   // 类型 int
@@ -2918,7 +2918,7 @@ interface DramaTrigger extends GameConfigDataType {
   function: string;
 }
 
-interface DrawLotResult extends GameConfigDataType {
+interface DrawLotResult extends GameObjectData {
   // ID int
   id: string;
   // 抽签结果 string
@@ -2927,7 +2927,7 @@ interface DrawLotResult extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonBase extends GameConfigDataType {
+interface DungeonBase extends GameObjectData {
   // 基础ID int
   id: string;
   // 副本类型 int
@@ -2988,7 +2988,7 @@ interface DungeonBase extends GameConfigDataType {
   dungeonLog: string;
 }
 
-interface DungeonEffect1001 extends GameConfigDataType {
+interface DungeonEffect1001 extends GameObjectData {
   // ID int
   id: string;
   // 副本ID int
@@ -3025,7 +3025,7 @@ interface DungeonEffect1001 extends GameConfigDataType {
   weight: string;
 }
 
-interface DungeonEffect1002 extends GameConfigDataType {
+interface DungeonEffect1002 extends GameObjectData {
   // ID int
   id: string;
   // 房间索引 int
@@ -3038,14 +3038,14 @@ interface DungeonEffect1002 extends GameConfigDataType {
   bossAttr: string;
 }
 
-interface DungeonEffectBase extends GameConfigDataType {
+interface DungeonEffectBase extends GameObjectData {
   // 效果ID int
   id: string;
   // 效果类型 int
   type: string;
 }
 
-interface DungeonEnemyDesc extends GameConfigDataType {
+interface DungeonEnemyDesc extends GameObjectData {
   // ID int
   id: string;
   // 副本规模 int
@@ -3054,7 +3054,7 @@ interface DungeonEnemyDesc extends GameConfigDataType {
   desc: string;
 }
 
-interface DungeonPowerDesc extends GameConfigDataType {
+interface DungeonPowerDesc extends GameObjectData {
   // ID int
   id: string;
   // 战力倍数（BOSS+小怪/玩家） float
@@ -3063,7 +3063,7 @@ interface DungeonPowerDesc extends GameConfigDataType {
   desc: string;
 }
 
-interface DungeonRoomBase extends GameConfigDataType {
+interface DungeonRoomBase extends GameObjectData {
   // 规模ID int
   id: string;
   // 类型 int
@@ -3082,7 +3082,7 @@ interface DungeonRoomBase extends GameConfigDataType {
   transfer: string;
 }
 
-interface DungeonScaleBase extends GameConfigDataType {
+interface DungeonScaleBase extends GameObjectData {
   // ID int
   id: string;
   // 规模组ID int
@@ -3103,7 +3103,7 @@ interface DungeonScaleBase extends GameConfigDataType {
   monsterNum: string;
 }
 
-interface DungeonSceneBase extends GameConfigDataType {
+interface DungeonSceneBase extends GameObjectData {
   // 场景ID int
   id: string;
   // 场景类型 int
@@ -3132,7 +3132,7 @@ interface DungeonSceneBase extends GameConfigDataType {
   weight: string;
 }
 
-interface DungeonSceneObject extends GameConfigDataType {
+interface DungeonSceneObject extends GameObjectData {
   // ID int
   id: string;
   // 装饰物ID string
@@ -3169,7 +3169,7 @@ interface DungeonSceneObject extends GameConfigDataType {
   barrierType: string;
 }
 
-interface DungeonSpecial47 extends GameConfigDataType {
+interface DungeonSpecial47 extends GameObjectData {
   // ID int
   id: string;
   // 副本ID int
@@ -3194,7 +3194,7 @@ interface DungeonSpecial47 extends GameConfigDataType {
   posiType: string;
 }
 
-interface DungeonSpecial48 extends GameConfigDataType {
+interface DungeonSpecial48 extends GameObjectData {
   // 副本ID int
   id: string;
   // 最小副本等级 int
@@ -3205,7 +3205,7 @@ interface DungeonSpecial48 extends GameConfigDataType {
   rewardID: string;
 }
 
-interface DungeonSpecial49 extends GameConfigDataType {
+interface DungeonSpecial49 extends GameObjectData {
   // 副本ID int
   id: string;
   // 最小副本等级 int
@@ -3216,7 +3216,7 @@ interface DungeonSpecial49 extends GameConfigDataType {
   rewardID: string;
 }
 
-interface DungeonSpecial51 extends GameConfigDataType {
+interface DungeonSpecial51 extends GameObjectData {
   // 副本ID int
   id: string;
   // 分支1剧情1 int
@@ -3257,7 +3257,7 @@ interface DungeonSpecial51 extends GameConfigDataType {
   damageUp: string;
 }
 
-interface DungeonSpecial56 extends GameConfigDataType {
+interface DungeonSpecial56 extends GameObjectData {
   // 副本ID int
   id: string;
   // 互动增加亲密度 int
@@ -3276,7 +3276,7 @@ interface DungeonSpecial56 extends GameConfigDataType {
   intimMaxDrama: string;
 }
 
-interface DungeonSpecial56Trigger extends GameConfigDataType {
+interface DungeonSpecial56Trigger extends GameObjectData {
   // ID int
   id: string;
   // 副本ID int
@@ -3299,7 +3299,7 @@ interface DungeonSpecial56Trigger extends GameConfigDataType {
   probabilityA: string;
 }
 
-interface DungeonSpecial60 extends GameConfigDataType {
+interface DungeonSpecial60 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3308,7 +3308,7 @@ interface DungeonSpecial60 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial61 extends GameConfigDataType {
+interface DungeonSpecial61 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3317,7 +3317,7 @@ interface DungeonSpecial61 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial65 extends GameConfigDataType {
+interface DungeonSpecial65 extends GameObjectData {
   // ID int
   id: string;
   // 房间位置 int[]
@@ -3342,7 +3342,7 @@ interface DungeonSpecial65 extends GameConfigDataType {
   passPositions: string;
 }
 
-interface DungeonSpecial73 extends GameConfigDataType {
+interface DungeonSpecial73 extends GameObjectData {
   // ID int
   id: string;
   // 刷出怪物组 int
@@ -3357,7 +3357,7 @@ interface DungeonSpecial73 extends GameConfigDataType {
   color: string;
 }
 
-interface DungeonSpecial74 extends GameConfigDataType {
+interface DungeonSpecial74 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3366,7 +3366,7 @@ interface DungeonSpecial74 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial75 extends GameConfigDataType {
+interface DungeonSpecial75 extends GameObjectData {
   // ID int
   id: string;
   // 副本编号 int
@@ -3381,7 +3381,7 @@ interface DungeonSpecial75 extends GameConfigDataType {
   specEffects: string;
 }
 
-interface DungeonSpecial75System extends GameConfigDataType {
+interface DungeonSpecial75System extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3390,7 +3390,7 @@ interface DungeonSpecial75System extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial76 extends GameConfigDataType {
+interface DungeonSpecial76 extends GameObjectData {
   // ID int
   id: string;
   // 副本编号 int
@@ -3407,7 +3407,7 @@ interface DungeonSpecial76 extends GameConfigDataType {
   noUnitsDeadTime: string;
 }
 
-interface DungeonSpecial77 extends GameConfigDataType {
+interface DungeonSpecial77 extends GameObjectData {
   // ID int
   id: string;
   // 房间位置 int[]
@@ -3422,7 +3422,7 @@ interface DungeonSpecial77 extends GameConfigDataType {
   sceneBaseID: string;
 }
 
-interface DungeonSpecial80 extends GameConfigDataType {
+interface DungeonSpecial80 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3431,7 +3431,7 @@ interface DungeonSpecial80 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial83 extends GameConfigDataType {
+interface DungeonSpecial83 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3440,7 +3440,7 @@ interface DungeonSpecial83 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial84 extends GameConfigDataType {
+interface DungeonSpecial84 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3449,7 +3449,7 @@ interface DungeonSpecial84 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial85 extends GameConfigDataType {
+interface DungeonSpecial85 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3458,7 +3458,7 @@ interface DungeonSpecial85 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial86 extends GameConfigDataType {
+interface DungeonSpecial86 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3467,7 +3467,7 @@ interface DungeonSpecial86 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial87 extends GameConfigDataType {
+interface DungeonSpecial87 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3476,7 +3476,7 @@ interface DungeonSpecial87 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecial88 extends GameConfigDataType {
+interface DungeonSpecial88 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3485,7 +3485,7 @@ interface DungeonSpecial88 extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecialRoom1 extends GameConfigDataType {
+interface DungeonSpecialRoom1 extends GameObjectData {
   // 宝箱ID int
   id: string;
   // 宝箱名称 string
@@ -3506,7 +3506,7 @@ interface DungeonSpecialRoom1 extends GameConfigDataType {
   unitGroup: string;
 }
 
-interface DungeonSpecialRoom30 extends GameConfigDataType {
+interface DungeonSpecialRoom30 extends GameObjectData {
   // ID int
   id: string;
   // 怪物组 string
@@ -3517,7 +3517,7 @@ interface DungeonSpecialRoom30 extends GameConfigDataType {
   npc: string;
 }
 
-interface DungeonSpecialRoom31 extends GameConfigDataType {
+interface DungeonSpecialRoom31 extends GameObjectData {
   // ID int
   id: string;
   // NPC生成条件 string
@@ -3534,7 +3534,7 @@ interface DungeonSpecialRoom31 extends GameConfigDataType {
   npcDramaID: string;
 }
 
-interface DungeonSpecialRoom77Parameters extends GameConfigDataType {
+interface DungeonSpecialRoom77Parameters extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3543,7 +3543,7 @@ interface DungeonSpecialRoom77Parameters extends GameConfigDataType {
   value: string;
 }
 
-interface DungeonSpecialRoomBase extends GameConfigDataType {
+interface DungeonSpecialRoomBase extends GameObjectData {
   // ID int
   id: string;
   // 生成条件 string
@@ -3564,7 +3564,7 @@ interface DungeonSpecialRoomBase extends GameConfigDataType {
   weight: string;
 }
 
-interface DungeonSpecialRoomTrigger extends GameConfigDataType {
+interface DungeonSpecialRoomTrigger extends GameObjectData {
   // ID int
   id: string;
   // 副本ID int[]
@@ -3579,7 +3579,7 @@ interface DungeonSpecialRoomTrigger extends GameConfigDataType {
   dungeonSpecialRoomBaseID: string;
 }
 
-interface DungeonTrigger extends GameConfigDataType {
+interface DungeonTrigger extends GameObjectData {
   // ID int
   id: string;
   // 副本类型 string
@@ -3614,7 +3614,7 @@ interface DungeonTrigger extends GameConfigDataType {
   weight: string;
 }
 
-interface DungeonUnitBase extends GameConfigDataType {
+interface DungeonUnitBase extends GameObjectData {
   // 怪物组ID int
   id: string;
   // 怪物ID string
@@ -3633,7 +3633,7 @@ interface DungeonUnitBase extends GameConfigDataType {
   weightGrow: string;
 }
 
-interface DungonSpecial74sub extends GameConfigDataType {
+interface DungonSpecial74sub extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3642,7 +3642,7 @@ interface DungonSpecial74sub extends GameConfigDataType {
   value: string;
 }
 
-interface ElderBase extends GameConfigDataType {
+interface ElderBase extends GameObjectData {
   // 神魂ID int
   id: string;
   // 名称 string
@@ -3665,7 +3665,7 @@ interface ElderBase extends GameConfigDataType {
   BigImage: string;
 }
 
-interface ElderCostItem extends GameConfigDataType {
+interface ElderCostItem extends GameObjectData {
   // 神魂等级 int
   id: string;
   // 消耗道具 int
@@ -3676,7 +3676,7 @@ interface ElderCostItem extends GameConfigDataType {
   exp: string;
 }
 
-interface ElderGetExp extends GameConfigDataType {
+interface ElderGetExp extends GameObjectData {
   // ID int
   id: string;
   // 敌人境界 int
@@ -3687,7 +3687,7 @@ interface ElderGetExp extends GameConfigDataType {
   exp: string;
 }
 
-interface ElderLevel extends GameConfigDataType {
+interface ElderLevel extends GameObjectData {
   // ID int
   id: string;
   // 神魂ID int
@@ -3704,7 +3704,7 @@ interface ElderLevel extends GameConfigDataType {
   desc: string;
 }
 
-interface FairyChickenBase extends GameConfigDataType {
+interface FairyChickenBase extends GameObjectData {
   // 编号 int
   id: string;
   // 仙鸡名称 string
@@ -3741,7 +3741,7 @@ interface FairyChickenBase extends GameConfigDataType {
   ability5: string;
 }
 
-interface FairyChickenDress extends GameConfigDataType {
+interface FairyChickenDress extends GameObjectData {
   // 部位ID int
   id: string;
   // 模型 string
@@ -3754,7 +3754,7 @@ interface FairyChickenDress extends GameConfigDataType {
   color: string;
 }
 
-interface FairyChickenRestraint extends GameConfigDataType {
+interface FairyChickenRestraint extends GameObjectData {
   // 类型 int
   id: string;
   // 克制类型 string
@@ -3765,7 +3765,7 @@ interface FairyChickenRestraint extends GameConfigDataType {
   targetEffects: string;
 }
 
-interface FairyChickenSkillBase extends GameConfigDataType {
+interface FairyChickenSkillBase extends GameObjectData {
   // 底层表ID int
   id: string;
   // 技能动画 string
@@ -3798,7 +3798,7 @@ interface FairyChickenSkillBase extends GameConfigDataType {
   timeScaleDur: string;
 }
 
-interface FairyChickenStore extends GameConfigDataType {
+interface FairyChickenStore extends GameObjectData {
   // ID int
   id: string;
   // 道具ID int
@@ -3817,7 +3817,7 @@ interface FairyChickenStore extends GameConfigDataType {
   price: string;
 }
 
-interface FairyChickenSystemBase extends GameConfigDataType {
+interface FairyChickenSystemBase extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3826,7 +3826,7 @@ interface FairyChickenSystemBase extends GameConfigDataType {
   value: string;
 }
 
-interface FairyLeagueParameters extends GameConfigDataType {
+interface FairyLeagueParameters extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3835,7 +3835,7 @@ interface FairyLeagueParameters extends GameConfigDataType {
   value: string;
 }
 
-interface FairyLeagueStoreParameters extends GameConfigDataType {
+interface FairyLeagueStoreParameters extends GameObjectData {
   // ID int
   id: string;
   // 键 string
@@ -3844,7 +3844,7 @@ interface FairyLeagueStoreParameters extends GameConfigDataType {
   value: string;
 }
 
-interface FairyLeagueStoreProp extends GameConfigDataType {
+interface FairyLeagueStoreProp extends GameObjectData {
   // 道具ID int
   id: string;
   // 售卖类型 int
@@ -3857,7 +3857,7 @@ interface FairyLeagueStoreProp extends GameConfigDataType {
   layer: string;
 }
 
-interface FairyLeagueTaskReward extends GameConfigDataType {
+interface FairyLeagueTaskReward extends GameObjectData {
   // ID int
   id: string;
   // 任务ID int
@@ -3868,7 +3868,7 @@ interface FairyLeagueTaskReward extends GameConfigDataType {
   progress: string;
 }
 
-interface FateFeature extends GameConfigDataType {
+interface FateFeature extends GameObjectData {
   // 气运 int
   id: string;
   // 出现条件 string
@@ -3891,7 +3891,7 @@ interface FateFeature extends GameConfigDataType {
   desc: string;
 }
 
-interface FateFeatureGroup extends GameConfigDataType {
+interface FateFeatureGroup extends GameObjectData {
   // ID int
   id: string;
   // 组ID int
@@ -3900,14 +3900,14 @@ interface FateFeatureGroup extends GameConfigDataType {
   fateFeatureID: string;
 }
 
-interface FateGradeRequire extends GameConfigDataType {
+interface FateGradeRequire extends GameObjectData {
   // ID int
   id: string;
   // 来源说明文本 string
   desc: string;
 }
 
-interface FieldSkillBase extends GameConfigDataType {
+interface FieldSkillBase extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -3916,7 +3916,7 @@ interface FieldSkillBase extends GameConfigDataType {
   value: string;
 }
 
-interface FieldSkillItem extends GameConfigDataType {
+interface FieldSkillItem extends GameObjectData {
   // ID int
   id: string;
   // 属性类型 int
@@ -3935,7 +3935,7 @@ interface FieldSkillItem extends GameConfigDataType {
   range: string;
 }
 
-interface FieldSkillType extends GameConfigDataType {
+interface FieldSkillType extends GameObjectData {
   // ID int
   id: string;
   // 属性类型 int
@@ -3948,7 +3948,7 @@ interface FieldSkillType extends GameConfigDataType {
   desc: string;
 }
 
-interface FortuitousEvent extends GameConfigDataType {
+interface FortuitousEvent extends GameObjectData {
   // ID int
   id: string;
   // 奇遇名称 string
@@ -3991,7 +3991,7 @@ interface FortuitousEvent extends GameConfigDataType {
   priority: string;
 }
 
-interface FortuitousParameters extends GameConfigDataType {
+interface FortuitousParameters extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -4000,7 +4000,7 @@ interface FortuitousParameters extends GameConfigDataType {
   value: string;
 }
 
-interface GameDifficultyCrazy extends GameConfigDataType {
+interface GameDifficultyCrazy extends GameObjectData {
   // 境界ID int
   id: string;
   // 怪物属性 string
@@ -4023,7 +4023,7 @@ interface GameDifficultyCrazy extends GameConfigDataType {
   bossDmgPotmon: string;
 }
 
-interface GameDifficultyValue extends GameConfigDataType {
+interface GameDifficultyValue extends GameObjectData {
   // 难度ID int
   id: string;
   // 大地图额外回复的格子总数量百分比 int
@@ -4054,7 +4054,7 @@ interface GameDifficultyValue extends GameConfigDataType {
   dropRate: string;
 }
 
-interface GameItemCost extends GameConfigDataType {
+interface GameItemCost extends GameObjectData {
   // ID int
   id: string;
   // 消耗组ID int
@@ -4075,7 +4075,7 @@ interface GameItemCost extends GameConfigDataType {
   forceCost: string;
 }
 
-interface GameItemReward extends GameConfigDataType {
+interface GameItemReward extends GameObjectData {
   // ID int
   id: string;
   // 产出组ID int
@@ -4102,7 +4102,7 @@ interface GameItemReward extends GameConfigDataType {
   weight: string;
 }
 
-interface GameItemRewardAbilitySuit extends GameConfigDataType {
+interface GameItemRewardAbilitySuit extends GameObjectData {
   // id int
   id: string;
   // 产出组ID int
@@ -4119,7 +4119,7 @@ interface GameItemRewardAbilitySuit extends GameConfigDataType {
   rate: string;
 }
 
-interface GameItemRewardArtifact extends GameConfigDataType {
+interface GameItemRewardArtifact extends GameObjectData {
   // id int
   id: string;
   // 产出组ID int
@@ -4138,7 +4138,7 @@ interface GameItemRewardArtifact extends GameConfigDataType {
   weight: string;
 }
 
-interface GameKeyCode extends GameConfigDataType {
+interface GameKeyCode extends GameObjectData {
   // ID int
   id: string;
   // 文本 string
@@ -4147,21 +4147,21 @@ interface GameKeyCode extends GameConfigDataType {
   custon: string;
 }
 
-interface GameLoadScenesBG extends GameConfigDataType {
+interface GameLoadScenesBG extends GameObjectData {
   // ID int
   id: string;
   // 背景 string
   bg: string;
 }
 
-interface GameLoadScenesTip extends GameConfigDataType {
+interface GameLoadScenesTip extends GameObjectData {
   // ID int
   id: string;
   // 描述 string
   text: string;
 }
 
-interface GameParameter extends GameConfigDataType {
+interface GameParameter extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -4170,7 +4170,7 @@ interface GameParameter extends GameConfigDataType {
   value: string;
 }
 
-interface GameSettingCursor extends GameConfigDataType {
+interface GameSettingCursor extends GameObjectData {
   // ID int
   id: string;
   // 地图鼠标 string
@@ -4183,7 +4183,7 @@ interface GameSettingCursor extends GameConfigDataType {
   cursorBattleLed: string;
 }
 
-interface GameUnitDifficulty extends GameConfigDataType {
+interface GameUnitDifficulty extends GameObjectData {
   // ID int
   id: string;
   // 怪物ID string
@@ -4196,7 +4196,7 @@ interface GameUnitDifficulty extends GameConfigDataType {
   unitAttr: string;
 }
 
-interface GeomancyEvent extends GameConfigDataType {
+interface GeomancyEvent extends GameObjectData {
   // 序号 int
   id: string;
   // 风水事件条件 string
@@ -4211,7 +4211,7 @@ interface GeomancyEvent extends GameConfigDataType {
   weight: string;
 }
 
-interface GeomancyGame extends GameConfigDataType {
+interface GeomancyGame extends GameObjectData {
   // 编号 int
   id: string;
   // 分组 int
@@ -4234,7 +4234,7 @@ interface GeomancyGame extends GameConfigDataType {
   limitedStpes: string;
 }
 
-interface GeomancyQuantity extends GameConfigDataType {
+interface GeomancyQuantity extends GameObjectData {
   // ID int
   id: string;
   // 生成数量 int
@@ -4243,7 +4243,7 @@ interface GeomancyQuantity extends GameConfigDataType {
   time: string;
 }
 
-interface GeomancyResult extends GameConfigDataType {
+interface GeomancyResult extends GameObjectData {
   // 序号 int
   id: string;
   // 成功or失败 int
@@ -4254,7 +4254,7 @@ interface GeomancyResult extends GameConfigDataType {
   weight: string;
 }
 
-interface GeomancySkill extends GameConfigDataType {
+interface GeomancySkill extends GameObjectData {
   // ID int
   id: string;
   // 技能组 int
@@ -4281,7 +4281,7 @@ interface GeomancySkill extends GameConfigDataType {
   remind: string;
 }
 
-interface GeomancyTalent extends GameConfigDataType {
+interface GeomancyTalent extends GameObjectData {
   // 序号 int
   id: string;
   // 风水图ID int
@@ -4296,7 +4296,7 @@ interface GeomancyTalent extends GameConfigDataType {
   horizonMax: string;
 }
 
-interface GhostMountainBossProduce extends GameConfigDataType {
+interface GhostMountainBossProduce extends GameObjectData {
   // ID int
   id: string;
   // 水晶条件 int[][]
@@ -4313,7 +4313,7 @@ interface GhostMountainBossProduce extends GameConfigDataType {
   prodNumMax: string;
 }
 
-interface GhostMountainSalvage extends GameConfigDataType {
+interface GhostMountainSalvage extends GameObjectData {
   // ID int
   id: string;
   // 晶石等级 int
@@ -4338,7 +4338,7 @@ interface GhostMountainSalvage extends GameConfigDataType {
   dropLv: string;
 }
 
-interface GhostMountainSalvagePillar extends GameConfigDataType {
+interface GhostMountainSalvagePillar extends GameObjectData {
   // ID int
   id: string;
   // 副本ID int
@@ -4357,21 +4357,21 @@ interface GhostMountainSalvagePillar extends GameConfigDataType {
   costItemLevel: string;
 }
 
-interface GodEyeBaseCost extends GameConfigDataType {
+interface GodEyeBaseCost extends GameObjectData {
   // 境界 int
   id: string;
   // 耗费 int
   cost: string;
 }
 
-interface GodEyeExtraCost extends GameConfigDataType {
+interface GodEyeExtraCost extends GameObjectData {
   // 次数 int
   id: string;
   // 耗费 int
   cost: string;
 }
 
-interface GodEyePar extends GameConfigDataType {
+interface GodEyePar extends GameObjectData {
   // id int
   id: string;
   // 参数 string
@@ -4380,7 +4380,7 @@ interface GodEyePar extends GameConfigDataType {
   value: string;
 }
 
-interface GodEyeSkills extends GameConfigDataType {
+interface GodEyeSkills extends GameObjectData {
   // 技能ID int
   id: string;
   // 技能名称 string
@@ -4401,7 +4401,7 @@ interface GodEyeSkills extends GameConfigDataType {
   bossID: string;
 }
 
-interface HerdBattle77Log extends GameConfigDataType {
+interface HerdBattle77Log extends GameObjectData {
   // id int
   id: string;
   // 事件icon string
@@ -4412,7 +4412,7 @@ interface HerdBattle77Log extends GameConfigDataType {
   desc: string;
 }
 
-interface HerdNPCNameFirst extends GameConfigDataType {
+interface HerdNPCNameFirst extends GameObjectData {
   // ID int
   id: string;
   // 名字（姓） string
@@ -4423,7 +4423,7 @@ interface HerdNPCNameFirst extends GameConfigDataType {
   en: string;
 }
 
-interface HerdNpcClothes extends GameConfigDataType {
+interface HerdNpcClothes extends GameObjectData {
   // ID int
   id: string;
   // 女衣服类型 string
@@ -4452,7 +4452,7 @@ interface HerdNpcClothes extends GameConfigDataType {
   manClothesType: string;
 }
 
-interface HerdNpcFortuitous extends GameConfigDataType {
+interface HerdNpcFortuitous extends GameObjectData {
   // ID int
   id: string;
   // 兽潮NpcID string
@@ -4469,7 +4469,7 @@ interface HerdNpcFortuitous extends GameConfigDataType {
   monthTipID: string;
 }
 
-interface HerdNpcLevel extends GameConfigDataType {
+interface HerdNpcLevel extends GameObjectData {
   // ID int
   id: string;
   // 等级 int
@@ -4544,7 +4544,7 @@ interface HerdNpcLevel extends GameConfigDataType {
   rewardScale: string;
 }
 
-interface HerdNpcParameters extends GameConfigDataType {
+interface HerdNpcParameters extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -4553,7 +4553,7 @@ interface HerdNpcParameters extends GameConfigDataType {
   value: string;
 }
 
-interface HerdNpcSkill extends GameConfigDataType {
+interface HerdNpcSkill extends GameObjectData {
   // 技能ID int
   id: string;
   // 技能类型 int
@@ -4566,7 +4566,7 @@ interface HerdNpcSkill extends GameConfigDataType {
   cd: string;
 }
 
-interface HerdWakingAttr extends GameConfigDataType {
+interface HerdWakingAttr extends GameObjectData {
   // ID int
   id: string;
   // 体力 int
@@ -4625,7 +4625,7 @@ interface HerdWakingAttr extends GameConfigDataType {
   guardV: string;
 }
 
-interface Hunt extends GameConfigDataType {
+interface Hunt extends GameObjectData {
   // 难度 int
   id: string;
   // 游戏时长 int
@@ -4650,7 +4650,7 @@ interface Hunt extends GameConfigDataType {
   loseDialogueID: string;
 }
 
-interface ImmortalHuman extends GameConfigDataType {
+interface ImmortalHuman extends GameObjectData {
   // 基础id int
   id: string;
   // 名字 string
@@ -4671,7 +4671,7 @@ interface ImmortalHuman extends GameConfigDataType {
   IconSmall: string;
 }
 
-interface ImmortalMethod extends GameConfigDataType {
+interface ImmortalMethod extends GameObjectData {
   // 基础ID int
   id: string;
   // 仙法名称 string
@@ -4714,7 +4714,7 @@ interface ImmortalMethod extends GameConfigDataType {
   IconBig: string;
 }
 
-interface ImmortalMethodBase1 extends GameConfigDataType {
+interface ImmortalMethodBase1 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -4723,7 +4723,7 @@ interface ImmortalMethodBase1 extends GameConfigDataType {
   value: string;
 }
 
-interface ImmortalMethodSet extends GameConfigDataType {
+interface ImmortalMethodSet extends GameObjectData {
   // 基础ID int
   id: string;
   // 使用主仙法ID int
@@ -4734,7 +4734,7 @@ interface ImmortalMethodSet extends GameConfigDataType {
   effectOpen: string;
 }
 
-interface ImmortalPoint extends GameConfigDataType {
+interface ImmortalPoint extends GameObjectData {
   // 基础id int
   id: string;
   // 触发类型 int
@@ -4755,7 +4755,7 @@ interface ImmortalPoint extends GameConfigDataType {
   function: string;
 }
 
-interface ImmortalPosition extends GameConfigDataType {
+interface ImmortalPosition extends GameObjectData {
   // 基础id int
   id: string;
   // 仙法收集数 int
@@ -4764,7 +4764,7 @@ interface ImmortalPosition extends GameConfigDataType {
   slotPosition: string;
 }
 
-interface ImmortalSlot extends GameConfigDataType {
+interface ImmortalSlot extends GameObjectData {
   // 基础id int
   id: string;
   // 境界值 int
@@ -4775,7 +4775,7 @@ interface ImmortalSlot extends GameConfigDataType {
   slotNum: string;
 }
 
-interface ImmortalStore extends GameConfigDataType {
+interface ImmortalStore extends GameObjectData {
   // ID int
   id: string;
   // 产出ID int
@@ -4788,7 +4788,7 @@ interface ImmortalStore extends GameConfigDataType {
   onlyOne: string;
 }
 
-interface ImmortalUISetting extends GameConfigDataType {
+interface ImmortalUISetting extends GameObjectData {
   // ID int
   id: string;
   // key string
@@ -4797,7 +4797,7 @@ interface ImmortalUISetting extends GameConfigDataType {
   value: string;
 }
 
-interface ItemBook extends GameConfigDataType {
+interface ItemBook extends GameObjectData {
   // ID int
   id: string;
   // UI类型 int
@@ -4808,7 +4808,7 @@ interface ItemBook extends GameConfigDataType {
   title: string;
 }
 
-interface ItemChest extends GameConfigDataType {
+interface ItemChest extends GameObjectData {
   // ID int
   id: string;
   // 掉落ID int[][]
@@ -4823,7 +4823,7 @@ interface ItemChest extends GameConfigDataType {
   maxOpenCount: string;
 }
 
-interface ItemChestDrops extends GameConfigDataType {
+interface ItemChestDrops extends GameObjectData {
   // ID int
   id: string;
   // 掉落ID int
@@ -4836,7 +4836,7 @@ interface ItemChestDrops extends GameConfigDataType {
   weight: string;
 }
 
-interface ItemFate extends GameConfigDataType {
+interface ItemFate extends GameObjectData {
   // ID int
   id: string;
   // 修改境界 int[]
@@ -4845,7 +4845,7 @@ interface ItemFate extends GameConfigDataType {
   requireGrade: string;
 }
 
-interface ItemFunction extends GameConfigDataType {
+interface ItemFunction extends GameObjectData {
   // ID int
   id: string;
   // 条件 string
@@ -4858,7 +4858,7 @@ interface ItemFunction extends GameConfigDataType {
   multiUse: string;
 }
 
-interface ItemGloom extends GameConfigDataType {
+interface ItemGloom extends GameObjectData {
   // ID int
   id: string;
   // 条件 string
@@ -4869,7 +4869,7 @@ interface ItemGloom extends GameConfigDataType {
   failFunction: string;
 }
 
-interface ItemHerbal extends GameConfigDataType {
+interface ItemHerbal extends GameObjectData {
   // ID int
   id: string;
   // 材料类型 int
@@ -4878,7 +4878,7 @@ interface ItemHerbal extends GameConfigDataType {
   effectValue: string;
 }
 
-interface ItemHobby extends GameConfigDataType {
+interface ItemHobby extends GameObjectData {
   // ID int
   id: string;
   // 作用参数 string
@@ -4891,7 +4891,7 @@ interface ItemHobby extends GameConfigDataType {
   lasting: string;
 }
 
-interface ItemHorse extends GameConfigDataType {
+interface ItemHorse extends GameObjectData {
   // ID int
   id: string;
   // 作用参数 string
@@ -4908,19 +4908,19 @@ interface ItemHorse extends GameConfigDataType {
   grade: string;
 }
 
-interface ItemImmortalPoint extends GameConfigDataType {
+interface ItemImmortalPoint extends GameObjectData {
   // ID int
   id: string;
 }
 
-interface ItemLevelDesc extends GameConfigDataType {
+interface ItemLevelDesc extends GameObjectData {
   // ID int
   id: string;
   // 品质描述 string
   desc: string;
 }
 
-interface ItemMapSearch extends GameConfigDataType {
+interface ItemMapSearch extends GameObjectData {
   // ID int
   id: string;
   // 可探查区域 string
@@ -4935,7 +4935,7 @@ interface ItemMapSearch extends GameConfigDataType {
   searchEventID: string;
 }
 
-interface ItemPill extends GameConfigDataType {
+interface ItemPill extends GameObjectData {
   // ID int
   id: string;
   // 作用类型 int
@@ -4976,7 +4976,7 @@ interface ItemPill extends GameConfigDataType {
   consume: string;
 }
 
-interface ItemPillSpRequire extends GameConfigDataType {
+interface ItemPillSpRequire extends GameObjectData {
   // ID int
   id: string;
   // 道具境界 int
@@ -4985,7 +4985,7 @@ interface ItemPillSpRequire extends GameConfigDataType {
   spRequire: string;
 }
 
-interface ItemProps extends GameConfigDataType {
+interface ItemProps extends GameObjectData {
   // 物品ID int
   id: string;
   // 物品名称 string
@@ -5022,7 +5022,7 @@ interface ItemProps extends GameConfigDataType {
   isMultiDrop: string;
 }
 
-interface ItemRarityMaterials extends GameConfigDataType {
+interface ItemRarityMaterials extends GameObjectData {
   // ID int
   id: string;
   // 作用参数 string
@@ -5033,7 +5033,7 @@ interface ItemRarityMaterials extends GameConfigDataType {
   hunger: string;
 }
 
-interface ItemSchoolRelocateFlag extends GameConfigDataType {
+interface ItemSchoolRelocateFlag extends GameObjectData {
   // ID int
   id: string;
   // 事件id int
@@ -5056,7 +5056,7 @@ interface ItemSchoolRelocateFlag extends GameConfigDataType {
   maxOffsetY: string;
 }
 
-interface ItemSkill extends GameConfigDataType {
+interface ItemSkill extends GameObjectData {
   // ID int
   id: string;
   // 技能类型 int
@@ -5079,7 +5079,7 @@ interface ItemSkill extends GameConfigDataType {
   sale: string;
 }
 
-interface ItemTerrain extends GameConfigDataType {
+interface ItemTerrain extends GameObjectData {
   // ID int
   id: string;
   // 消耗 string
@@ -5106,7 +5106,7 @@ interface ItemTerrain extends GameConfigDataType {
   function: string;
 }
 
-interface ItemTransfer extends GameConfigDataType {
+interface ItemTransfer extends GameObjectData {
   // ID int
   id: string;
   // 作用类型 string
@@ -5115,7 +5115,7 @@ interface ItemTransfer extends GameConfigDataType {
   area: string;
 }
 
-interface ItemTreasureMap extends GameConfigDataType {
+interface ItemTreasureMap extends GameObjectData {
   // ID int
   id: string;
   // 事件ID int
@@ -5128,7 +5128,7 @@ interface ItemTreasureMap extends GameConfigDataType {
   cost: string;
 }
 
-interface ItemType extends GameConfigDataType {
+interface ItemType extends GameObjectData {
   // 类型ID int
   id: string;
   // 所属大类 int
@@ -5141,7 +5141,7 @@ interface ItemType extends GameConfigDataType {
   sort: string;
 }
 
-interface LetterBase extends GameConfigDataType {
+interface LetterBase extends GameObjectData {
   // ID int
   id: string;
   // 发信人 string
@@ -5154,7 +5154,7 @@ interface LetterBase extends GameConfigDataType {
   content: string;
 }
 
-interface LocalText extends GameConfigDataType {
+interface LocalText extends GameObjectData {
   //   int
   id: string;
   // 文本索引 string
@@ -5167,7 +5167,7 @@ interface LocalText extends GameConfigDataType {
   en: string;
 }
 
-interface LogLocalVocal extends GameConfigDataType {
+interface LogLocalVocal extends GameObjectData {
   // ID int
   id: string;
   // 角色日志表id int
@@ -5176,7 +5176,7 @@ interface LogLocalVocal extends GameConfigDataType {
   vocal: string;
 }
 
-interface MakePillFormula extends GameConfigDataType {
+interface MakePillFormula extends GameObjectData {
   // ID int
   id: string;
   // 丹方名称 string
@@ -5231,7 +5231,7 @@ interface MakePillFormula extends GameConfigDataType {
   nextPillFormulaID: string;
 }
 
-interface MakePillFurnace extends GameConfigDataType {
+interface MakePillFurnace extends GameObjectData {
   // ID int
   id: string;
   // 丹炉名称 string
@@ -5248,7 +5248,7 @@ interface MakePillFurnace extends GameConfigDataType {
   skills: string;
 }
 
-interface MakePillSkill extends GameConfigDataType {
+interface MakePillSkill extends GameObjectData {
   // ID int
   id: string;
   // 技能名称 string
@@ -5263,7 +5263,7 @@ interface MakePillSkill extends GameConfigDataType {
   isHide: string;
 }
 
-interface MapData extends GameConfigDataType {
+interface MapData extends GameObjectData {
   // ID int
   id: string;
   // 名字类型 int
@@ -5272,7 +5272,7 @@ interface MapData extends GameConfigDataType {
   value: string;
 }
 
-interface MapPosition extends GameConfigDataType {
+interface MapPosition extends GameObjectData {
   // ID int
   id: string;
   // 地图区域 string
@@ -5287,7 +5287,7 @@ interface MapPosition extends GameConfigDataType {
   buildingIndex: string;
 }
 
-interface ModCondition extends GameConfigDataType {
+interface ModCondition extends GameObjectData {
   // ID int
   id: string;
   // 函数key string
@@ -5348,7 +5348,7 @@ interface ModCondition extends GameConfigDataType {
   value8Desc: string;
 }
 
-interface ModEnum extends GameConfigDataType {
+interface ModEnum extends GameObjectData {
   // ID int
   id: string;
   // 枚举标题 string
@@ -5365,7 +5365,7 @@ interface ModEnum extends GameConfigDataType {
   enumWidth: string;
 }
 
-interface ModFunction extends GameConfigDataType {
+interface ModFunction extends GameObjectData {
   // ID int
   id: string;
   // 函数key string
@@ -5426,7 +5426,7 @@ interface ModFunction extends GameConfigDataType {
   value8Desc: string;
 }
 
-interface ModHorseModel extends GameConfigDataType {
+interface ModHorseModel extends GameObjectData {
   // ID int
   id: string;
   // 模型 string
@@ -5465,7 +5465,7 @@ interface ModHorseModel extends GameConfigDataType {
   scaleEffectBG: string;
 }
 
-interface ModNpcAddWorld extends GameConfigDataType {
+interface ModNpcAddWorld extends GameObjectData {
   // ID int
   id: string;
   // 初始位置类型 int
@@ -5514,7 +5514,7 @@ interface ModNpcAddWorld extends GameConfigDataType {
   addLuck: string;
 }
 
-interface ModRoleEffectType1 extends GameConfigDataType {
+interface ModRoleEffectType1 extends GameObjectData {
   // ID int
   id: string;
   // 属性Key string
@@ -5527,7 +5527,7 @@ interface ModRoleEffectType1 extends GameConfigDataType {
   types: string;
 }
 
-interface ModRoleEffectType2 extends GameConfigDataType {
+interface ModRoleEffectType2 extends GameObjectData {
   // ID int
   id: string;
   // 属性Key string
@@ -5538,7 +5538,7 @@ interface ModRoleEffectType2 extends GameConfigDataType {
   attrDesc: string;
 }
 
-interface ModRoleEffectType3 extends GameConfigDataType {
+interface ModRoleEffectType3 extends GameObjectData {
   // ID int
   id: string;
   // 函数key string
@@ -5599,7 +5599,7 @@ interface ModRoleEffectType3 extends GameConfigDataType {
   value8Desc: string;
 }
 
-interface ModSchoolCustom extends GameConfigDataType {
+interface ModSchoolCustom extends GameObjectData {
   // ID int
   id: string;
   // 所在区域 int
@@ -5632,7 +5632,7 @@ interface ModSchoolCustom extends GameConfigDataType {
   schoolSloganType2_2: string;
 }
 
-interface ModTags extends GameConfigDataType {
+interface ModTags extends GameObjectData {
   // ID int
   id: string;
   // 标签 string
@@ -5641,7 +5641,7 @@ interface ModTags extends GameConfigDataType {
   tagName: string;
 }
 
-interface MonthLogBase extends GameConfigDataType {
+interface MonthLogBase extends GameObjectData {
   // ID int
   id: string;
   // 日志类型 int
@@ -5660,7 +5660,7 @@ interface MonthLogBase extends GameConfigDataType {
   eventLog: string;
 }
 
-interface MoveCam extends GameConfigDataType {
+interface MoveCam extends GameObjectData {
   // ID int
   id: string;
   // 目标类型 int
@@ -5675,7 +5675,7 @@ interface MoveCam extends GameConfigDataType {
   dramaID: string;
 }
 
-interface NoticeBase extends GameConfigDataType {
+interface NoticeBase extends GameObjectData {
   // ID int
   id: string;
   // 图标 string
@@ -5686,7 +5686,7 @@ interface NoticeBase extends GameConfigDataType {
   content: string;
 }
 
-interface NpcBase extends GameConfigDataType {
+interface NpcBase extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -5695,7 +5695,7 @@ interface NpcBase extends GameConfigDataType {
   value: string;
 }
 
-interface NpcCondition extends GameConfigDataType {
+interface NpcCondition extends GameObjectData {
   // ID int
   id: string;
   // 区域 int[]
@@ -5742,7 +5742,7 @@ interface NpcCondition extends GameConfigDataType {
   raceType: string;
 }
 
-interface NpcFavouriteLooks extends GameConfigDataType {
+interface NpcFavouriteLooks extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -5751,7 +5751,7 @@ interface NpcFavouriteLooks extends GameConfigDataType {
   value: string;
 }
 
-interface NpcFortuitous extends GameConfigDataType {
+interface NpcFortuitous extends GameObjectData {
   // ID int
   id: string;
   // 奇遇气运 int
@@ -5762,7 +5762,7 @@ interface NpcFortuitous extends GameConfigDataType {
   eventLog: string;
 }
 
-interface NpcHeroes extends GameConfigDataType {
+interface NpcHeroes extends GameObjectData {
   // ID int
   id: string;
   // 境界 int
@@ -5797,7 +5797,7 @@ interface NpcHeroes extends GameConfigDataType {
   initLuckRate: string;
 }
 
-interface NpcHeroesParn extends GameConfigDataType {
+interface NpcHeroesParn extends GameObjectData {
   // ID int
   id: string;
   // 随机百分比最小值 string
@@ -5806,7 +5806,7 @@ interface NpcHeroesParn extends GameConfigDataType {
   value: string;
 }
 
-interface NpcImmortSkill extends GameConfigDataType {
+interface NpcImmortSkill extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -5815,7 +5815,7 @@ interface NpcImmortSkill extends GameConfigDataType {
   value: string;
 }
 
-interface NpcImmortValue extends GameConfigDataType {
+interface NpcImmortValue extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -5824,7 +5824,7 @@ interface NpcImmortValue extends GameConfigDataType {
   value: string;
 }
 
-interface NpcInitAttrGrow extends GameConfigDataType {
+interface NpcInitAttrGrow extends GameObjectData {
   // 职位ID int
   id: string;
   // 年龄放大 int
@@ -5859,7 +5859,7 @@ interface NpcInitAttrGrow extends GameConfigDataType {
   free: string;
 }
 
-interface NpcInitAttrTend extends GameConfigDataType {
+interface NpcInitAttrTend extends GameObjectData {
   // 宗门地区ID int
   id: string;
   // 特长基准准概率（百分比） int
@@ -5868,7 +5868,7 @@ interface NpcInitAttrTend extends GameConfigDataType {
   tendPostProbability: string;
 }
 
-interface NpcInitCharacter extends GameConfigDataType {
+interface NpcInitCharacter extends GameObjectData {
   // ID int
   id: string;
   // 散修权重 int
@@ -5883,7 +5883,7 @@ interface NpcInitCharacter extends GameConfigDataType {
   weightPostDown: string;
 }
 
-interface NpcInitFeature extends GameConfigDataType {
+interface NpcInitFeature extends GameObjectData {
   // 气运ID int
   id: string;
   // 气运类型 int
@@ -5898,7 +5898,7 @@ interface NpcInitFeature extends GameConfigDataType {
   weightGrade: string;
 }
 
-interface NpcInitGradeSchool extends GameConfigDataType {
+interface NpcInitGradeSchool extends GameObjectData {
   // ID int
   id: string;
   // 宗门区域 int
@@ -5915,7 +5915,7 @@ interface NpcInitGradeSchool extends GameConfigDataType {
   contribution: string;
 }
 
-interface NpcInitGradeTown extends GameConfigDataType {
+interface NpcInitGradeTown extends GameObjectData {
   // ID int
   id: string;
   // 城镇等级 int
@@ -5928,7 +5928,7 @@ interface NpcInitGradeTown extends GameConfigDataType {
   weight: string;
 }
 
-interface NpcInitHobby extends GameConfigDataType {
+interface NpcInitHobby extends GameObjectData {
   // 兴趣ID int
   id: string;
   // 属性条件 string
@@ -5945,7 +5945,7 @@ interface NpcInitHobby extends GameConfigDataType {
   weightPostDown: string;
 }
 
-interface NpcInitMoney extends GameConfigDataType {
+interface NpcInitMoney extends GameObjectData {
   // 境界ID int
   id: string;
   // 灵石最小值 int
@@ -5956,7 +5956,7 @@ interface NpcInitMoney extends GameConfigDataType {
   schoolGrow: string;
 }
 
-interface NpcInitParameters extends GameConfigDataType {
+interface NpcInitParameters extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -5965,7 +5965,7 @@ interface NpcInitParameters extends GameConfigDataType {
   value: string;
 }
 
-interface NpcInitSkill extends GameConfigDataType {
+interface NpcInitSkill extends GameObjectData {
   // ID int
   id: string;
   // 境界 int
@@ -5982,7 +5982,7 @@ interface NpcInitSkill extends GameConfigDataType {
   probabilityCrazy: string;
 }
 
-interface NpcNameFirst extends GameConfigDataType {
+interface NpcNameFirst extends GameObjectData {
   // ID int
   id: string;
   // 性别 int
@@ -5997,7 +5997,7 @@ interface NpcNameFirst extends GameConfigDataType {
   en: string;
 }
 
-interface NpcNameLast extends GameConfigDataType {
+interface NpcNameLast extends GameObjectData {
   // ID int
   id: string;
   // 性别 int
@@ -6010,7 +6010,7 @@ interface NpcNameLast extends GameConfigDataType {
   en: string;
 }
 
-interface NpcSpecial extends GameConfigDataType {
+interface NpcSpecial extends GameObjectData {
   // npcID int
   id: string;
   // 初始境界 int
@@ -6037,7 +6037,7 @@ interface NpcSpecial extends GameConfigDataType {
   startPos: string;
 }
 
-interface PassiveMethod extends GameConfigDataType {
+interface PassiveMethod extends GameObjectData {
   // ID int
   id: string;
   // 被动仙卡ID int
@@ -6068,7 +6068,7 @@ interface PassiveMethod extends GameConfigDataType {
   getText: string;
 }
 
-interface PassiveMethodType31 extends GameConfigDataType {
+interface PassiveMethodType31 extends GameObjectData {
   // 基础ID int
   id: string;
   // 次数 string
@@ -6081,7 +6081,7 @@ interface PassiveMethodType31 extends GameConfigDataType {
   lastSkillTime: string;
 }
 
-interface PillSchoolFight extends GameConfigDataType {
+interface PillSchoolFight extends GameObjectData {
   // ID int
   id: string;
   // 使用条件ID(武技条件表) string
@@ -6100,7 +6100,7 @@ interface PillSchoolFight extends GameConfigDataType {
   heal: string;
 }
 
-interface PiscesParam extends GameConfigDataType {
+interface PiscesParam extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6109,7 +6109,7 @@ interface PiscesParam extends GameConfigDataType {
   value: string;
 }
 
-interface PotmonBase extends GameConfigDataType {
+interface PotmonBase extends GameObjectData {
   // ID int
   id: string;
   // 名字 string
@@ -6190,7 +6190,7 @@ interface PotmonBase extends GameConfigDataType {
   firstGetMonstDrama: string;
 }
 
-interface PotmonBattle extends GameConfigDataType {
+interface PotmonBattle extends GameObjectData {
   // ID int
   id: string;
   // 壶妖在场持续时间 int
@@ -6201,7 +6201,7 @@ interface PotmonBattle extends GameConfigDataType {
   spCost: string;
 }
 
-interface PotmonBattleExp extends GameConfigDataType {
+interface PotmonBattleExp extends GameObjectData {
   // ID int
   id: string;
   // 境界差距 int
@@ -6210,7 +6210,7 @@ interface PotmonBattleExp extends GameConfigDataType {
   winExp: string;
 }
 
-interface PotmonBattleSkill extends GameConfigDataType {
+interface PotmonBattleSkill extends GameObjectData {
   // ID int
   id: string;
   // 壶妖ID int
@@ -6227,7 +6227,7 @@ interface PotmonBattleSkill extends GameConfigDataType {
   score: string;
 }
 
-interface PotmonConverPropertyScale extends GameConfigDataType {
+interface PotmonConverPropertyScale extends GameObjectData {
   // ID int
   id: string;
   // 体力 int
@@ -6262,7 +6262,7 @@ interface PotmonConverPropertyScale extends GameConfigDataType {
   bas3rd: string;
 }
 
-interface PotmonFurryAction extends GameConfigDataType {
+interface PotmonFurryAction extends GameObjectData {
   // ID int
   id: string;
   // 执行行为ID int
@@ -6275,7 +6275,7 @@ interface PotmonFurryAction extends GameConfigDataType {
   minCount: string;
 }
 
-interface PotmonFurryGradeLevel extends GameConfigDataType {
+interface PotmonFurryGradeLevel extends GameObjectData {
   // ID int
   id: string;
   // 境界 int
@@ -6292,7 +6292,7 @@ interface PotmonFurryGradeLevel extends GameConfigDataType {
   upgradeProp: string;
 }
 
-interface PotmonGradeLevel extends GameConfigDataType {
+interface PotmonGradeLevel extends GameObjectData {
   // ID int
   id: string;
   // 境界 int
@@ -6305,7 +6305,7 @@ interface PotmonGradeLevel extends GameConfigDataType {
   upgradeProp: string;
 }
 
-interface PotmonLogFunction extends GameConfigDataType {
+interface PotmonLogFunction extends GameObjectData {
   // id int
   id: string;
   // 获得道具日志 string
@@ -6324,7 +6324,7 @@ interface PotmonLogFunction extends GameConfigDataType {
   group: string;
 }
 
-interface PotmonMap extends GameConfigDataType {
+interface PotmonMap extends GameObjectData {
   // ID int
   id: string;
   // 重伤时间 int
@@ -6335,7 +6335,7 @@ interface PotmonMap extends GameConfigDataType {
   reviveItem: string;
 }
 
-interface PotmonParamer extends GameConfigDataType {
+interface PotmonParamer extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6344,7 +6344,7 @@ interface PotmonParamer extends GameConfigDataType {
   value: string;
 }
 
-interface PotmonPropertyScale extends GameConfigDataType {
+interface PotmonPropertyScale extends GameObjectData {
   // ID int
   id: string;
   // 移动速度 int
@@ -6381,7 +6381,7 @@ interface PotmonPropertyScale extends GameConfigDataType {
   skillDmg: string;
 }
 
-interface PotmonRomanTarget extends GameConfigDataType {
+interface PotmonRomanTarget extends GameObjectData {
   // 序号 int
   id: string;
   // 探索方向技能组 int[]
@@ -6394,7 +6394,7 @@ interface PotmonRomanTarget extends GameConfigDataType {
   targetIcon: string;
 }
 
-interface PotmonSkill extends GameConfigDataType {
+interface PotmonSkill extends GameObjectData {
   // 技能id int
   id: string;
   // 技能名字 string
@@ -6417,7 +6417,7 @@ interface PotmonSkill extends GameConfigDataType {
   function: string;
 }
 
-interface PotmonSkillAid extends GameConfigDataType {
+interface PotmonSkillAid extends GameObjectData {
   // 技能id int
   id: string;
   // 前置技能 string
@@ -6436,14 +6436,14 @@ interface PotmonSkillAid extends GameConfigDataType {
   decreaseSkillCD: string;
 }
 
-interface PotmonSkillFixOutput extends GameConfigDataType {
+interface PotmonSkillFixOutput extends GameObjectData {
   // 道具产出ID int
   id: string;
   // 修正后的道具产出ID int[]
   fixId: string;
 }
 
-interface PotmonSkillLife extends GameConfigDataType {
+interface PotmonSkillLife extends GameObjectData {
   // 序号 int
   id: string;
   // 技能id int
@@ -6470,7 +6470,7 @@ interface PotmonSkillLife extends GameConfigDataType {
   triggerCD: string;
 }
 
-interface PotmonSkillStudy extends GameConfigDataType {
+interface PotmonSkillStudy extends GameObjectData {
   // id int
   id: string;
   // 技能id int
@@ -6509,7 +6509,7 @@ interface PotmonSkillStudy extends GameConfigDataType {
   dramaId: string;
 }
 
-interface PotmonUnitAction extends GameConfigDataType {
+interface PotmonUnitAction extends GameObjectData {
   // ID int
   id: string;
   // 壶妖种族 string
@@ -6526,7 +6526,7 @@ interface PotmonUnitAction extends GameConfigDataType {
   isForce: string;
 }
 
-interface PotmonUnitFeedBack extends GameConfigDataType {
+interface PotmonUnitFeedBack extends GameObjectData {
   // ID int
   id: string;
   // 壶妖种族 string
@@ -6547,7 +6547,7 @@ interface PotmonUnitFeedBack extends GameConfigDataType {
   reduceIntim: string;
 }
 
-interface RingBase extends GameConfigDataType {
+interface RingBase extends GameObjectData {
   // ID int
   id: string;
   // 境界 int
@@ -6560,7 +6560,7 @@ interface RingBase extends GameConfigDataType {
   effectValue: string;
 }
 
-interface RoleAppellationBattle extends GameConfigDataType {
+interface RoleAppellationBattle extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6569,7 +6569,7 @@ interface RoleAppellationBattle extends GameConfigDataType {
   value: string;
 }
 
-interface RoleAskfor extends GameConfigDataType {
+interface RoleAskfor extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6578,7 +6578,7 @@ interface RoleAskfor extends GameConfigDataType {
   value: string;
 }
 
-interface RoleAttack extends GameConfigDataType {
+interface RoleAttack extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6587,7 +6587,7 @@ interface RoleAttack extends GameConfigDataType {
   value: string;
 }
 
-interface RoleAttributeDesc extends GameConfigDataType {
+interface RoleAttributeDesc extends GameObjectData {
   // ID int
   id: string;
   // 键 string
@@ -6598,7 +6598,7 @@ interface RoleAttributeDesc extends GameConfigDataType {
   desc: string;
 }
 
-interface RoleBattle extends GameConfigDataType {
+interface RoleBattle extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6607,7 +6607,7 @@ interface RoleBattle extends GameConfigDataType {
   value: string;
 }
 
-interface RoleBattleChicken extends GameConfigDataType {
+interface RoleBattleChicken extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6616,7 +6616,7 @@ interface RoleBattleChicken extends GameConfigDataType {
   value: string;
 }
 
-interface RoleBattleSub extends GameConfigDataType {
+interface RoleBattleSub extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6625,7 +6625,7 @@ interface RoleBattleSub extends GameConfigDataType {
   value: string;
 }
 
-interface RoleBeauty extends GameConfigDataType {
+interface RoleBeauty extends GameObjectData {
   // ID int
   id: string;
   // 魅力值 int
@@ -6634,7 +6634,7 @@ interface RoleBeauty extends GameConfigDataType {
   text: string;
 }
 
-interface RoleBreedTaoistSeed extends GameConfigDataType {
+interface RoleBreedTaoistSeed extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6643,7 +6643,7 @@ interface RoleBreedTaoistSeed extends GameConfigDataType {
   value: string;
 }
 
-interface RoleCall extends GameConfigDataType {
+interface RoleCall extends GameObjectData {
   // ID int
   id: string;
   // A与B的关系 int
@@ -6658,7 +6658,7 @@ interface RoleCall extends GameConfigDataType {
   weight: string;
 }
 
-interface RoleChat extends GameConfigDataType {
+interface RoleChat extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6667,7 +6667,7 @@ interface RoleChat extends GameConfigDataType {
   value: string;
 }
 
-interface RoleClose extends GameConfigDataType {
+interface RoleClose extends GameObjectData {
   // ID int
   id: string;
   // 亲密度区间 int
@@ -6682,7 +6682,7 @@ interface RoleClose extends GameConfigDataType {
   hateReduce: string;
 }
 
-interface RoleCloseDevelop extends GameConfigDataType {
+interface RoleCloseDevelop extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6691,7 +6691,7 @@ interface RoleCloseDevelop extends GameConfigDataType {
   value: string;
 }
 
-interface RoleCreateFeature extends GameConfigDataType {
+interface RoleCreateFeature extends GameObjectData {
   // ID int
   id: string;
   // 气运类型 int
@@ -6722,7 +6722,7 @@ interface RoleCreateFeature extends GameConfigDataType {
   weight: string;
 }
 
-interface RoleCreateHobby extends GameConfigDataType {
+interface RoleCreateHobby extends GameObjectData {
   // ID int
   id: string;
   // 兴趣名称 string
@@ -6743,7 +6743,7 @@ interface RoleCreateHobby extends GameConfigDataType {
   cd: string;
 }
 
-interface RoleDiscovery extends GameConfigDataType {
+interface RoleDiscovery extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6752,7 +6752,7 @@ interface RoleDiscovery extends GameConfigDataType {
   value: string;
 }
 
-interface RoleDress extends GameConfigDataType {
+interface RoleDress extends GameObjectData {
   // ID int
   id: string;
   // 衣服ID int
@@ -6785,7 +6785,7 @@ interface RoleDress extends GameConfigDataType {
   npcGrade: string;
 }
 
-interface RoleDressCombination extends GameConfigDataType {
+interface RoleDressCombination extends GameObjectData {
   // ID int
   id: string;
   // 部件ID1 string
@@ -6806,7 +6806,7 @@ interface RoleDressCombination extends GameConfigDataType {
   beauty: string;
 }
 
-interface RoleDrill extends GameConfigDataType {
+interface RoleDrill extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6815,7 +6815,7 @@ interface RoleDrill extends GameConfigDataType {
   value: string;
 }
 
-interface RoleDying extends GameConfigDataType {
+interface RoleDying extends GameObjectData {
   // 境界ID int
   id: string;
   // 是否可变成元魂 int
@@ -6834,7 +6834,7 @@ interface RoleDying extends GameConfigDataType {
   itemID: string;
 }
 
-interface RoleEffect extends GameConfigDataType {
+interface RoleEffect extends GameObjectData {
   // 效果ID int
   id: string;
   // 效果类型 int
@@ -6843,7 +6843,7 @@ interface RoleEffect extends GameConfigDataType {
   value: string;
 }
 
-interface RoleEscape extends GameConfigDataType {
+interface RoleEscape extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6852,7 +6852,7 @@ interface RoleEscape extends GameConfigDataType {
   value: string;
 }
 
-interface RoleEvent extends GameConfigDataType {
+interface RoleEvent extends GameObjectData {
   // 事件ID int
   id: string;
   // 目击半径 int
@@ -6873,7 +6873,7 @@ interface RoleEvent extends GameConfigDataType {
   dialogue: string;
 }
 
-interface RoleFace extends GameConfigDataType {
+interface RoleFace extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6882,7 +6882,7 @@ interface RoleFace extends GameConfigDataType {
   value: string;
 }
 
-interface RoleFunction extends GameConfigDataType {
+interface RoleFunction extends GameObjectData {
   // ID int
   id: string;
   // 操作按钮 string
@@ -6891,7 +6891,7 @@ interface RoleFunction extends GameConfigDataType {
   strangerOpen: string;
 }
 
-interface RoleGive extends GameConfigDataType {
+interface RoleGive extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -6900,7 +6900,7 @@ interface RoleGive extends GameConfigDataType {
   value: string;
 }
 
-interface RoleGrade extends GameConfigDataType {
+interface RoleGrade extends GameObjectData {
   // ID int
   id: string;
   // 境界 int
@@ -6985,7 +6985,7 @@ interface RoleGrade extends GameConfigDataType {
   allItemShowA: string;
 }
 
-interface RoleHealth extends GameConfigDataType {
+interface RoleHealth extends GameObjectData {
   // ID int
   id: string;
   // 健康值 int
@@ -6996,7 +6996,7 @@ interface RoleHealth extends GameConfigDataType {
   lifeReduce: string;
 }
 
-interface RoleHealthReduce extends GameConfigDataType {
+interface RoleHealthReduce extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7005,7 +7005,7 @@ interface RoleHealthReduce extends GameConfigDataType {
   value: string;
 }
 
-interface RoleInvite extends GameConfigDataType {
+interface RoleInvite extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7014,7 +7014,7 @@ interface RoleInvite extends GameConfigDataType {
   value: string;
 }
 
-interface RoleKill extends GameConfigDataType {
+interface RoleKill extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7023,7 +7023,7 @@ interface RoleKill extends GameConfigDataType {
   value: string;
 }
 
-interface RoleLogBase extends GameConfigDataType {
+interface RoleLogBase extends GameObjectData {
   // ID int
   id: string;
   // 事件类型 int
@@ -7034,7 +7034,7 @@ interface RoleLogBase extends GameConfigDataType {
   eventLog: string;
 }
 
-interface RoleLogLocal extends GameConfigDataType {
+interface RoleLogLocal extends GameObjectData {
   // ID int
   id: string;
   // 参数ID string
@@ -7071,7 +7071,7 @@ interface RoleLogLocal extends GameConfigDataType {
   en: string;
 }
 
-interface RoleLoginTip extends GameConfigDataType {
+interface RoleLoginTip extends GameObjectData {
   // ID int
   id: string;
   // 图标 string
@@ -7082,7 +7082,7 @@ interface RoleLoginTip extends GameConfigDataType {
   tip: string;
 }
 
-interface RoleMark extends GameConfigDataType {
+interface RoleMark extends GameObjectData {
   // 境界ID int
   id: string;
   // 需要念力上限 int
@@ -7091,7 +7091,7 @@ interface RoleMark extends GameConfigDataType {
   cost: string;
 }
 
-interface RoleMarry extends GameConfigDataType {
+interface RoleMarry extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7100,7 +7100,7 @@ interface RoleMarry extends GameConfigDataType {
   value: string;
 }
 
-interface RoleMartialGradeGrid extends GameConfigDataType {
+interface RoleMartialGradeGrid extends GameObjectData {
   // ID int
   id: string;
   // 类型 int
@@ -7111,7 +7111,7 @@ interface RoleMartialGradeGrid extends GameConfigDataType {
   grid: string;
 }
 
-interface RoleMood extends GameConfigDataType {
+interface RoleMood extends GameObjectData {
   // 气运ID int
   id: string;
   // 心情值 int
@@ -7120,7 +7120,7 @@ interface RoleMood extends GameConfigDataType {
   prob: string;
 }
 
-interface RoleMoodFeature extends GameConfigDataType {
+interface RoleMoodFeature extends GameObjectData {
   // ID int
   id: string;
   // 心情值最小值 int
@@ -7133,7 +7133,7 @@ interface RoleMoodFeature extends GameConfigDataType {
   weight: string;
 }
 
-interface RolePoisonAction extends GameConfigDataType {
+interface RolePoisonAction extends GameObjectData {
   // ID int
   id: string;
   // 行为ID int
@@ -7160,7 +7160,7 @@ interface RolePoisonAction extends GameConfigDataType {
   defTriggerLogKey: string;
 }
 
-interface RolePoisonActionType extends GameConfigDataType {
+interface RolePoisonActionType extends GameObjectData {
   // ID int
   id: string;
   // 行为类型 int
@@ -7173,7 +7173,7 @@ interface RolePoisonActionType extends GameConfigDataType {
   condition: string;
 }
 
-interface RoleRelease extends GameConfigDataType {
+interface RoleRelease extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7182,7 +7182,7 @@ interface RoleRelease extends GameConfigDataType {
   value: string;
 }
 
-interface RoleReputation extends GameConfigDataType {
+interface RoleReputation extends GameObjectData {
   // ID int
   id: string;
   // 名声值 int
@@ -7191,7 +7191,7 @@ interface RoleReputation extends GameConfigDataType {
   text: string;
 }
 
-interface RoleRutElixirAction extends GameConfigDataType {
+interface RoleRutElixirAction extends GameObjectData {
   // ID int
   id: string;
   // 行为组 int
@@ -7222,7 +7222,7 @@ interface RoleRutElixirAction extends GameConfigDataType {
   globalCD: string;
 }
 
-interface RoleSave extends GameConfigDataType {
+interface RoleSave extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7231,7 +7231,7 @@ interface RoleSave extends GameConfigDataType {
   value: string;
 }
 
-interface RoleSchoolRecruit extends GameConfigDataType {
+interface RoleSchoolRecruit extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7240,7 +7240,7 @@ interface RoleSchoolRecruit extends GameConfigDataType {
   value: string;
 }
 
-interface RoleStealItem extends GameConfigDataType {
+interface RoleStealItem extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7249,7 +7249,7 @@ interface RoleStealItem extends GameConfigDataType {
   value: string;
 }
 
-interface RoleThankGiveClothes extends GameConfigDataType {
+interface RoleThankGiveClothes extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7258,7 +7258,7 @@ interface RoleThankGiveClothes extends GameConfigDataType {
   value: string;
 }
 
-interface RoleTrains extends GameConfigDataType {
+interface RoleTrains extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7267,7 +7267,7 @@ interface RoleTrains extends GameConfigDataType {
   value: string;
 }
 
-interface RoleViewItem extends GameConfigDataType {
+interface RoleViewItem extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7276,7 +7276,7 @@ interface RoleViewItem extends GameConfigDataType {
   value: string;
 }
 
-interface RuleDungeonEffect extends GameConfigDataType {
+interface RuleDungeonEffect extends GameObjectData {
   // ID int
   id: string;
   // 组 int
@@ -7293,7 +7293,7 @@ interface RuleDungeonEffect extends GameConfigDataType {
   desc: string;
 }
 
-interface RuleDungeonEffectLevel extends GameConfigDataType {
+interface RuleDungeonEffectLevel extends GameObjectData {
   // 等级ID int
   id: string;
   // 需求资质 int
@@ -7304,7 +7304,7 @@ interface RuleDungeonEffectLevel extends GameConfigDataType {
   weight: string;
 }
 
-interface RuleDungeonName extends GameConfigDataType {
+interface RuleDungeonName extends GameObjectData {
   // ID int
   id: string;
   // 道界名称 string
@@ -7319,14 +7319,14 @@ interface RuleDungeonName extends GameConfigDataType {
   skillIcon: string;
 }
 
-interface RuleDungeonRoom extends GameConfigDataType {
+interface RuleDungeonRoom extends GameObjectData {
   // 房间序号ID int
   id: string;
   // 提升属性 string
   attr: string;
 }
 
-interface RuneFormula extends GameConfigDataType {
+interface RuneFormula extends GameObjectData {
   // 序号 int
   id: string;
   // 图谱ID int
@@ -7371,7 +7371,7 @@ interface RuneFormula extends GameConfigDataType {
   extraPercent: string;
 }
 
-interface RuneParameters extends GameConfigDataType {
+interface RuneParameters extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7380,7 +7380,7 @@ interface RuneParameters extends GameConfigDataType {
   value: string;
 }
 
-interface RuneWriting extends GameConfigDataType {
+interface RuneWriting extends GameObjectData {
   // 笔迹图形 int
   id: string;
   // 图谱ID int
@@ -7399,7 +7399,7 @@ interface RuneWriting extends GameConfigDataType {
   writingTime: string;
 }
 
-interface SchoolApprove extends GameConfigDataType {
+interface SchoolApprove extends GameObjectData {
   // ID int
   id: string;
   // 宗门资源id string
@@ -7432,7 +7432,7 @@ interface SchoolApprove extends GameConfigDataType {
   playerRefuseDrama: string;
 }
 
-interface SchoolAura extends GameConfigDataType {
+interface SchoolAura extends GameObjectData {
   // ID int
   id: string;
   // 建筑等级 int
@@ -7441,7 +7441,7 @@ interface SchoolAura extends GameConfigDataType {
   group: string;
 }
 
-interface SchoolBigFight extends GameConfigDataType {
+interface SchoolBigFight extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7450,7 +7450,7 @@ interface SchoolBigFight extends GameConfigDataType {
   value: string;
 }
 
-interface SchoolBigFightDrama extends GameConfigDataType {
+interface SchoolBigFightDrama extends GameObjectData {
   // ID int
   id: string;
   // 触发条件 string
@@ -7459,7 +7459,7 @@ interface SchoolBigFightDrama extends GameConfigDataType {
   dramaId: string;
 }
 
-interface SchoolBigFightEvent1 extends GameConfigDataType {
+interface SchoolBigFightEvent1 extends GameObjectData {
   // ID int
   id: string;
   // 剧情编号 int
@@ -7478,7 +7478,7 @@ interface SchoolBigFightEvent1 extends GameConfigDataType {
   triggerMonths: string;
 }
 
-interface SchoolBigFightReward extends GameConfigDataType {
+interface SchoolBigFightReward extends GameObjectData {
   // ID int
   id: string;
   // 类型 int
@@ -7501,7 +7501,7 @@ interface SchoolBigFightReward extends GameConfigDataType {
   luckies: string;
 }
 
-interface SchoolBuilding extends GameConfigDataType {
+interface SchoolBuilding extends GameObjectData {
   // ID int
   id: string;
   // 建筑名称 string
@@ -7520,7 +7520,7 @@ interface SchoolBuilding extends GameConfigDataType {
   notShowAreaID: string;
 }
 
-interface SchoolClose extends GameConfigDataType {
+interface SchoolClose extends GameObjectData {
   // ID int
   id: string;
   // 宗门亲密度 int
@@ -7529,7 +7529,7 @@ interface SchoolClose extends GameConfigDataType {
   multiple: string;
 }
 
-interface SchoolConsultFAQ extends GameConfigDataType {
+interface SchoolConsultFAQ extends GameObjectData {
   // ID int
   id: string;
   // 区域 string
@@ -7544,7 +7544,7 @@ interface SchoolConsultFAQ extends GameConfigDataType {
   newTip: string;
 }
 
-interface SchoolCurScale extends GameConfigDataType {
+interface SchoolCurScale extends GameObjectData {
   // 当前规模ID int
   id: string;
   // 功法类型最大格子数量 int
@@ -7553,7 +7553,7 @@ interface SchoolCurScale extends GameConfigDataType {
   skillTypeSmall: string;
 }
 
-interface SchoolDragonArtifactDialog extends GameConfigDataType {
+interface SchoolDragonArtifactDialog extends GameObjectData {
   // ID int
   id: string;
   // 形态 string
@@ -7564,7 +7564,7 @@ interface SchoolDragonArtifactDialog extends GameConfigDataType {
   dialogueId: string;
 }
 
-interface SchoolDragonDoor extends GameConfigDataType {
+interface SchoolDragonDoor extends GameObjectData {
   // ID int
   id: string;
   // 等级 int
@@ -7593,7 +7593,7 @@ interface SchoolDragonDoor extends GameConfigDataType {
   negativeUpgradeTips: string;
 }
 
-interface SchoolDragonDoorEffect extends GameConfigDataType {
+interface SchoolDragonDoorEffect extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7602,7 +7602,7 @@ interface SchoolDragonDoorEffect extends GameConfigDataType {
   value: string;
 }
 
-interface SchoolEquipRoom extends GameConfigDataType {
+interface SchoolEquipRoom extends GameObjectData {
   // ID int
   id: string;
   // 建筑等级 int
@@ -7611,7 +7611,7 @@ interface SchoolEquipRoom extends GameConfigDataType {
   equipOutput: string;
 }
 
-interface SchoolFate extends GameConfigDataType {
+interface SchoolFate extends GameObjectData {
   // ID int
   id: string;
   // 宗门规模 int
@@ -7620,7 +7620,7 @@ interface SchoolFate extends GameConfigDataType {
   fateFeature: string;
 }
 
-interface SchoolFight extends GameConfigDataType {
+interface SchoolFight extends GameObjectData {
   // 比试ID int
   id: string;
   // 晋升职位 int
@@ -7655,7 +7655,7 @@ interface SchoolFight extends GameConfigDataType {
   desc: string;
 }
 
-interface SchoolFightBigElder extends GameConfigDataType {
+interface SchoolFightBigElder extends GameObjectData {
   // ID int
   id: string;
   // 宗门所属区域 int
@@ -7674,7 +7674,7 @@ interface SchoolFightBigElder extends GameConfigDataType {
   noHateDialogue: string;
 }
 
-interface SchoolFightDrama extends GameConfigDataType {
+interface SchoolFightDrama extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -7683,7 +7683,7 @@ interface SchoolFightDrama extends GameConfigDataType {
   value: string;
 }
 
-interface SchoolFightElder extends GameConfigDataType {
+interface SchoolFightElder extends GameObjectData {
   // ID int
   id: string;
   // 宗门所属区域 int
@@ -7700,7 +7700,7 @@ interface SchoolFightElder extends GameConfigDataType {
   noHateDialogue: string;
 }
 
-interface SchoolFightInherit extends GameConfigDataType {
+interface SchoolFightInherit extends GameObjectData {
   // ID int
   id: string;
   // 宗门所属区域 int
@@ -7719,7 +7719,7 @@ interface SchoolFightInherit extends GameConfigDataType {
   competitorMin: string;
 }
 
-interface SchoolFightPost extends GameConfigDataType {
+interface SchoolFightPost extends GameObjectData {
   // 比试ID int
   id: string;
   // 区域 int
@@ -7750,7 +7750,7 @@ interface SchoolFightPost extends GameConfigDataType {
   desc: string;
 }
 
-interface SchoolFightReward extends GameConfigDataType {
+interface SchoolFightReward extends GameObjectData {
   // ID int
   id: string;
   // 所在区域 int
@@ -7761,7 +7761,7 @@ interface SchoolFightReward extends GameConfigDataType {
   rewards: string;
 }
 
-interface SchoolFightSchoolMain extends GameConfigDataType {
+interface SchoolFightSchoolMain extends GameObjectData {
   // ID int
   id: string;
   // 宗门所属区域 int
@@ -7802,7 +7802,7 @@ interface SchoolFightSchoolMain extends GameConfigDataType {
   inheritLoseDialogue: string;
 }
 
-interface SchoolFixedEffect extends GameConfigDataType {
+interface SchoolFixedEffect extends GameObjectData {
   // ID int
   id: string;
   // 消耗道具ID string
@@ -7817,7 +7817,7 @@ interface SchoolFixedEffect extends GameConfigDataType {
   desc: string;
 }
 
-interface SchoolGeologyRoom extends GameConfigDataType {
+interface SchoolGeologyRoom extends GameObjectData {
   // ID int
   id: string;
   // 建筑等级 int
@@ -7826,7 +7826,7 @@ interface SchoolGeologyRoom extends GameConfigDataType {
   geologyOutput: string;
 }
 
-interface SchoolGodBeast extends GameConfigDataType {
+interface SchoolGodBeast extends GameObjectData {
   // ID int
   id: string;
   // 宗门区域 int
@@ -7855,7 +7855,7 @@ interface SchoolGodBeast extends GameConfigDataType {
   monthHungerDown: string;
 }
 
-interface SchoolGodBeastFeed extends GameConfigDataType {
+interface SchoolGodBeastFeed extends GameObjectData {
   // ID int
   id: string;
   // 优先级 int
@@ -7866,7 +7866,7 @@ interface SchoolGodBeastFeed extends GameConfigDataType {
   condition: string;
 }
 
-interface SchoolGodBeastFeedProp extends GameConfigDataType {
+interface SchoolGodBeastFeedProp extends GameObjectData {
   // 道具 int
   id: string;
   // 神兽经验 int
@@ -7875,7 +7875,7 @@ interface SchoolGodBeastFeedProp extends GameConfigDataType {
   propHunger: string;
 }
 
-interface SchoolGodBeastGetReward extends GameConfigDataType {
+interface SchoolGodBeastGetReward extends GameObjectData {
   // ID int
   id: string;
   // 奖励组 int
@@ -7888,7 +7888,7 @@ interface SchoolGodBeastGetReward extends GameConfigDataType {
   memory: string;
 }
 
-interface SchoolGodBeastInfo extends GameConfigDataType {
+interface SchoolGodBeastInfo extends GameObjectData {
   // ID int
   id: string;
   // 模型 string
@@ -7899,7 +7899,7 @@ interface SchoolGodBeastInfo extends GameConfigDataType {
   name: string;
 }
 
-interface SchoolGodBeastInterval extends GameConfigDataType {
+interface SchoolGodBeastInterval extends GameObjectData {
   // ID int
   id: string;
   // 状态 string
@@ -7910,7 +7910,7 @@ interface SchoolGodBeastInterval extends GameConfigDataType {
   max: string;
 }
 
-interface SchoolGodBeastTalk extends GameConfigDataType {
+interface SchoolGodBeastTalk extends GameObjectData {
   // ID int
   id: string;
   // 心情低于触发对话 int
@@ -7921,7 +7921,7 @@ interface SchoolGodBeastTalk extends GameConfigDataType {
   cdDialogue: string;
 }
 
-interface SchoolGodExcrete extends GameConfigDataType {
+interface SchoolGodExcrete extends GameObjectData {
   // ID int
   id: string;
   // 宗门规模 int
@@ -7936,7 +7936,7 @@ interface SchoolGodExcrete extends GameConfigDataType {
   excreteCount: string;
 }
 
-interface SchoolHospital extends GameConfigDataType {
+interface SchoolHospital extends GameObjectData {
   // ID int
   id: string;
   // 建筑等级 int
@@ -7949,7 +7949,7 @@ interface SchoolHospital extends GameConfigDataType {
   deathReduce: string;
 }
 
-interface SchoolInherited extends GameConfigDataType {
+interface SchoolInherited extends GameObjectData {
   // ID int
   id: string;
   // 宗门评级 int
@@ -7964,7 +7964,7 @@ interface SchoolInherited extends GameConfigDataType {
   bigUp: string;
 }
 
-interface SchoolInheritedInfo extends GameConfigDataType {
+interface SchoolInheritedInfo extends GameObjectData {
   // ID int
   id: string;
   // 宗门资质属性 int
@@ -7983,7 +7983,7 @@ interface SchoolInheritedInfo extends GameConfigDataType {
   inheritEffectDesc: string;
 }
 
-interface SchoolInitScale extends GameConfigDataType {
+interface SchoolInitScale extends GameObjectData {
   // ID int
   id: string;
   // 宗门规模 int
@@ -8042,7 +8042,7 @@ interface SchoolInitScale extends GameConfigDataType {
   skillInit: string;
 }
 
-interface SchoolIntim extends GameConfigDataType {
+interface SchoolIntim extends GameObjectData {
   // ID int
   id: string;
   // 好感等级 int
@@ -8055,7 +8055,7 @@ interface SchoolIntim extends GameConfigDataType {
   max: string;
 }
 
-interface SchoolIntimEvent extends GameConfigDataType {
+interface SchoolIntimEvent extends GameObjectData {
   // ID int
   id: string;
   // 好感等级 string
@@ -8088,7 +8088,7 @@ interface SchoolIntimEvent extends GameConfigDataType {
   param5: string;
 }
 
-interface SchoolLibrary extends GameConfigDataType {
+interface SchoolLibrary extends GameObjectData {
   // ID int
   id: string;
   // 宗门区域 int
@@ -8133,7 +8133,7 @@ interface SchoolLibrary extends GameConfigDataType {
   basWood: string;
 }
 
-interface SchoolLibrarySub2 extends GameConfigDataType {
+interface SchoolLibrarySub2 extends GameObjectData {
   // ID int
   id: string;
   // 分舵层级 int
@@ -8144,7 +8144,7 @@ interface SchoolLibrarySub2 extends GameConfigDataType {
   post: string;
 }
 
-interface SchoolLibraySub extends GameConfigDataType {
+interface SchoolLibraySub extends GameObjectData {
   // ID int
   id: string;
   // 宗门规模 int
@@ -8171,7 +8171,7 @@ interface SchoolLibraySub extends GameConfigDataType {
   numAllMax: string;
 }
 
-interface SchoolLocalScale extends GameConfigDataType {
+interface SchoolLocalScale extends GameObjectData {
   // ID int
   id: string;
   // 宗门评级 int
@@ -8194,7 +8194,7 @@ interface SchoolLocalScale extends GameConfigDataType {
   intelligence: string;
 }
 
-interface SchoolLog extends GameConfigDataType {
+interface SchoolLog extends GameObjectData {
   // ID int
   id: string;
   // 日志类型 int
@@ -8207,7 +8207,7 @@ interface SchoolLog extends GameConfigDataType {
   logDescSub: string;
 }
 
-interface SchoolLuckyEffect extends GameConfigDataType {
+interface SchoolLuckyEffect extends GameObjectData {
   // ID int
   id: string;
   // 消耗道具ID string
@@ -8220,7 +8220,7 @@ interface SchoolLuckyEffect extends GameConfigDataType {
   desc: string;
 }
 
-interface SchoolMainHall extends GameConfigDataType {
+interface SchoolMainHall extends GameObjectData {
   // ID int
   id: string;
   // 建筑等级 int
@@ -8247,7 +8247,7 @@ interface SchoolMainHall extends GameConfigDataType {
   domainRange: string;
 }
 
-interface SchoolMove extends GameConfigDataType {
+interface SchoolMove extends GameObjectData {
   // 宗门地区 int
   id: string;
   // 建造飞舟所需灵石 int
@@ -8266,7 +8266,7 @@ interface SchoolMove extends GameConfigDataType {
   awayPopulationCount: string;
 }
 
-interface SchoolMystTreasureProd extends GameConfigDataType {
+interface SchoolMystTreasureProd extends GameObjectData {
   // ID int
   id: string;
   // 道具编号 int
@@ -8277,7 +8277,7 @@ interface SchoolMystTreasureProd extends GameConfigDataType {
   areas: string;
 }
 
-interface SchoolName extends GameConfigDataType {
+interface SchoolName extends GameObjectData {
   // ID int
   id: string;
   // 分组 int
@@ -8288,7 +8288,7 @@ interface SchoolName extends GameConfigDataType {
   name2: string;
 }
 
-interface SchoolNextAreaParam extends GameConfigDataType {
+interface SchoolNextAreaParam extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -8297,7 +8297,7 @@ interface SchoolNextAreaParam extends GameConfigDataType {
   value: string;
 }
 
-interface SchoolParameters1 extends GameConfigDataType {
+interface SchoolParameters1 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -8306,7 +8306,7 @@ interface SchoolParameters1 extends GameConfigDataType {
   value: string;
 }
 
-interface SchoolPillOutput extends GameConfigDataType {
+interface SchoolPillOutput extends GameObjectData {
   // ID int
   id: string;
   // 道具ID int
@@ -8345,7 +8345,7 @@ interface SchoolPillOutput extends GameConfigDataType {
   price: string;
 }
 
-interface SchoolPost extends GameConfigDataType {
+interface SchoolPost extends GameObjectData {
   // ID int
   id: string;
   // 所在区域 int
@@ -8374,7 +8374,7 @@ interface SchoolPost extends GameConfigDataType {
   task: string;
 }
 
-interface SchoolPostParam extends GameConfigDataType {
+interface SchoolPostParam extends GameObjectData {
   // ID int
   id: string;
   // key string
@@ -8383,7 +8383,7 @@ interface SchoolPostParam extends GameConfigDataType {
   value: string;
 }
 
-interface SchoolPostScore extends GameConfigDataType {
+interface SchoolPostScore extends GameObjectData {
   // 职位ID int
   id: string;
   // 击杀战功 int
@@ -8392,7 +8392,7 @@ interface SchoolPostScore extends GameConfigDataType {
   heroScore: string;
 }
 
-interface SchoolPromoteEffec extends GameConfigDataType {
+interface SchoolPromoteEffec extends GameObjectData {
   // ID int
   id: string;
   // 名称 string
@@ -8407,7 +8407,7 @@ interface SchoolPromoteEffec extends GameConfigDataType {
   cost: string;
 }
 
-interface SchoolReviveCost extends GameConfigDataType {
+interface SchoolReviveCost extends GameObjectData {
   // 境界ID int
   id: string;
   // 普通NPC int
@@ -8416,7 +8416,7 @@ interface SchoolReviveCost extends GameConfigDataType {
   heroCost: string;
 }
 
-interface SchoolRoleCall extends GameConfigDataType {
+interface SchoolRoleCall extends GameObjectData {
   // ID int
   id: string;
   // A与B的关系 int
@@ -8427,7 +8427,7 @@ interface SchoolRoleCall extends GameConfigDataType {
   call: string;
 }
 
-interface SchoolSlogan extends GameConfigDataType {
+interface SchoolSlogan extends GameObjectData {
   // ID int
   id: string;
   // 宗门规模 int
@@ -8448,7 +8448,7 @@ interface SchoolSlogan extends GameConfigDataType {
   desc: string;
 }
 
-interface SchoolSmall extends GameConfigDataType {
+interface SchoolSmall extends GameObjectData {
   // 小宗门ID int
   id: string;
   // 生成位置条件 string
@@ -8479,7 +8479,7 @@ interface SchoolSmall extends GameConfigDataType {
   dungeonID: string;
 }
 
-interface SchoolStand extends GameConfigDataType {
+interface SchoolStand extends GameObjectData {
   // ID int
   id: string;
   // 差值数值 int
@@ -8498,7 +8498,7 @@ interface SchoolStand extends GameConfigDataType {
   captivity: string;
 }
 
-interface SchoolStock extends GameConfigDataType {
+interface SchoolStock extends GameObjectData {
   // ID int
   id: string;
   // 商店类型,1-药材,2-矿材 int
@@ -8531,7 +8531,7 @@ interface SchoolStock extends GameConfigDataType {
   addCD: string;
 }
 
-interface SchoolStockSub extends GameConfigDataType {
+interface SchoolStockSub extends GameObjectData {
   // 区域ID int
   id: string;
   // 药材消耗最大值 int
@@ -8548,7 +8548,7 @@ interface SchoolStockSub extends GameConfigDataType {
   mineRefreshCD: string;
 }
 
-interface SchoolStore extends GameConfigDataType {
+interface SchoolStore extends GameObjectData {
   // ID int
   id: string;
   // 道具ID int
@@ -8569,7 +8569,7 @@ interface SchoolStore extends GameConfigDataType {
   countMax: string;
 }
 
-interface SchoolSymbolRoom extends GameConfigDataType {
+interface SchoolSymbolRoom extends GameObjectData {
   // ID int
   id: string;
   // 建筑等级 int
@@ -8578,7 +8578,7 @@ interface SchoolSymbolRoom extends GameConfigDataType {
   symbolOutput: string;
 }
 
-interface SchoolTask extends GameConfigDataType {
+interface SchoolTask extends GameObjectData {
   // ID int
   id: string;
   // 任务类型ID int
@@ -8593,7 +8593,7 @@ interface SchoolTask extends GameConfigDataType {
   name: string;
 }
 
-interface SchoolTask102 extends GameConfigDataType {
+interface SchoolTask102 extends GameObjectData {
   // ID int
   id: string;
   // 任务权重 int
@@ -8612,7 +8612,7 @@ interface SchoolTask102 extends GameConfigDataType {
   herbalWorth: string;
 }
 
-interface SchoolTask103 extends GameConfigDataType {
+interface SchoolTask103 extends GameObjectData {
   // ID int
   id: string;
   // 任务权重 int
@@ -8623,19 +8623,19 @@ interface SchoolTask103 extends GameConfigDataType {
   sourceItem: string;
 }
 
-interface SchoolTask104 extends GameConfigDataType {
+interface SchoolTask104 extends GameObjectData {
   // ID int
   id: string;
 }
 
-interface SchoolTask105 extends GameConfigDataType {
+interface SchoolTask105 extends GameObjectData {
   // ID int
   id: string;
   // 需要提升的安定度 int
   requireStable: string;
 }
 
-interface SchoolTask106 extends GameConfigDataType {
+interface SchoolTask106 extends GameObjectData {
   // ID int
   id: string;
   // 副本ID int
@@ -8644,7 +8644,7 @@ interface SchoolTask106 extends GameConfigDataType {
   dungeonLevel: string;
 }
 
-interface SchoolTask109 extends GameConfigDataType {
+interface SchoolTask109 extends GameObjectData {
   // ID int
   id: string;
   // 增加的声望 int
@@ -8657,7 +8657,7 @@ interface SchoolTask109 extends GameConfigDataType {
   memberDefeatFeature: string;
 }
 
-interface SchoolTask111 extends GameConfigDataType {
+interface SchoolTask111 extends GameObjectData {
   // ID int
   id: string;
   // 任务权重 int
@@ -8670,7 +8670,7 @@ interface SchoolTask111 extends GameConfigDataType {
   taskCount: string;
 }
 
-interface SchoolTask112 extends GameConfigDataType {
+interface SchoolTask112 extends GameObjectData {
   // ID int
   id: string;
   // 副本ID int
@@ -8685,22 +8685,22 @@ interface SchoolTask112 extends GameConfigDataType {
   maxIonRange: string;
 }
 
-interface SchoolTask113 extends GameConfigDataType {
+interface SchoolTask113 extends GameObjectData {
   // ID int
   id: string;
 }
 
-interface SchoolTask114 extends GameConfigDataType {
+interface SchoolTask114 extends GameObjectData {
   // ID int
   id: string;
 }
 
-interface SchoolTask115 extends GameConfigDataType {
+interface SchoolTask115 extends GameObjectData {
   // ID int
   id: string;
 }
 
-interface SchoolTask116 extends GameConfigDataType {
+interface SchoolTask116 extends GameObjectData {
   // ID int
   id: string;
   // 大地图元素ID int
@@ -8711,7 +8711,7 @@ interface SchoolTask116 extends GameConfigDataType {
   maxIonRange: string;
 }
 
-interface SchoolTask117 extends GameConfigDataType {
+interface SchoolTask117 extends GameObjectData {
   // ID int
   id: string;
   // 任务权重 int
@@ -8724,7 +8724,7 @@ interface SchoolTask117 extends GameConfigDataType {
   taskCount: string;
 }
 
-interface SchoolTask118 extends GameConfigDataType {
+interface SchoolTask118 extends GameObjectData {
   // ID int
   id: string;
   // 任务权重 int
@@ -8743,7 +8743,7 @@ interface SchoolTask118 extends GameConfigDataType {
   condition3: string;
 }
 
-interface SchoolTask119 extends GameConfigDataType {
+interface SchoolTask119 extends GameObjectData {
   // ID int
   id: string;
   // 任务权重 int
@@ -8752,7 +8752,7 @@ interface SchoolTask119 extends GameConfigDataType {
   npcCount: string;
 }
 
-interface SchoolTaskAllot extends GameConfigDataType {
+interface SchoolTaskAllot extends GameObjectData {
   // 任务ID int
   id: string;
   // 类型 string
@@ -8803,7 +8803,7 @@ interface SchoolTaskAllot extends GameConfigDataType {
   schoolTaskLog: string;
 }
 
-interface SchoolTaskAllotCount extends GameConfigDataType {
+interface SchoolTaskAllotCount extends GameObjectData {
   // 部门类型 int
   id: string;
   // 每月最小任务数量 int
@@ -8812,7 +8812,7 @@ interface SchoolTaskAllotCount extends GameConfigDataType {
   taskCountMax: string;
 }
 
-interface SchoolTaskHall extends GameConfigDataType {
+interface SchoolTaskHall extends GameObjectData {
   // ID int
   id: string;
   // 建筑等级 int
@@ -8821,7 +8821,7 @@ interface SchoolTaskHall extends GameConfigDataType {
   taskNumber: string;
 }
 
-interface SchoolTaskTypeBase extends GameConfigDataType {
+interface SchoolTaskTypeBase extends GameObjectData {
   // ID int
   id: string;
   // 任务名字 string
@@ -8870,7 +8870,7 @@ interface SchoolTaskTypeBase extends GameConfigDataType {
   desc: string;
 }
 
-interface SchoolTrainingHall extends GameConfigDataType {
+interface SchoolTrainingHall extends GameObjectData {
   // ID int
   id: string;
   // 建筑等级 int
@@ -8885,7 +8885,7 @@ interface SchoolTrainingHall extends GameConfigDataType {
   succeedGain: string;
 }
 
-interface SchoolTransmit extends GameConfigDataType {
+interface SchoolTransmit extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -8894,7 +8894,7 @@ interface SchoolTransmit extends GameConfigDataType {
   value: string;
 }
 
-interface SchoolType extends GameConfigDataType {
+interface SchoolType extends GameObjectData {
   // ID int
   id: string;
   // 宗门规模 int
@@ -8905,7 +8905,7 @@ interface SchoolType extends GameConfigDataType {
   stand: string;
 }
 
-interface SchoolWarAreaInfo extends GameConfigDataType {
+interface SchoolWarAreaInfo extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -8922,7 +8922,7 @@ interface SchoolWarAreaInfo extends GameConfigDataType {
   valueArea10: string;
 }
 
-interface SchoolWarBattleInfo extends GameConfigDataType {
+interface SchoolWarBattleInfo extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -8931,7 +8931,7 @@ interface SchoolWarBattleInfo extends GameConfigDataType {
   value: string;
 }
 
-interface SchoolWarBoss extends GameConfigDataType {
+interface SchoolWarBoss extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -8940,7 +8940,7 @@ interface SchoolWarBoss extends GameConfigDataType {
   value: string;
 }
 
-interface SchoolWarBossBattleInfo extends GameConfigDataType {
+interface SchoolWarBossBattleInfo extends GameObjectData {
   // ID int
   id: string;
   // 房间位置 int[]
@@ -8955,7 +8955,7 @@ interface SchoolWarBossBattleInfo extends GameConfigDataType {
   toward: string;
 }
 
-interface SchoolWarBossHumanNum extends GameConfigDataType {
+interface SchoolWarBossHumanNum extends GameObjectData {
   // ID int
   id: string;
   // 房间位置 int[]
@@ -8974,7 +8974,7 @@ interface SchoolWarBossHumanNum extends GameConfigDataType {
   defPlayerPostNum: string;
 }
 
-interface SchoolWarInfo extends GameConfigDataType {
+interface SchoolWarInfo extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -8983,7 +8983,7 @@ interface SchoolWarInfo extends GameConfigDataType {
   value: string;
 }
 
-interface SkillCombineGrade extends GameConfigDataType {
+interface SkillCombineGrade extends GameObjectData {
   // ID int
   id: string;
   // 境界指定类型 int
@@ -8992,7 +8992,7 @@ interface SkillCombineGrade extends GameConfigDataType {
   value: string;
 }
 
-interface SkillEffectDesc extends GameConfigDataType {
+interface SkillEffectDesc extends GameObjectData {
   // ID int
   id: string;
   // Key值 string
@@ -9007,7 +9007,7 @@ interface SkillEffectDesc extends GameConfigDataType {
   value: string;
 }
 
-interface SoundGroups extends GameConfigDataType {
+interface SoundGroups extends GameObjectData {
   // ID int
   id: string;
   // 目录 string
@@ -9016,7 +9016,7 @@ interface SoundGroups extends GameConfigDataType {
   group: string;
 }
 
-interface SoundLowPass extends GameConfigDataType {
+interface SoundLowPass extends GameObjectData {
   // ID int
   id: string;
   // 键 string
@@ -9025,7 +9025,7 @@ interface SoundLowPass extends GameConfigDataType {
   value: string;
 }
 
-interface SoundsEffectPitch extends GameConfigDataType {
+interface SoundsEffectPitch extends GameObjectData {
   // ID int
   id: string;
   // 目录 string
@@ -9036,7 +9036,7 @@ interface SoundsEffectPitch extends GameConfigDataType {
   maxPitch: string;
 }
 
-interface SpecificBattleSkill extends GameConfigDataType {
+interface SpecificBattleSkill extends GameObjectData {
   // ID int
   id: string;
   // 角色ID int
@@ -9063,7 +9063,7 @@ interface SpecificBattleSkill extends GameConfigDataType {
   skillSub: string;
 }
 
-interface SpecificNpcCreate extends GameConfigDataType {
+interface SpecificNpcCreate extends GameObjectData {
   // ID int
   id: string;
   // 角色ID int
@@ -9078,7 +9078,7 @@ interface SpecificNpcCreate extends GameConfigDataType {
   luck: string;
 }
 
-interface SpecificSkillAttack extends GameConfigDataType {
+interface SpecificSkillAttack extends GameObjectData {
   // ID int
   id: string;
   // 角色ID int
@@ -9093,7 +9093,7 @@ interface SpecificSkillAttack extends GameConfigDataType {
   desc: string;
 }
 
-interface TaoistHeart extends GameConfigDataType {
+interface TaoistHeart extends GameObjectData {
   // ID int
   id: string;
   // 道心名字 string
@@ -9136,7 +9136,7 @@ interface TaoistHeart extends GameConfigDataType {
   weight: string;
 }
 
-interface TaoistHeartEffect extends GameConfigDataType {
+interface TaoistHeartEffect extends GameObjectData {
   // ID int
   id: string;
   // 道心ID int
@@ -9151,7 +9151,7 @@ interface TaoistHeartEffect extends GameConfigDataType {
   feature2: string;
 }
 
-interface TaoistSeed extends GameConfigDataType {
+interface TaoistSeed extends GameObjectData {
   // ID int
   id: string;
   // 道种名字 string
@@ -9188,7 +9188,7 @@ interface TaoistSeed extends GameConfigDataType {
   seedUIEffect: string;
 }
 
-interface Task101 extends GameConfigDataType {
+interface Task101 extends GameObjectData {
   // ID int
   id: string;
   // 道具的大类型 string
@@ -9209,7 +9209,7 @@ interface Task101 extends GameConfigDataType {
   itemDesc: string;
 }
 
-interface Task102 extends GameConfigDataType {
+interface Task102 extends GameObjectData {
   // ID int
   id: string;
   // 消耗道具的分类 string
@@ -9232,7 +9232,7 @@ interface Task102 extends GameConfigDataType {
   listenType: string;
 }
 
-interface Task103 extends GameConfigDataType {
+interface Task103 extends GameObjectData {
   // ID int
   id: string;
   // 副本类型 string
@@ -9251,14 +9251,14 @@ interface Task103 extends GameConfigDataType {
   listenType: string;
 }
 
-interface Task104 extends GameConfigDataType {
+interface Task104 extends GameObjectData {
   // ID int
   id: string;
   // 需要提升的数值 int
   requireNumber: string;
 }
 
-interface Task105 extends GameConfigDataType {
+interface Task105 extends GameObjectData {
   // ID int
   id: string;
   // 运送道具 int
@@ -9269,12 +9269,12 @@ interface Task105 extends GameConfigDataType {
   destination: string;
 }
 
-interface Task106 extends GameConfigDataType {
+interface Task106 extends GameObjectData {
   // ID int
   id: string;
 }
 
-interface Task107 extends GameConfigDataType {
+interface Task107 extends GameObjectData {
   // ID int
   id: string;
   // 目标的宗门立场 int
@@ -9289,7 +9289,7 @@ interface Task107 extends GameConfigDataType {
   realDie: string;
 }
 
-interface Task108 extends GameConfigDataType {
+interface Task108 extends GameObjectData {
   // ID int
   id: string;
   // 副本ID string
@@ -9306,7 +9306,7 @@ interface Task108 extends GameConfigDataType {
   listenType: string;
 }
 
-interface Task109 extends GameConfigDataType {
+interface Task109 extends GameObjectData {
   // ID int
   id: string;
   // 大地图元素ID int
@@ -9319,7 +9319,7 @@ interface Task109 extends GameConfigDataType {
   iconRange: string;
 }
 
-interface Task110 extends GameConfigDataType {
+interface Task110 extends GameObjectData {
   // ID int
   id: string;
   // 剧情对话ID string
@@ -9328,7 +9328,7 @@ interface Task110 extends GameConfigDataType {
   positionID: string;
 }
 
-interface Task111 extends GameConfigDataType {
+interface Task111 extends GameObjectData {
   // ID int
   id: string;
   // 触发类型 int
@@ -9349,7 +9349,7 @@ interface Task111 extends GameConfigDataType {
   positionID: string;
 }
 
-interface Task112 extends GameConfigDataType {
+interface Task112 extends GameObjectData {
   // ID int
   id: string;
   // B对A的亲密度提升最小值 int
@@ -9376,7 +9376,7 @@ interface Task112 extends GameConfigDataType {
   eventLogTaskC: string;
 }
 
-interface Task113 extends GameConfigDataType {
+interface Task113 extends GameObjectData {
   // ID int
   id: string;
   // B对A的亲密度提升最小值 int
@@ -9423,7 +9423,7 @@ interface Task113 extends GameConfigDataType {
   eventLogTaskE: string;
 }
 
-interface Task114 extends GameConfigDataType {
+interface Task114 extends GameObjectData {
   // ID int
   id: string;
   // B对A的亲密度提升最小值 int
@@ -9470,7 +9470,7 @@ interface Task114 extends GameConfigDataType {
   eventLogTaskE: string;
 }
 
-interface Task115 extends GameConfigDataType {
+interface Task115 extends GameObjectData {
   // ID int
   id: string;
   // B对A的亲密度提升最小值 int
@@ -9509,7 +9509,7 @@ interface Task115 extends GameConfigDataType {
   eventLogTaskF: string;
 }
 
-interface Task116 extends GameConfigDataType {
+interface Task116 extends GameObjectData {
   // ID int
   id: string;
   // B对A的亲密度提升最小值 int
@@ -9536,7 +9536,7 @@ interface Task116 extends GameConfigDataType {
   eventLogTaskB: string;
 }
 
-interface Task117 extends GameConfigDataType {
+interface Task117 extends GameObjectData {
   // ID int
   id: string;
   // B对A的亲密度提升最小值 int
@@ -9557,7 +9557,7 @@ interface Task117 extends GameConfigDataType {
   moveGhostRevengeRate: string;
 }
 
-interface Task118 extends GameConfigDataType {
+interface Task118 extends GameObjectData {
   // ID int
   id: string;
   // B对A的亲密度提升最小值 int
@@ -9588,7 +9588,7 @@ interface Task118 extends GameConfigDataType {
   eventLogTaskF: string;
 }
 
-interface Task119 extends GameConfigDataType {
+interface Task119 extends GameObjectData {
   // ID int
   id: string;
   // 条件1 string
@@ -9599,14 +9599,14 @@ interface Task119 extends GameConfigDataType {
   positionID: string;
 }
 
-interface Task120 extends GameConfigDataType {
+interface Task120 extends GameObjectData {
   // ID int
   id: string;
   // 位置ID int
   positionID: string;
 }
 
-interface Task121 extends GameConfigDataType {
+interface Task121 extends GameObjectData {
   // ID int
   id: string;
   // 道具ID int
@@ -9615,7 +9615,7 @@ interface Task121 extends GameConfigDataType {
   startDialogue: string;
 }
 
-interface Task122 extends GameConfigDataType {
+interface Task122 extends GameObjectData {
   // ID int
   id: string;
   // 道具ID int
@@ -9624,7 +9624,7 @@ interface Task122 extends GameConfigDataType {
   startDialogue: string;
 }
 
-interface Task123 extends GameConfigDataType {
+interface Task123 extends GameObjectData {
   // ID int
   id: string;
   // 副本ID int
@@ -9637,7 +9637,7 @@ interface Task123 extends GameConfigDataType {
   condition: string;
 }
 
-interface Task124 extends GameConfigDataType {
+interface Task124 extends GameObjectData {
   // ID int
   id: string;
   // 设置NPC1 int
@@ -9650,7 +9650,7 @@ interface Task124 extends GameConfigDataType {
   startDialogue: string;
 }
 
-interface Task125 extends GameConfigDataType {
+interface Task125 extends GameObjectData {
   // ID int
   id: string;
   // 外门弟子数量 int
@@ -9679,17 +9679,17 @@ interface Task125 extends GameConfigDataType {
   startDialogue: string;
 }
 
-interface Task126 extends GameConfigDataType {
+interface Task126 extends GameObjectData {
   // ID int
   id: string;
 }
 
-interface Task127 extends GameConfigDataType {
+interface Task127 extends GameObjectData {
   // ID int
   id: string;
 }
 
-interface Task128 extends GameConfigDataType {
+interface Task128 extends GameObjectData {
   // ID int
   id: string;
   // 所有类型 int[]
@@ -9710,7 +9710,7 @@ interface Task128 extends GameConfigDataType {
   dramaTaskComplete: string;
 }
 
-interface Task129 extends GameConfigDataType {
+interface Task129 extends GameObjectData {
   // ID int
   id: string;
   // 接取任务时剧情 string
@@ -9725,7 +9725,7 @@ interface Task129 extends GameConfigDataType {
   battleDieDrama: string;
 }
 
-interface Task130 extends GameConfigDataType {
+interface Task130 extends GameObjectData {
   // ID int
   id: string;
   // 接取任务时剧情 string
@@ -9740,7 +9740,7 @@ interface Task130 extends GameConfigDataType {
   isAttack: string;
 }
 
-interface Task131 extends GameConfigDataType {
+interface Task131 extends GameObjectData {
   // ID int
   id: string;
   // 属性ID int
@@ -9751,7 +9751,7 @@ interface Task131 extends GameConfigDataType {
   value: string;
 }
 
-interface TaskBase extends GameConfigDataType {
+interface TaskBase extends GameObjectData {
   // ID int
   id: string;
   // 任务名称 string
@@ -9804,14 +9804,14 @@ interface TaskBase extends GameConfigDataType {
   remind: string;
 }
 
-interface TaskLevel extends GameConfigDataType {
+interface TaskLevel extends GameObjectData {
   // 任务等级 int
   id: string;
   // 难度名字 string
   name: string;
 }
 
-interface TownAuction extends GameConfigDataType {
+interface TownAuction extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -9820,7 +9820,7 @@ interface TownAuction extends GameConfigDataType {
   value: string;
 }
 
-interface TownAuctionDrama extends GameConfigDataType {
+interface TownAuctionDrama extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -9829,7 +9829,7 @@ interface TownAuctionDrama extends GameConfigDataType {
   value: string;
 }
 
-interface TownAuctionProp extends GameConfigDataType {
+interface TownAuctionProp extends GameObjectData {
   // ID int
   id: string;
   // 产出ID int
@@ -9842,7 +9842,7 @@ interface TownAuctionProp extends GameConfigDataType {
   weight: string;
 }
 
-interface TownAuctionSpecialItem extends GameConfigDataType {
+interface TownAuctionSpecialItem extends GameObjectData {
   // ID int
   id: string;
   // 条件 string
@@ -9861,14 +9861,14 @@ interface TownAuctionSpecialItem extends GameConfigDataType {
   monthLogID: string;
 }
 
-interface TownBlackMarket extends GameConfigDataType {
+interface TownBlackMarket extends GameObjectData {
   // 收购的道具ID int
   id: string;
   // 收购价格 int
   recoveryPrice: string;
 }
 
-interface TownBookstore extends GameConfigDataType {
+interface TownBookstore extends GameObjectData {
   // ID int
   id: string;
   // 所需数量 int
@@ -9879,7 +9879,7 @@ interface TownBookstore extends GameConfigDataType {
   desc: string;
 }
 
-interface TownBounty extends GameConfigDataType {
+interface TownBounty extends GameObjectData {
   // ID int
   id: string;
   // 任务ID int
@@ -9910,7 +9910,7 @@ interface TownBounty extends GameConfigDataType {
   forceUpdate: string;
 }
 
-interface TownBuilding extends GameConfigDataType {
+interface TownBuilding extends GameObjectData {
   // ID int
   id: string;
   // 建筑名称 string
@@ -9923,7 +9923,7 @@ interface TownBuilding extends GameConfigDataType {
   area: string;
 }
 
-interface TownFactotySell extends GameConfigDataType {
+interface TownFactotySell extends GameObjectData {
   // 道具ID int
   id: string;
   // 城镇等级 int
@@ -9934,7 +9934,7 @@ interface TownFactotySell extends GameConfigDataType {
   makePrice: string;
 }
 
-interface TownFactotySellArtifact extends GameConfigDataType {
+interface TownFactotySellArtifact extends GameObjectData {
   // 道具ID int
   id: string;
   // 城镇等级 int
@@ -9943,7 +9943,7 @@ interface TownFactotySellArtifact extends GameConfigDataType {
   mainTown: string;
 }
 
-interface TownFight extends GameConfigDataType {
+interface TownFight extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -9952,7 +9952,7 @@ interface TownFight extends GameConfigDataType {
   value: string;
 }
 
-interface TownFightDrama extends GameConfigDataType {
+interface TownFightDrama extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -9961,7 +9961,7 @@ interface TownFightDrama extends GameConfigDataType {
   value: string;
 }
 
-interface TownFightSub extends GameConfigDataType {
+interface TownFightSub extends GameObjectData {
   // 城镇区域ID int
   id: string;
   // 需求境界 int
@@ -9980,7 +9980,7 @@ interface TownFightSub extends GameConfigDataType {
   money: string;
 }
 
-interface TownGirl extends GameConfigDataType {
+interface TownGirl extends GameObjectData {
   // ID int
   id: string;
   // 需求好感 int
@@ -10013,7 +10013,7 @@ interface TownGirl extends GameConfigDataType {
   closeDown: string;
 }
 
-interface TownHotel extends GameConfigDataType {
+interface TownHotel extends GameObjectData {
   // ID int
   id: string;
   // 建筑等级 int
@@ -10024,7 +10024,7 @@ interface TownHotel extends GameConfigDataType {
   costMoney: string;
 }
 
-interface TownMarketBase extends GameConfigDataType {
+interface TownMarketBase extends GameObjectData {
   // ID int
   id: string;
   // 城镇等级 int
@@ -10037,7 +10037,7 @@ interface TownMarketBase extends GameConfigDataType {
   countMax: string;
 }
 
-interface TownMarketBook extends GameConfigDataType {
+interface TownMarketBook extends GameObjectData {
   // ID int
   id: string;
   // 城镇规模 int
@@ -10060,7 +10060,7 @@ interface TownMarketBook extends GameConfigDataType {
   outID: string;
 }
 
-interface TownMarketItem extends GameConfigDataType {
+interface TownMarketItem extends GameObjectData {
   // 道具ID int
   id: string;
   // 道具分组 int
@@ -10081,7 +10081,7 @@ interface TownMarketItem extends GameConfigDataType {
   patch: string;
 }
 
-interface TownName extends GameConfigDataType {
+interface TownName extends GameObjectData {
   // ID int
   id: string;
   // 城镇名称 string
@@ -10094,7 +10094,7 @@ interface TownName extends GameConfigDataType {
   type: string;
 }
 
-interface TownNpcInfo extends GameConfigDataType {
+interface TownNpcInfo extends GameObjectData {
   // ID int
   id: string;
   // 建筑ID int
@@ -10107,7 +10107,7 @@ interface TownNpcInfo extends GameConfigDataType {
   dialogueID: string;
 }
 
-interface TownPub extends GameConfigDataType {
+interface TownPub extends GameObjectData {
   // 物品ID int
   id: string;
   // 规模 string
@@ -10146,7 +10146,7 @@ interface TownPub extends GameConfigDataType {
   numMax: string;
 }
 
-interface TownPubDrama extends GameConfigDataType {
+interface TownPubDrama extends GameObjectData {
   // ID int
   id: string;
   // 城镇等级 int
@@ -10161,7 +10161,7 @@ interface TownPubDrama extends GameConfigDataType {
   btnText: string;
 }
 
-interface TownPubSub extends GameConfigDataType {
+interface TownPubSub extends GameObjectData {
   // ID int
   id: string;
   // 城镇等级 int
@@ -10178,7 +10178,7 @@ interface TownPubSub extends GameConfigDataType {
   newTip: string;
 }
 
-interface TownRefine extends GameConfigDataType {
+interface TownRefine extends GameObjectData {
   // ID int
   id: string;
   // 城镇等级 int
@@ -10195,7 +10195,7 @@ interface TownRefine extends GameConfigDataType {
   moneyCost: string;
 }
 
-interface TownTransmit extends GameConfigDataType {
+interface TownTransmit extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -10204,7 +10204,7 @@ interface TownTransmit extends GameConfigDataType {
   value: string;
 }
 
-interface UnitActionTrigger extends GameConfigDataType {
+interface UnitActionTrigger extends GameObjectData {
   // ID int
   id: string;
   // 触发类型 int
@@ -10233,7 +10233,7 @@ interface UnitActionTrigger extends GameConfigDataType {
   value8: string;
 }
 
-interface WeatherChangAddRate extends GameConfigDataType {
+interface WeatherChangAddRate extends GameObjectData {
   // ID int
   id: string;
   // 区域ID int
@@ -10246,7 +10246,7 @@ interface WeatherChangAddRate extends GameConfigDataType {
   addRate: string;
 }
 
-interface WeatherEffect extends GameConfigDataType {
+interface WeatherEffect extends GameObjectData {
   // ID int
   id: string;
   // 天气名称 string
@@ -10271,14 +10271,14 @@ interface WeatherEffect extends GameConfigDataType {
   weight: string;
 }
 
-interface WeatherLayout extends GameConfigDataType {
+interface WeatherLayout extends GameObjectData {
   // 区域ID int
   id: string;
   // 天气效果ID string
   weatherId: string;
 }
 
-interface WingmanBase extends GameConfigDataType {
+interface WingmanBase extends GameObjectData {
   // ID int
   id: string;
   // 名称 string
@@ -10305,7 +10305,7 @@ interface WingmanBase extends GameConfigDataType {
   breakSkillConditionID: string;
 }
 
-interface WingmanEffect extends GameConfigDataType {
+interface WingmanEffect extends GameObjectData {
   // ID int
   id: string;
   // 效果图标 string
@@ -10320,7 +10320,7 @@ interface WingmanEffect extends GameConfigDataType {
   desc: string;
 }
 
-interface WingmanFixValue extends GameConfigDataType {
+interface WingmanFixValue extends GameObjectData {
   // ID int
   id: string;
   // 效果图标 string
@@ -10345,7 +10345,7 @@ interface WingmanFixValue extends GameConfigDataType {
   desc: string;
 }
 
-interface WorldAreaSpecial extends GameConfigDataType {
+interface WorldAreaSpecial extends GameObjectData {
   // ID int
   id: string;
   // 位置类型 int
@@ -10372,7 +10372,7 @@ interface WorldAreaSpecial extends GameConfigDataType {
   minTerrDis: string;
 }
 
-interface WorldBlockAttribute extends GameConfigDataType {
+interface WorldBlockAttribute extends GameObjectData {
   // 类型ID int
   id: string;
   // 基础灵气 int
@@ -10397,7 +10397,7 @@ interface WorldBlockAttribute extends GameConfigDataType {
   restoreMax: string;
 }
 
-interface WorldBlockGeomantic extends GameConfigDataType {
+interface WorldBlockGeomantic extends GameObjectData {
   // ID int
   id: string;
   // 参数名称 string
@@ -10406,7 +10406,7 @@ interface WorldBlockGeomantic extends GameConfigDataType {
   value: string;
 }
 
-interface WorldBlockGeomanticSub extends GameConfigDataType {
+interface WorldBlockGeomanticSub extends GameObjectData {
   // 格子事件ID int
   id: string;
   // 探测状态一评分参数 int
@@ -10417,7 +10417,7 @@ interface WorldBlockGeomanticSub extends GameConfigDataType {
   scoreStateC: string;
 }
 
-interface WorldBlockGetExp extends GameConfigDataType {
+interface WorldBlockGetExp extends GameObjectData {
   // 境界ID int
   id: string;
   // 角色境界 int
@@ -10436,7 +10436,7 @@ interface WorldBlockGetExp extends GameConfigDataType {
   mpGrow: string;
 }
 
-interface WorldBlockHerb extends GameConfigDataType {
+interface WorldBlockHerb extends GameObjectData {
   // 技能ID int
   id: string;
   // 资质条件 int
@@ -10483,7 +10483,7 @@ interface WorldBlockHerb extends GameConfigDataType {
   weight13: string;
 }
 
-interface WorldBlockMine extends GameConfigDataType {
+interface WorldBlockMine extends GameObjectData {
   // ID int
   id: string;
   // 区域ID int
@@ -10502,7 +10502,7 @@ interface WorldBlockMine extends GameConfigDataType {
   costDay: string;
 }
 
-interface WorldBlockMineBook extends GameConfigDataType {
+interface WorldBlockMineBook extends GameObjectData {
   // 技能ID int
   id: string;
   // 矿材资质要求 int
@@ -10551,7 +10551,7 @@ interface WorldBlockMineBook extends GameConfigDataType {
   weight13: string;
 }
 
-interface WorldBlockOperation extends GameConfigDataType {
+interface WorldBlockOperation extends GameObjectData {
   // ID int
   id: string;
   // 操作类型 string
@@ -10560,7 +10560,7 @@ interface WorldBlockOperation extends GameConfigDataType {
   cost: string;
 }
 
-interface WorldBuilding10001 extends GameConfigDataType {
+interface WorldBuilding10001 extends GameObjectData {
   // ID int
   id: string;
   // 投入道具ID int
@@ -10575,7 +10575,7 @@ interface WorldBuilding10001 extends GameConfigDataType {
   duration: string;
 }
 
-interface WorldBuilding10002 extends GameConfigDataType {
+interface WorldBuilding10002 extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -10584,7 +10584,7 @@ interface WorldBuilding10002 extends GameConfigDataType {
   value: string;
 }
 
-interface WorldBuilding10005 extends GameConfigDataType {
+interface WorldBuilding10005 extends GameObjectData {
   // ID int
   id: string;
   // 图标 string
@@ -10625,7 +10625,7 @@ interface WorldBuilding10005 extends GameConfigDataType {
   minMapIconType: string;
 }
 
-interface WorldBuilding10007 extends GameConfigDataType {
+interface WorldBuilding10007 extends GameObjectData {
   // ID int
   id: string;
   // 范围 int
@@ -10636,7 +10636,7 @@ interface WorldBuilding10007 extends GameConfigDataType {
   dramaID: string;
 }
 
-interface WorldBuilding10008 extends GameConfigDataType {
+interface WorldBuilding10008 extends GameObjectData {
   // ID int
   id: string;
   // 仙祠名称 string
@@ -10667,7 +10667,7 @@ interface WorldBuilding10008 extends GameConfigDataType {
   stoneID: string;
 }
 
-interface WorldBuildingBase extends GameConfigDataType {
+interface WorldBuildingBase extends GameObjectData {
   // 建筑ID int
   id: string;
   // 进入建筑打开的UI string
@@ -10676,7 +10676,7 @@ interface WorldBuildingBase extends GameConfigDataType {
   dramaID: string;
 }
 
-interface WorldCreateCmd extends GameConfigDataType {
+interface WorldCreateCmd extends GameObjectData {
   // ID int
   id: string;
   // 执行顺序（在命令之后） string
@@ -10687,7 +10687,7 @@ interface WorldCreateCmd extends GameConfigDataType {
   value: string;
 }
 
-interface WorldDungeonLevel extends GameConfigDataType {
+interface WorldDungeonLevel extends GameObjectData {
   // ID int
   id: string;
   // 区域积分 int
@@ -10698,7 +10698,7 @@ interface WorldDungeonLevel extends GameConfigDataType {
   dungeonLevelMax: string;
 }
 
-interface WorldFortuitousEvent2 extends GameConfigDataType {
+interface WorldFortuitousEvent2 extends GameObjectData {
   // ID int
   id: string;
   // 目的地类型 int
@@ -10725,7 +10725,7 @@ interface WorldFortuitousEvent2 extends GameConfigDataType {
   dramaID: string;
 }
 
-interface WorldFortuitousEvent2Effect extends GameConfigDataType {
+interface WorldFortuitousEvent2Effect extends GameObjectData {
   // ID int
   id: string;
   // 中心区域大小大小 int
@@ -10746,7 +10746,7 @@ interface WorldFortuitousEvent2Effect extends GameConfigDataType {
   weatherId: string;
 }
 
-interface WorldFortuitousEvent3 extends GameConfigDataType {
+interface WorldFortuitousEvent3 extends GameObjectData {
   // ID int
   id: string;
   // 最小资源 int
@@ -10763,7 +10763,7 @@ interface WorldFortuitousEvent3 extends GameConfigDataType {
   maxTime: string;
 }
 
-interface WorldFortuitousEvent4 extends GameConfigDataType {
+interface WorldFortuitousEvent4 extends GameObjectData {
   // ID int
   id: string;
   // 移动图标 string
@@ -10782,7 +10782,7 @@ interface WorldFortuitousEvent4 extends GameConfigDataType {
   dramaID: string;
 }
 
-interface WorldFortuitousEvent5 extends GameConfigDataType {
+interface WorldFortuitousEvent5 extends GameObjectData {
   // ID int
   id: string;
   // 移动图标 string
@@ -10797,7 +10797,7 @@ interface WorldFortuitousEvent5 extends GameConfigDataType {
   dramaID: string;
 }
 
-interface WorldFortuitousEvent7 extends GameConfigDataType {
+interface WorldFortuitousEvent7 extends GameObjectData {
   // ID int
   id: string;
   // 资源等级 int
@@ -10844,7 +10844,7 @@ interface WorldFortuitousEvent7 extends GameConfigDataType {
   refreshWeight: string;
 }
 
-interface WorldFortuitousEvent7Sub extends GameConfigDataType {
+interface WorldFortuitousEvent7Sub extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -10853,7 +10853,7 @@ interface WorldFortuitousEvent7Sub extends GameConfigDataType {
   value: string;
 }
 
-interface WorldFortuitousEventBase extends GameConfigDataType {
+interface WorldFortuitousEventBase extends GameObjectData {
   // ID int
   id: string;
   // 事件名称 string
@@ -10910,7 +10910,7 @@ interface WorldFortuitousEventBase extends GameConfigDataType {
   effectCondition: string;
 }
 
-interface WorldFortuitousEventIcon extends GameConfigDataType {
+interface WorldFortuitousEventIcon extends GameObjectData {
   // ID int
   id: string;
   // 事件图标 string
@@ -10925,7 +10925,7 @@ interface WorldFortuitousEventIcon extends GameConfigDataType {
   outViewHide: string;
 }
 
-interface WorldMonsterArea extends GameConfigDataType {
+interface WorldMonsterArea extends GameObjectData {
   // 区域ID int
   id: string;
   // 类型 int
@@ -10936,7 +10936,7 @@ interface WorldMonsterArea extends GameConfigDataType {
   centreY: string;
 }
 
-interface WorldMonsterAreaMatch extends GameConfigDataType {
+interface WorldMonsterAreaMatch extends GameObjectData {
   // ID int
   id: string;
   // 区域ID int
@@ -10953,7 +10953,7 @@ interface WorldMonsterAreaMatch extends GameConfigDataType {
   weight: string;
 }
 
-interface WorldMonsterAreaTrigger extends GameConfigDataType {
+interface WorldMonsterAreaTrigger extends GameObjectData {
   // 区域ID int
   id: string;
   // 遇怪概率 int
@@ -10966,7 +10966,7 @@ interface WorldMonsterAreaTrigger extends GameConfigDataType {
   levelDis: string;
 }
 
-interface WorldMonsterRefresh extends GameConfigDataType {
+interface WorldMonsterRefresh extends GameObjectData {
   // ID int
   id: string;
   // 参数 string
@@ -10975,7 +10975,7 @@ interface WorldMonsterRefresh extends GameConfigDataType {
   value: string;
 }
 
-interface WorldMonsterSpecialArea extends GameConfigDataType {
+interface WorldMonsterSpecialArea extends GameObjectData {
   // ID int
   id: string;
   // 坐标点 string
@@ -10986,7 +10986,7 @@ interface WorldMonsterSpecialArea extends GameConfigDataType {
   time: string;
 }
 
-interface WorldTerr1001 extends GameConfigDataType {
+interface WorldTerr1001 extends GameObjectData {
   // ID int
   id: string;
   // 名字 string
@@ -10999,7 +10999,7 @@ interface WorldTerr1001 extends GameConfigDataType {
   icon: string;
 }
 
-interface WorldTerrainDecorate extends GameConfigDataType {
+interface WorldTerrainDecorate extends GameObjectData {
   // 装饰ID int
   id: string;
   // 地形类型 int
@@ -11016,7 +11016,7 @@ interface WorldTerrainDecorate extends GameConfigDataType {
   weight: string;
 }
 
-interface WorldTerrainType extends GameConfigDataType {
+interface WorldTerrainType extends GameObjectData {
   // ID int
   id: string;
   // 名称 string
@@ -11027,7 +11027,7 @@ interface WorldTerrainType extends GameConfigDataType {
   moveCost: string;
 }
 
-interface WorldVillage1 extends GameConfigDataType {
+interface WorldVillage1 extends GameObjectData {
   // id int
   id: string;
   // 村庄ID int
@@ -11042,7 +11042,7 @@ interface WorldVillage1 extends GameConfigDataType {
   newTip: string;
 }
 
-interface WorldVillageBase extends GameConfigDataType {
+interface WorldVillageBase extends GameObjectData {
   // 村庄ID int
   id: string;
   // 村庄名字 string

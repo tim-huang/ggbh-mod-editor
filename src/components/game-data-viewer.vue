@@ -1,4 +1,5 @@
 <template>
+  <!-- <component v-if="builtInViewer" :is="builtInViewer" :data="data"></component> -->
   <a-descriptions bordered v-if="data" size="small" :column="1" :label-style="{ width: '120px' }">
     <a-descriptions-item v-for="field of mergedObjectConfig.fields"
       :label="field.alias?.trim() || field.label?.trim() || field.code" :key="field.code">
@@ -14,11 +15,12 @@ import { useGameObject } from "@/data/app-config";
 
 const props = defineProps<{
   dataKey: GameDataKey,
-  data: GameConfigDataType
+  data: GameObjectData
 }>()
 
 const { mergedObjectConfig } = useGameObject(() => props.dataKey)
 
+// const builtInViewer = computed<any>(() => getObjectViewer(GameDataKey.DramaDialogue))
 </script>
 
 <style scoped></style>

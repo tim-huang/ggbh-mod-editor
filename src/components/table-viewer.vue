@@ -4,14 +4,17 @@
       <template #bodyCell="{ column, text, record }">
         <field-display v-if="column.dataIndex !== '$action'" :data-key="dataKey" :field="fieldMap[column.dataIndex]"
           :field-value="text"></field-display>
-        <span v-else>
+        <a-space v-else>
           <a @click="showDetailDialog(record)" class="mr-1">
             <info-circle-outlined title="Detail"></info-circle-outlined>
           </a>
           <a @click="showEditorDialog(record.id)">
             <edit-outlined title="Edit"></edit-outlined>
           </a>
-        </span>
+          <a @click="onSelect(record)">
+            <check-circle-outlined title="Edit"></check-circle-outlined>
+          </a>
+        </a-space>
       </template>
     </a-table>
     <!-- detail dialog -->
@@ -33,11 +36,12 @@ import FieldDisplay from './field-display.vue';
 import GameDataViewer from './game-data-viewer.vue';
 import ObjectEditor from './object-editor.vue';
 import { computed, ref } from 'vue';
-import { InfoCircleOutlined, EditOutlined } from '@ant-design/icons-vue';
+import { InfoCircleOutlined, EditOutlined, CheckCircleOutlined } from '@ant-design/icons-vue';
 
 const props = defineProps<{
   dataKey: GameDataKey,
-  dataSource: GameConfigDataType[]
+  dataSource: GameObjectData[],
+  selectable?: boolean,
 }>();
 
 const { mergedInlineFields } = useGameObject(() => props.dataKey);
@@ -70,8 +74,8 @@ const columns = computed(() => {
 
 // show detail dialog
 const detailDialogVisible = ref<boolean>(false);
-const detailObject = ref<GameConfigDataType>();
-const showDetailDialog = (data: GameConfigDataType) => {
+const detailObject = ref<GameObjectData>();
+const showDetailDialog = (data: GameObjectData) => {
   detailObject.value = data;
   detailDialogVisible.value = true;
 }
@@ -82,6 +86,12 @@ const showEditorDialog = (id: string) => {
   editingId.value = id;
   editorDialogVisible.value = true;
 }
+// select row
+const emits = defineEmits<{
+  (e: 'select', item: GameObjectData): void;
+}>()
+
+const onSelect = (item: GameObjectData) => emits('select', item);
 </script>
 
 

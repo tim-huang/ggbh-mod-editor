@@ -6,8 +6,7 @@
         <a-checkbox v-model:checked="customizedOnly">Customized Only</a-checkbox>
         <a-select :value="dataKey" :options="options" style="width: 300px; text-align: left;" show-search
           @select="dataKeySelected"></a-select>
-        <a-button type="primary" :icon="h(SettingOutlined)" @click="fieldsConfigDialogVisibile = true">
-          Customize
+        <a-button type="primary" :icon="h(SettingOutlined)" @click="fieldsConfigDialogVisibile = true" shape="circle">
         </a-button>
       </template>
     </a-page-header>

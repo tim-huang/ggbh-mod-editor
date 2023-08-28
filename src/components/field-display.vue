@@ -1,10 +1,13 @@
 
 <template>
-  <span v-if="fieldValue" class="mx-0.5 border border-solid border-transparent rounded-sm hover:border-b-purple-300">
+  <span v-if="fieldValue" class="mx-0.5">
     <span v-if="field.dictionary">{{ getDictionary(field.dictionary)[fieldValue] || fieldValue }}</span>
     <span v-else-if="field.refer?.length && Object.keys(referObjects || {}).length">
       <template v-for="(objs, key) in referObjects">
-        <brief-viewer v-for="obj of objs" :data-key="key" :data="obj" :key="key + obj.id"></brief-viewer>
+        <template v-for="(obj, idx) in objs" :key="key + obj.id">
+          <brief-viewer :data-key="key" :data="obj"></brief-viewer>
+          <br v-if="idx !== (objs?.length ?? 0) - 1">
+        </template>
       </template>
     </span>
     <span v-else :title="fieldValue">{{ limitText(fieldValue) }}</span>

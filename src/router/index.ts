@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { MessageOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons-vue'
+import { DeploymentUnitOutlined, MessageOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons-vue'
 import * as VueRouter from 'vue-router'
 import { ItemType } from 'ant-design-vue'
 
@@ -39,6 +39,12 @@ const editorMenuItems: EditorMenuItem[] = [
     label: 'Object List',
     icon: h(UnorderedListOutlined),
     component: () => import('@/pages/object-list.vue')
+  },
+  {
+    path: '/object-browser',
+    label: 'Object Browser',
+    icon: h(DeploymentUnitOutlined),
+    component: () => import('@/pages/object-browser.vue')
   },
 ]
 

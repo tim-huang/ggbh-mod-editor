@@ -17,7 +17,7 @@ interface GameConfigMeta {
 /**
  * 所有JSON配置文件中的JSON对象都有一个id
  */
-type GameConfigDataType = {
+type GameObjectData = {
   id: string,
   /**
    * indicate status of data

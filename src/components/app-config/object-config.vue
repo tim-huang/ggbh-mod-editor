@@ -62,7 +62,7 @@ const options = Object.keys(gameMetaInfo).map((k) => ({ value: k, label: k }))
 
 const randomDataTrigger = ref(0);
 
-const randomData = computed<GameConfigDataType | undefined>(() => {
+const randomData = computed<GameObjectData | undefined>(() => {
   const arr = gameData.combined[selectedDataKey.value];
   if (arr?.length) {
     const idx = Math.floor(Math.random() * arr.length) + randomDataTrigger.value * 0;
@@ -70,7 +70,7 @@ const randomData = computed<GameConfigDataType | undefined>(() => {
   }
 })
 
-const randomDataSource = computed<GameConfigDataType[]>(() => {
+const randomDataSource = computed<GameObjectData[]>(() => {
   const arr = gameData.combined[selectedDataKey.value];
   const rows = 5;
   if (arr?.length) {

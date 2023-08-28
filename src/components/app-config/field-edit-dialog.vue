@@ -19,26 +19,25 @@
         <a-form-item :wrapper-col="{ offset: 4, span: 20 }" :hasFeedback="false">
           <template v-if="dialogModel.refer?.length">
             <div class="grid grid-cols-12 gap-0.5 font-bold">
-              <span class="col-span-5">Object</span>
+              <span class="col-span-6">Object</span>
               <span class="col-span-5">Field</span>
-              <span class="col-span-1">Multi</span>
               <span class="col-span-1"></span>
             </div>
             <div v-for="( refer, index ) of  dialogModel.refer " :key="index" class="grid grid-cols-12 gap-0.5">
-              <a-form-item :name="['refer', index, 'object']" :rules="[{ required: true }]" class="col-span-5">
+              <a-form-item :name="['refer', index, 'object']" :rules="[{ required: true }]" class="col-span-6">
                 <a-select v-model:value="refer.object" :options="referenceObjects" show-search />
               </a-form-item>
               <a-form-item :name="['refer', index, 'field']" :rules="[{ required: true }]" class="col-span-5">
                 <a-select v-model:value="refer.field" :options="computeReferenceFields(refer.object as GameDataKey)"
                   show-search />
               </a-form-item>
-              <a-form-item :name="['refer', index, 'multiple']">
-                <a-checkbox v-model:checked="refer.multiple"></a-checkbox>
-              </a-form-item>
               <a title="remove" @click="removeRefer(index)">
                 <close-circle-outlined class="text-red-600"></close-circle-outlined>
               </a>
             </div>
+            <a-form-item>
+              <a-checkbox v-model:checked="dialogModel.multiple">Multiple</a-checkbox>
+            </a-form-item>
           </template>
         </a-form-item>
         <!-- <template v-if=" dialogModel.refer?.length "> -->
@@ -179,6 +178,7 @@ const saveField = () => {
   field.refer = field.refer?.filter((r) => r.field && r.object)
   if (dialogModel.value?.referType !== 'R' || !field.refer?.length) {
     delete field.refer
+    delete field.multiple
   }
   if (dialogModel.value?.referType !== 'D') {
     delete field.dictionary
@@ -191,7 +191,9 @@ const saveField = () => {
 }
 
 // datasource for reference object select
-const referenceObjects = Object.keys(gameMetaInfo).filter(key => key != props.dataKey).map(key => ({ value: key, label: key }))
+const referenceObjects = Object.keys(gameMetaInfo)
+  // .filter(key => key != props.dataKey)
+  .map(key => ({ value: key, label: key }))
 // datasource for reference field select
 const computeReferenceFields = computed(() => {
   return (object: GameDataKey) => {

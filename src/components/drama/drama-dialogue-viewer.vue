@@ -20,44 +20,44 @@
           <h4 class="align-bottom text-blue-500">
             <info-circle-outlined></info-circle-outlined>
             <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('uiType')"
-              :field-value="data?.uiType || ''" />
+              :field-value="model?.uiType || ''" />
             <!-- {{ data?.uiType }} - {{ dramaUiType[data?.uiType as string] }} -->
           </h4>
           <h4>
             <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('title')"
-              :field-value="data?.title || ''" />
+              :field-value="model?.title || ''" />
           </h4>
         </div>
-        <template #content v-if="data">
-          <game-data-viewer :data-key="GameDataKey.DramaDialogue" :data="data" />
+        <template #content v-if="model">
+          <game-data-viewer :data-key="GameDataKey.DramaDialogue" :data="model" />
         </template>
       </a-popover>
       <!-- next dialogue -->
-      <a-button @click="gotoDialogue(data.nextDialogue)" :icon="h(CaretRightOutlined)" type="primary"
-        v-if="data?.nextDialogue && data?.nextDialogue !== '0'">
+      <a-button @click="gotoDialogue(model.nextDialogue)" :icon="h(CaretRightOutlined)" type="primary"
+        v-if="model?.nextDialogue && model?.nextDialogue !== '0'">
         Next
       </a-button>
     </div>
     <!-- participants-->
     <div class="w-full h-32 relative">
-      <div v-if="data?.npcLeft && data?.npcLeft !== '0'" class="absolute left-4 flex flex-col">
-        <img src="/public/images/human.png" height="128" :class="{ 'blur-sm': data.speaker !== '1' }">
+      <div v-if="model?.npcLeft && model?.npcLeft !== '0'" class="absolute left-4 flex flex-col">
+        <img src="/public/images/human.png" height="128" :class="{ 'blur-sm': model.speaker !== '1' }">
         <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('npcLeft')"
-          :field-value="data?.npcLeft || ''" />
+          :field-value="model?.npcLeft || ''" />
         <!-- <span>{{ data?.npcLeft }} - {{ dramaNpc[data?.npcLeft] }}</span> -->
       </div>
-      <div v-if="data?.npcRight && data?.npcRight !== '0'" class="absolute right-4 flex flex-col">
+      <div v-if="model?.npcRight && model?.npcRight !== '0'" class="absolute right-4 flex flex-col">
         <img src="/public/images/human.png" height="128" style="transform: rotateY(180deg)"
-          :class="{ 'blur-sm': data.speaker !== '2' }">
+          :class="{ 'blur-sm': model.speaker !== '2' }">
         <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('npcRight')"
-          :field-value="data?.npcRight || ''" />
+          :field-value="model?.npcRight || ''" />
         <!-- <span>{{ data?.npcRight }} - {{ dramaNpc[data?.npcRight] }}</span> -->
       </div>
     </div>
     <!-- content -->
     <div class="w-full p-4 bg-gray-200 m-2 rounded-lg border border-gray-500 border-solid">
       <field-display :data-key="GameDataKey.DramaDialogue" :field="getField('dialogue')"
-        :field-value="data?.dialogue || ''" />
+        :field-value="model?.dialogue || ''" />
 
       <!-- <p v-for="(item, index) in textContents"><message-outlined /> {{ item }} </p> -->
     </div>
@@ -94,7 +94,8 @@ import FieldDisplay from "../field-display.vue";
 import { useGameObject } from "@/data/app-config";
 
 const props = defineProps<{
-  dialogueId: string
+  dialogueId?: string;
+  data?: GameObjectData
 }>()
 
 const router = useRouter();
@@ -111,16 +112,21 @@ const getField = computed(() => {
   }
 })
 // current dialogue data
-const data = computed<DramaDialogue | undefined>(() => {
-  return (gameData.combined.DramaDialogue as DramaDialogue[])
-    .find(item => item.id === props.dialogueId)
+const model = computed<DramaDialogue | undefined>(() => {
+  console.log(props)
+  if (props.dialogueId) {
+    return (gameData.combined.DramaDialogue as DramaDialogue[])
+      .find(item => item.id === props.dialogueId)
+  } else if (props.data) {
+    return props.data as DramaDialogue
+  }
 })
 
 // previous dialogue data
 const prev = computed<ItemType[]>(() => {
-  if (!data.value?.id) return []
+  if (!model.value?.id) return []
   const found = (gameData.combined.DramaDialogue as DramaDialogue[])
-    .filter(item => item.nextDialogue === data.value?.id)
+    .filter(item => item.nextDialogue === model.value?.id)
   return found.map(item => {
     const texts = fn.getText(item.dialogue)
     return {
@@ -150,8 +156,8 @@ type LocalOption = {
   }[]
 }
 const options = computed<LocalOption[]>(() => {
-  if (!data.value || !data.value.options || data.value.options === '0') return []
-  const options = data.value.options.split('|')
+  if (!model.value || !model.value.options || model.value.options === '0') return []
+  const options = model.value.options.split('|')
   const found = (gameData.combined.DramaOptions as DramaOptions[])
     .filter((item) => options.indexOf(item.id) != -1)
   return found.map(item => {

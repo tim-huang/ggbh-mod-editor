@@ -41,22 +41,22 @@ import { h, computed } from 'vue';
 import { ItemType } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
 import { FolderOpenOutlined, LockTwoTone, UnlockTwoTone, SettingTwoTone, ReloadOutlined, SaveOutlined, FolderViewOutlined } from '@ant-design/icons-vue'
+import { usePending } from '@/utils/use';
+
+const emits = defineEmits<{
+  (e: 'selected', path: string): void;
+}>();
 
 const { gameData } = useGameData()
 
-let disabled = false
-const onSelectPath = async () => {
-  if (!disabled) {
-    disabled = true
-
-    const path = await window.api.selectPath()
-    if (path && path != gameData.path) {
-      await gameData.init(path)
-      console.log(gameData.path)
-    }
-    disabled = false
+const { fn: onSelectPath } = usePending(async () => {
+  const path = await window.api.selectPath();
+  if (path && path !== gameData.path) {
+    await gameData.init(path);
+    console.log(path, "is selected");
+    path && emits("selected", path)
   }
-}
+});
 
 const menuItemClicked = ({ item }: { item: { action?: () => void } }) => {
   if (item.action) {

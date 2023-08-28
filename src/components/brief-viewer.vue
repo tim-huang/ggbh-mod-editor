@@ -1,13 +1,14 @@
 <template>
   <span class="mx-0.5">
-    <span v-for="field of mergedBriefFields">
-      <field-display :data-key="props.dataKey" :field="field" :field-value="data[field.code]" />
-    </span>
     <a-tooltip :title="`${dataKey} - ${data.id}`">
-      <a @click="showDetailModal = true">
+      <a @click="showDetailModal = true" class="peer">
         <info-circle-outlined></info-circle-outlined>
       </a>
     </a-tooltip>
+    <span class="border border-solid border-transparent rounded-sm peer-hover:border-b-purple-300">
+      <field-display v-for="field of mergedBriefFields" :data-key="props.dataKey" :field="field"
+        :field-value="data[field.code]" />
+    </span>
     <a-modal v-model:open="showDetailModal" :title="`${dataKey} - ${data.id}`" width="800px">
       <div class="overflow-y-scroll w-full" style="max-height: 500px">
         <game-data-viewer :data-key="dataKey" :data="data"></game-data-viewer>
@@ -27,7 +28,7 @@ import GameDataViewer from './game-data-viewer.vue';
 
 const props = defineProps<{
   dataKey: GameDataKey
-  data: GameConfigDataType
+  data: GameObjectData
 }>();
 
 const { mergedBriefFields } = useGameObject(() => props.dataKey);

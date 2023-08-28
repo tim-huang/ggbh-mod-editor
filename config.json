@@ -71,10 +71,20 @@
           "refer": [
             {
               "object": "DramaOptions",
-              "field": "id",
-              "multiple": true
+              "field": "id"
             }
-          ]
+          ],
+          "multiple": true
+        },
+        "nextDialogue": {
+          "code": "nextDialogue",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ],
+          "multiple": true
         }
       },
       "inline": [
@@ -104,6 +114,12 @@
     },
     "RoleLogLocal": {
       "brief": [
+        "ch"
+      ],
+      "inline": [
+        "id",
+        "keyID",
+        "condition",
         "ch"
       ]
     },
@@ -169,11 +185,11 @@
           "refer": [
             {
               "object": "DramaDialogue",
-              "field": "id",
-              "multiple": true
+              "field": "id"
             }
           ],
-          "alias": "后续剧情"
+          "alias": "后续剧情",
+          "multiple": true
         },
         "text": {
           "code": "text",
@@ -219,6 +235,87 @@
           "dictionary": "fortuitousEventType"
         }
       }
+    },
+    "LetterBase": {
+      "fields": {
+        "title": {
+          "code": "title",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "content": {
+          "code": "content",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "sendName": {
+          "code": "sendName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ItemProps": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "className": {
+          "code": "className"
+        },
+        "type": {
+          "code": "type",
+          "refer": [
+            {
+              "object": "ItemType",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemType": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
     }
   }
 }
