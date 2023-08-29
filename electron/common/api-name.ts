@@ -1,23 +1,3 @@
-
-
-export enum EditorEvent {
-  WINDOW_MESSAGE = "message",
-  SELECT_PATH = "select-path",
-  PATH_SELECTED = "path-selected",
-}
-
-export interface WindowMessage<T> {
-  type: EditorEvent,
-  data: T,
-}
-
-
-
-
-
-
-
-
 export enum ApiName {
   selectPath = "dialog:selectPath",
   loadProject = "project:load",
@@ -25,5 +5,7 @@ export enum ApiName {
   writeJson = "json:write",
   readAppConfig = "app:readConfig",
   saveAppConfig = "app:saveConfig",
-  openProjectInSysApp = "project:openProjectInSysApp"
+  openProjectInSysApp = "project:openProjectInSysApp",
+  readLastUpdate = "project:readLastUpdate",
+  writeLastUpdate = "project:writeLastUpdate"
 }

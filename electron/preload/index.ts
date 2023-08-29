@@ -1,4 +1,3 @@
-import './path-selection'
 import './bridge'
 
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {

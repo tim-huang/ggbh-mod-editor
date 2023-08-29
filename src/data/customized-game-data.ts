@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { GameDataKey } from '@/common/ggbh-meta';
 import JSON5 from 'json5'
 import { originalGameData } from './original-game-data';
+import { useLastUpdate } from './last-update';
 
 export interface ProjectData {
   path: string,
@@ -97,8 +98,10 @@ const useProjectData = defineStore({
     updateObject(key: GameDataKey, obj: GameObjectData) {
       const original = originalGameData[key].find(o => o.id === obj.id);
       this.json[key] = this.json[key] || [];
+      const lastUpdate = useLastUpdate();
       if (!original) {
-        this.json[key]!.push(obj)
+        this.json[key]!.push(obj);
+        lastUpdate.log(key, obj.id, 'A');
       } else {
         // compare object
         const ignoreFields = ['customized']
@@ -116,27 +119,32 @@ const useProjectData = defineStore({
           } else {
             this.json[key]!.push(diff);
           }
+          lastUpdate.log(key, obj.id, 'M');
         } else {
           // remove customized
           this.json[key] = this.json[key]?.filter(o => o.id !== obj.id)
+          lastUpdate.log(key, obj.id, 'D');
         }
       }
-      console.debug(this.json[key])
       this.dirtyMap[key] = true;
     },
     remove(key: GameDataKey, id: string) {
       if (this.json[key] && this.json[key]!.find(o => o.id === id)) {
         this.json[key] = this.json[key]?.filter(o => o.id !== id);
+        useLastUpdate().log(key, id, 'D')
         this.dirtyMap[key] = true;
       }
 
     },
     async save() {
+      // save dirty file
       const promises = Object.entries(this.dirtyMap).map(([key, dirty]) => {
         if (dirty) {
-          window.api.writeJsonFile(key, JSON.stringify(this.json[key as GameDataKey] || [], null, 2))
+          return window.api.writeJsonFile(key, JSON.stringify(this.json[key as GameDataKey] || [], null, 2))
         }
       });
+      // save last update
+      promises.push(useLastUpdate().save())
       await Promise.all(promises)
       this.dirtyMap = {} as Partial<Record<GameDataKey, boolean>>;
     },

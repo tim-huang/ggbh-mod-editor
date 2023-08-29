@@ -1,7 +1,6 @@
 import { app, BrowserWindow, shell, ipcMain, dialog, ipcRenderer } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
-import { EditorEvent } from '../common/api-name'
 import { useBridgeApi } from './bridge-api'
 import { session } from 'electron'
 
@@ -87,13 +86,6 @@ async function createWindow() {
     return { action: 'deny' }
   })
   // win.webContents.on('will-navigate', (event, url) => { }) #344
-
-  ipcMain.on(EditorEvent.SELECT_PATH, async (event, arg) => {
-    const result = await dialog.showOpenDialog(win, {
-      properties: ['openDirectory']
-    })
-    win.webContents.send(EditorEvent.PATH_SELECTED, result.filePaths)
-  })
 
   useBridgeApi(win)
 }

@@ -27,6 +27,9 @@ export const useBridgeApi = (win: BrowserWindow) => {
     const filePath = getConfigPath(projectPath, fileName)
     const stat = await fs.lstat(filePath)
     console.log(filePath, "==>", stat)
+    if (!stat) {
+      return "[]";
+    }
     if (!stat.isFile()) {
       console.log(filePath, 'is not a file.')
       return undefined
@@ -72,7 +75,7 @@ export const useBridgeApi = (win: BrowserWindow) => {
   async function readAppConfig(): Promise<string | undefined> {
     const configPath = join(app.getAppPath(), "config.json")
     const stat = await fs.lstat(configPath)
-    if (!stat.isFile()) {
+    if (!stat?.isFile()) {
       console.log(configPath, 'is not a file.')
       return "{}"
     }
@@ -93,4 +96,32 @@ export const useBridgeApi = (win: BrowserWindow) => {
     shell.openPath(path);
   }
   ipcMain.handle(ApiName.openProjectInSysApp, openInSysApp)
+
+  const lastUpdateFileName = "last-update.json";
+  // read last update
+  async function readLastUpdate(_: any, projectPath: string): Promise<string | undefined> {
+    const filePath = getConfigPath(projectPath, lastUpdateFileName)
+    const stat = await fs.lstat(filePath)
+    console.log(filePath, "==>", stat)
+    if (stat && !stat.isFile()) {
+      console.error(filePath, 'is not a file.')
+      return undefined
+    }
+
+    return fs.readFile(filePath, 'utf8')
+  }
+  ipcMain.handle(ApiName.readLastUpdate, readLastUpdate)
+
+  // write last update
+  async function writeLastUpdate(_: any, projectPath: string, data: string) {
+    const filePath = getConfigPath(projectPath, lastUpdateFileName)
+    const stat = await fs.lstat(filePath)
+    if (stat && !stat.isFile()) {
+      console.log(filePath, 'is not a file.')
+      return '[]'
+    }
+
+    return fs.writeFile(filePath, data, "utf8")
+  }
+  ipcMain.handle(ApiName.writeLastUpdate, writeLastUpdate)
 }
