@@ -102,7 +102,6 @@ export const useBridgeApi = (win: BrowserWindow) => {
   async function readLastUpdate(_: any, projectPath: string): Promise<string | undefined> {
     const filePath = join(projectPath, lastUpdateFileName)
     const stat = fs.statSync(filePath)
-    console.log(filePath, "==>", stat)
     if (stat && !stat.isFile()) {
       console.error(filePath, 'is not a file.')
       return undefined

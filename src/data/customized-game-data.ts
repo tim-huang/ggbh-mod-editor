@@ -84,6 +84,7 @@ const useProjectData = defineStore({
       this.json = json as GameConfigDataMap;
       this.path = path;
       this.dirtyMap = {};
+      return useLastUpdate().init();
     },
     /**
      * 重新加载指定的JSON文件

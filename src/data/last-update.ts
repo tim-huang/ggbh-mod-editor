@@ -14,17 +14,18 @@ export interface LastUpdate {
 
 export const useLastUpdate = defineStore({
   id: "last-update",
-  state: (): LastUpdate[] => [],
+  state: (): { history: LastUpdate[] } => ({ history: [] }),
   actions: {
     async init() {
       const str = await window.api.readLastUpdate();
-      this.$state = JSON5.parse(str)
+      const arr = JSON5.parse(str) as LastUpdate[];
+      this.history = arr.sort((a, b) => b.lastUpdate - a.lastUpdate)
     },
     async save() {
-      return window.api.writeLastUpdate(JSON.stringify(this.$state, null, 2))
+      return window.api.writeLastUpdate(JSON.stringify(this.history, null, 2))
     },
     log(type: GameDataKey, id: string, action: LastUpdateActionType = 'M') {
-      this.$state.unshift({
+      this.history.unshift({
         type,
         id,
         action,

@@ -52,7 +52,6 @@ const emits = defineEmits<{
   (e: 'nodeSelected', item: NodeData): void;
 }>()
 
-const root = ref<NodeData>()
 const treeData = ref<TreeData[]>([]);
 const selectedKeys = ref<(string | number)[]>([]);
 const expandedKeys = ref<(string | number)[]>([])
@@ -65,13 +64,13 @@ const objectSelectorVisible = ref<boolean>(false);
 const { width } = useWindowSize();
 
 const onRootSelected = ({ type, items }: { type: GameDataKey, items: GameObjectData[] }) => {
-  root.value = { type, item: items[0] };
+  const root = { type, item: items[0] };
   objectSelectorVisible.value = false;
   // re-initialize tree
-  initializeTreeData(root.value);
+  initializeTreeData(root);
   selectedKeys.value = treeData.value?.map(item => item.key) || [];
   // onNodeSelected(selectedItem)
-  emits('nodeSelected', root.value);
+  emits('nodeSelected', root);
 }
 
 // initialize tree
@@ -135,31 +134,38 @@ const onNodeSelected = (_: (string | number)[], { selected, node: { type, data }
   }
 }
 // refresh tree
-const refreshTree = async () => {
-  if (!treeData.value?.length) return;
-  const keys = [...expandedKeys.value]
-  const root = treeData.value[0];
-  if (root.type === 'object') {
-    const obj = gameData.combined[root.data.type]?.find(o => o.id === root.data.item.id);
+const refreshTree = async (arg?: { type: GameDataKey, id: string }) => {
+  if (arg) {
+    const obj = gameData.combined[arg.type]?.find(o => o.id === arg.id)
     if (obj) {
-      root.data.item = obj;
-      const todo = [...treeData.value];
-      while (todo.length) {
-        const node = todo.pop();
-        if (node && keys.includes(node.key)) {
-          delete node.children;
-          await loadData({ dataRef: node });
-          if (node.children) {
-            todo.push(...(node.children as TreeData[]));
+      initializeTreeData({ type: arg.type, item: obj })
+    }
+  } else {
+    if (!treeData.value?.length) return;
+    const keys = [...expandedKeys.value]
+    const root = treeData.value[0];
+    if (root.type === 'object') {
+      const obj = gameData.combined[root.data.type]?.find(o => o.id === root.data.item.id);
+      if (obj) {
+        root.data.item = obj;
+        const todo = [...treeData.value];
+        while (todo.length) {
+          const node = todo.pop();
+          if (node && keys.includes(node.key)) {
+            delete node.children;
+            await loadData({ dataRef: node });
+            if (node.children) {
+              todo.push(...(node.children as TreeData[]));
+            }
           }
         }
+        treeData.value = [...treeData.value];
+      } else {
+        treeData.value = [];
       }
-      treeData.value = [...treeData.value];
     } else {
       treeData.value = [];
     }
-  } else {
-    treeData.value = [];
   }
 }
 

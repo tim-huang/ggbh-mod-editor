@@ -18,14 +18,16 @@ useStyleProvider(styleProvider)
 
 // load config
 const appConfig = useAppConfig();
-onMounted(appConfig.init)
-
 
 // once project path has been selected, redirect to object browser
 const router = useRouter();
 const onPathSelected = (_: string) => {
   nextTick(() => router.push({ path: "/object-browser" }))
 }
+
+// load app config
+onMounted(appConfig.init)
+
 </script>
 
 <template>

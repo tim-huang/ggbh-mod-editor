@@ -52,11 +52,15 @@ import ObjectTree from '@/components/object-browser/object-tree.vue'
 import GameDataViewer from '@/components/game-data-viewer.vue';
 import ObjectEditor from '@/components/object-editor.vue';
 import { GameDataKey } from '@/common/ggbh-meta';
-import { computed, ref } from 'vue';
+import { computed, nextTick, onUnmounted, ref, watchEffect } from 'vue';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import { useWindowSize } from '@vueuse/core';
 import { Modal } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
+import { useRoute } from 'vue-router';
+
+
+const route = useRoute();
 
 const dataKey = ref<GameDataKey>()
 const dataId = ref<string>()
@@ -112,7 +116,20 @@ const onRemove = () => {
 
 // refresh tree
 const objectTree = ref<{
-  refreshTree: () => Promise<any>,
+  refreshTree: (arg?: { type: GameDataKey, id: string }) => Promise<any>,
 }>();
+
+const stopWatch = watchEffect(() => {
+  if (route.query.type && route.query.id) {
+    dataKey.value = route.query.type as GameDataKey;
+    dataId.value = route.query.id as string;
+    // refreshTree
+    nextTick(() => {
+      objectTree.value?.refreshTree({ type: route.query.type as GameDataKey, id: route.query.id as string })
+    })
+  }
+})
+
+onUnmounted(stopWatch)
 
 </script>

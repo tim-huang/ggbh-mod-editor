@@ -1,4 +1,3 @@
-
 <template>
   <div class="app-header flex flex-col justify-center">
     <div class="flex flex-row place-items-center mx-2 gap-4">
@@ -35,6 +34,9 @@
     </div>
     <div class="absolute right-4 top-1/2 -translate-y-1/2 flex flex-row place-items-center gap-4 z-10">
       <!-- TODO: implement feature - search anything  -->
+      <a class="menu-icon cursor-pointer" title="History" @click="historyBrowserVisibile = true">
+        <history-outlined class="text-blue-500"></history-outlined>
+      </a>
       <a-input-search placeholder="Search anything" width="300px"></a-input-search>
       <a-dropdown>
         <a class="menu-icon cursor-pointer">
@@ -46,19 +48,26 @@
         </template>
       </a-dropdown>
     </div>
+
+    <a-modal :closable="false" width="800px" :footer="null" v-model:open="historyBrowserVisibile" destroy-on-close
+      :body-style="{ padding: '5px', height: '600px' }">
+      <history-browser @select="gotoBrowser"></history-browser>
+    </a-modal>
   </div>
 </template>
 
 <script setup lang="ts">
 
-import { computed, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { menuItems } from '@/router'
 import { useRoute, useRouter } from 'vue-router'
-import { MenuOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined, SaveOutlined } from '@ant-design/icons-vue';
+import { MenuOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined, SaveOutlined, HistoryOutlined } from '@ant-design/icons-vue';
 import { ItemType } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
 import { usePending } from '@/utils/use';
 import PathSelector from './path-selector.vue';
+import HistoryBrowser from './history/history-browser.vue';
+import { LastUpdate } from '@/data/last-update';
 
 const route = useRoute();
 const { gameData } = useGameData();
@@ -83,6 +92,27 @@ const gotoLink = ({ key }: { key: string }) => {
 
 // save project
 const { fn: onSaveProject } = usePending(gameData.save)
+
+// history browser
+const historyBrowserVisibile = ref<boolean>(false);
+const gotoBrowser = (history: LastUpdate) => {
+  historyBrowserVisibile.value = false;
+  router.push({ path: '/object-browser', query: { type: history.type, id: history.id } })
+}
+
+const hotkeyHandler = (e: KeyboardEvent) => {
+  if (e.key === 'h' && e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
+    historyBrowserVisibile.value = !historyBrowserVisibile.value;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', hotkeyHandler);
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', hotkeyHandler);
+})
 </script>
 
 <style scoped>
