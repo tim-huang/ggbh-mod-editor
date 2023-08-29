@@ -45,7 +45,6 @@ const indexHtml = join(process.env.DIST, 'index.html')
 
 // enable vue devtools
 async function enableVueDevtools() {
-  console.log(import.meta.env.VITE_DEVTOOLS_PATH)
   if (process.env.NODE_ENV === 'development' && import.meta.env.VITE_DEVTOOLS_PATH) {
     await session.defaultSession.loadExtension(import.meta.env.VITE_DEVTOOLS_PATH)
   }

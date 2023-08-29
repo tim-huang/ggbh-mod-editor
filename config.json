@@ -5,12 +5,10 @@
       "fields": {
         "id": {
           "code": "id",
-          "label": "ID",
           "type": "int"
         },
         "exp": {
           "code": "exp",
-          "label": "需求心得",
           "type": "int"
         }
       },
@@ -20,31 +18,26 @@
       "fields": {
         "uiType": {
           "code": "uiType",
-          "label": "UI类型",
           "type": "int",
           "dictionary": "dramaUiType"
         },
         "speaker": {
           "code": "speaker",
-          "label": "说话者",
           "type": "int",
           "dictionary": "dramaSpeaker"
         },
         "npcLeft": {
           "code": "npcLeft",
-          "label": "对话NPC左",
           "type": "int",
           "dictionary": "dramaNpc"
         },
         "npcRight": {
           "code": "npcRight",
-          "label": "对话NPC右",
           "type": "int",
           "dictionary": "dramaNpc"
         },
         "dialogue": {
           "code": "dialogue",
-          "label": "对话内容",
           "type": "string",
           "refer": [
             {
@@ -103,7 +96,6 @@
       "fields": {
         "id": {
           "code": "id",
-          "label": " ",
           "type": "int",
           "alias": "ID"
         }
@@ -127,7 +119,6 @@
       "fields": {
         "name": {
           "code": "name",
-          "label": "技能名称",
           "type": "string",
           "refer": [
             {
@@ -138,7 +129,6 @@
         },
         "desc": {
           "code": "desc",
-          "label": "技能说明",
           "type": "string",
           "refer": [
             {
@@ -156,7 +146,6 @@
       "fields": {
         "skillID": {
           "code": "skillID",
-          "label": "技能ID",
           "type": "string",
           "refer": [
             {
@@ -167,7 +156,6 @@
         },
         "desc": {
           "code": "desc",
-          "label": "效果说明",
           "type": "string",
           "refer": [
             {
@@ -208,6 +196,13 @@
       "brief": [
         "text",
         "nextDialogue"
+      ],
+      "inline": [
+        "id",
+        "text",
+        "nextDialogue",
+        "condition",
+        "function"
       ]
     },
     "FortuitousEvent": {

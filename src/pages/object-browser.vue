@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-row">
     <div class="w-[300px] h-full p-1">
-      <object-tree @node-selected="onNodeSelected"></object-tree>
+      <object-tree @node-selected="onNodeSelected" ref="objectTree"></object-tree>
     </div>
     <div class="w-[2px] h-full shadow"></div>
     <div class="w-[calc(100%-302px)] h-full">
@@ -80,8 +80,11 @@ const editorDrawerVisible = ref<boolean>(false)
 const onEdit = () => {
   editorDrawerVisible.value = true;
 }
-const onSave = () => {
+const onSave = async () => {
   editorRef.value?.save();
+  if (objectTree.value) {
+    await objectTree.value.refreshTree();
+  }
   editorDrawerVisible.value = false;
 }
 // remove customization
@@ -90,11 +93,20 @@ const onRemove = () => {
   Modal.confirm({
     title: 'Remove Customization',
     content: `You are about to remove customization on ${title.value}, are you sure?`,
-    onOk: () => {
+    onOk: async () => {
       if (dataKey.value && data.value) {
         gameData.remove(dataKey.value, data.value.id)
+        if (objectTree.value) {
+          await objectTree.value?.refreshTree()
+        }
       }
     }
   })
 }
+
+// refresh tree
+const objectTree = ref<{
+  refreshTree: () => Promise<any>,
+}>();
+
 </script>

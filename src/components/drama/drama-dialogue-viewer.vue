@@ -113,7 +113,6 @@ const getField = computed(() => {
 })
 // current dialogue data
 const model = computed<DramaDialogue | undefined>(() => {
-  console.log(props)
   if (props.dialogueId) {
     return (gameData.combined.DramaDialogue as DramaDialogue[])
       .find(item => item.id === props.dialogueId)

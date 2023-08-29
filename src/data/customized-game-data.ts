@@ -139,6 +139,18 @@ const useProjectData = defineStore({
       });
       await Promise.all(promises)
       this.dirtyMap = {} as Partial<Record<GameDataKey, boolean>>;
+    },
+    getRandomId(key: GameDataKey): string {
+      const max = 2147483647;
+      const min = -2147483648;
+
+      while (true) {
+        const offset = Math.floor(Math.random() * max);
+        const id = (offset < max / 2 ? (min + offset) : (max - offset)).toString();
+        if (!this.combined[key]?.some(o => o.id === id)) {
+          return id;
+        }
+      }
     }
   }
 })

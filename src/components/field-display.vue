@@ -34,7 +34,7 @@ const referObjects = computed(() => {
 })
 
 const limitText = computed(() => {
-  return (s: string, length: number = 80) => {
+  return (s: string, length: number = 30) => {
     if ((s?.length ?? 0) <= length) {
       return s;
     }

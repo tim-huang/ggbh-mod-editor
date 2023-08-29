@@ -3,7 +3,7 @@ import PathSelector from '@/components/path-selector.vue'
 import MainView from '@/pages/main-view.vue'
 import { useStyleProvider } from 'ant-design-vue';
 import { useGameData } from "@/data/customized-game-data"
-import { onMounted, reactive } from 'vue';
+import { nextTick, onMounted, reactive } from 'vue';
 import { UseStyleProviderProps } from 'ant-design-vue/es/_util/cssinjs/StyleContext';
 import { useAppConfig } from './data/app-config';
 import { useRouter } from 'vue-router';
@@ -20,10 +20,11 @@ useStyleProvider(styleProvider)
 const appConfig = useAppConfig();
 onMounted(appConfig.init)
 
+
 // once project path has been selected, redirect to object browser
-const onPathSelected = (path: string) => {
-  console.log("path selected", path)
-  useRouter().push({ path: "/object-browser" })
+const router = useRouter();
+const onPathSelected = (_: string) => {
+  nextTick(() => router.push({ path: "/object-browser" }))
 }
 </script>
 

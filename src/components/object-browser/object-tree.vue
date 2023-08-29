@@ -9,8 +9,8 @@
       </a-button>
     </div>
     <div class="h-[calc(100%-36px)] overflow-x-scroll">
-      <a-tree v-model:selected-keys="selectedKeys" :tree-data="treeData" :load-data="loadData" @select="onNodeSelected"
-        show-line>
+      <a-tree v-model:selected-keys="selectedKeys" v-model:expanded-keys="expandedKeys" :tree-data="treeData"
+        :load-data="loadData" @select="onNodeSelected" show-line>
       </a-tree>
     </div>
     <object-selector v-model:open="objectSelectorVisible" :width="`${width - 64}px`" placement="left"
@@ -55,6 +55,10 @@ const emits = defineEmits<{
 const root = ref<NodeData>()
 const treeData = ref<TreeData[]>([]);
 const selectedKeys = ref<(string | number)[]>([]);
+const expandedKeys = ref<(string | number)[]>([])
+
+const { gameData } = useGameData();
+
 // object selector
 const objectSelectorVisible = ref<boolean>(false);
 
@@ -71,18 +75,17 @@ const onRootSelected = (selectedItem: NodeData) => {
 }
 
 // initialize tree
-const loadData = async (parent: TreeData) => {
+const loadData = async ({ dataRef }: { dataRef: TreeData }) => {
   return new Promise<void>(resolve => {
-    if (parent.dataRef.children) {
+    if (dataRef.children) {
       resolve();
       return;
     }
-    if (parent.type === 'field') {
-      const { gameData } = useGameData();
-      parent.dataRef.children = parent.field.refer?.map(refer => {
-        let arr = [parent.data];
-        if (parent.field.multiple) {
-          arr = parent.data?.split('|')
+    if (dataRef.type === 'field') {
+      dataRef.children = dataRef.field.refer?.map(refer => {
+        let arr = [dataRef.data];
+        if (dataRef.field.multiple) {
+          arr = dataRef.data?.split('|')
         }
         return (gameData.combined[refer.object as GameDataKey]?.filter(obj => arr.includes(obj[refer.field])) || []).map(obj => {
           return {
@@ -94,20 +97,20 @@ const loadData = async (parent: TreeData) => {
         return {
           type: 'object',
           title: `${obj.type}-${obj.item.id}`,
-          key: `${parent.key}/${obj.type}-${obj.item.id}`,
+          key: `${dataRef.key}/${obj.type}-${obj.item.id}`,
           data: obj,
         }
       });
-    } else if (parent.type === 'object') {
+    } else if (dataRef.type === 'object') {
       // add field as children
-      const { mergedObjectConfig } = useGameObject(() => parent.data!.type);
-      parent.dataRef.children = Object.values(mergedObjectConfig.value.fields || {}).filter(field => field.refer).map(field => {
+      const { mergedObjectConfig } = useGameObject(() => dataRef.data!.type);
+      dataRef.children = Object.values(mergedObjectConfig.value.fields || {}).filter(field => field.refer).map(field => {
         return {
           type: 'field',
           title: field.alias?.trim() || field.label?.trim() || field.code,
-          key: `${parent.key}/${field.code}`,
+          key: `${dataRef.key}/${field.code}`,
           field,
-          data: parent.data!.item[field.code]
+          data: dataRef.data!.item[field.code]
         }
       })
     }
@@ -131,4 +134,36 @@ const onNodeSelected = (_: (string | number)[], { selected, node: { type, data }
     emits('nodeSelected', data);
   }
 }
+// refresh tree
+const refreshTree = async () => {
+  if (!treeData.value?.length) return;
+  const keys = [...expandedKeys.value]
+  const root = treeData.value[0];
+  if (root.type === 'object') {
+    const obj = gameData.combined[root.data.type]?.find(o => o.id === root.data.item.id);
+    if (obj) {
+      root.data.item = obj;
+      const todo = [...treeData.value];
+      while (todo.length) {
+        const node = todo.pop();
+        if (node && keys.includes(node.key)) {
+          delete node.children;
+          await loadData({ dataRef: node });
+          if (node.children) {
+            todo.push(...(node.children as TreeData[]));
+          }
+        }
+      }
+      treeData.value = [...treeData.value];
+    } else {
+      treeData.value = [];
+    }
+  } else {
+    treeData.value = [];
+  }
+}
+
+defineExpose({
+  refreshTree
+})
 </script>
