@@ -46,6 +46,16 @@ import { ApiName } from "../common/api-name";
     return ipcRenderer.invoke(ApiName.openProjectInSysApp, projectPath)
   }
 
+  // open history
+  const readLastUpdate = () => {
+    return ipcRenderer.invoke(ApiName.readLastUpdate, projectPath)
+  }
+
+  // write history
+  const writeLastUpdate = (data: string) => {
+    return ipcRenderer.invoke(ApiName.writeLastUpdate, projectPath, data)
+  }
+
   const api = {
     selectPath,
     readJsonFile,
@@ -53,7 +63,9 @@ import { ApiName } from "../common/api-name";
     loadProject,
     readConfig,
     saveConfig,
-    openProjectInSysApp
+    openProjectInSysApp,
+    readLastUpdate,
+    writeLastUpdate,
   }
   window['api'] = api
 })()

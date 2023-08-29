@@ -5,17 +5,17 @@
     </div>
     <div class="w-[2px] h-full shadow"></div>
     <div class="w-[calc(100%-302px)] h-full">
-      <div v-if="!dataKey || !data" class="h-full flex flex-col justify-center">
+      <div v-if="!dataKey || !dataForViewer" class="h-full flex flex-col justify-center">
         <a-empty></a-empty>
       </div>
       <div v-else class="w-full h-full">
         <a-page-header :title="title" :backIcon="false" class="shadow">
           <!-- sub title -->
-          <template #subTitle v-if="data.customized">
+          <template #subTitle v-if="dataForViewer.customized">
             <a-tag color="red">Customized</a-tag>
           </template>
           <template #extra>
-            <a-button v-if="data?.customized" type="primary" @click="onRemove" danger>
+            <a-button v-if="dataForViewer?.customized" type="primary" @click="onRemove" danger>
               <delete-outlined></delete-outlined>
               Remove Customization
             </a-button>
@@ -26,14 +26,14 @@
           </template>
         </a-page-header>
         <div class="h-[calc(100%-85px)] overflow-y-scroll mt-[5px]">
-          <game-data-viewer :data-key="dataKey" :data="data"></game-data-viewer>
+          <game-data-viewer :data-key="dataKey" :data="dataForViewer"></game-data-viewer>
         </div>
       </div>
     </div>
     <a-drawer v-model:open="editorDrawerVisible" :title="title" :width="`${width - 180}px`" destroy-on-close>
       <template #title>
         <span>{{ title }}</span>
-        <a-tag color="red" v-if="data?.customized">Customized</a-tag>
+        <a-tag color="red" v-if="dataForViewer?.customized">Customized</a-tag>
       </template>
       <template #extra>
         <a-space>
@@ -41,7 +41,7 @@
           <a-button @click="editorDrawerVisible = false">Cancel</a-button>
         </a-space>
       </template>
-      <object-editor v-if="dataKey && data" :data-key="dataKey" :object-id="data.id" ref="editorRef"
+      <object-editor v-if="dataKey && editingData" :data-key="dataKey" v-model:value="editingData"
         :labelStyle="{ 'max-width': '300px' }"></object-editor>
     </a-drawer>
   </div>
@@ -66,25 +66,31 @@ const onNodeSelected = ({ type, item }: { type: GameDataKey, item: GameObjectDat
 }
 
 const { gameData } = useGameData();
-const data = computed(() => {
+const dataForViewer = computed(() => {
   if (!dataKey.value || !dataId.value) return;
   return gameData.combined[dataKey.value]?.find(o => o.id === dataId.value);
 })
 
 const { width } = useWindowSize();
 
-const title = computed(() => `${dataKey.value} - ${data.value?.id}`)
+const title = computed(() => `${dataKey.value} - ${dataForViewer.value?.id}`)
 // edit object
-const editorRef = ref()
 const editorDrawerVisible = ref<boolean>(false)
+const editingData = ref<GameObjectData>();
 const onEdit = () => {
+  // create model
+  editingData.value = Object.assign({}, dataForViewer.value)
   editorDrawerVisible.value = true;
 }
 const onSave = async () => {
-  editorRef.value?.save();
+  if (!dataKey.value || !editingData.value) return;
+  // save data
+  gameData.updateObject(dataKey.value, editingData.value)
+  // refresh left tree
   if (objectTree.value) {
     await objectTree.value.refreshTree();
   }
+  // close drawer
   editorDrawerVisible.value = false;
 }
 // remove customization
@@ -94,8 +100,8 @@ const onRemove = () => {
     title: 'Remove Customization',
     content: `You are about to remove customization on ${title.value}, are you sure?`,
     onOk: async () => {
-      if (dataKey.value && data.value) {
-        gameData.remove(dataKey.value, data.value.id)
+      if (dataKey.value && dataForViewer.value) {
+        gameData.remove(dataKey.value, dataForViewer.value.id)
         if (objectTree.value) {
           await objectTree.value?.refreshTree()
         }

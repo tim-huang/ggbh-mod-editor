@@ -7,6 +7,9 @@
         <span>{{ dataKey }}</span>
       </a-space>
     </template>
+    <template #footer>
+      <a-button type="primary" @click="onConfirm()">Confirm</a-button>
+    </template>
     <template #extra>
       <a-form layout="inline" :model="searchModel" size="small" class="mx-10">
         <a-form-item>
@@ -36,7 +39,8 @@
       </div>
 
       <!-- table  -->
-      <table-viewer :data-key="dataKey" :data-source="dataSource" size="small" @select="onSelect" bordered></table-viewer>
+      <table-viewer :data-key="dataKey" :data-source="dataSource" :row-selection="rowSelection" :custom-row="customRow"
+        size="small" bordered></table-viewer>
       <!-- field config -->
       <a-modal v-model:open="fieldsConfigDialogVisibile" title="Customization" width="800px" @ok="onConfigOk"
         :okButtonProps="{ disabled: pending }" destroy-on-close>
@@ -45,6 +49,7 @@
         </div>
       </a-modal>
     </div>
+
   </a-drawer>
 </template>
 <script setup lang="ts">
@@ -57,13 +62,16 @@ import { useGameData } from '@/data/customized-game-data';
 import { getSelectOptions } from '@/data/dict';
 import TableViewer from '../table-viewer.vue';
 import ObjectConfig from '../app-config/object-config.vue';
+import { TableProps } from 'ant-design-vue';
 
 const props = defineProps<{
   dataKeyRestrict?: GameDataKey[],
+  // multiple selection
+  multiple?: boolean;
 }>();
 
 const emits = defineEmits<{
-  (e: 'select', item: { type: GameDataKey, item: GameObjectData }): void;
+  (e: 'select', item: { type: GameDataKey, items: GameObjectData[] }): void;
 }>();
 
 const customizedOnly = ref<boolean>(false);
@@ -94,7 +102,7 @@ const keywordSymbol = '$$keyword4search$$';
 const searchModel = reactive<Record<string, string>>({})
 const dictionaryField = computed(() => Object.values(mergedObjectConfig.value.fields || {}).filter(field => field.dictionary));
 // datasource for table
-const { gameData } = useGameData()
+const { gameData, getText } = useGameData()
 const dataSource = computed(() => {
   if (!dataKey.value) return [];
   return gameData.combined[dataKey.value].filter(row => !customizedOnly.value || row.customized)
@@ -109,13 +117,60 @@ const dataSource = computed(() => {
       }
       // filter out by keyword
       const keyword = searchModel[keywordSymbol];
-      return !keyword || Object.keys(mergedObjectConfig.value.fields || {}).some(key => row[key] && row[key].indexOf(keyword) >= 0)
+      if (!keyword) return true;
+      if (Object.values(row).some(v => v && v.toString().indexOf(keyword) >= 0)) {
+        return true;
+      }
+      // deep search if it's related to LocalText or RoleLogLocal
+      return Object.values(mergedObjectConfig.value.fields || {})
+        .filter(field => field.refer?.some(r => [GameDataKey.LocalText, GameDataKey.RoleLogLocal].includes(r.object as GameDataKey)))
+        .some(field => getText(row[field.code]).some(text => text.indexOf(keyword) > 0))
     })
   // return gameData.combined[dataKey.value as GameDataKey] || []
 })
 
+let selectedObjects: GameObjectData[] = [];
+const selectedRowKeys = ref<string[]>([]);
+const rowSelection = computed<TableProps['rowSelection']>(() => {
+  return {
+    selectedRowKeys: selectedRowKeys.value,
+    onChange: (selectedKeys, selectedRows: GameObjectData[]) => {
+      selectedRowKeys.value = selectedKeys as string[];
+      selectedObjects = [...selectedRows];
+    },
+    type: props.multiple ? 'checkbox' : 'radio',
+    fixed: true,
+  }
+})
+
+const selectRow = (record: GameObjectData) => {
+  let keys = [...selectedRowKeys.value];
+  if (keys.includes(record.id)) {
+    keys = keys.filter(k => k !== record.id);
+  } else {
+    if (props.multiple) {
+      keys.push(record.id)
+    } else {
+      keys = [record.id]
+    }
+  }
+  selectedRowKeys.value = keys;
+}
+
+const customRow = (record: GameObjectData) => {
+  return {
+    onClick: () => {
+      selectRow(record)
+    },
+    ondblclick: () => {
+      if (!props.multiple) {
+        onConfirm([record])
+      }
+    }
+  }
+}
 // on item selected
-const onSelect = (item: GameObjectData) => {
-  emits('select', { type: dataKey.value, item });
+const onConfirm = (items?: GameObjectData[]) => {
+  emits('select', { type: dataKey.value, items: items || selectedObjects });
 } 
 </script>

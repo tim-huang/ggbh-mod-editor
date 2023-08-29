@@ -24,7 +24,7 @@ export const useLastUpdate = defineStore({
       return window.api.writeLastUpdate(JSON.stringify(this.$state, null, 2))
     },
     log(type: GameDataKey, id: string, action: LastUpdateActionType = 'M') {
-      this.unshift({
+      this.$state.unshift({
         type,
         id,
         action,

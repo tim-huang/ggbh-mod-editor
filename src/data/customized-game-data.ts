@@ -3,6 +3,7 @@ import { GameDataKey } from '@/common/ggbh-meta';
 import JSON5 from 'json5'
 import { originalGameData } from './original-game-data';
 import { useLastUpdate } from './last-update';
+import { useAppConfig, useGameObject } from './app-config';
 
 export interface ProjectData {
   path: string,
@@ -82,6 +83,7 @@ const useProjectData = defineStore({
       }
       this.json = json as GameConfigDataMap;
       this.path = path;
+      this.dirtyMap = {};
     },
     /**
      * 重新加载指定的JSON文件
@@ -159,7 +161,7 @@ const useProjectData = defineStore({
           return id;
         }
       }
-    }
+    },
   }
 })
 
@@ -172,7 +174,7 @@ export const useGameData = () => {
   }
   // 查找一个field对应的对象
   const getReferenceObjectsByField = (field: AppConfig.IFieldConfig, fieldValue?: string): Partial<Record<GameDataKey, GameObjectData[]>> | undefined => {
-    if (!fieldValue) return;
+    if (!fieldValue || fieldValue === '0') return;
     const result: Partial<Record<GameDataKey, GameObjectData[]>> = {}
     field.refer?.forEach(refer => {
       const values = field.multiple ? fieldValue.split('|') : [fieldValue]
@@ -199,13 +201,41 @@ export const useGameData = () => {
       })
     return objs;
   }
+
+  // search
+  const search = ({ keyword, key, customizedOnly }: { keyword: string, key?: GameDataKey, customizedOnly?: boolean }) => {
+    if (!keyword) {
+      return {};
+    }
+    const result: Partial<Record<GameDataKey, GameObjectData[]>> = {};
+    Object.entries(gameData.combined).filter(([k, _]) => !key || k === key)
+      .forEach(([k, arr]) => {
+        const { mergedObjectConfig } = useGameObject(() => k as GameDataKey);
+        const filtered = (arr as GameObjectData[]).filter(row => !customizedOnly || row.customized)
+          .filter((row) => {
+            // filter out by keyword
+            if (!keyword) return true;
+            if (Object.values(row).some(v => v && v.toString().indexOf(keyword) >= 0)) {
+              return true;
+            }
+            // deep search if it's related to LocalText or RoleLogLocal
+            return Object.values(mergedObjectConfig.value.fields || {})
+              .filter(field => field.refer?.some(r => [GameDataKey.LocalText, GameDataKey.RoleLogLocal].includes(r.object as GameDataKey)))
+              .some(field => getText(row[field.code]).some(text => text.indexOf(keyword) > 0))
+          })
+        if (filtered.length) {
+          result[k as GameDataKey] = filtered;
+        }
+      })
+    return result;
+  }
+
   return {
     gameData,
     getReferenceObjectsByField,
     getReferenceObjects,
-    fn: {
-      getText
-    }
+    getText,
+    search,
   }
 }
 

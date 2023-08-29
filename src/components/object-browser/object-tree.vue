@@ -64,14 +64,14 @@ const objectSelectorVisible = ref<boolean>(false);
 
 const { width } = useWindowSize();
 
-const onRootSelected = (selectedItem: NodeData) => {
-  root.value = selectedItem;
+const onRootSelected = ({ type, items }: { type: GameDataKey, items: GameObjectData[] }) => {
+  root.value = { type, item: items[0] };
   objectSelectorVisible.value = false;
   // re-initialize tree
-  initializeTreeData(selectedItem);
+  initializeTreeData(root.value);
   selectedKeys.value = treeData.value?.map(item => item.key) || [];
   // onNodeSelected(selectedItem)
-  emits('nodeSelected', selectedItem);
+  emits('nodeSelected', root.value);
 }
 
 // initialize tree

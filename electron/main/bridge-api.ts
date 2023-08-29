@@ -1,7 +1,7 @@
 import { BrowserWindow, dialog, ipcMain, app, shell } from "electron";
 import { ApiName } from "../common/api-name";
 import { join } from 'node:path'
-import fs from 'node:fs/promises'
+import fs from 'node:fs'
 
 
 export const useBridgeApi = (win: BrowserWindow) => {
@@ -25,7 +25,7 @@ export const useBridgeApi = (win: BrowserWindow) => {
   // read json file
   async function readJson(_: any, projectPath: string, fileName: string): Promise<string | undefined> {
     const filePath = getConfigPath(projectPath, fileName)
-    const stat = await fs.lstat(filePath)
+    const stat = fs.statSync(filePath)
     console.log(filePath, "==>", stat)
     if (!stat) {
       return "[]";
@@ -35,7 +35,7 @@ export const useBridgeApi = (win: BrowserWindow) => {
       return undefined
     }
 
-    return fs.readFile(filePath, 'utf8')
+    return fs.promises.readFile(filePath, 'utf8')
   }
   ipcMain.handle(ApiName.readJson, readJson)
 
@@ -43,13 +43,13 @@ export const useBridgeApi = (win: BrowserWindow) => {
   // write json file
   async function writeJson(_: any, projectPath: string, fileName: string, data: string) {
     const filePath = getConfigPath(projectPath, fileName)
-    const stat = await fs.lstat(filePath)
+    const stat = fs.statSync(filePath)
     if (stat && !stat.isFile()) {
       console.log(filePath, 'is not a file.')
       return '[]'
     }
 
-    return fs.writeFile(filePath, data, "utf8")
+    return fs.promises.writeFile(filePath, data, "utf8")
   }
   ipcMain.handle(ApiName.writeJson, writeJson)
 
@@ -57,9 +57,9 @@ export const useBridgeApi = (win: BrowserWindow) => {
   async function loadProject(_: any, projectPath: string): Promise<Record<string, string>> {
     const path = getConfigPath(projectPath)
     // get file list
-    const files = (await fs.readdir(path)).filter(file => file.endsWith(".json"))
+    const files = (await fs.promises.readdir(path)).filter(file => file.endsWith(".json"))
     // read files
-    const readings = files.map(file => fs.readFile(getConfigPath(projectPath, file), "utf8"))
+    const readings = files.map(file => fs.promises.readFile(getConfigPath(projectPath, file), "utf8"))
     // wait for results
     const results = await Promise.all(readings)
     // assemble return value
@@ -74,20 +74,20 @@ export const useBridgeApi = (win: BrowserWindow) => {
   // read app config file
   async function readAppConfig(): Promise<string | undefined> {
     const configPath = join(app.getAppPath(), "config.json")
-    const stat = await fs.lstat(configPath)
+    const stat = fs.statSync(configPath)
     if (!stat?.isFile()) {
       console.log(configPath, 'is not a file.')
       return "{}"
     }
 
-    return fs.readFile(configPath, 'utf8')
+    return fs.promises.readFile(configPath, 'utf8')
   }
   ipcMain.handle(ApiName.readAppConfig, readAppConfig)
 
   // save app config file
   async function saveAppConfig(_: any, data: string) {
     const configPath = join(app.getAppPath(), "config.json")
-    return fs.writeFile(configPath, data, 'utf8')
+    return fs.promises.writeFile(configPath, data, 'utf8')
   }
   ipcMain.handle(ApiName.saveAppConfig, saveAppConfig)
 
@@ -100,28 +100,28 @@ export const useBridgeApi = (win: BrowserWindow) => {
   const lastUpdateFileName = "last-update.json";
   // read last update
   async function readLastUpdate(_: any, projectPath: string): Promise<string | undefined> {
-    const filePath = getConfigPath(projectPath, lastUpdateFileName)
-    const stat = await fs.lstat(filePath)
+    const filePath = join(projectPath, lastUpdateFileName)
+    const stat = fs.statSync(filePath)
     console.log(filePath, "==>", stat)
     if (stat && !stat.isFile()) {
       console.error(filePath, 'is not a file.')
       return undefined
     }
 
-    return fs.readFile(filePath, 'utf8')
+    return fs.promises.readFile(filePath, 'utf8')
   }
   ipcMain.handle(ApiName.readLastUpdate, readLastUpdate)
 
   // write last update
   async function writeLastUpdate(_: any, projectPath: string, data: string) {
-    const filePath = getConfigPath(projectPath, lastUpdateFileName)
-    const stat = await fs.lstat(filePath)
+    const filePath = join(projectPath, lastUpdateFileName)
+    const stat = fs.statSync(filePath, { throwIfNoEntry: false })
     if (stat && !stat.isFile()) {
       console.log(filePath, 'is not a file.')
       return '[]'
     }
 
-    return fs.writeFile(filePath, data, "utf8")
+    return fs.promises.writeFile(filePath, data, "utf8")
   }
   ipcMain.handle(ApiName.writeLastUpdate, writeLastUpdate)
 }

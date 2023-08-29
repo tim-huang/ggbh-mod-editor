@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col max-w-[calc(100%)] overflow-x-scroll space-y-0.5">
     <span v-for="(fv, idx) in model" :key="fv">
-      <a-tag :closable="field.multiple" @close="removeObject(fv)">
+      <a-tag @close="removeObject(fv)" closable>
         <a @click="moveLeft(fv)" v-if="idx > 0">
           <caret-up-outlined class="text-blue-600"></caret-up-outlined>
         </a>
@@ -21,7 +21,7 @@
     <!-- menu for add assosiated object -->
     <div>
       <a-dropdown v-if="field.multiple || !model.length">
-        <a-tag color="processing">
+        <a-tag color="processing" class="cursor-default">
           <plus-outlined></plus-outlined>
           Add Reference
         </a-tag>
@@ -30,8 +30,9 @@
         </template>
       </a-dropdown>
     </div>
-    <object-selector :data-key-restrict="dataKeyRestrict" v-model:open="objectSelectorVisible" :width="`${width - 100}px`"
-      @select="onAssosiateWithObject"></object-selector>
+    <object-selector :data-key-restrict="dataKeyRestrict" :width="`${width - 100}px`"
+      :multiple="field.multiple && !replacing" v-model:open="objectSelectorVisible" @select="onAssosiateWithObject"
+      @close="onSelectorClosed"></object-selector>
     <a-drawer v-model:open="objectCreatorVisible" :title="`Create ${newDataKey}`" :width="`${width - 180}px`"
       destroy-on-close>
       <template #extra>
@@ -40,7 +41,7 @@
           <a-button @click="objectCreatorVisible = false">Cancel</a-button>
         </a-space>
       </template>
-      <object-editor v-if="newDataKey && newObjectId" :data-key="newDataKey" :object-id="newObjectId" ref="editorRef"
+      <object-editor v-if="newDataKey && newObject" :data-key="newDataKey" v-model:value="newObject" ref="editorRef"
         :labelStyle="{ 'max-width': '300px' }"></object-editor>
     </a-drawer>
   </div>
@@ -54,6 +55,7 @@ import ObjectSelector from '../object-browser/object-selector.vue';
 import { useWindowSize } from '@vueuse/core';
 import { useGameData } from '@/data/customized-game-data';
 import ObjectEditor from '../object-editor.vue';
+import { originalGameData } from '@/data/original-game-data';
 
 
 const props = defineProps<{
@@ -95,10 +97,10 @@ const menuItems = computed<ItemType[]>(() => {
 })
 
 // replace or add
-let replacing = '';
+const replacing = ref<string>('');
 const onMenuItemClick = ({ key }: { key: string }, replaceId?: string) => {
   if (replaceId) {
-    replacing = replaceId;
+    replacing.value = replaceId;
   }
   if (key === '$') {
     // select existing
@@ -108,28 +110,31 @@ const onMenuItemClick = ({ key }: { key: string }, replaceId?: string) => {
   }
 }
 // create an object and assosiate with this object
-const newObjectId = ref<string>('');
+const newObject = ref<GameObjectData>();
 const newDataKey = ref<GameDataKey>();
 const { gameData } = useGameData();
 const objectCreatorVisible = ref<boolean>(false);
-const editorRef = ref();
 const onCreate = (key: GameDataKey) => {
+  // copy one from original data
+  const obj = Object.assign({}, (originalGameData[key] || [{}])[0]);
+  Object.keys(obj).forEach(k => obj[k] = '0'); // init object properties with '0'
+  obj.id = gameData.getRandomId(key); // generate object id
   newDataKey.value = key;
-  newObjectId.value = gameData.getRandomId(key);
-  objectCreatorVisible.value = true;
+  newObject.value = obj;
+  objectCreatorVisible.value = true; // open drawer
 }
 
 const onCreateSave = () => {
-  if (editorRef.value && newDataKey.value && newObjectId.value) {
-    editorRef.value.save();
+  if (newDataKey.value && newObject.value) {
+    gameData.updateObject(newDataKey.value, newObject.value); // update object
     const key = newDataKey.value;
-    const id = newObjectId.value;
+    const id = newObject.value.id;
     // gameData.combined is a computed variable, it will not be recomputed before next tick
     nextTick(() => {
       objectCreatorVisible.value = false;
       const obj = (gameData.combined[key]!).find(o => o.id === id);
       if (obj) {
-        onAssosiateWithObject({ type: key, item: obj })
+        onAssosiateWithObject({ type: key, items: [obj] })
       }
     })
   }
@@ -162,27 +167,23 @@ const moveRight = (fv: string) => {
   }
 }
 
-// value for replace
-// const onReplace = (fv: string) => {
-//   replacing = fv;
-//   objectSelectorVisible.value = true;
-// }
-// const onAdd = () => {
-//   objectSelectorVisible.value = true;
-// }
-const onAssosiateWithObject = ({ type, item }: { type: GameDataKey, item: GameObjectData }) => {
+const onAssosiateWithObject = ({ type, items }: { type: GameDataKey, items: GameObjectData[] }) => {
   const refer = props.field.refer?.find(r => r.object == type);
   objectSelectorVisible.value = false;
   if (!refer) return;
-  if (!replacing) {
-    model.value = [...model.value, item[refer.field]]
+  if (!replacing.value) {
+    model.value = [...model.value, ...items.map(o => o[refer.field])]
   } else {
-    const idx = model.value.indexOf(replacing)
+    const idx = model.value.indexOf(replacing.value)
     if (idx >= 0) {
       const arr = [...model.value];
-      arr[idx] = item[refer.field];
+      arr[idx] = items[0][refer.field];
       model.value = arr;
     }
   }
+}
+
+const onSelectorClosed = () => {
+  replacing.value = '';
 }
 </script>

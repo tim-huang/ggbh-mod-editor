@@ -29,23 +29,26 @@ import { GameDataKey } from '@/common/ggbh-meta';
 import { useGameObject } from '@/data/app-config';
 import { useGameData } from '@/data/customized-game-data';
 import { getSelectOptions } from '@/data/dict';
-import { computed, onUnmounted, reactive, ref, watchEffect } from 'vue';
+import { computed, onUnmounted, ref, watchEffect } from 'vue';
 import ReferenceFieldEditor from './form/reference-field-editor.vue';
 import { UnorderedListOutlined } from '@ant-design/icons-vue';
 
 const props = defineProps<{
   dataKey: GameDataKey,
-  objectId: string,
+  // objectId: string,
+  value: GameObjectData,
 }>()
 
+const emits = defineEmits<{
+  (e: 'update:value', value: GameObjectData): void;
+}>();
+
 // model
-const model = ref<GameObjectData>({ id: props.objectId });
+const model = ref<GameObjectData>({ id: '' });
 
 const { gameData } = useGameData();
 const stopWatchingProps = watchEffect(() => {
-  const objects = gameData.combined[props.dataKey];
-  const obj = objects.find(o => o.id === props.objectId);
-  model.value = Object.assign({}, obj || { id: props.objectId })
+  model.value = props.value
 });
 
 // construct form
