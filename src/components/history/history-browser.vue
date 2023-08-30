@@ -9,7 +9,7 @@
             <span>{{ item.type }} - {{ item.id }}</span>
           </div>
           <div class="sub-title">
-            <span class="rounded-sm border border-red-500 bg-red-100 text-red-500 border-solid p-0.5 mr-1">{{
+            <span :class="'rounded-sm border border-solid p-0.5 mr-1 ' + item.color">{{
               item.actionText
             }}</span>
             <span class="text-gray-400">{{ item.time }}</span>
@@ -46,9 +46,9 @@ type HistoryItem = LastUpdate & {
 
 const history = computed<HistoryItem[]>(() => {
   const colorMap = {
-    'A': 'green',
-    'M': 'blue',
-    'D': 'red'
+    'A': 'border-green-500 bg-green-100 text-green-500',
+    'M': 'border-blue-500 bg-blue-100 text-blue-500',
+    'D': 'border-red-500 bg-red-100 text-red-500'
   }
   const actionMap = {
     'A': 'Added',
@@ -78,18 +78,15 @@ const selectedObject = computed<GameObjectData | undefined>(() => {
 })
 
 const next = () => {
-  if (index.value < history.value.length - 1) {
-    index.value++;
-  } else {
-    index.value = 0;
+  if (history.value.length) {
+    index.value = (index.value + 1) % history.value.length
   }
 }
 
 const prev = () => {
-  if (index.value > 0) {
-    index.value--;
-  } else {
-    index.value = history.value.length - 1;
+  if (history.value.length) {
+    const i = (index.value - 1) % history.value.length
+    index.value = i < 0 ? (history.value.length + i) : i;
   }
 }
 

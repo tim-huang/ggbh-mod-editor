@@ -33,11 +33,15 @@
       <!-- <path-selector></path-selector> -->
     </div>
     <div class="absolute right-4 top-1/2 -translate-y-1/2 flex flex-row place-items-center gap-4 z-10">
-      <!-- TODO: implement feature - search anything  -->
-      <a class="menu-icon cursor-pointer" title="History" @click="historyBrowserVisibile = true">
+      <a class="menu-icon cursor-pointer" title="Create an object (CTRL+N)" @click="openTypeSelectorDialog">
+        <plus-circle-outlined class="text-green-500"></plus-circle-outlined>
+      </a>
+      <a class="menu-icon cursor-pointer" title="History (CTRL+H)" @click="historyBrowserVisibile = true">
         <history-outlined class="text-blue-500"></history-outlined>
       </a>
-      <a-input-search placeholder="Search anything" width="300px"></a-input-search>
+      <a class="menu-icon cursor-pointer" title="Search (CTRL+S)" @click="searchDialogVisible = true">
+        <search-outlined class="text-blue-500"></search-outlined>
+      </a>
       <a-dropdown>
         <a class="menu-icon cursor-pointer">
           <menu-outlined class="text-blue-500"></menu-outlined>
@@ -48,11 +52,31 @@
         </template>
       </a-dropdown>
     </div>
-
+    <!-- history -->
     <a-modal :closable="false" width="800px" :footer="null" v-model:open="historyBrowserVisibile" destroy-on-close
       :body-style="{ padding: '5px', height: '600px' }">
       <history-browser @select="gotoBrowser"></history-browser>
     </a-modal>
+    <!-- search -->
+    <a-modal :closable="false" width="1280px" :footer="null" v-model:open="searchDialogVisible" destroy-on-close
+      :body-style="{ padding: '5px', height: '680px' }">
+      <search-panel @select="gotoBrowser"></search-panel>
+    </a-modal>
+    <!-- create new object -->
+    <a-drawer v-model:open="editorDrawerVisible" :title="`New ${newObjectType}`" :width="`${width - 180}px`"
+      placement="left" destroy-on-close>
+      <template #extra>
+        <a-space>
+          <a-button type="primary" @click="onSaveNewObject">Save</a-button>
+          <a-button @click="editorDrawerVisible = false">Cancel</a-button>
+        </a-space>
+      </template>
+      <object-editor v-if="newObjectType && newObject" :data-key="newObjectType" v-model:value="newObject"
+        :labelStyle="{ 'max-width': '300px' }"></object-editor>
+    </a-drawer>
+    <!-- new object type selection dialog -->
+    <ObjectTypeSelectorDialog v-if="objectTypeSelectorVisible" v-model:open="objectTypeSelectorVisible"
+      v-model:value="newObjectType" @ok="onNewObjectTypeSelected"></ObjectTypeSelectorDialog>
   </div>
 </template>
 
@@ -61,16 +85,21 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { menuItems } from '@/router'
 import { useRoute, useRouter } from 'vue-router'
-import { MenuOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined, SaveOutlined, HistoryOutlined } from '@ant-design/icons-vue';
+import { MenuOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined, SaveOutlined, HistoryOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons-vue';
 import { ItemType } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
 import { usePending } from '@/utils/use';
 import PathSelector from './path-selector.vue';
 import HistoryBrowser from './history/history-browser.vue';
-import { LastUpdate } from '@/data/last-update';
+import SearchPanel from './search/search-panel.vue'
+import { GameDataKey } from '@/common/ggbh-meta';
+import { useWindowSize } from '@vueuse/core';
+import ObjectEditor from './object-editor.vue';
+import ObjectTypeSelectorDialog from './editor/object-type-selector-dialog.vue';
 
 const route = useRoute();
-const { gameData } = useGameData();
+const { width } = useWindowSize();
+const { gameData, createObject } = useGameData();
 
 const title = computed<string>(() => {
   return (menuItems.find(item => item?.key === route.path) as { label?: string })?.label || route.path;
@@ -95,14 +124,52 @@ const { fn: onSaveProject } = usePending(gameData.save)
 
 // history browser
 const historyBrowserVisibile = ref<boolean>(false);
-const gotoBrowser = (history: LastUpdate) => {
+const gotoBrowser = (item: { type: GameDataKey, id: string }) => {
   historyBrowserVisibile.value = false;
-  router.push({ path: '/object-browser', query: { type: history.type, id: history.id } })
+  searchDialogVisible.value = false;
+  router.push({ path: '/object-browser', query: { type: item.type, id: item.id } })
 }
 
+// search ...
+const searchDialogVisible = ref<boolean>(false);
+
+// create new object
+// select the type of new object
+const newObjectType = ref<GameDataKey>();
+const objectTypeSelectorVisible = ref<boolean>(false);
+const openTypeSelectorDialog = () => {
+  newObjectType.value = undefined;
+  objectTypeSelectorVisible.value = true;
+}
+// create empty object and show editor
+const newObject = ref<GameObjectData>({ id: '' });
+const editorDrawerVisible = ref<boolean>(false);
+const onNewObjectTypeSelected = () => {
+  if (newObjectType.value) {
+    newObject.value = createObject(newObjectType.value)
+    objectTypeSelectorVisible.value = false;
+    editorDrawerVisible.value = true;
+  }
+}
+// save new object
+const onSaveNewObject = () => {
+  editorDrawerVisible.value = false;
+  if (newObject.value && newObjectType.value) {
+    gameData.updateObject(newObjectType.value, newObject.value);
+    gotoBrowser({ type: newObjectType.value, id: newObject.value.id });
+  }
+}
+
+// hotkey
 const hotkeyHandler = (e: KeyboardEvent) => {
-  if (e.key === 'h' && e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
-    historyBrowserVisibile.value = !historyBrowserVisibile.value;
+  if (e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
+    if (['h', 'H'].includes(e.key)) {
+      historyBrowserVisibile.value = !historyBrowserVisibile.value;
+    } else if (['s', 'S'].includes(e.key)) {
+      searchDialogVisible.value = !searchDialogVisible.value;
+    } else if (['n', 'N'].includes(e.key)) {
+      openTypeSelectorDialog();
+    }
   }
 }
 

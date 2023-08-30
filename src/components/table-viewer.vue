@@ -15,13 +15,17 @@
       </template>
     </a-table>
     <!-- detail dialog -->
-    <a-modal v-model:open="detailDialogVisible" width="650px" :title="dataKey + ' - ' + detailObject?.id">
-      <game-data-viewer :data-key="dataKey" :data="detailObject!"></game-data-viewer>
+    <a-modal v-model:open="detailDialogVisible" width="800px" :title="dataKey + ' - ' + detailObject?.id">
+      <div class='w-full h-[680px] overflow-y-scroll'>
+        <game-data-viewer :data-key="dataKey" :data="detailObject!"></game-data-viewer>
+      </div>
     </a-modal>
     <!-- editor dialog -->
     <a-modal v-model:open="editorDialogVisible" width="800px" :title="dataKey + ' - ' + editingObject?.id"
       @ok="onSaveEditing">
-      <object-editor v-if="editingObject" :data-key="dataKey" v-model:value="editingObject"></object-editor>
+      <div class='w-full h-[680px] overflow-y-scroll'>
+        <object-editor v-if="editingObject" :data-key="dataKey" v-model:value="editingObject"></object-editor>
+      </div>
     </a-modal>
   </div>
 </template>

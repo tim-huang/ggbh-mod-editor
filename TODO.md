@@ -5,5 +5,5 @@
 - [ ] dictionary configuration
 - [ ] object reference configuration, including config, object viewer, object editor
 - [x] last update: memorize object last update in a json 
-- [ ] search anything
-- [ ] show last update
+- [x] search anything
+- [x] show last update

@@ -103,8 +103,15 @@ const useProjectData = defineStore({
       this.json[key] = this.json[key] || [];
       const lastUpdate = useLastUpdate();
       if (!original) {
-        this.json[key]!.push(obj);
-        lastUpdate.log(key, obj.id, 'A');
+        const customizedObject = this.json[key]?.find(o => o.id === obj.id);
+        if (customizedObject) {
+          Object.assign(customizedObject, obj);
+          lastUpdate.log(key, obj.id, 'M');
+        } else {
+
+          this.json[key]!.push(obj);
+          lastUpdate.log(key, obj.id, 'A');
+        }
       } else {
         // compare object
         const ignoreFields = ['customized']
@@ -204,9 +211,10 @@ export const useGameData = () => {
   }
 
   // search
-  const search = ({ keyword, key, customizedOnly }: { keyword: string, key?: GameDataKey, customizedOnly?: boolean }) => {
-    if (!keyword) {
-      return {};
+  const search = ({ keyword, key, customizedOnly }: { keyword: string, key?: GameDataKey, customizedOnly?: boolean },
+    filter?: (obj: GameObjectData) => boolean) => {
+    if (!keyword && !filter) {
+      return gameData.combined;
     }
     const result: Partial<Record<GameDataKey, GameObjectData[]>> = {};
     Object.entries(gameData.combined).filter(([k, _]) => !key || k === key)
@@ -215,6 +223,7 @@ export const useGameData = () => {
         const filtered = (arr as GameObjectData[]).filter(row => !customizedOnly || row.customized)
           .filter((row) => {
             // filter out by keyword
+            if (filter && !filter(row)) return false;
             if (!keyword) return true;
             if (Object.values(row).some(v => v && v.toString().indexOf(keyword) >= 0)) {
               return true;
@@ -231,12 +240,21 @@ export const useGameData = () => {
     return result;
   }
 
+  // init a new object
+  const createObject = (key: GameDataKey) => {
+    // copy one from original data
+    const obj = Object.assign({}, (originalGameData[key] || [{}])[0]);
+    Object.keys(obj).forEach(k => obj[k] = '0'); // init object properties with '0'
+    obj.id = gameData.getRandomId(key); // generate object id
+    return obj;
+  }
   return {
     gameData,
     getReferenceObjectsByField,
     getReferenceObjects,
     getText,
     search,
+    createObject
   }
 }
 

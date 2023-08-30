@@ -52,7 +52,7 @@ const emits = defineEmits<{
   (e: "itemSelected", option: OptionItem): void;
 }>()
 
-const { gameData, fn } = useGameData()
+const { gameData, getText } = useGameData()
 const keyword = ref("");
 
 // menu item is selected
@@ -72,7 +72,7 @@ const dialogue = computed<OptionItem[]>(() => {
       value: GameDataKey.DramaDialogue + d.id,
       // value: d.id,
       textKey: d.dialogue,
-      content: fn.getText(d.dialogue),
+      content: getText(d.dialogue),
       type: GameDataKey.DramaDialogue,
       links: (d.options && d.options != "0") ? d.options.split("|") : undefined
     }
@@ -88,7 +88,7 @@ const dialogueOptions = computed<OptionItem[]>(() => {
       value: GameDataKey.DramaOptions + o.id,
       // value: o.id,
       textKey: o.text,
-      content: fn.getText(o.text),
+      content: getText(o.text),
       type: GameDataKey.DramaOptions,
     }
   }) || [];

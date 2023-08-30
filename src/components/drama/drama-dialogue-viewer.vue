@@ -99,7 +99,7 @@ const props = defineProps<{
 }>()
 
 const router = useRouter();
-const { gameData, fn } = useGameData();
+const { gameData, getText } = useGameData();
 const { mergedObjectConfig } = useGameObject(() => GameDataKey.DramaDialogue)
 
 // field
@@ -127,7 +127,7 @@ const prev = computed<ItemType[]>(() => {
   const found = (gameData.combined.DramaDialogue as DramaDialogue[])
     .filter(item => item.nextDialogue === model.value?.id)
   return found.map(item => {
-    const texts = fn.getText(item.dialogue)
+    const texts = getText(item.dialogue)
     return {
       key: item.id,
       label: (texts?.length > 0 ? texts[0] : "No Content").substring(0, 20)
@@ -137,12 +137,12 @@ const prev = computed<ItemType[]>(() => {
 
 // current dialogue text contents
 // const textContents = computed<string[]>(() => {
-//   return fn.getText(data.value?.dialogue)
+//   return getText(data.value?.dialogue)
 // })
 
 // current dialogue title
 // const titles = computed<string[]>(() => {
-//   return fn.getText(data.value?.title)
+//   return getText(data.value?.title)
 // })
 
 // options
@@ -162,13 +162,13 @@ const options = computed<LocalOption[]>(() => {
   return found.map(item => {
     const option: LocalOption = {
       option: item,
-      text: fn.getText(item.text),
+      text: getText(item.text),
       to: []
     }
     if (item.nextDialogue && item.nextDialogue !== '0') {
       item.nextDialogue.split('|').forEach(id => {
         const dst = (gameData.combined.DramaDialogue as DramaDialogue[]).find((a) => a.id === id)
-        dst && option.to.push({ id, text: fn.getText(dst.dialogue) })
+        dst && option.to.push({ id, text: getText(dst.dialogue) })
       })
     }
     return option

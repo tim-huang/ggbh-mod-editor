@@ -1,17 +1,33 @@
 
 <template>
-  <a-descriptions :column="1" bordered size="small" v-bind="$attrs">
+  <a-descriptions :column="1" bordered size="small" v-bind="$attrs" :label-style="{ width: '280px' }">
+    <template #extra v-if="isNewObject">
+      <a-button @click="objectSelectorVisible = true">
+        <template #icon>
+          <copy-outlined></copy-outlined>
+        </template>
+        Copy from
+      </a-button>
+
+      <object-selector v-model:open="objectSelectorVisible" :width="`${width - 64}px`" placement="left"
+        :data-key-restrict="[dataKey]" @select="onTemplateSelected"></object-selector>
+    </template>
     <a-descriptions-item v-for="field of fields" :key="field.code">
       <template #label>
-        <span class="mr-1">{{ field.alias?.trim() || field.label?.trim() || field.code }}</span>
-        <a-dropdown v-if="field.code !== 'id' && !field.dictionary && !field.refer?.length" trigger="click">
-          <a title="Example">
-            <unordered-list-outlined></unordered-list-outlined>
+        <a-space>
+          <span>{{ field.alias?.trim() || field.label?.trim() || field.code }}</span>
+          <a-dropdown v-if="field.code !== 'id' && !field.dictionary && !field.refer?.length" trigger="click">
+            <a title="Example">
+              <unordered-list-outlined></unordered-list-outlined>
+            </a>
+            <template #overlay>
+              <a-menu :items="samples[field.code]" @click="setFieldValue(field.code, $event)"></a-menu>
+            </template>
+          </a-dropdown>
+          <a @click="paste((text: string) => model[field.code] = text)" title="Paste">
+            <SnippetsOutlined class="text-blue-500"></SnippetsOutlined>
           </a>
-          <template #overlay>
-            <a-menu :items="samples[field.code]" @click="setFieldValue(field.code, $event)"></a-menu>
-          </template>
-        </a-dropdown>
+        </a-space>
       </template>
       <a-select v-if="field.dictionary" size="small" width="200px" :options="getSelectOptions(field.dictionary)"
         v-model:value="model[field.code]"></a-select>
@@ -31,7 +47,10 @@ import { useGameData } from '@/data/customized-game-data';
 import { getSelectOptions } from '@/data/dict';
 import { computed, onUnmounted, ref, watchEffect } from 'vue';
 import ReferenceFieldEditor from './form/reference-field-editor.vue';
-import { UnorderedListOutlined } from '@ant-design/icons-vue';
+import { UnorderedListOutlined, CopyOutlined, SnippetsOutlined } from '@ant-design/icons-vue';
+import { useWindowSize } from '@vueuse/core';
+import ObjectSelector from './object-browser/object-selector.vue';
+import { paste } from '@/utils/clipboard';
 
 const props = defineProps<{
   dataKey: GameDataKey,
@@ -51,7 +70,23 @@ const stopWatchingProps = watchEffect(() => {
   model.value = props.value
 });
 
-// construct form
+const isNewObject = computed<boolean>(() => {
+  return !gameData.combined[props.dataKey]?.find(o => o.id === props.value.id)
+});
+
+// Find a template and copy it's value to model
+const objectSelectorVisible = ref<boolean>(false);
+const { width } = useWindowSize();
+const onTemplateSelected = ({ type, items }: { type: GameDataKey, items: GameObjectData[] }) => {
+  if (type === props.dataKey && items.length) {
+    // copy values from template, except id
+    Object.assign(model.value, model.value, items[0], { id: model.value.id });
+    delete model.value.customized
+  }
+  objectSelectorVisible.value = false;
+}
+
+// construct form by object metadata
 const { mergedObjectConfig } = useGameObject(() => props.dataKey);
 const fields = computed<AppConfig.IFieldConfig[]>(() => {
   return Object.values(mergedObjectConfig.value.fields || {})
@@ -87,7 +122,7 @@ onUnmounted(stopWatchingProps)
 
 // save
 const save = () => {
-  gameData.updateObject(props.dataKey, model.value)
+  emits('update:value', model.value)
 }
 
 defineExpose({

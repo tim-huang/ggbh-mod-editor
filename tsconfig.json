@@ -17,6 +17,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "typeRoots": [
+      "node_modules/@types",
       "typings/",
       "electron/electron-env.d.ts"
     ],

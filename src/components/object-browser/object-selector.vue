@@ -8,7 +8,7 @@
       </a-space>
     </template>
     <template #footer>
-      <a-button type="primary" @click="onConfirm()">Confirm</a-button>
+      <a-button type="primary" @click="onConfirmBtnClick()" :disabled="!selectedRowKeys.length">Confirm</a-button>
     </template>
     <template #extra>
       <a-form layout="inline" :model="searchModel" size="small" class="mx-10">
@@ -129,15 +129,13 @@ const dataSource = computed(() => {
   // return gameData.combined[dataKey.value as GameDataKey] || []
 })
 
-let selectedObjects: GameObjectData[] = [];
 const selectedRowKeys = ref<string[]>([]);
 const rowSelection = computed<TableProps['rowSelection']>(() => {
   return {
     selectedRowKeys: selectedRowKeys.value,
-    onChange: (selectedKeys, selectedRows: GameObjectData[]) => {
-      selectedRowKeys.value = selectedKeys as string[];
-      selectedObjects = [...selectedRows];
-    },
+    // onChange: (selectedKeys, selectedRows: GameObjectData[]) => {
+    //   selectedRowKeys.value = selectedKeys as string[];
+    // },
     type: props.multiple ? 'checkbox' : 'radio',
     fixed: true,
   }
@@ -170,7 +168,11 @@ const customRow = (record: GameObjectData) => {
   }
 }
 // on item selected
-const onConfirm = (items?: GameObjectData[]) => {
-  emits('select', { type: dataKey.value, items: items || selectedObjects });
+const onConfirmBtnClick = () => {
+  const selectedObjects = gameData.combined[dataKey.value]?.filter(o => selectedRowKeys.value.includes(o.id)) || [];
+  onConfirm(selectedObjects)
+}
+const onConfirm = (items: GameObjectData[]) => {
+  emits('select', { type: dataKey.value, items });
 } 
 </script>

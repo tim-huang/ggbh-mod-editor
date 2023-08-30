@@ -112,15 +112,11 @@ const onMenuItemClick = ({ key }: { key: string }, replaceId?: string) => {
 // create an object and assosiate with this object
 const newObject = ref<GameObjectData>();
 const newDataKey = ref<GameDataKey>();
-const { gameData } = useGameData();
+const { gameData, createObject } = useGameData();
 const objectCreatorVisible = ref<boolean>(false);
 const onCreate = (key: GameDataKey) => {
-  // copy one from original data
-  const obj = Object.assign({}, (originalGameData[key] || [{}])[0]);
-  Object.keys(obj).forEach(k => obj[k] = '0'); // init object properties with '0'
-  obj.id = gameData.getRandomId(key); // generate object id
   newDataKey.value = key;
-  newObject.value = obj;
+  newObject.value = createObject(key);
   objectCreatorVisible.value = true; // open drawer
 }
 
