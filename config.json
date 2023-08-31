@@ -146,13 +146,13 @@
       "fields": {
         "skillID": {
           "code": "skillID",
-          "type": "string",
           "refer": [
             {
               "object": "BattleSkillAttack",
               "field": "id"
             }
-          ]
+          ],
+          "multiple": true
         },
         "desc": {
           "code": "desc",
@@ -210,7 +210,8 @@
         "name",
         "type",
         "trigger",
-        "function"
+        "function",
+        "repeatedly"
       ],
       "brief": [
         "name"
@@ -283,7 +284,13 @@
           ]
         },
         "className": {
-          "code": "className"
+          "code": "className",
+          "refer": [
+            {
+              "object": "ItemType",
+              "field": "id"
+            }
+          ]
         },
         "type": {
           "code": "type",
@@ -294,7 +301,10 @@
             }
           ]
         }
-      }
+      },
+      "brief": [
+        "name"
+      ]
     },
     "ItemType": {
       "fields": {
@@ -311,6 +321,3608 @@
       "brief": [
         "name"
       ]
+    },
+    "AppellationTitle": {
+      "fields": {
+        "className": {
+          "code": "className"
+        },
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "tips": {
+          "code": "tips",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "gainDesc": {
+          "code": "gainDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "lootRoleLogIDA": {
+          "code": "lootRoleLogIDA",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "lootRoleLogIDB": {
+          "code": "lootRoleLogIDB",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "lossRoleLogID": {
+          "code": "lossRoleLogID",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "lootLogID": {
+          "code": "lootLogID",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "lossLogID": {
+          "code": "lossLogID",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        }
+      }
+    },
+    "ItemBook": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemChest": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemChestDrops": {
+      "fields": {
+        "itemID": {
+          "code": "itemID",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemFate": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemFunction": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ],
+          "alias": ""
+        }
+      }
+    },
+    "ItemGloom": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemHerbal": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemHobby": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemHorse": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ],
+          "alias": ""
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ItemImmortalPoint": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemLevelDesc": {
+      "fields": {
+        "id": {
+          "code": "id"
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ItemMapSearch": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemPill": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemRarityMaterials": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemSchoolRelocateFlag": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "buildDramaId": {
+          "code": "buildDramaId",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "moveStartDramaId": {
+          "code": "moveStartDramaId",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "moveDramaId": {
+          "code": "moveDramaId",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemPillSpRequire": {
+      "fields": {
+        "id": {
+          "code": "id"
+        }
+      }
+    },
+    "ItemSkill": {
+      "fields": {
+        "id": {
+          "code": "id"
+        }
+      }
+    },
+    "ItemTransfer": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ItemTreasureMap": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "LogLocalVocal": {
+      "fields": {
+        "logLocalID": {
+          "code": "logLocalID",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "id"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "vocal"
+      ]
+    },
+    "MakePillFormula": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "pillA": {
+          "code": "pillA",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "pillB": {
+          "code": "pillB",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "pillC": {
+          "code": "pillC",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "pillD": {
+          "code": "pillD",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "pillE": {
+          "code": "pillE",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "pillF": {
+          "code": "pillF",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "MakePillFurnace": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "MakePillSkill": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "id": {
+          "code": "id"
+        }
+      }
+    },
+    "ModFunction": {
+      "brief": [
+        "key"
+      ],
+      "fields": {
+        "title": {
+          "code": "title"
+        },
+        "value1": {
+          "code": "value1"
+        },
+        "value2": {
+          "code": "value2"
+        },
+        "value3": {
+          "code": "value3"
+        },
+        "value4": {
+          "code": "value4"
+        },
+        "value5": {
+          "code": "value5"
+        },
+        "value1Name": {
+          "code": "value1Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value2Name": {
+          "code": "value2Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value3Name": {
+          "code": "value3Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value4Name": {
+          "code": "value4Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value5Name": {
+          "code": "value5Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value6Name": {
+          "code": "value6Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value7Name": {
+          "code": "value7Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value8Name": {
+          "code": "value8Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value1Desc": {
+          "code": "value1Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value2Desc": {
+          "code": "value2Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value3Desc": {
+          "code": "value3Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value4Desc": {
+          "code": "value4Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value5Desc": {
+          "code": "value5Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value6Desc": {
+          "code": "value6Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value7Desc": {
+          "code": "value7Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value8Desc": {
+          "code": "value8Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ModRoleEffectType1": {
+      "fields": {
+        "attrText": {
+          "code": "attrText",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "attrDesc": {
+          "code": "attrDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ModRoleEffectType2": {
+      "fields": {
+        "attrKey": {
+          "code": "attrKey"
+        },
+        "attrText": {
+          "code": "attrText",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ModRoleEffectType3": {
+      "fields": {
+        "title": {
+          "code": "title",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value1Name": {
+          "code": "value1Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value2Name": {
+          "code": "value2Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value3Name": {
+          "code": "value3Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value4Name": {
+          "code": "value4Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value5Name": {
+          "code": "value5Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value6Name": {
+          "code": "value6Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value7Name": {
+          "code": "value7Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value8Name": {
+          "code": "value8Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value1Desc": {
+          "code": "value1Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value2Desc": {
+          "code": "value2Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value3Desc": {
+          "code": "value3Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value4Desc": {
+          "code": "value4Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value5Desc": {
+          "code": "value5Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value6Desc": {
+          "code": "value6Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value7Desc": {
+          "code": "value7Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value8Desc": {
+          "code": "value8Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ModTags": {
+      "fields": {
+        "tagName": {
+          "code": "tagName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "MonthLogBase": {
+      "fields": {
+        "title": {
+          "code": "title",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "eventLog": {
+          "code": "eventLog",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        }
+      }
+    },
+    "MoveCam": {
+      "fields": {
+        "dramaID": {
+          "code": "dramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        }
+      }
+    },
+    "NoticeBase": {
+      "fields": {
+        "title": {
+          "code": "title",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "content": {
+          "code": "content",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "NpcFortuitous": {
+      "fields": {
+        "eventLog": {
+          "code": "eventLog",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        }
+      }
+    },
+    "RoleCreateFeature": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "tips": {
+          "code": "tips",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "introduceText": {
+          "code": "introduceText",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "NpcInitFeature": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "RoleCreateFeature",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "PassiveMethod": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "info": {
+          "code": "info",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "getText": {
+          "code": "getText",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "PotmonBase": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "race": {
+          "code": "race",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "abilityDesc": {
+          "code": "abilityDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "leaveDrama": {
+          "code": "leaveDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "giveUpDrama": {
+          "code": "giveUpDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "giveUpMonstDrama": {
+          "code": "giveUpMonstDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "studyDrama": {
+          "code": "studyDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "battleDrama": {
+          "code": "battleDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "battleMonstDrama": {
+          "code": "battleMonstDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "feedDrama": {
+          "code": "feedDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "feedMonstDrama": {
+          "code": "feedMonstDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "firstGetMonstDrama": {
+          "code": "firstGetMonstDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "BattleSkillBase": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "BattleSkillAttack",
+              "field": "id"
+            }
+          ]
+        },
+        "mainSkill": {
+          "code": "mainSkill",
+          "refer": [
+            {
+              "object": "BattleSkillAttack",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactSprite": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "ArtifactShape": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "id"
+      ]
+    },
+    "WorldTerrainType": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "WorldTerr1001": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "WorldBuilding10008": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "fairyPowerID": {
+          "code": "fairyPowerID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "dramaID": {
+          "code": "dramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "consecrateAmount": {
+          "code": "consecrateAmount",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "challengeID": {
+          "code": "challengeID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "gossipID": {
+          "code": "gossipID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "DuelID": {
+          "code": "DuelID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "consecrateID": {
+          "code": "consecrateID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "GeomancySkill": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "remind": {
+          "code": "remind",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "id": {
+          "code": "id"
+        }
+      }
+    },
+    "FateFeature": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "RoleCreateFeature",
+              "field": "id"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "id",
+        "desc"
+      ]
+    },
+    "FateGradeRequire": {
+      "fields": {
+        "id": {
+          "code": "id"
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ElderBase": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "item": {
+          "code": "item",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "ElderCostItem": {
+      "fields": {
+        "item": {
+          "code": "item",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ElderLevel": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "elderID": {
+          "code": "elderID",
+          "refer": [
+            {
+              "object": "ElderBase",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "DungeonBase": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "typeDesc": {
+          "code": "typeDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "info": {
+          "code": "info",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "victoryDesc": {
+          "code": "victoryDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "DungeonEnemyDesc": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "desc"
+      ]
+    },
+    "DungeonPowerDesc": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "desc"
+      ]
+    },
+    "DungeonSceneBase": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "AppellationFortuitous": {
+      "fields": {
+        "dramaID": {
+          "code": "dramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "AppellationGrant": {
+      "fields": {
+        "gainLogID": {
+          "code": "gainLogID",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "roleLogID": {
+          "code": "roleLogID",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        }
+      }
+    },
+    "AppellationSymbolNamed": {
+      "fields": {
+        "name": {
+          "code": "name"
+        }
+      }
+    },
+    "ArtifactShapeMixed": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactShapeRefine": {
+      "fields": {
+        "costItem": {
+          "code": "costItem",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactShapeRepairSub": {
+      "fields": {
+        "repairItem": {
+          "code": "repairItem",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactShapeUpgrade": {
+      "fields": {
+        "item": {
+          "code": "item",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "upgradeItem": {
+          "code": "upgradeItem",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "RoleGrade": {
+      "fields": {
+        "gradeName": {
+          "code": "gradeName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "phaseName": {
+          "code": "phaseName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "qualityName": {
+          "code": "qualityName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "drama": {
+          "code": "drama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "growWayDesc": {
+          "code": "growWayDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "gradeName"
+      ]
+    },
+    "ArtifactShapeCommon": {
+      "fields": {
+        "id": {
+          "code": "id"
+        }
+      }
+    },
+    "RoleLogBase": {
+      "fields": {
+        "eventLog": {
+          "code": "eventLog",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactSpriteArt": {
+      "fields": {
+        "skillRoleEffect": {
+          "code": "skillRoleEffect"
+        },
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "spriteID": {
+          "code": "spriteID",
+          "refer": [
+            {
+              "object": "ArtifactSprite",
+              "field": "id"
+            }
+          ]
+        },
+        "id": {
+          "code": "id"
+        }
+      }
+    },
+    "ArtifactSpriteDialogue": {
+      "fields": {
+        "spriteID": {
+          "code": "spriteID",
+          "refer": [
+            {
+              "object": "ArtifactSprite",
+              "field": "id"
+            }
+          ]
+        },
+        "dialogueId": {
+          "code": "dialogueId",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactSpriteDialogueSub": {
+      "fields": {
+        "spriteID": {
+          "code": "spriteID",
+          "refer": [
+            {
+              "object": "ArtifactSprite",
+              "field": "id"
+            }
+          ]
+        },
+        "dialogueId": {
+          "code": "dialogueId"
+        }
+      }
+    },
+    "ArtifactSpriteEquip": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactSpriteLevel": {
+      "fields": {
+        "spriteID": {
+          "code": "spriteID",
+          "refer": [
+            {
+              "object": "ArtifactSprite",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactSpriteSkill": {
+      "fields": {
+        "spriteID": {
+          "code": "spriteID",
+          "refer": [
+            {
+              "object": "ArtifactSprite",
+              "field": "id"
+            }
+          ]
+        },
+        "skillID": {
+          "code": "skillID",
+          "refer": [
+            {
+              "object": "BattleSkillAttack",
+              "field": "id"
+            }
+          ]
+        }
+      },
+      "brief": []
+    },
+    "ArtifactSpriteStroy": {
+      "fields": {
+        "memory": {
+          "code": "memory",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ],
+          "multiple": true
+        },
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ArtifactSprite",
+              "field": "id"
+            }
+          ]
+        },
+        "story": {
+          "code": "story",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "type": {
+          "code": "type",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactSpriteTalent": {
+      "fields": {
+        "spriteID": {
+          "code": "spriteID",
+          "refer": [
+            {
+              "object": "ArtifactSprite",
+              "field": "id"
+            }
+          ]
+        },
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "drama": {
+          "code": "drama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "unlockDesc": {
+          "code": "unlockDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "BattleAbilityBase": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "BattleAbilitySuitBase": {
+      "fields": {
+        "suitName": {
+          "code": "suitName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "suitCall": {
+          "code": "suitCall",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "suitDesc1": {
+          "code": "suitDesc1",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "suitDesc2": {
+          "code": "suitDesc2",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "suit_history": {
+          "code": "suit_history",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "suit_historyName": {
+          "code": "suit_historyName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "suitName"
+      ]
+    },
+    "BattleEffectBasePower": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "BattleEffectClassName": {
+      "fields": {
+        "name": {
+          "code": "name"
+        }
+      }
+    },
+    "BattleSkillMastery": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "BattleSkillTrain": {
+      "fields": {
+        "costItem": {
+          "code": "costItem",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "BattleSkillCondition": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "BattleSkillAttack",
+              "field": "id"
+            }
+          ]
+        },
+        "type": {
+          "code": "type",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        }
+      }
+    },
+    "BattleEffect": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "valueDesc": {
+          "code": "valueDesc"
+        }
+      },
+      "brief": [
+        "typeID",
+        "name",
+        "desc"
+      ]
+    },
+    "BattleSkillRealizeCost": {
+      "fields": {
+        "item": {
+          "code": "item",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "BattleStepBase": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "id": {
+          "code": "id"
+        }
+      }
+    },
+    "BattleStepEntry": {
+      "fields": {
+        "title": {
+          "code": "title",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "SkillEffectDesc": {
+      "fields": {
+        "value": {
+          "code": "value",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "SpecificSkillAttack": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "TaoistHeart": {
+      "fields": {
+        "heartName": {
+          "code": "heartName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "heartDescribe": {
+          "code": "heartDescribe",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "tips": {
+          "code": "tips",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "gainHeartLog": {
+          "code": "gainHeartLog",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "badHeartLog": {
+          "code": "badHeartLog",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "skillGroup": {
+          "code": "skillGroup"
+        }
+      },
+      "brief": [
+        "heartName"
+      ]
+    },
+    "TaoistHeartEffect": {
+      "fields": {
+        "taoistHeartID": {
+          "code": "taoistHeartID",
+          "refer": [
+            {
+              "object": "TaoistHeart",
+              "field": "id"
+            }
+          ]
+        },
+        "feature": {
+          "code": "feature",
+          "refer": [
+            {
+              "object": "RoleCreateFeature",
+              "field": "id"
+            }
+          ]
+        },
+        "feature2": {
+          "code": "feature2",
+          "refer": [
+            {
+              "object": "RoleCreateFeature",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "TaoistSeed": {
+      "fields": {
+        "seedName": {
+          "code": "seedName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "seedDescribe": {
+          "code": "seedDescribe",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "ghostWinLog": {
+          "code": "ghostWinLog",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "ghostLoseLog": {
+          "code": "ghostLoseLog",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        }
+      }
+    },
+    "TownGirl": {
+      "fields": {
+        "dramaID": {
+          "code": "dramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "chatDramaID": {
+          "code": "chatDramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "cdChatDramaID": {
+          "code": "cdChatDramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "giveDramaID": {
+          "code": "giveDramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "cdGiveDramaID": {
+          "code": "cdGiveDramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "eventDramaID": {
+          "code": "eventDramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "TownName": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "TownNpcInfo": {
+      "fields": {
+        "dialogueID": {
+          "code": "dialogueID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "DramaNpc": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "dramaId": {
+          "code": "dramaId",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "TownBookstore": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "TownFactotySell": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "TownFactotySellArtifact": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "TownPubDrama": {
+      "fields": {
+        "btnText": {
+          "code": "btnText",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "TownPubSub": {
+      "fields": {
+        "askText": {
+          "code": "askText",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "drama": {
+          "code": "drama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "ask": {
+          "code": "ask",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "TownRefine": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "UnitActionTrigger": {
+      "fields": {
+        "roleLogID": {
+          "code": "roleLogID",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "gainLogID": {
+          "code": "gainLogID",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        }
+      }
+    },
+    "WingmanBase": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "effectDesc": {
+          "code": "effectDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "effectName": {
+          "code": "effectName"
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "WingmanEffect": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "WingmanFixValue": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "WorldBuilding10001": {
+      "fields": {
+        "item": {
+          "code": "item",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "WorldBuilding10005": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "buttonText": {
+          "code": "buttonText",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "conditionDesc": {
+          "code": "conditionDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "clickTip": {
+          "code": "clickTip",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "winExtraDesc": {
+          "code": "winExtraDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "WorldBuilding10007": {
+      "fields": {
+        "dramaID": {
+          "code": "dramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "WorldFortuitousEvent2": {
+      "fields": {
+        "dramaID": {
+          "code": "dramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "WorldFortuitousEvent4": {
+      "fields": {
+        "dramaID": {
+          "code": "dramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        }
+      }
+    },
+    "WorldFortuitousEvent5": {
+      "fields": {
+        "dramaID": {
+          "code": "dramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        }
+      }
+    },
+    "WorldFortuitousEventBase": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "createDramaID": {
+          "code": "createDramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "dramaID": {
+          "code": "dramaID",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "createMonthLog": {
+          "code": "createMonthLog",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        },
+        "delMonthLog": {
+          "code": "delMonthLog",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
+        }
+      }
+    },
+    "GeomancyTalent": {
+      "fields": {
+        "itemGroup": {
+          "code": "itemGroup",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ImmortalHuman": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "ImmortalMethod": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "info": {
+          "code": "info",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "ImmortalStore": {
+      "fields": {
+        "rewardID": {
+          "code": "rewardID"
+        }
+      }
+    },
+    "GameItemReward": {
+      "fields": {
+        "item": {
+          "code": "item",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "GameItemRewardAbilitySuit": {
+      "fields": {
+        "suitID": {
+          "code": "suitID",
+          "refer": [
+            {
+              "object": "BattleAbilitySuitBase",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "GameItemRewardArtifact": {
+      "fields": {
+        "artifactID": {
+          "code": "artifactID",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "GameKeyCode": {
+      "fields": {
+        "keyText": {
+          "code": "keyText",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "GameLoadScenesTip": {
+      "fields": {
+        "text": {
+          "code": "text",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "BattleUnitAttr": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "BattleUnitDrop": {
+      "fields": {
+        "rewards": {
+          "code": "rewards"
+        }
+      }
+    },
+    "BrokenAltar": {
+      "fields": {
+        "bossName": {
+          "code": "bossName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ],
+          "multiple": true
+        },
+        "bossID": {
+          "code": "bossID"
+        }
+      }
+    },
+    "BrokenLevel": {
+      "fields": {
+        "btnText": {
+          "code": "btnText",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "benDesc": {
+          "code": "benDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "BuildingStorageImmortal": {
+      "fields": {
+        "enterDrama": {
+          "code": "enterDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "chatDrama": {
+          "code": "chatDrama",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ]
+        },
+        "dressID": {
+          "code": "dressID",
+          "refer": [
+            {
+              "object": "DramaNpc",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "BattleHaloSummon": {
+      "fields": {
+        "unitID": {
+          "code": "unitID",
+          "refer": [
+            {
+              "object": "BattleUnitAttr",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        }
+      }
+    },
+    "BattleSkillDifficult": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "FieldSkillType": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "GameItemCost": {
+      "fields": {
+        "item": {
+          "code": "item",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "RuneFormula": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "groupName": {
+          "code": "groupName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "RuleDungeonEffect": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "item": {
+          "code": "item",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "RoleLoginTip": {
+      "fields": {
+        "tip": {
+          "code": "tip",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "RoleFunction": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      },
+      "brief": [
+        "name"
+      ]
+    },
+    "RoleEvent": {
+      "fields": {
+        "dialogue": {
+          "code": "dialogue"
+        }
+      }
+    },
+    "RoleDying": {
+      "fields": {
+        "itemID": {
+          "code": "itemID",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "deadFeatureID": {
+          "code": "deadFeatureID",
+          "refer": [
+            {
+              "object": "RoleCreateFeature",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "RoleCreateHobby": {
+      "fields": {
+        "name": {
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "RoleCall": {
+      "fields": {
+        "call": {
+          "code": "call"
+        }
+      }
+    },
+    "RoleBeauty": {
+      "fields": {
+        "text": {
+          "code": "text",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "RoleAttributeDesc": {
+      "fields": {
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "RingBase": {
+      "fields": {
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "ModEnum": {
+      "fields": {
+        "title": {
+          "code": "title",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "desc": {
+          "code": "desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "typesName": {
+          "code": "typesName",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ],
+          "multiple": true
+        },
+        "typesDesc": {
+          "code": "typesDesc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ],
+          "multiple": true
+        }
+      }
+    },
+    "ModCondition": {
+      "fields": {
+        "title": {
+          "code": "title",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value1Name": {
+          "code": "value1Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value2Name": {
+          "code": "value2Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value3Name": {
+          "code": "value3Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value4Name": {
+          "code": "value4Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value5Name": {
+          "code": "value5Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value6Name": {
+          "code": "value6Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value7Name": {
+          "code": "value7Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value8Name": {
+          "code": "value8Name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value1Desc": {
+          "code": "value1Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value2Desc": {
+          "code": "value2Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value3Desc": {
+          "code": "value3Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value4Desc": {
+          "code": "value4Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value5Desc": {
+          "code": "value5Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value6Desc": {
+          "code": "value6Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value7Desc": {
+          "code": "value7Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        },
+        "value8Desc": {
+          "code": "value8Desc",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
+        }
+      }
+    },
+    "BattleSkillCombine": {
+      "fields": {
+        "baseID": {
+          "code": "baseID",
+          "refer": [
+            {
+              "object": "BattleSkillAttack",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "dictionary": {
+    "dramaUiType": {
+      "id": "dramaUiType",
+      "label": "剧情类型",
+      "entries": {
+        "1": "普通对话",
+        "2": "奇遇小界面",
+        "3": "剧情大图",
+        "4": "器灵大对话框",
+        "5": "器灵小对话框",
+        "6": "信件界面",
+        "7": "神秘组织普通对话",
+        "8": "信件界面（绢材质）",
+        "9": "冥妖对话",
+        "10": "仙人对话",
+        "11": "壶妖对话",
+        "12": "剧情大图对话（立绘）",
+        "13": "天元山支线奇遇界面",
+        "14": "天元山普通对话界面",
+        "15": "玩家子女被杀传音给杀人者阻止此行为"
+      }
+    },
+    "dramaNpc": {
+      "id": "dramaNpc",
+      "label": "剧情NPC",
+      "entries": {
+        "0": "无",
+        "1": "Player",
+        "11": "NPC-B",
+        "12": "NPC-C"
+      }
+    },
+    "dramaSpeaker": {
+      "id": "dramaSpeaker",
+      "label": "发言人",
+      "entries": {
+        "0": "无",
+        "1": "左侧NPC",
+        "2": "右侧NPC"
+      }
+    },
+    "fortuitousEventType": {
+      "id": "fortuitousEventType",
+      "label": "奇遇类型",
+      "entries": {
+        "1": "大地图踩地雷",
+        "2": "大地图出图标",
+        "3": "战斗内特殊房间",
+        "4": "调用引导功能触发",
+        "5": "指定位置的范围内触发",
+        "6": "大地图固定点奇遇",
+        "7": "当玩家竞价后，NPC抬价时，设置抬价NPC为剧情NPC2",
+        "8": "NPC找玩家聊天（注意，事件动作必须是callDrama）",
+        "9": "玩家在非战斗状态下连续点击某一类物品多次",
+        "10": "玩家在大地图上没有打开其他任何UI，持续一定时间",
+        "11": "玩家打开某个UI且达到指定时间没有进行任何操作时",
+        "12": "打开10005的建筑",
+        "13": "接取宗门任务时触发事件",
+        "14": "自定义触发",
+        "15": "打开10005的建筑分类",
+        "16": "玩家踩到大地图事件上"
+      }
+    },
+    "D5481998185481495": {
+      "id": "D5481998185481495",
+      "label": "伤害类型",
+      "entries": {
+        "0": "任何伤害",
+        "1": "固定数值伤害（纯伤害）",
+        "10": "任何物理伤害",
+        "11": "物理伤害（刀法资质）",
+        "12": "物理伤害（枪法资质）",
+        "13": "物理伤害（剑法资质）",
+        "14": "物理伤害（拳法资质）",
+        "15": "物理伤害（掌法资质）",
+        "16": "物理伤害（指法资质）",
+        "20": "任何属性伤害",
+        "21": "属性伤害（火）",
+        "22": "属性伤害（水）",
+        "23": "属性伤害（雷）",
+        "24": "属性伤害（风）",
+        "25": "属性伤害（土）",
+        "26": "属性伤害（木）",
+        "100": "任何暴击伤害",
+        "110": "任何物理暴击伤害",
+        "111": "物理暴击伤害（刀法资质）",
+        "112": "物理暴击伤害（枪法资质）",
+        "113": "物理暴击伤害（剑法资质）",
+        "114": "物理暴击伤害（拳法资质）",
+        "115": "物理暴击伤害（掌法资质）",
+        "116": "物理暴击伤害（指法资质）",
+        "120": "任何暴击属性伤害",
+        "121": "属性暴击伤害（火）",
+        "122": "属性暴击伤害（水）",
+        "123": "属性暴击伤害（雷）",
+        "124": "属性暴击伤害（风）",
+        "125": "属性暴击伤害（土）",
+        "126": "属性暴击伤害（木）",
+        "127": "仙法伤害"
+      }
     }
   }
 }

@@ -30,7 +30,7 @@
       <div class="my-2">
         <a-form layout="inline" :model="searchModel" size="small" class="mx-10">
           <a-form-item v-for="field of dictionaryField" :key="field.code">
-            <a-select :options="getSelectOptions(field.dictionary!)" v-model:value="searchModel[field.code]"
+            <a-select :options="appConfig.getSelectOptions(field.dictionary!)" v-model:value="searchModel[field.code]"
               :placeholder="field.alias?.trim() || field.label?.trim() || field.code" style="width: 150px"
               allowClear></a-select>
           </a-form-item>
@@ -59,7 +59,6 @@ import { SettingOutlined } from '@ant-design/icons-vue';
 import { useGameObject } from '@/data/app-config';
 import { usePending } from '@/utils/use';
 import { useGameData } from '@/data/customized-game-data';
-import { getSelectOptions } from '@/data/dict';
 import TableViewer from '../table-viewer.vue';
 import ObjectConfig from '../app-config/object-config.vue';
 import { TableProps } from 'ant-design-vue';

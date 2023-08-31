@@ -3,7 +3,7 @@ import { GameDataKey } from '@/common/ggbh-meta';
 import JSON5 from 'json5'
 import { originalGameData } from './original-game-data';
 import { useLastUpdate } from './last-update';
-import { useAppConfig, useGameObject } from './app-config';
+import { useGameObject } from './app-config';
 
 export interface ProjectData {
   path: string,

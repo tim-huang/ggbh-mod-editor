@@ -1,6 +1,7 @@
 <template>
   <div class="max-w-[calc(100%)] overflow-x-scroll">
     <a-table :columns="columns" :data-source="dataSource" row-key="id" v-bind="$attrs">
+      <!-- @resize-column="handleResizeColumn"> -->
       <template #bodyCell="{ column, text, record }">
         <field-display v-if="column.dataIndex !== '$action'" :data-key="dataKey" :field="fieldMap[column.dataIndex]"
           :field-value="text"></field-display>
@@ -15,7 +16,8 @@
       </template>
     </a-table>
     <!-- detail dialog -->
-    <a-modal v-model:open="detailDialogVisible" width="800px" :title="dataKey + ' - ' + detailObject?.id">
+    <a-modal v-model:open="detailDialogVisible" width="800px" :title="dataKey + ' - ' + detailObject?.id"
+      @ok="detailDialogVisible = false">
       <div class='w-full h-[680px] overflow-y-scroll'>
         <game-data-viewer :data-key="dataKey" :data="detailObject!"></game-data-viewer>
       </div>
@@ -59,6 +61,7 @@ const fieldMap = computed(() => {
   }, {} as Record<string, AppConfig.IFieldConfig>)
 })
 
+
 // column definition
 const columns = computed(() => {
   const arr: any[] = mergedInlineFields.value.map(field => {
@@ -66,6 +69,17 @@ const columns = computed(() => {
       title: field.alias?.trim() || field.label?.trim() || field.code,
       dataIndex: field.code,
       key: field.code,
+      sorter: (a: GameObjectData, b: GameObjectData) => {
+        if (a[field.code] === b[field.code]) return 0;
+        if (!a[field.code]) return -1;
+        if (!b[field.code]) return 1;
+        return a[field.code] > b[field.code] ? 1 : -1;
+      },
+      sortDirections: ['descend', 'ascend'],
+      // resizable: true,
+      minWidth: 80,
+      width: 100,
+      // maxWidth: 300,
       // ellipsis: true,
     }
   }) || [];
@@ -79,6 +93,10 @@ const columns = computed(() => {
   return arr;
 })
 
+// resize column
+// const handleResizeColumn = (w: number, col: { width: number }) => {
+//   col.width = w;
+// }
 // show detail dialog
 const detailDialogVisible = ref<boolean>(false);
 const detailObject = ref<GameObjectData>();

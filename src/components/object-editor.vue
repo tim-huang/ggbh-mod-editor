@@ -29,7 +29,7 @@
           </a>
         </a-space>
       </template>
-      <a-select v-if="field.dictionary" size="small" width="200px" :options="getSelectOptions(field.dictionary)"
+      <a-select v-if="field.dictionary" size="small" width="200px" :options="appConfig.getSelectOptions(field.dictionary)"
         v-model:value="model[field.code]"></a-select>
       <span v-else-if="field.refer?.length">
         <reference-field-editor :data-key="dataKey" :field="field"
@@ -44,7 +44,6 @@
 import { GameDataKey } from '@/common/ggbh-meta';
 import { useGameObject } from '@/data/app-config';
 import { useGameData } from '@/data/customized-game-data';
-import { getSelectOptions } from '@/data/dict';
 import { computed, onUnmounted, ref, watchEffect } from 'vue';
 import ReferenceFieldEditor from './form/reference-field-editor.vue';
 import { UnorderedListOutlined, CopyOutlined, SnippetsOutlined } from '@ant-design/icons-vue';
@@ -87,7 +86,7 @@ const onTemplateSelected = ({ type, items }: { type: GameDataKey, items: GameObj
 }
 
 // construct form by object metadata
-const { mergedObjectConfig } = useGameObject(() => props.dataKey);
+const { mergedObjectConfig, appConfig } = useGameObject(() => props.dataKey);
 const fields = computed<AppConfig.IFieldConfig[]>(() => {
   return Object.values(mergedObjectConfig.value.fields || {})
 })

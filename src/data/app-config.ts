@@ -5,6 +5,7 @@ import { computed } from "vue";
 
 export interface IAppConfig {
     objects?: Partial<Record<GameDataKey, AppConfig.GameObjectConfig>>,
+    dictionary?: Record<string, AppConfig.Dictionary>
 }
 
 const swap = (arr: any[] | undefined, index1: number, index2: number) => {
@@ -16,29 +17,24 @@ const swap = (arr: any[] | undefined, index1: number, index2: number) => {
 
 export const useAppConfig = defineStore({
     id: "app-config",
-    state: (): { config: IAppConfig } => ({
-        config: {}
+    state: (): IAppConfig => ({
+        objects: {},
+        dictionary: {},
     }),
     actions: {
         async init() {
             const config = await window.api.readConfig();
-            this.config = JSON5.parse(config)
-            // Object.values(this.config.objects || {}).forEach(obj => {
-            //     Object.values(obj.fields || {}).forEach(field => {
-            //         if (field.refer?.some(r => r.multiple)) {
-            //             field.multiple = true
-            //         }
-            //         field.refer?.forEach(r => delete r.multiple)
-            //     })
-            // })
+            const json = JSON5.parse(config) as IAppConfig;
+            this.objects = json.objects;
+            this.dictionary = json.dictionary;
         },
         async save() {
-            return window.api.saveConfig(JSON.stringify(this.config, null, 2))
+            return window.api.saveConfig(JSON.stringify(this.$state, null, 2))
         },
         getObject(key: GameDataKey): AppConfig.GameObjectConfig {
-            if (!this.config.objects) this.config.objects = {};
-            if (!this.config.objects[key]) this.config.objects[key] = {};
-            return this.config.objects[key] as AppConfig.GameObjectConfig;
+            if (!this.objects) this.objects = {};
+            if (!this.objects[key]) this.objects[key] = {};
+            return this.objects[key] as AppConfig.GameObjectConfig;
         },
         removeInlineField(key: GameDataKey, code: string) {
             const obj = this.getObject(key);
@@ -66,7 +62,20 @@ export const useAppConfig = defineStore({
             const obj = this.getObject(key)
             swap(obj.brief, index, index + offset)
         },
-
+        getSelectOptions(dictionaryId: string) {
+            const dict = (this.dictionary || {})[dictionaryId];
+            if (!dict) return []
+            return Object.entries(dict.entries).map(([k, v]) => {
+                return {
+                    value: k,
+                    label: v,
+                }
+            })
+        },
+        getDictionary(dictionaryId: string) {
+            const dict = (this.dictionary || {})[dictionaryId]?.entries || {};
+            return dict;
+        }
     }
 });
 
@@ -74,8 +83,8 @@ export const useGameObject = (key: () => GameDataKey) => {
     const appConfig = useAppConfig();
 
     const objectConfig = computed<AppConfig.GameObjectConfig>(() => {
-        if (!appConfig.config.objects) return {};
-        return appConfig.config.objects[key()] || {}
+        if (!appConfig.objects) return {};
+        return appConfig.objects[key()] || {}
     })
 
     const mergedObjectConfig = computed<AppConfig.GameObjectConfig>(() => {
@@ -87,7 +96,7 @@ export const useGameObject = (key: () => GameDataKey) => {
             result.fields[field.code] = { ...field }
             fieldCodes.push(field.code);
         })
-        const config = appConfig.config.objects && appConfig.config.objects[key()];
+        const config = appConfig.objects && appConfig.objects[key()];
         result.brief = config?.brief?.length ? config.brief : fieldCodes;
         result.inline = config?.inline?.length ? config.inline : fieldCodes;
         Object.values(config?.fields || {}).forEach(field => {

@@ -1,7 +1,7 @@
 
 <template>
   <span v-if="fieldValue" class="mx-0.5">
-    <span v-if="field.dictionary">{{ getDictionary(field.dictionary)[fieldValue] || fieldValue }}</span>
+    <span v-if="field.dictionary">{{ appConfig.getDictionary(field.dictionary)[fieldValue] || fieldValue }}</span>
     <span v-else-if="field.refer?.length && Object.keys(referObjects || {}).length">
       <template v-for="(objs, key) in referObjects">
         <template v-for="(obj, idx) in objs" :key="key + obj.id">
@@ -19,8 +19,8 @@
 import { GameDataKey } from '@/common/ggbh-meta';
 import { useGameData } from '@/data/customized-game-data';
 import { computed } from 'vue';
-import { getDictionary } from '@/data/dict';
 import BriefViewer from './brief-viewer.vue';
+import { useAppConfig } from '@/data/app-config';
 
 const props = defineProps<{
   dataKey: GameDataKey,
@@ -29,6 +29,7 @@ const props = defineProps<{
 }>();
 
 const { getReferenceObjectsByField } = useGameData();
+const appConfig = useAppConfig()
 const referObjects = computed(() => {
   return getReferenceObjectsByField(props.field, props.fieldValue)
 })

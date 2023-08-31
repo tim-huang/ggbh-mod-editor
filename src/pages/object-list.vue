@@ -14,7 +14,7 @@
     <div class="my-2">
       <a-form layout="inline" :model="searchModel" size="small" class="mx-10">
         <a-form-item v-for="field of dictionaryField" :key="field.code">
-          <a-select :options="getSelectOptions(field.dictionary!)" v-model:value="searchModel[field.code]"
+          <a-select :options="appConfig.getSelectOptions(field.dictionary!)" v-model:value="searchModel[field.code]"
             :placeholder="field.alias?.trim() || field.label?.trim() || field.code" style="width: 150px"
             allowClear></a-select>
         </a-form-item>
@@ -29,8 +29,8 @@
     <table-viewer :data-key="dataKey" :data-source="dataSource" size="small" bordered editable></table-viewer>
 
     <!-- field config -->
-    <a-modal v-model:open="fieldsConfigDialogVisibile" title="Customization" width="800px" @ok="onConfigOk"
-      :okButtonProps="{ disabled: pending }">
+    <a-modal v-model:open="fieldsConfigDialogVisibile" :title="`Customization - ${dataKey}`" width="800px"
+      @ok="onConfigOk" :okButtonProps="{ disabled: pending }" destroy-on-close>
       <div class="overflow-scroll h-[600px]">
         <object-config :data-key="dataKey"></object-config>
       </div>
@@ -47,14 +47,16 @@ import TableViewer from '@/components/table-viewer.vue';
 import { useGameObject } from '@/data/app-config';
 import { SettingOutlined } from '@ant-design/icons-vue';
 import ObjectConfig from '@/components/app-config/object-config.vue';
-import { getSelectOptions } from '@/data/dict';
 import { usePending } from '@/utils/use';
 import { useDebounceFn } from '@vueuse/core';
 
 
 // select an object type
 const router = useRouter();
-const dataKey = computed<GameDataKey>(() => (router.currentRoute.value.query?.dataKey || GameDataKey.ArtifactShape) as GameDataKey);
+// const dataKey = computed<GameDataKey>(() => (router.currentRoute.value.query?.dataKey || GameDataKey.ArtifactShape) as GameDataKey);
+const dataKey = computed<GameDataKey>(() => {
+  return (router.currentRoute.value.query?.dataKey || GameDataKey.ArtifactShape) as GameDataKey;
+})
 const options = Object.keys(gameMetaInfo).map((k) => ({ value: k, label: k }))
 
 const dataKeySelected = (value: string) => {
@@ -77,7 +79,7 @@ const onConfigOk = async () => {
 const searchModel = reactive<Record<string, string>>({})
 const dictionaryField = computed(() => Object.values(mergedObjectConfig.value.fields || {}).filter(field => field.dictionary));
 // datasource for table
-const { gameData, search } = useGameData()
+const { search } = useGameData()
 
 // search
 const keyword = ref<string>('');
@@ -95,7 +97,7 @@ const doSearch = () => {
 
 const debounceSearch = useDebounceFn(doSearch, 300);
 
-const stopWatch = watch([searchModel], doSearch);
+const stopWatch = watch([searchModel, dataKey, customizedOnly], doSearch);
 const stopWatchKeyword = watch([keyword], debounceSearch);
 
 doSearch();

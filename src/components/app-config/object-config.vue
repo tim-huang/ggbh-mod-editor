@@ -31,11 +31,11 @@
       </a-descriptions>
     </a-tab-pane>
     <a-tab-pane key="3" tab="Editor"></a-tab-pane>
-    <template #rightExtra >
+    <template #rightExtra>
       <a-space>
         <a-button type="primary" @click="randomDataTrigger++" v-if="activeKey === '2'">Refresh Random Data</a-button>
-        <a-select v-if="dataKeyChangable" v-model:value="selectedDataKey" :options="options" style="width: 200px; text-align: left;"
-          show-search></a-select>
+        <a-select v-if="dataKeyChangable" v-model:value="selectedDataKey" :options="options"
+          style="width: 200px; text-align: left;" show-search></a-select>
       </a-space>
     </template>
   </a-tabs>

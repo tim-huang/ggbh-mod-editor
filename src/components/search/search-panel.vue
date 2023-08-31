@@ -9,8 +9,8 @@
     </div>
     <div v-else class="w-full h-[calc(100%-42px)] border border-black flex flex-row ">
       <div class="w-[250px] h-[calc(100%)] overflow-y-scroll p-1 flex flex-col gap-1">
-        <div v-for="(item, idx) in resultSummary" :key="item.key" @click="summaryIndex = idx"
-          :class="{ 'p-1 border border-solid rounded border-gray-200': true, 'bg-blue-200 border-blue-400': summaryIndexCounter === idx }">
+        <div v-for="(item, idx) in resultSummary" :key="item.key" @click="summaryIndexCounter = idx"
+          :class="{ 'p-1 border border-solid rounded border-gray-200': true, 'bg-blue-200 border-blue-400': summaryIndex === idx }">
           <span class="mr-2">{{ item.key }}</span>
           <a-badge :count="item.count" :overflow-count="999"></a-badge>
         </div>

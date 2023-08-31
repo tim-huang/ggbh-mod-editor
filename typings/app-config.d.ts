@@ -25,4 +25,10 @@ namespace AppConfig {
         // which fields are displayed in inline mode
         inline?: string[];
     };
+
+    export interface Dictionary {
+        id: string;
+        label: string;
+        entries: Record<string, string>;
+    }
 }
