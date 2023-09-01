@@ -1,7 +1,6 @@
 <template>
-  <!-- <component v-if="builtInViewer" :is="builtInViewer" :data="data"></component> -->
   <a-descriptions bordered v-if="data" size="small" :column="1" :label-style="{ width: '210px' }">
-    <a-descriptions-item v-for="field of mergedObjectConfig.fields" :key="field.code">
+    <a-descriptions-item v-for="field of computedFields" :key="field.code">
       <template #label>
         <a-space>
           <span>{{ field.alias?.trim() || field.label?.trim() || field.code }}</span>
@@ -25,6 +24,8 @@ import FieldDisplay from './field-display.vue';
 import { InfoCircleOutlined, CopyOutlined } from "@ant-design/icons-vue";
 import { useGameObject } from "@/data/app-config";
 import { copy } from "@/utils/clipboard";
+import { computed } from "vue";
+import { getObjectFieldsModifier } from "@/data/object-fields-plugin";
 
 const props = defineProps<{
   dataKey: GameDataKey,
@@ -33,7 +34,11 @@ const props = defineProps<{
 
 const { mergedObjectConfig } = useGameObject(() => props.dataKey)
 
-// const builtInViewer = computed<any>(() => getObjectViewer(GameDataKey.DramaDialogue))
+const computedFields = computed<AppConfig.IFieldConfig[]>(() => {
+  const fn = getObjectFieldsModifier(props.dataKey)
+  if (!fn) return Object.values(mergedObjectConfig.value.fields || {})
+  return fn(props.data)
+})
 </script>
 
 <style scoped></style>

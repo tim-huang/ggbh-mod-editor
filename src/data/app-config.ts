@@ -5,7 +5,8 @@ import { computed } from "vue";
 
 export interface IAppConfig {
     objects?: Partial<Record<GameDataKey, AppConfig.GameObjectConfig>>,
-    dictionary?: Record<string, AppConfig.Dictionary>
+    dictionary?: Record<string, AppConfig.Dictionary>,
+    battleEffect?: Record<string, AppConfig.BattleEffectAPI>,
 }
 
 const swap = (arr: any[] | undefined, index1: number, index2: number) => {
@@ -20,6 +21,7 @@ export const useAppConfig = defineStore({
     state: (): IAppConfig => ({
         objects: {},
         dictionary: {},
+        battleEffect: {},
     }),
     actions: {
         async init() {
@@ -27,6 +29,7 @@ export const useAppConfig = defineStore({
             const json = JSON5.parse(config) as IAppConfig;
             this.objects = json.objects;
             this.dictionary = json.dictionary;
+            this.battleEffect = json.battleEffect;
         },
         async save() {
             return window.api.saveConfig(JSON.stringify(this.$state, null, 2))

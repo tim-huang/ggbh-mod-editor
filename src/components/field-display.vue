@@ -1,6 +1,6 @@
 
 <template>
-  <span v-if="fieldValue" class="mx-0.5">
+  <span v-if="fieldValue">
     <span v-if="field.dictionary">{{ appConfig.getDictionary(field.dictionary)[fieldValue] || fieldValue }}</span>
     <span v-else-if="field.refer?.length && Object.keys(referObjects || {}).length">
       <template v-for="(objs, key) in referObjects">

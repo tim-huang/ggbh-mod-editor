@@ -125,6 +125,6 @@ const columns = [
 ]
 
 const onOk = () => {
-  emits('ok', entries.value, 'I');
+  emits('ok', entries.value, model.value.conflictStrategy);
 }
 </script>

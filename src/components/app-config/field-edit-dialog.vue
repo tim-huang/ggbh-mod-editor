@@ -7,6 +7,9 @@
       <a-form-item label="Alias" name="alias">
         <a-input v-model:value="dialogModel.alias" />
       </a-form-item>
+      <a-form-item label="Multi-line editor">
+        <a-checkbox v-model:checked="dialogModel.multiLines"></a-checkbox>
+      </a-form-item>
       <a-form-item label="Reference">
         <a-radio-group v-model:value="dialogModel.referType" @change="referTypeChanged">
           <a-radio value='N'>None</a-radio>
@@ -227,7 +230,14 @@ const computeReferenceFields = computed(() => {
 })
 
 // datasource for dictionary select
-const dictionaries = appConfig.getSelectOptions("dictionary");
+const dictionaries = computed(() => {
+  return Object.values(appConfig.dictionary || {}).map(dict => {
+    return {
+      value: dict.id,
+      label: dict.label,
+    }
+  })
+});
 // datasource for dictionary example
 const exampleDictionary = computed(() => {
   if (dialogModel.value?.dictionary) {

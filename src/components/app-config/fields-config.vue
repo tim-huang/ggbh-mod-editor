@@ -11,7 +11,7 @@
               </a-tag>
             </span>
             <a-tag v-else-if="record.dictionary">
-              {{ record.dictionary }}
+              {{ (appConfig.dictionary || {})[record.dictionary]?.label || record.dictionary }}
             </a-tag>
             <span v-else>None</span>
           </div>
@@ -58,7 +58,7 @@ const props = defineProps<{
   dataKey: GameDataKey
 }>();
 
-const { mergedObjectConfig } = useGameObject(() => props.dataKey)
+const { appConfig, mergedObjectConfig } = useGameObject(() => props.dataKey)
 const { gameData } = useGameData()
 
 const fields = computed<AppConfig.IFieldConfig[]>(() => Object.values(mergedObjectConfig.value.fields!));

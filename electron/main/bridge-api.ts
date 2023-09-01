@@ -43,7 +43,7 @@ export const useBridgeApi = (win: BrowserWindow) => {
   // write json file
   async function writeJson(_: any, projectPath: string, fileName: string, data: string) {
     const filePath = getConfigPath(projectPath, fileName)
-    const stat = fs.statSync(filePath)
+    const stat = fs.statSync(filePath, { throwIfNoEntry: false })
     if (stat && !stat.isFile()) {
       console.log(filePath, 'is not a file.')
       return '[]'
@@ -56,6 +56,12 @@ export const useBridgeApi = (win: BrowserWindow) => {
   // load project json file
   async function loadProject(_: any, projectPath: string): Promise<Record<string, string>> {
     const path = getConfigPath(projectPath)
+    if (!fs.existsSync(path)) {
+      fs.mkdir(path, { recursive: true }, (err) => {
+        // console.error('Create path', path, 'failed:', err)
+        console.log(err)
+      })
+    }
     // get file list
     const files = (await fs.promises.readdir(path)).filter(file => file.endsWith(".json"))
     // read files
@@ -101,10 +107,12 @@ export const useBridgeApi = (win: BrowserWindow) => {
   // read last update
   async function readLastUpdate(_: any, projectPath: string): Promise<string | undefined> {
     const filePath = join(projectPath, lastUpdateFileName)
-    const stat = fs.statSync(filePath)
+    const stat = fs.statSync(filePath, { throwIfNoEntry: false })
     if (stat && !stat.isFile()) {
       console.error(filePath, 'is not a file.')
       return undefined
+    } else if (!stat) {
+      return "[]"
     }
 
     return fs.promises.readFile(filePath, 'utf8')

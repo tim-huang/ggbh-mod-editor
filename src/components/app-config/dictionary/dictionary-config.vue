@@ -173,7 +173,7 @@ const importingDialogVisible = ref<boolean>(false);
 const doImport = (entries: { label: string, key: string }[], conflictStrategy: 'I' | 'R') => {
   if (selectedDict.value) {
     entries.forEach(item => {
-      if (conflictStrategy == 'R' || !selectedDict.value?.entries[item.key]) {
+      if (conflictStrategy === 'R' || !selectedDict.value?.entries[item.key]) {
         selectedDict.value!.entries[item.key] = item.label;
       }
     })

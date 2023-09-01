@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-[calc(100%)] overflow-x-scroll space-y-0.5">
+  <div class="flex flex-col max-w-[calc(100%)] overflow-x-scroll gap-y-0.5">
     <span v-for="(fv, idx) in model" :key="fv">
       <a-tag @close="removeObject(fv)" closable>
         <a @click="moveLeft(fv)" v-if="idx > 0">
@@ -15,6 +15,7 @@
             <a-menu :items="menuItems" @click="onMenuItemClick($event, fv)"></a-menu>
           </template>
         </a-dropdown>
+        <!-- edit btn -->
         <field-display :data-key="dataKey" :field="field" :field-value="fv"></field-display>
       </a-tag>
     </span>
@@ -33,8 +34,7 @@
     <object-selector :data-key-restrict="dataKeyRestrict" :width="`${width - 100}px`"
       :multiple="field.multiple && !replacing" v-model:open="objectSelectorVisible" @select="onAssosiateWithObject"
       @close="onSelectorClosed"></object-selector>
-    <a-drawer v-model:open="objectCreatorVisible" :title="`Create ${newDataKey}`" :width="`${width - 180}px`"
-      destroy-on-close>
+    <a-drawer v-model:open="objectCreatorVisible" :title="editorTitle" :width="`${width - 180}px`" destroy-on-close>
       <template #extra>
         <a-space>
           <a-button type="primary" @click="onCreateSave">Save</a-button>
@@ -50,7 +50,7 @@
 import { GameDataKey } from '@/common/ggbh-meta';
 import { computed, nextTick, ref } from 'vue';
 import FieldDisplay from '../field-display.vue';
-import { PlusOutlined, CaretUpOutlined, CaretDownOutlined, SwapOutlined } from '@ant-design/icons-vue';
+import { PlusOutlined, CaretUpOutlined, CaretDownOutlined, SwapOutlined, EditOutlined } from '@ant-design/icons-vue';
 import ObjectSelector from '../object-browser/object-selector.vue';
 import { useWindowSize } from '@vueuse/core';
 import { useGameData } from '@/data/customized-game-data';
@@ -115,9 +115,18 @@ const newDataKey = ref<GameDataKey>();
 const { gameData, createObject } = useGameData();
 const objectCreatorVisible = ref<boolean>(false);
 const onCreate = (key: GameDataKey) => {
+  editorTitle.value = 'New ' + key;
   newDataKey.value = key;
   newObject.value = createObject(key);
   objectCreatorVisible.value = true; // open drawer
+}
+const editorTitle = ref<string>('')
+const onEdit = (key: GameDataKey, id: string) => {
+  newObject.value = gameData.combined[key]?.find(o => o.id === id);
+  if (newObject.value) {
+    editorTitle.value = 'Edit ' + key + ' - ' + id;
+    objectCreatorVisible.value = true;
+  }
 }
 
 const onCreateSave = () => {

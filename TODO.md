@@ -8,3 +8,4 @@
 - [x] search anything
 - [x] show last update
 - [ ] create dictionary from field sample
+- [x] battle effect

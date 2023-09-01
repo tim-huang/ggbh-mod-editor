@@ -7,7 +7,7 @@ namespace AppConfig {
         // customized label
         alias?: string;
         // hint for the field
-        hint?: string;
+        desc?: string;
         // map to a built-in dictionary
         dictionary?: string;
         // refer to another object
@@ -16,6 +16,7 @@ namespace AppConfig {
             field: string;
         }[],
         multiple?: boolean;
+        multiLines?: boolean;
     }
     export interface GameObjectConfig {
         // a map from field code to field display label
@@ -30,5 +31,25 @@ namespace AppConfig {
         id: string;
         label: string;
         entries: Record<string, string>;
+    };
+
+    export interface BattleEffectAPI {
+        id: string;
+        desc: string;
+        targetID?: IFieldConfig,
+        value1?: IFieldConfig,
+        value2?: IFieldConfig,
+        value3?: IFieldConfig,
+        value4?: IFieldConfig,
+        value5?: IFieldConfig,
+        value6?: IFieldConfig,
+        value7?: IFieldConfig,
+        value8?: IFieldConfig,
+        effect1?: IFieldConfig,
+        effect2?: IFieldConfig,
+        effect3?: IFieldConfig,
+        effect4?: IFieldConfig,
+        effect5?: IFieldConfig,
+        effect6?: IFieldConfig,
     }
 }

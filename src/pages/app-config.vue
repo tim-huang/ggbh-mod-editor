@@ -34,6 +34,8 @@ const { fn: resetConfig } = usePending(appConfig.init, pending);
 
 const activeKey = ref<string>('dictionary');
 
+console.debug(appConfig);
+
 </script>
 
 <style scoped></style>
