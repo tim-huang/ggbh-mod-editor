@@ -1,6 +1,7 @@
 <template>
   <span>
-    <a-dropdown><a @click="showDetailModal = true" class="peer">
+    <a-dropdown>
+      <a @click="showDetailModal = true" class="peer">
         <menu-outlined class="text-blue-500"></menu-outlined>
       </a>
       <template #overlay>

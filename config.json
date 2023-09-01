@@ -84,7 +84,10 @@
         "uiType",
         "title",
         "options",
-        "dialogue"
+        "dialogue",
+        "npcLeft",
+        "npcRight",
+        "speaker"
       ],
       "brief": [
         "id",

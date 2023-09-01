@@ -113,7 +113,8 @@ const showEditorDialog = (id: string) => {
 }
 // save  editing
 const onSaveEditing = () => {
-  alert('Not implemented yet.')
+  if (editingObject.value) gameData.updateObject(props.dataKey, editingObject.value)
+  editorDialogVisible.value = false;
 }
 
 </script>

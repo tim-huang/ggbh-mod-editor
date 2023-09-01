@@ -30,8 +30,10 @@
             </a>
           </a-space>
         </template>
-        <a-select v-if="field.dictionary" size="small" style="width:400px;" show-search :filterOption="commonFilter"
-          :options="appConfig.getSelectOptions(field.dictionary)" v-model:value="model[field.code]"></a-select>
+        <!-- <a-select v-if="field.dictionary" size="small" style="width:400px;" show-search :filterOption="commonFilter" -->
+        <!--   :options="appConfig.getSelectOptions(field.dictionary)" v-model:value="model[field.code]"></a-select> -->
+        <customized-select v-if="field.dictionary" style="width:400px;" show-search :filterOption="commonFilter"
+          :options="appConfig.getSelectOptions(field.dictionary)" v-model:value="model[field.code]"></customized-select>
         <span v-else-if="field.refer?.length">
           <reference-field-editor :data-key="dataKey" :field="field"
             v-model:field-value="model[field.code]"></reference-field-editor>
@@ -53,14 +55,16 @@
 import { GameDataKey } from '@/common/ggbh-meta';
 import { useGameObject } from '@/data/app-config';
 import { useGameData } from '@/data/customized-game-data';
-import { computed, onUnmounted, ref, watchEffect } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
 import ReferenceFieldEditor from './form/reference-field-editor.vue';
 import { UnorderedListOutlined, CopyOutlined, SnippetsOutlined, FunctionOutlined } from '@ant-design/icons-vue';
 import { useWindowSize } from '@vueuse/core';
 import ObjectSelector from './object-browser/object-selector.vue';
+import CustomizedSelect from './form/customized-select.vue';
 import { paste } from '@/utils/clipboard';
 import { ItemType } from 'ant-design-vue';
 import { getObjectFieldsModifier } from '@/data/object-fields-plugin';
+import { useLastUpdate } from '@/data/last-update';
 
 const props = defineProps<{
   dataKey: GameDataKey,
@@ -149,6 +153,13 @@ const fillWithSkillValue = ({ items }: { items: GameObjectData[] }) => {
   model.value[fieldCodeToFill] = (items[0] as BattleSkillValue).key
 }
 
+const log = () => useLastUpdate().log(props.dataKey, props.value?.id, 'V')
+
+// log once
+log();
+const stopWatch = watch([() => props.dataKey, () => props.value?.id], log);
+
+onUnmounted(stopWatch)
 onUnmounted(stopWatchingProps)
 
 // save

@@ -24,8 +24,9 @@ import FieldDisplay from './field-display.vue';
 import { InfoCircleOutlined, CopyOutlined } from "@ant-design/icons-vue";
 import { useGameObject } from "@/data/app-config";
 import { copy } from "@/utils/clipboard";
-import { computed } from "vue";
+import { computed, onUnmounted, watch } from "vue";
 import { getObjectFieldsModifier } from "@/data/object-fields-plugin";
+import { useLastUpdate } from "@/data/last-update";
 
 const props = defineProps<{
   dataKey: GameDataKey,
@@ -39,6 +40,14 @@ const computedFields = computed<AppConfig.IFieldConfig[]>(() => {
   if (!fn) return Object.values(mergedObjectConfig.value.fields || {})
   return fn(props.data)
 })
+
+const log = () => useLastUpdate().log(props.dataKey, props.data?.id, 'V')
+
+// log once
+log();
+const stopWatch = watch([() => props.dataKey, () => props.data?.id], log);
+
+onUnmounted(stopWatch)
 </script>
 
 <style scoped></style>
