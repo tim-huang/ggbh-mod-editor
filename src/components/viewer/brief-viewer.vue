@@ -39,7 +39,7 @@ import { computed, ref } from 'vue';
 import { MenuOutlined } from '@ant-design/icons-vue';
 import FieldDisplay from './field-display.vue';
 import GameDataViewer from './game-data-viewer.vue';
-import ObjectEditor from './object-editor.vue';
+import ObjectEditor from '../editor/object-editor.vue';
 import { useWindowSize } from '@vueuse/core';
 import { useGameData } from '@/data/customized-game-data';
 

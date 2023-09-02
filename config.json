@@ -165,6 +165,15 @@
               "field": "key"
             }
           ]
+        },
+        "skillID": {
+          "code": "skillID",
+          "refer": [
+            {
+              "object": "BattleSkillAttack",
+              "field": "id"
+            }
+          ]
         }
       },
       "brief": [
@@ -190,6 +199,15 @@
             {
               "object": "LocalText",
               "field": "key"
+            }
+          ]
+        },
+        "skillEffect": {
+          "code": "skillEffect",
+          "refer": [
+            {
+              "object": "BattleSkillEffect",
+              "field": "id"
             }
           ]
         }
@@ -1551,8 +1569,40 @@
               "field": "id"
             }
           ]
+        },
+        "skillEffect": {
+          "code": "skillEffect",
+          "refer": [
+            {
+              "object": "BattleSkillEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        },
+        "missileID": {
+          "code": "missileID",
+          "refer": [
+            {
+              "object": "BattleMissile",
+              "field": "id"
+            }
+          ]
+        },
+        "skillSub": {
+          "code": "skillSub",
+          "refer": [
+            {
+              "object": "BattleSkillSub",
+              "field": "id"
+            }
+          ],
+          "multiple": true
         }
-      }
+      },
+      "brief": [
+        "id"
+      ]
     },
     "ArtifactSprite": {
       "fields": {
@@ -2218,7 +2268,10 @@
           ]
         }
       },
-      "brief": []
+      "brief": [
+        "spriteID",
+        "skillID"
+      ]
     },
     "ArtifactSpriteStroy": {
       "fields": {
@@ -2409,7 +2462,13 @@
     "BattleEffectClassName": {
       "fields": {
         "name": {
-          "code": "name"
+          "code": "name",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
         }
       }
     },
@@ -2509,14 +2568,7 @@
       "brief": [
         "typeID"
       ],
-      "inline": [
-        "id",
-        "typeID",
-        "targetID",
-        "overlay",
-        "layCount",
-        "duration"
-      ]
+      "inline": []
     },
     "BattleSkillRealizeCost": {
       "fields": {
@@ -3289,6 +3341,10 @@
               "field": "id"
             }
           ]
+        },
+        "itemType": {
+          "code": "itemType",
+          "dictionary": "D2357932733222809"
         }
       }
     },
@@ -3934,6 +3990,160 @@
           "dictionary": "D5347528302964237"
         }
       }
+    },
+    "BattleMissile": {
+      "brief": [
+        "model"
+      ],
+      "fields": {
+        "shotID": {
+          "code": "shotID",
+          "refer": [
+            {
+              "object": "BattleShot99",
+              "field": "id"
+            },
+            {
+              "object": "BattleShot98",
+              "field": "id"
+            },
+            {
+              "object": "BattleShot97",
+              "field": "id"
+            },
+            {
+              "object": "BattleShot96",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "BattleSkillEffect": {
+      "fields": {
+        "effectID": {
+          "code": "effectID",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ]
+        },
+        "target": {
+          "code": "target",
+          "dictionary": "D4086254609461513"
+        }
+      },
+      "brief": [
+        "effectID"
+      ]
+    },
+    "BattleSkillSub": {
+      "brief": [
+        "id"
+      ],
+      "fields": {
+        "skillType": {
+          "code": "skillType",
+          "dictionary": "D90560855679879"
+        },
+        "subSkillID": {
+          "code": "subSkillID",
+          "refer": [
+            {
+              "object": "BattleSkillBase",
+              "field": "id"
+            },
+            {
+              "object": "BattleHaloBase",
+              "field": "id"
+            }
+          ]
+        }
+      }
+    },
+    "BattleShot99": {
+      "brief": [
+        "id"
+      ]
+    },
+    "BattleShot98": {
+      "brief": [
+        "id"
+      ]
+    },
+    "BattleShot97": {
+      "brief": [
+        "id"
+      ]
+    },
+    "BattleShot96": {
+      "brief": [
+        "id"
+      ]
+    },
+    "BattleHaloBase": {
+      "fields": {
+        "mainSkill": {
+          "code": "mainSkill",
+          "refer": [
+            {
+              "object": "BattleSkillBase",
+              "field": "id"
+            }
+          ]
+        },
+        "enterEffect": {
+          "code": "enterEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        },
+        "exitEffect": {
+          "code": "exitEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        },
+        "clearEffect": {
+          "code": "clearEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        },
+        "destroyEffect": {
+          "code": "destroyEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        }
+      },
+      "brief": [
+        "model"
+      ],
+      "inline": [
+        "id",
+        "type",
+        "enterEffect",
+        "exitEffect"
+      ]
     }
   },
   "dictionary": {
@@ -4659,6 +4869,32 @@
         "104": "104-天元山专用",
         "105": "105-属性转化",
         "106": "106-剧情函数"
+      }
+    },
+    "D2357932733222809": {
+      "id": "D2357932733222809",
+      "label": "掉落道具类型",
+      "entries": {
+        "1": "道具",
+        "2": "武技，绝技，神通",
+        "3": "身法",
+        "4": "心法"
+      }
+    },
+    "D90560855679879": {
+      "id": "D90560855679879",
+      "label": "子技能类型",
+      "entries": {
+        "1": "普通武技",
+        "2": "光环"
+      }
+    },
+    "D4086254609461513": {
+      "id": "D4086254609461513",
+      "label": "技能效果目标",
+      "entries": {
+        "0": "自己",
+        "1": "目标"
       }
     }
   },

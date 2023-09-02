@@ -85,12 +85,12 @@
 
 import { useGameData } from "@/data/customized-game-data";
 import { computed, h } from "vue";
-import GameDataViewer from "@/components/game-data-viewer.vue";
+import GameDataViewer from "@/components/viewer/game-data-viewer.vue";
 import { CaretRightOutlined, CaretLeftOutlined, InfoCircleOutlined, MessageOutlined } from "@ant-design/icons-vue";
 import { useRouter } from "vue-router";
 import { GameDataKey } from "@/common/ggbh-meta";
 import { ItemType } from "ant-design-vue";
-import FieldDisplay from "../field-display.vue";
+import FieldDisplay from "@/components/viewer/field-display.vue";
 import { useGameObject } from "@/data/app-config";
 
 const props = defineProps<{

@@ -42,6 +42,9 @@
       <a class="menu-icon cursor-pointer" title="Search (CTRL+S)" @click="searchDialogVisible = true">
         <search-outlined class="text-blue-500"></search-outlined>
       </a>
+      <a class="menu-icon cursor-pointer" title="Console (CTRL+L)" @click="consoleDialogVisible = true">
+        <code-outlined class="text-blue-500"></code-outlined>
+      </a>
       <a-dropdown>
         <a class="menu-icon cursor-pointer">
           <menu-outlined class="text-blue-500"></menu-outlined>
@@ -77,15 +80,19 @@
     <!-- new object type selection dialog -->
     <ObjectTypeSelectorDialog v-if="objectTypeSelectorVisible" v-model:open="objectTypeSelectorVisible"
       v-model:value="newObjectType" @ok="onNewObjectTypeSelected"></ObjectTypeSelectorDialog>
+    <!-- console dialog -->
+    <a-modal v-model:open="consoleDialogVisible" :footer="null" :closable="false" width="850px">
+      <Console></Console>
+    </a-modal>
   </div>
 </template>
 
 <script setup lang="ts">
 
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { Ref, computed, onMounted, onUnmounted, ref } from 'vue';
 import { menuItems } from '@/router'
 import { useRoute, useRouter } from 'vue-router'
-import { MenuOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined, SaveOutlined, HistoryOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons-vue';
+import { MenuOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined, SaveOutlined, HistoryOutlined, SearchOutlined, PlusCircleOutlined, CodeOutlined } from '@ant-design/icons-vue';
 import { ItemType } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
 import { usePending } from '@/utils/use';
@@ -94,8 +101,9 @@ import HistoryBrowser from './history/history-browser.vue';
 import SearchPanel from './search/search-panel.vue'
 import { GameDataKey } from '@/common/ggbh-meta';
 import { useWindowSize } from '@vueuse/core';
-import ObjectEditor from './object-editor.vue';
+import ObjectEditor from './editor/object-editor.vue';
 import ObjectTypeSelectorDialog from './editor/object-type-selector-dialog.vue';
+import Console from './script-console/console.vue';
 
 const route = useRoute();
 const { width } = useWindowSize();
@@ -160,15 +168,27 @@ const onSaveNewObject = () => {
   }
 }
 
+// console
+const consoleDialogVisible = ref<boolean>(false);
+
 // hotkey
+const toggleUIShowHide = (visible: Ref<boolean>, fn?: () => void) => {
+  fn = fn || (() => visible.value = !visible.value)
+  const arr = [historyBrowserVisibile, searchDialogVisible, consoleDialogVisible, objectTypeSelectorVisible];
+  if (arr.every(e => !e.value) || arr.some(e => e === visible && e.value)) {
+    fn()
+  }
+}
 const hotkeyHandler = (e: KeyboardEvent) => {
   if (e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
     if (['h', 'H'].includes(e.key)) {
-      historyBrowserVisibile.value = !historyBrowserVisibile.value;
+      toggleUIShowHide(historyBrowserVisibile)
     } else if (['s', 'S'].includes(e.key)) {
-      searchDialogVisible.value = !searchDialogVisible.value;
+      toggleUIShowHide(searchDialogVisible)
     } else if (['n', 'N'].includes(e.key)) {
-      openTypeSelectorDialog();
+      toggleUIShowHide(objectTypeSelectorVisible, openTypeSelectorDialog)
+    } else if (['l', 'L'].includes(e.key)) {
+      toggleUIShowHide(consoleDialogVisible)
     }
   }
 }

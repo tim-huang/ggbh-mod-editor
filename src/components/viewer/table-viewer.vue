@@ -1,6 +1,7 @@
 <template>
   <div class="max-w-[calc(100%)] overflow-x-scroll">
-    <a-table :columns="columns" :data-source="dataSource" row-key="id" v-bind="$attrs">
+    <a-table :columns="columns" :data-source="dataSource" row-key="id" :row-class-name="rowClassName" v-bind="$attrs"
+      class="game-object-table">
       <!-- @resize-column="handleResizeColumn"> -->
       <template #bodyCell="{ column, text, record }">
         <field-display v-if="column.dataIndex !== '$action'" :data-key="dataKey" :field="fieldMap[column.dataIndex]"
@@ -16,8 +17,13 @@
       </template>
     </a-table>
     <!-- detail dialog -->
-    <a-modal v-model:open="detailDialogVisible" width="800px" :title="dataKey + ' - ' + detailObject?.id"
-      @ok="detailDialogVisible = false">
+    <a-modal v-model:open="detailDialogVisible" width="800px" @ok="detailDialogVisible = false">
+      <template #title>
+        <a-space>
+          <span>{{ dataKey }} - {{ detailObject?.id }}</span>
+          <a-tag color="red" v-if="detailObject?.customized">Customized</a-tag>
+        </a-space>
+      </template>
       <div class='w-full h-[680px] overflow-y-scroll'>
         <game-data-viewer :data-key="dataKey" :data="detailObject!"></game-data-viewer>
       </div>
@@ -38,7 +44,7 @@ import { GameDataKey } from '@/common/ggbh-meta';
 import { useGameObject } from "@/data/app-config";
 import FieldDisplay from './field-display.vue';
 import GameDataViewer from './game-data-viewer.vue';
-import ObjectEditor from './object-editor.vue';
+import ObjectEditor from '../editor/object-editor.vue';
 import { computed, ref } from 'vue';
 import { InfoCircleOutlined, EditOutlined } from '@ant-design/icons-vue';
 import { useGameData } from '@/data/customized-game-data';
@@ -93,6 +99,10 @@ const columns = computed(() => {
   return arr;
 })
 
+const rowClassName = (record: GameObjectData, _index: number) => {
+  if (record.customized) return 'customized-row'
+  return null;
+}
 // resize column
 // const handleResizeColumn = (w: number, col: { width: number }) => {
 //   col.width = w;
@@ -120,4 +130,8 @@ const onSaveEditing = () => {
 </script>
 
 
-<style scoped></style>
+<style scoped>
+.game-object-table :deep(.customized-row) td {
+  @apply bg-red-100 text-red-500;
+}
+</style>

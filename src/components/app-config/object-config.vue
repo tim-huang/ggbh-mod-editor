@@ -45,10 +45,10 @@ import { GameDataKey, gameMetaInfo } from "@/common/ggbh-meta";
 import { computed, ref } from 'vue';
 import { useGameData } from '@/data/customized-game-data';
 import DisplayFieldsConfig from '@/components/app-config/display-fields-config.vue'
-import InlineViewer from '@/components/inline-viewer.vue';
-import BriefViewer from '@/components/brief-viewer.vue';
+import InlineViewer from '@/components/viewer/inline-viewer.vue';
+import BriefViewer from '@/components/viewer/brief-viewer.vue';
 import FieldsConfig from "@/components/app-config/fields-config.vue";
-import TableViewer from "@/components/table-viewer.vue";
+import TableViewer from "@/components/viewer/table-viewer.vue";
 
 const props = defineProps<{
   dataKey: GameDataKey,

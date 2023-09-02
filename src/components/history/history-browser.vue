@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { LastUpdate, useLastUpdate } from '@/data/last-update';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
-import GameDataViewer from '../game-data-viewer.vue';
+import GameDataViewer from '../viewer/game-data-viewer.vue';
 import { useGameData } from '@/data/customized-game-data';
 
 const emits = defineEmits<{

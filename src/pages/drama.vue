@@ -20,7 +20,7 @@ import { useGameData } from '@/data/customized-game-data'
 import { GameDataKey } from '@/common/ggbh-meta';
 import DramaSearchInput from '@/components/drama/drama-search-input.vue'
 import DramaDialogueViewer from '@/components/drama/drama-dialogue-viewer.vue'
-import GameDataViewer from '@/components/game-data-viewer.vue'
+import GameDataViewer from '@/components/viewer/game-data-viewer.vue'
 import { useRoute } from "vue-router";
 
 const currentRoute = useRoute()

@@ -49,8 +49,8 @@
 <script setup lang="ts">
 
 import ObjectTree from '@/components/object-browser/object-tree.vue'
-import GameDataViewer from '@/components/game-data-viewer.vue';
-import ObjectEditor from '@/components/object-editor.vue';
+import GameDataViewer from '@/components/viewer/game-data-viewer.vue';
+import ObjectEditor from '@/components/editor/object-editor.vue';
 import { GameDataKey } from '@/common/ggbh-meta';
 import { computed, nextTick, onUnmounted, ref, watchEffect } from 'vue';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';

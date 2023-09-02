@@ -31,7 +31,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import GameDataViewer from '../game-data-viewer.vue';
+import GameDataViewer from '../viewer/game-data-viewer.vue';
 import { useGameData } from '@/data/customized-game-data';
 import { GameDataKey } from '@/common/ggbh-meta';
 import { useDebounceFn } from '@vueuse/core';

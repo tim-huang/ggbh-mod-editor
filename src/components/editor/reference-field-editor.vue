@@ -49,12 +49,12 @@
 <script setup lang="ts">
 import { GameDataKey } from '@/common/ggbh-meta';
 import { computed, nextTick, ref } from 'vue';
-import FieldDisplay from '../field-display.vue';
+import FieldDisplay from '../viewer/field-display.vue';
 import { PlusOutlined, CaretUpOutlined, CaretDownOutlined, SwapOutlined, EditOutlined } from '@ant-design/icons-vue';
 import ObjectSelector from '../object-browser/object-selector.vue';
 import { useWindowSize } from '@vueuse/core';
 import { useGameData } from '@/data/customized-game-data';
-import ObjectEditor from '../object-editor.vue';
+import ObjectEditor from './object-editor.vue';
 import { originalGameData } from '@/data/original-game-data';
 
 

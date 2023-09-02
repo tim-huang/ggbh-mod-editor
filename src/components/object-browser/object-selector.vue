@@ -20,8 +20,7 @@
             show-search></a-select>
         </a-form-item>
         <a-form-item>
-          <a-input-search v-model:value="searchModel[keywordSymbol]" allowClear placeholder="keyword"
-            width="120px"></a-input-search>
+          <a-input-search v-model:value="keyword" allowClear placeholder="keyword" width="120px"></a-input-search>
         </a-form-item>
       </a-form>
     </template>
@@ -53,15 +52,16 @@
   </a-drawer>
 </template>
 <script setup lang="ts">
-import { ref, h, reactive, computed } from 'vue';
+import { ref, h, reactive, computed, onUnmounted } from 'vue';
 import { GameDataKey, gameMetaInfo } from '@/common/ggbh-meta';
 import { SettingOutlined } from '@ant-design/icons-vue';
 import { useGameObject } from '@/data/app-config';
 import { usePending } from '@/utils/use';
 import { useGameData } from '@/data/customized-game-data';
-import TableViewer from '../table-viewer.vue';
+import TableViewer from '../viewer/table-viewer.vue';
 import ObjectConfig from '../app-config/object-config.vue';
 import { TableProps } from 'ant-design-vue';
+import { watchDebounced } from '@vueuse/core';
 
 const props = defineProps<{
   dataKeyRestrict?: GameDataKey[],
@@ -74,6 +74,12 @@ const emits = defineEmits<{
 }>();
 
 const customizedOnly = ref<boolean>(false);
+const keyword = ref<string>('');
+const debouncedKeyword = ref<string>('');
+
+// debounce watch keyword
+const stopWatch = watchDebounced([keyword], () => debouncedKeyword.value = keyword.value, { debounce: 300 });
+onUnmounted(stopWatch);
 
 const options = computed(() => {
   return (props.dataKeyRestrict?.length ? props.dataKeyRestrict : Object.keys(gameMetaInfo))
@@ -97,44 +103,24 @@ const onConfigOk = async () => {
   fieldsConfigDialogVisibile.value = false;
 }
 // search form
-const keywordSymbol = '$$keyword4search$$';
 const searchModel = reactive<Record<string, string>>({})
 const dictionaryField = computed(() => Object.values(mergedObjectConfig.value.fields || {}).filter(field => field.dictionary));
 // datasource for table
-const { gameData, getText } = useGameData()
+const { gameData, search } = useGameData()
 const dataSource = computed(() => {
   if (!dataKey.value) return [];
-  return gameData.combined[dataKey.value].filter(row => !customizedOnly.value || row.customized)
-    .filter((row) => {
-      // filter out by selected dictionary
-      if (Object.entries(searchModel).some(([k, v]) => {
-        if (!v) return false;
-        if (k === keywordSymbol) return false;
-        if (row[k] !== v) return true;
-      })) {
-        return false;
-      }
-      // filter out by keyword
-      const keyword = searchModel[keywordSymbol];
-      if (!keyword) return true;
-      if (Object.values(row).some(v => v && v.toString().indexOf(keyword) >= 0)) {
-        return true;
-      }
-      // deep search if it's related to LocalText or RoleLogLocal
-      return Object.values(mergedObjectConfig.value.fields || {})
-        .filter(field => field.refer?.some(r => [GameDataKey.LocalText, GameDataKey.RoleLogLocal].includes(r.object as GameDataKey)))
-        .some(field => getText(row[field.code]).some(text => text.indexOf(keyword) > 0))
-    })
-  // return gameData.combined[dataKey.value as GameDataKey] || []
+  return search({ key: dataKey.value, keyword: debouncedKeyword.value, customizedOnly: customizedOnly.value }, (row: GameObjectData) => {
+    return !Object.entries(searchModel).some(([k, v]) => {
+      if (!v) return false;
+      if (row[k] !== v) return true;
+    });
+  })[dataKey.value] || [];
 })
 
 const selectedRowKeys = ref<string[]>([]);
 const rowSelection = computed<TableProps['rowSelection']>(() => {
   return {
     selectedRowKeys: selectedRowKeys.value,
-    // onChange: (selectedKeys, selectedRows: GameObjectData[]) => {
-    //   selectedRowKeys.value = selectedKeys as string[];
-    // },
     type: props.multiple ? 'checkbox' : 'radio',
     fixed: true,
   }

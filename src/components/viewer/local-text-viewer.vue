@@ -7,21 +7,16 @@
           <a @click="() => copy(data[field.code])" title="Copy Value">
             <CopyOutlined class="text-blue-500"></CopyOutlined>
           </a>
-          <a-tooltip :title="`Original value: ${data[field.code]}`">
-            <InfoCircleOutlined v-if="field.refer?.length || field.dictionary" class="text-blue-500">
-            </InfoCircleOutlined>
-          </a-tooltip>
         </a-space>
       </template>
-      <field-display :data-key="dataKey" :field-value="data[field.code]" :field="field"></field-display>
+      <span>{{ data[field.code] }}</span>
     </a-descriptions-item>
   </a-descriptions>
 </template>
 
 <script lang="ts" setup>
 import { GameDataKey } from "@/common/ggbh-meta";
-import FieldDisplay from './field-display.vue';
-import { InfoCircleOutlined, CopyOutlined } from "@ant-design/icons-vue";
+import { CopyOutlined } from "@ant-design/icons-vue";
 import { useGameObject } from "@/data/app-config";
 import { copy } from "@/utils/clipboard";
 import { computed, onUnmounted, watch } from "vue";
@@ -51,3 +46,4 @@ onUnmounted(stopWatch)
 </script>
 
 <style scoped></style>
+
