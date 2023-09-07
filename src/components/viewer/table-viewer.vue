@@ -13,6 +13,12 @@
           <a v-if="editable" @click="showEditorDialog(record.id)">
             <edit-outlined title="Edit"></edit-outlined>
           </a>
+          <a v-if="editable" @click="copy(record.id)">
+            <copy-outlined title="Edit"></copy-outlined>
+          </a>
+          <a v-if="editable && record.customized" @click="remove(record.id)">
+            <delete-outlined title="Remove" class="text-red-600"></delete-outlined>
+          </a>
         </a-space>
       </template>
     </a-table>
@@ -46,8 +52,9 @@ import FieldDisplay from './field-display.vue';
 import GameDataViewer from './game-data-viewer.vue';
 import ObjectEditor from '../editor/object-editor.vue';
 import { computed, ref } from 'vue';
-import { InfoCircleOutlined, EditOutlined } from '@ant-design/icons-vue';
+import { InfoCircleOutlined, EditOutlined, CopyOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import { useGameData } from '@/data/customized-game-data';
+import { Modal } from 'ant-design-vue';
 
 const props = defineProps<{
   dataKey: GameDataKey,
@@ -56,7 +63,7 @@ const props = defineProps<{
   editable?: boolean,
 }>();
 
-const { gameData } = useGameData()
+const { gameData, createObject } = useGameData()
 
 const { mergedInlineFields } = useGameObject(() => props.dataKey);
 
@@ -120,6 +127,23 @@ const editingObject = ref<GameObjectData>();
 const showEditorDialog = (id: string) => {
   editingObject.value = Object.assign({}, gameData.combined[props.dataKey]?.find(o => o.id === id));
   editorDialogVisible.value = true;
+}
+
+// copy
+const copy = (id: string) => {
+  editingObject.value = createObject(props.dataKey, id)
+  editorDialogVisible.value = true;
+}
+
+// remove
+const remove = (id: string) => {
+  Modal.confirm({
+    title: `Remove ${props.dataKey} ${id}`,
+    content: `You are about to remove ${props.dataKey}[${id}], are you sure?`,
+    onOk() {
+      gameData.remove(props.dataKey, id);
+    }
+  })
 }
 // save  editing
 const onSaveEditing = () => {

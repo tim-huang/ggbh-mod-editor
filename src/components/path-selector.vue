@@ -41,7 +41,7 @@ const { gameData } = useGameData()
 
 const { fn: onSelectPath } = usePending(async () => {
   const path = await window.api.selectPath();
-  if (path && path !== gameData.path) {
+  if (path) {
     await gameData.init(path);
     path && emits("selected", path)
   }

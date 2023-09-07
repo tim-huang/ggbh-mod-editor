@@ -181,8 +181,8 @@ export const useGameData = () => {
     return gameData.texts[key]?.map(text => text[lang]) || []
   }
   // 查找一个field对应的对象
-  const getReferenceObjectsByField = (field: AppConfig.IFieldConfig, fieldValue?: string): Partial<Record<GameDataKey, GameObjectData[]>> | undefined => {
-    if (!fieldValue || fieldValue === '0') return;
+  const getReferenceObjectsByField = (field: AppConfig.IFieldConfig, fieldValue?: string): Partial<Record<GameDataKey, GameObjectData[]>> => {
+    if (!fieldValue || fieldValue === '0') return {};
     const result: Partial<Record<GameDataKey, GameObjectData[]>> = {}
     field.refer?.forEach(refer => {
       const values = field.multiple ? fieldValue.split('|') : [fieldValue]
@@ -195,7 +195,7 @@ export const useGameData = () => {
     if (Object.keys(result).length) {
       return result
     }
-    return undefined
+    return {};
   }
   // 查找一个对象各个列引用的其它对象
   const getReferenceObjects = (currentObject: GameObjectData, fields: AppConfig.IFieldConfig[]) => {
@@ -241,10 +241,17 @@ export const useGameData = () => {
   }
 
   // init a new object
-  const createObject = (key: GameDataKey) => {
-    // copy one from original data
-    const obj = Object.assign({}, (originalGameData[key] || [{}])[0]);
-    Object.keys(obj).forEach(k => obj[k] = '0'); // init object properties with '0'
+  const createObject = (key: GameDataKey, copyId?: string) => {
+    let copyObject = null;
+    let found = false;
+    if (copyId) { // try to find copy source
+      copyObject = gameData.combined[key]?.find(o => o.id === copyId);
+      found = !!copyObject
+    }
+    copyObject = copyObject || (originalGameData[key] || [{}])[0];
+    // copy one from source
+    const obj = Object.assign({}, copyObject)
+    !found && Object.keys(obj).forEach(k => obj[k] = '0'); // init object properties with '0' if not in copy mode or source object not found
     obj.id = gameData.getRandomId(key); // generate object id
     return obj;
   }

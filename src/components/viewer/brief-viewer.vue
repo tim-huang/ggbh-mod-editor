@@ -42,12 +42,14 @@ import GameDataViewer from './game-data-viewer.vue';
 import ObjectEditor from '../editor/object-editor.vue';
 import { useWindowSize } from '@vueuse/core';
 import { useGameData } from '@/data/customized-game-data';
+import { useRouter } from 'vue-router';
 
 const props = defineProps<{
   dataKey: GameDataKey
   data: GameObjectData
 }>();
 
+const router = useRouter();
 const { mergedBriefFields } = useGameObject(() => props.dataKey);
 const { gameData } = useGameData()
 
@@ -78,6 +80,13 @@ const menuItems = computed(() => [
     onClick: () => {
       editingModel.value = Object.assign({}, props.data);
       showEditorModal.value = true;
+    }
+  },
+  {
+    label: 'Browse it',
+    key: 'browseIt',
+    onClick: () => {
+      router.push({ path: 'object-browser', query: { type: props.dataKey, id: props.data.id } })
     }
   }
 ]);

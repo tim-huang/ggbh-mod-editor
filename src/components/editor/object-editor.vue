@@ -2,7 +2,7 @@
 <template>
   <div class="w-full h-full">
     <a-descriptions :column="1" bordered size="small" v-bind="$attrs" :label-style="{ width: '280px' }">
-      <template #extra v-if="isNewObject">
+      <template #extra>
         <a-button @click="objectSelectorVisible = true">
           <template #icon>
             <copy-outlined></copy-outlined>
@@ -55,7 +55,7 @@
 import { GameDataKey } from '@/common/ggbh-meta';
 import { useGameObject } from '@/data/app-config';
 import { useGameData } from '@/data/customized-game-data';
-import { computed, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
+import { computed, onUnmounted, ref, watch, watchEffect } from 'vue';
 import ReferenceFieldEditor from './reference-field-editor.vue';
 import { UnorderedListOutlined, CopyOutlined, SnippetsOutlined, FunctionOutlined } from '@ant-design/icons-vue';
 import { useWindowSize } from '@vueuse/core';
@@ -84,9 +84,9 @@ const stopWatchingProps = watchEffect(() => {
   model.value = props.value
 });
 
-const isNewObject = computed<boolean>(() => {
-  return !gameData.combined[props.dataKey]?.find(o => o.id === props.value.id)
-});
+// const isNewObject = computed<boolean>(() => {
+//   return !gameData.combined[props.dataKey]?.find(o => o.id === props.value.id)
+// });
 
 // Find a template and copy it's value to model
 const objectSelectorVisible = ref<boolean>(false);

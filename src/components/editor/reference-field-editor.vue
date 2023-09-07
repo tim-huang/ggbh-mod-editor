@@ -12,7 +12,7 @@
         <a-dropdown>
           <swap-outlined class="text-orange-600" title="Replace"></swap-outlined>
           <template #overlay>
-            <a-menu :items="menuItems" @click="onMenuItemClick($event, fv)"></a-menu>
+            <a-menu :items="replacingMenuItems" @click="onMenuItemClick($event, fv)"></a-menu>
           </template>
         </a-dropdown>
         <!-- edit btn -->
@@ -50,12 +50,12 @@
 import { GameDataKey } from '@/common/ggbh-meta';
 import { computed, nextTick, ref } from 'vue';
 import FieldDisplay from '../viewer/field-display.vue';
-import { PlusOutlined, CaretUpOutlined, CaretDownOutlined, SwapOutlined, EditOutlined } from '@ant-design/icons-vue';
+import { PlusOutlined, CaretUpOutlined, CaretDownOutlined, SwapOutlined } from '@ant-design/icons-vue';
 import ObjectSelector from '../object-browser/object-selector.vue';
 import { useWindowSize } from '@vueuse/core';
 import { useGameData } from '@/data/customized-game-data';
 import ObjectEditor from './object-editor.vue';
-import { originalGameData } from '@/data/original-game-data';
+import { ItemType } from 'ant-design-vue';
 
 
 const props = defineProps<{
@@ -96,15 +96,33 @@ const menuItems = computed<ItemType[]>(() => {
   return arr as unknown as ItemType[];
 })
 
+const replacingMenuItems = computed<ItemType[]>(() => {
+  return [{
+    label: 'Copy & Replace',
+    key: '@'
+
+  }, ...menuItems.value] as ItemType[];
+})
 // replace or add
-const replacing = ref<string>('');
+const replacing = ref<string>();
 const onMenuItemClick = ({ key }: { key: string }, replaceId?: string) => {
-  if (replaceId) {
-    replacing.value = replaceId;
-  }
+  replacing.value = replaceId;
   if (key === '$') {
     // select existing
     objectSelectorVisible.value = true
+  } else if (key === '@') {
+    // copy & replace
+    const { getReferenceObjectsByField } = useGameData();
+    const referObjects = getReferenceObjectsByField(props.field, replaceId);
+    if (Object.keys(referObjects).length) {
+      const dataKey = Object.keys(referObjects)[0] as GameDataKey;
+      const source = referObjects[dataKey];
+      if (source?.length) {
+        onCreate(dataKey, source[0].id);
+      }
+    } else {
+      alert('Object not found.')
+    }
   } else {
     onCreate(key as GameDataKey)
   }
@@ -114,20 +132,13 @@ const newObject = ref<GameObjectData>();
 const newDataKey = ref<GameDataKey>();
 const { gameData, createObject } = useGameData();
 const objectCreatorVisible = ref<boolean>(false);
-const onCreate = (key: GameDataKey) => {
+const onCreate = (key: GameDataKey, copyId?: string) => {
   editorTitle.value = 'New ' + key;
   newDataKey.value = key;
-  newObject.value = createObject(key);
+  newObject.value = createObject(key, copyId);
   objectCreatorVisible.value = true; // open drawer
 }
 const editorTitle = ref<string>('')
-const onEdit = (key: GameDataKey, id: string) => {
-  newObject.value = gameData.combined[key]?.find(o => o.id === id);
-  if (newObject.value) {
-    editorTitle.value = 'Edit ' + key + ' - ' + id;
-    objectCreatorVisible.value = true;
-  }
-}
 
 const onCreateSave = () => {
   if (newDataKey.value && newObject.value) {

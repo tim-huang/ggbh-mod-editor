@@ -23,6 +23,10 @@
               <edit-outlined></edit-outlined>
               Edit
             </a-button>
+            <a-button @click="onCopy">
+              <CopyOutlined></CopyOutlined>
+              Copy
+            </a-button>
           </template>
         </a-page-header>
         <div class="h-[calc(100%-85px)] overflow-y-scroll mt-[5px]">
@@ -53,14 +57,15 @@ import GameDataViewer from '@/components/viewer/game-data-viewer.vue';
 import ObjectEditor from '@/components/editor/object-editor.vue';
 import { GameDataKey } from '@/common/ggbh-meta';
 import { computed, nextTick, onUnmounted, ref, watchEffect } from 'vue';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
+import { EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons-vue';
 import { useWindowSize } from '@vueuse/core';
 import { Modal } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 
 const route = useRoute();
+const router = useRouter();
 
 const dataKey = ref<GameDataKey>()
 const dataId = ref<string>()
@@ -69,7 +74,7 @@ const onNodeSelected = ({ type, item }: { type: GameDataKey, item: GameObjectDat
   dataId.value = item.id;
 }
 
-const { gameData } = useGameData();
+const { gameData, createObject } = useGameData();
 const dataForViewer = computed(() => {
   if (!dataKey.value || !dataId.value) return;
   return gameData.combined[dataKey.value]?.find(o => o.id === dataId.value);
@@ -86,17 +91,32 @@ const onEdit = () => {
   editingData.value = Object.assign({}, dataForViewer.value)
   editorDrawerVisible.value = true;
 }
+// copy
+const onCopy = () => {
+  if (dataKey.value && dataId.value) {
+    const obj = createObject(dataKey.value, dataId.value)
+    editingData.value = obj;
+    editorDrawerVisible.value = true;
+  }
+}
+// save
 const onSave = async () => {
   if (!dataKey.value || !editingData.value) return;
   // save data
   gameData.updateObject(dataKey.value, editingData.value)
-  // refresh left tree
-  if (objectTree.value) {
-    await objectTree.value.refreshTree();
+  if (dataId.value == editingData.value.id) { //edit
+
+    // refresh left tree
+    if (objectTree.value) {
+      await objectTree.value.refreshTree();
+    }
+  } else { // copy
+    router.push({ path: route.path, query: { type: dataKey.value, id: editingData.value.id } })
   }
   // close drawer
   editorDrawerVisible.value = false;
 }
+
 // remove customization
 const onRemove = () => {
   if (!dataKey.value || !dataId.value) return

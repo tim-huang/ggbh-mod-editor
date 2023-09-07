@@ -1,25 +1,32 @@
 <template>
   <div class="w-full h-full">
     <!-- page header -->
-    <a-page-header :title="dataKey">
+    <a-page-header>
+      <template #title>
+        <div class="flex flex-row gap-2">
+          <a-button type="primary" :icon="h(SettingOutlined)" @click="fieldsConfigDialogVisibile = true" shape="circle">
+          </a-button>
+          <span>{{ dataKey }}</span>
+        </div>
+      </template>
       <template #extra>
         <a-checkbox v-model:checked="customizedOnly">Customized Only</a-checkbox>
-        <a-select :value="dataKey" :options="options" style="width: 300px; text-align: left;" show-search
+        <a-select :value="dataKey" :options="options" style="width: 240px; text-align: left;" show-search
           @select="dataKeySelected"></a-select>
-        <a-button type="primary" :icon="h(SettingOutlined)" @click="fieldsConfigDialogVisibile = true" shape="circle">
-        </a-button>
+        <a-input v-model:value="keyword" allowClear placeholder="Keyword">
+          <template #prefix>
+            <SearchOutlined class="text-gray-400"></SearchOutlined>
+          </template>
+        </a-input>
       </template>
     </a-page-header>
     <!-- search form -->
-    <div class="my-2">
+    <div class="my-2 flex flex-col items-end">
       <a-form layout="inline" :model="searchModel" size="small" class="mx-10">
         <a-form-item v-for="field of dictionaryField" :key="field.code">
           <a-select :options="appConfig.getSelectOptions(field.dictionary!)" v-model:value="searchModel[field.code]"
             :placeholder="field.alias?.trim() || field.label?.trim() || field.code" style="width: 150px" show-search
             allowClear></a-select>
-        </a-form-item>
-        <a-form-item>
-          <a-input v-model:value="keyword" allowClear placeholder="keyword"></a-input>
         </a-form-item>
       </a-form>
 
@@ -45,7 +52,7 @@ import { computed, h, ref, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import TableViewer from '@/components/viewer/table-viewer.vue';
 import { useGameObject } from '@/data/app-config';
-import { SettingOutlined } from '@ant-design/icons-vue';
+import { SettingOutlined, SearchOutlined } from '@ant-design/icons-vue';
 import ObjectConfig from '@/components/app-config/object-config.vue';
 import { usePending } from '@/utils/use';
 import { watchDebounced } from '@vueuse/core';

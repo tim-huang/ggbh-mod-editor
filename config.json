@@ -2217,7 +2217,13 @@
           ]
         },
         "dialogueId": {
-          "code": "dialogueId"
+          "code": "dialogueId",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
         }
       }
     },
@@ -2522,14 +2528,7 @@
           ]
         },
         "type": {
-          "code": "type",
-          "refer": [
-            {
-              "object": "BattleEffect",
-              "field": "id"
-            }
-          ],
-          "multiple": true
+          "code": "type"
         }
       }
     },
@@ -2563,6 +2562,10 @@
         "typeID": {
           "code": "typeID",
           "dictionary": "D1423184220560971"
+        },
+        "overlay": {
+          "code": "overlay",
+          "dictionary": "D4086248229858635"
         }
       },
       "brief": [
@@ -2631,8 +2634,20 @@
               "field": "key"
             }
           ]
+        },
+        "key": {
+          "code": "key",
+          "refer": [
+            {
+              "object": "LocalText",
+              "field": "key"
+            }
+          ]
         }
-      }
+      },
+      "brief": [
+        "key"
+      ]
     },
     "SpecificSkillAttack": {
       "fields": {
@@ -3410,6 +3425,15 @@
               "field": "key"
             }
           ]
+        },
+        "baseID": {
+          "code": "baseID",
+          "refer": [
+            {
+              "object": "BattleUnitBase",
+              "field": "id"
+            }
+          ]
         }
       },
       "brief": [
@@ -4115,14 +4139,7 @@
           "multiple": true
         },
         "clearEffect": {
-          "code": "clearEffect",
-          "refer": [
-            {
-              "object": "BattleEffect",
-              "field": "id"
-            }
-          ],
-          "multiple": true
+          "code": "clearEffect"
         },
         "destroyEffect": {
           "code": "destroyEffect",
@@ -4133,6 +4150,18 @@
             }
           ],
           "multiple": true
+        },
+        "type": {
+          "code": "type",
+          "dictionary": "D8659321026251441"
+        },
+        "block": {
+          "code": "block",
+          "dictionary": "D3833873690126035"
+        },
+        "target": {
+          "code": "target",
+          "dictionary": "D364398517171469"
         }
       },
       "brief": [
@@ -4140,9 +4169,26 @@
       ],
       "inline": [
         "id",
+        "mainSkill",
         "type",
         "enterEffect",
-        "exitEffect"
+        "exitEffect",
+        "target",
+        "block"
+      ]
+    },
+    "BattleSubMissileTrigger": {
+      "fields": {
+        "type": {
+          "code": "type",
+          "dictionary": "D529504438305767"
+        }
+      }
+    },
+    "BattleUnitBase": {
+      "brief": [
+        "id",
+        "model"
       ]
     }
   },
@@ -4895,6 +4941,68 @@
       "entries": {
         "0": "自己",
         "1": "目标"
+      }
+    },
+    "D529504438305767": {
+      "id": "D529504438305767",
+      "label": "二段弹道触法条件",
+      "entries": {
+        "1": "间隔时间触发",
+        "2": "碰撞后触发",
+        "3": "警戒范围内有敌人触发",
+        "4": "销毁时触发",
+        "5": "逻辑或条件触发",
+        "6": "逻辑与条件触发",
+        "7": "击杀目标时触发",
+        "8": "间隔时间触发",
+        "9": "随机间隔触发(立即触发一次)",
+        "10": "销毁时没有命中目标"
+      }
+    },
+    "D4086248229858635": {
+      "id": "D4086248229858635",
+      "label": "效果叠加方式",
+      "entries": {
+        "0": "效果不叠加",
+        "1": "可叠加多个效果，每个效果只有一层，会受到最大层数限制",
+        "2": "只有一个效果，层数叠加，添加效果时，刷新已有效果的时间，受到最大层数限制",
+        "3": "只有一个效果，只有一层，每次获得效果时增加其持续时间，最大层数限制无效",
+        "4": "只有一个效果，层数叠加，每个层数单独计算持续时间，受到最大层数限制",
+        "5": "只有一个效果，层数叠加，添加效果时，刷新已有效果的时间，受到最大层数限制，获取层数时只返回一层（底层是有多层的）"
+      }
+    },
+    "D8659321026251441": {
+      "id": "D8659321026251441",
+      "label": "光环类型",
+      "entries": {
+        "0": "普通光环",
+        "1": "弹道光环（已废弃）",
+        "2": "攻击光环",
+        "3": "召唤光环"
+      }
+    },
+    "D3833873690126035": {
+      "id": "D3833873690126035",
+      "label": "光环阻挡",
+      "entries": {
+        "0": "无",
+        "1": "己方弹道",
+        "2": "敌方弹道",
+        "3": "所有弹道"
+      }
+    },
+    "D364398517171469": {
+      "id": "D364398517171469",
+      "label": "生效目标",
+      "entries": {
+        "1": "自己",
+        "2": "敌人",
+        "3": "友方（自己和自己的召唤物）",
+        "4": "所有单位",
+        "5": "友方，除了自己(包括盟军)",
+        "6": "己方召唤单位",
+        "7": "友方修仙者（不包括自己）",
+        "8": "友方（自己,自己召唤物,盟军）"
       }
     }
   },

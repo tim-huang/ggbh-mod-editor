@@ -45,6 +45,9 @@
       <a class="menu-icon cursor-pointer" title="Console (CTRL+L)" @click="consoleDialogVisible = true">
         <code-outlined class="text-blue-500"></code-outlined>
       </a>
+      <a class="menu-icon cursor-pointer" title="Replicate Objects (CTRL+R)" @click="replicateDialogVisible = true">
+        <copy-outlined class="text-blue-500"></copy-outlined>
+      </a>
       <a-dropdown>
         <a class="menu-icon cursor-pointer">
           <menu-outlined class="text-blue-500"></menu-outlined>
@@ -84,6 +87,9 @@
     <a-modal v-model:open="consoleDialogVisible" :footer="null" :closable="false" width="850px">
       <Console></Console>
     </a-modal>
+    <!-- replicate dialog -->
+    <replicate-objects v-model:open="replicateDialogVisible" @ok="replicateDialogVisible = false" :closable="false" width="1024px" title="Replicate Objects">
+    </replicate-objects>
   </div>
 </template>
 
@@ -92,7 +98,7 @@
 import { Ref, computed, onMounted, onUnmounted, ref } from 'vue';
 import { menuItems } from '@/router'
 import { useRoute, useRouter } from 'vue-router'
-import { MenuOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined, SaveOutlined, HistoryOutlined, SearchOutlined, PlusCircleOutlined, CodeOutlined } from '@ant-design/icons-vue';
+import { MenuOutlined, ArrowLeftOutlined, LockOutlined, UnlockOutlined, SaveOutlined, HistoryOutlined, SearchOutlined, PlusCircleOutlined, CodeOutlined, CopyOutlined } from '@ant-design/icons-vue';
 import { ItemType } from 'ant-design-vue';
 import { useGameData } from '@/data/customized-game-data';
 import { usePending } from '@/utils/use';
@@ -104,6 +110,7 @@ import { useWindowSize } from '@vueuse/core';
 import ObjectEditor from './editor/object-editor.vue';
 import ObjectTypeSelectorDialog from './editor/object-type-selector-dialog.vue';
 import Console from './script-console/console.vue';
+import ReplicateObjects from './editor/replicate-objects.vue';
 
 const route = useRoute();
 const { width } = useWindowSize();
@@ -171,10 +178,13 @@ const onSaveNewObject = () => {
 // console
 const consoleDialogVisible = ref<boolean>(false);
 
+// replicate
+const replicateDialogVisible = ref<boolean>(false);
+
 // hotkey
 const toggleUIShowHide = (visible: Ref<boolean>, fn?: () => void) => {
   fn = fn || (() => visible.value = !visible.value)
-  const arr = [historyBrowserVisibile, searchDialogVisible, consoleDialogVisible, objectTypeSelectorVisible];
+  const arr = [historyBrowserVisibile, searchDialogVisible, consoleDialogVisible, objectTypeSelectorVisible, replicateDialogVisible];
   if (arr.every(e => !e.value) || arr.some(e => e === visible && e.value)) {
     fn()
   }

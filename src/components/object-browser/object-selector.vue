@@ -30,7 +30,8 @@
         <a-form layout="inline" :model="searchModel" size="small" class="mx-10">
           <a-form-item v-for="field of dictionaryField" :key="field.code">
             <a-select :options="appConfig.getSelectOptions(field.dictionary!)" v-model:value="searchModel[field.code]"
-              :placeholder="field.alias?.trim() || field.label?.trim() || field.code" style="width: 150px"
+              :placeholder="field.alias?.trim() || field.label?.trim() || field.code" style="width: 150px" show-search
+              :filter-option="(inputValue: string, option: { label: string; value: string }) => option.label.indexOf(inputValue) >= 0 || option.value.indexOf(inputValue) >= 0"
               allowClear></a-select>
           </a-form-item>
         </a-form>
