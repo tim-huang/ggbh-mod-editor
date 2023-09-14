@@ -13,7 +13,7 @@
         <a-checkbox v-model:checked="customizedOnly">Customized Only</a-checkbox>
         <a-select :value="dataKey" :options="options" style="width: 240px; text-align: left;" show-search
           @select="dataKeySelected"></a-select>
-        <a-input v-model:value="keyword" allowClear placeholder="Keyword">
+        <a-input v-model:value="keyword" allowClear placeholder="Keyword" style="width: 300px">
           <template #prefix>
             <SearchOutlined class="text-gray-400"></SearchOutlined>
           </template>

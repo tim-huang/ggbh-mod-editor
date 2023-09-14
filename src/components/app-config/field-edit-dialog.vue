@@ -174,6 +174,13 @@ const frequentReferences = [
       doAddReference(GameDataKey.ItemProps, 'id');
     }
   },
+  {
+    label: '战斗效果:BattleEffect.id',
+    key: 'BattleEffect.id',
+    onClick() {
+      doAddReference(GameDataKey.BattleEffect, 'id');
+    }
+  },
 ]
 // refer type changed
 const referTypeChanged = (e: any) => {

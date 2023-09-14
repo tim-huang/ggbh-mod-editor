@@ -12,6 +12,8 @@
         </div>
         <!-- sub title -->
         <div class="text-sm text-gray-500 flex flex-row">
+          <!-- data integrity checked -->
+          <DataIntegrity></DataIntegrity>
           <!-- project path -->
           <path-selector></path-selector>
           <a-tag @click="gameData.readonly = !gameData.readonly" class="cursor-pointer"
@@ -88,7 +90,8 @@
       <Console></Console>
     </a-modal>
     <!-- replicate dialog -->
-    <replicate-objects v-model:open="replicateDialogVisible" @ok="replicateDialogVisible = false" :closable="false" width="1024px" title="Replicate Objects">
+    <replicate-objects v-model:open="replicateDialogVisible" @ok="replicateDialogVisible = false" :closable="false"
+      width="1024px" title="Replicate Objects">
     </replicate-objects>
   </div>
 </template>
@@ -111,6 +114,7 @@ import ObjectEditor from './editor/object-editor.vue';
 import ObjectTypeSelectorDialog from './editor/object-type-selector-dialog.vue';
 import Console from './script-console/console.vue';
 import ReplicateObjects from './editor/replicate-objects.vue';
+import DataIntegrity from './viewer/data-integrity.vue';
 
 const route = useRoute();
 const { width } = useWindowSize();

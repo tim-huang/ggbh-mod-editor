@@ -60,7 +60,7 @@ const useProjectData = defineStore({
     },
     dirty(): boolean {
       return Object.values(this.dirtyMap).includes(true)
-    }
+    },
   },
   actions: {
     /**
@@ -99,42 +99,17 @@ const useProjectData = defineStore({
       return this.json[key]
     },
     updateObject(key: GameDataKey, obj: GameObjectData) {
-      const original = originalGameData[key].find(o => o.id === obj.id);
+      // const original = originalGameData[key].find(o => o.id === obj.id);
       this.json[key] = this.json[key] || [];
       const lastUpdate = useLastUpdate();
-      if (!original) {
-        const customizedObject = this.json[key]?.find(o => o.id === obj.id);
-        if (customizedObject) {
-          Object.assign(customizedObject, obj);
-          lastUpdate.log(key, obj.id, 'M');
-        } else {
-
-          this.json[key]!.push(obj);
-          lastUpdate.log(key, obj.id, 'A');
-        }
+      const customizedObject = this.json[key]?.find(o => o.id === obj.id);
+      if (customizedObject) {
+        Object.assign(customizedObject, obj, { customized: undefined });
+        lastUpdate.log(key, obj.id, 'M');
       } else {
-        // compare object
-        const ignoreFields = ['customized']
-        const diff: GameObjectData = { id: obj.id }
-        Object.entries(obj).filter(([k, v]) => !ignoreFields.includes(k) && original[k] !== v)
-          .forEach(([k, v]) => diff[k] = v);
 
-        if (Object.keys(diff).length > 1) { // obj is diferent from original object
-          // replace customized data
-          this.json[key] = this.json[key] || [];
-          const idx = this.json[key]!.findIndex(o => o.id === obj.id);
-          diff.id = obj.id;
-          if (idx >= 0) {
-            (this.json[key]!)[idx] = diff;
-          } else {
-            this.json[key]!.push(diff);
-          }
-          lastUpdate.log(key, obj.id, 'M');
-        } else {
-          // remove customized
-          this.json[key] = this.json[key]?.filter(o => o.id !== obj.id)
-          lastUpdate.log(key, obj.id, 'D');
-        }
+        this.json[key]!.push(Object.assign({}, obj, { customized: undefined }));
+        lastUpdate.log(key, obj.id, 'A');
       }
       this.dirtyMap[key] = true;
     },
@@ -216,6 +191,7 @@ export const useGameData = () => {
     if (!keyword && !filter) {
       return gameData.combined;
     }
+    keyword = keyword.toLowerCase();
     const result: Partial<Record<GameDataKey, GameObjectData[]>> = {};
     Object.entries(gameData.combined).filter(([k, _]) => !key || k === key)
       .forEach(([k, arr]) => {
@@ -225,13 +201,13 @@ export const useGameData = () => {
             // filter out by keyword
             if (filter && !filter(row)) return false;
             if (!keyword) return true;
-            if (Object.values(row).some(v => v && v.toString().indexOf(keyword) >= 0)) {
+            if (Object.values(row).some(v => v && v.toString().toLowerCase().indexOf(keyword) >= 0)) {
               return true;
             }
             // deep search if it's related to LocalText or RoleLogLocal
             return Object.values(mergedObjectConfig.value.fields || {})
               .filter(field => field.refer?.some(r => [GameDataKey.LocalText, GameDataKey.RoleLogLocal].includes(r.object as GameDataKey)))
-              .some(field => getText(row[field.code]).some(text => text.indexOf(keyword) > 0))
+              .some(field => getText(row[field.code]).some(text => text?.toLowerCase()?.indexOf(keyword) > 0))
           })
         if (filtered.length) {
           result[k as GameDataKey] = filtered;

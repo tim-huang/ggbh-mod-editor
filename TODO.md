@@ -9,4 +9,4 @@
 - [x] show last update
 - [ ] create dictionary from field sample
 - [x] battle effect
-- [ ] copy object
+- [x] copy object

@@ -25,8 +25,12 @@
                 <a-menu :items="samples[field.code]" @click="setFieldValue(field.code, $event)"></a-menu>
               </template>
             </a-dropdown>
+            <a v-if="originalData && originalData[field.code] !== model[field.code]" @click="restoreFieldValue(field)"
+              :title="`Restore to ${originalData[field.code]}`">
+              <UndoOutlined class="text-red-500 cursor-pointer"></UndoOutlined>
+            </a>
             <a @click="paste((text: string) => model[field.code] = text)" title="Paste">
-              <SnippetsOutlined class="text-blue-500"></SnippetsOutlined>
+              <SnippetsOutlined class="text-blue-500 cursor-pointer"></SnippetsOutlined>
             </a>
           </a-space>
         </template>
@@ -57,14 +61,15 @@ import { useGameObject } from '@/data/app-config';
 import { useGameData } from '@/data/customized-game-data';
 import { computed, onUnmounted, ref, watch, watchEffect } from 'vue';
 import ReferenceFieldEditor from './reference-field-editor.vue';
-import { UnorderedListOutlined, CopyOutlined, SnippetsOutlined, FunctionOutlined } from '@ant-design/icons-vue';
+import { UnorderedListOutlined, CopyOutlined, SnippetsOutlined, FunctionOutlined, UndoOutlined } from '@ant-design/icons-vue';
 import { useWindowSize } from '@vueuse/core';
 import ObjectSelector from '../object-browser/object-selector.vue';
 import CustomizedSelect from './customized-select.vue';
 import { paste } from '@/utils/clipboard';
-import { ItemType } from 'ant-design-vue';
+import { ItemType, Modal } from 'ant-design-vue';
 import { getObjectFieldsModifier } from '@/data/object-fields-plugin';
 import { useLastUpdate } from '@/data/last-update';
+import { originalGameData } from '@/data/original-game-data';
 
 const props = defineProps<{
   dataKey: GameDataKey,
@@ -84,9 +89,24 @@ const stopWatchingProps = watchEffect(() => {
   model.value = props.value
 });
 
-// const isNewObject = computed<boolean>(() => {
-//   return !gameData.combined[props.dataKey]?.find(o => o.id === props.value.id)
-// });
+// original data
+const originalData = computed<GameObjectData | undefined>(() => {
+  return originalGameData[props.dataKey]?.find(o => o.id === model.value.id);
+})
+
+const restoreFieldValue = (field: AppConfig.IFieldConfig) => {
+  if (originalData.value) {
+    const originalValue = originalData.value[field.code];
+    Modal.confirm({
+      title: 'Restore original value',
+      content: `You are about to restore value of ${field.alias?.trim() || field.label?.trim() || field.code} to ${originalValue}, are you sure?`,
+      onOk() {
+        model.value[field.code] = originalValue;
+      }
+    })
+  }
+
+}
 
 // Find a template and copy it's value to model
 const objectSelectorVisible = ref<boolean>(false);

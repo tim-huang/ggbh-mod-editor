@@ -69,6 +69,8 @@ const reload = () => {
         reloadProject()
       }
     })
+  } else {
+    reloadProject()
   }
 }
 
@@ -96,7 +98,7 @@ const contextMenuItems = computed<ItemType[]>(() => {
       id: '3',
       icon: h(ReloadOutlined),
       label: "Reload",
-      disabled: pending.value || !gameData.dirty,
+      disabled: pending.value,
       action: reload
     },
     {

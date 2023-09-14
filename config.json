@@ -81,13 +81,15 @@
         }
       },
       "inline": [
+        "id",
         "uiType",
         "title",
         "options",
         "dialogue",
         "npcLeft",
         "npcRight",
-        "speaker"
+        "speaker",
+        "weight"
       ],
       "brief": [
         "id",
@@ -207,6 +209,15 @@
           "refer": [
             {
               "object": "BattleSkillEffect",
+              "field": "id"
+            }
+          ]
+        },
+        "equipEffect": {
+          "code": "equipEffect",
+          "refer": [
+            {
+              "object": "RoleEffect",
               "field": "id"
             }
           ]
@@ -591,6 +602,16 @@
               "field": "key"
             }
           ]
+        },
+        "effectValue": {
+          "code": "effectValue",
+          "refer": [
+            {
+              "object": "RoleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
         }
       }
     },
@@ -646,6 +667,20 @@
               "field": "id"
             }
           ]
+        },
+        "effectType": {
+          "code": "effectType",
+          "dictionary": "D1514188210746093"
+        },
+        "effectValue": {
+          "code": "effectValue",
+          "refer": [
+            {
+              "object": "RoleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
         }
       }
     },
@@ -1379,6 +1414,14 @@
             }
           ],
           "multiple": true
+        },
+        "type": {
+          "code": "type",
+          "dictionary": "D5852109845478039"
+        },
+        "refreshType": {
+          "code": "refreshType",
+          "dictionary": "D2919175535545341"
         }
       },
       "brief": [
@@ -1614,6 +1657,36 @@
               "field": "key"
             }
           ]
+        },
+        "wearAddRoleBattleEffect": {
+          "code": "wearAddRoleBattleEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        },
+        "addRoleBattleEffect": {
+          "code": "addRoleBattleEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        },
+        "addArtifactSpriteBattleEffect": {
+          "code": "addArtifactSpriteBattleEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
         }
       },
       "brief": [
@@ -1630,6 +1703,26 @@
               "field": "id"
             }
           ]
+        },
+        "addArtifactBattleEffect": {
+          "code": "addArtifactBattleEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        },
+        "addRoleBattleEffect": {
+          "code": "addRoleBattleEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
         }
       },
       "brief": [
@@ -2366,6 +2459,45 @@
               "field": "key"
             }
           ]
+        },
+        "skillRoleEffect": {
+          "code": "skillRoleEffect",
+          "refer": [
+            {
+              "object": "RoleEffect",
+              "field": "id"
+            }
+          ]
+        },
+        "addArtifactSpriteBattleEffect": {
+          "code": "addArtifactSpriteBattleEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        },
+        "addRoleBattleEffect": {
+          "code": "addRoleBattleEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        },
+        "wearAddRoleBattleEffect": {
+          "code": "wearAddRoleBattleEffect",
+          "refer": [
+            {
+              "object": "BattleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
         }
       }
     },
@@ -2519,13 +2651,7 @@
           ]
         },
         "id": {
-          "code": "id",
-          "refer": [
-            {
-              "object": "BattleSkillAttack",
-              "field": "id"
-            }
-          ]
+          "code": "id"
         },
         "type": {
           "code": "type"
@@ -3706,7 +3832,13 @@
     "RoleCall": {
       "fields": {
         "call": {
-          "code": "call"
+          "code": "call",
+          "refer": [
+            {
+              "object": "RoleLogLocal",
+              "field": "keyID"
+            }
+          ]
         }
       }
     },
@@ -3746,6 +3878,16 @@
               "field": "id"
             }
           ]
+        },
+        "effectValue": {
+          "code": "effectValue",
+          "refer": [
+            {
+              "object": "RoleEffect",
+              "field": "id"
+            }
+          ],
+          "multiple": true
         }
       }
     },
@@ -4189,7 +4331,84 @@
       "brief": [
         "id",
         "model"
-      ]
+      ],
+      "fields": {
+        "type": {
+          "code": "type",
+          "dictionary": "D8312509917213361"
+        },
+        "skills": {
+          "code": "skills",
+          "refer": [
+            {
+              "object": "BattleSkillBase",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        }
+      }
+    },
+    "RoleBattleSub": {
+      "fields": {
+        "value": {
+          "code": "value",
+          "refer": [
+            {
+              "object": "DramaDialogue",
+              "field": "id"
+            }
+          ],
+          "multiple": true
+        }
+      }
+    },
+    "RoleEscape": {
+      "fields": {
+        "value": {
+          "code": "value"
+        }
+      }
+    },
+    "ArtifactShapeMaterial": {
+      "fields": {
+        "shape": {
+          "code": "shape",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "coreMaterialID": {
+          "code": "coreMaterialID",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "rareMaterial": {
+          "code": "rareMaterial",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        },
+        "id": {
+          "code": "id",
+          "refer": [
+            {
+              "object": "ItemProps",
+              "field": "id"
+            }
+          ]
+        }
+      }
     }
   },
   "dictionary": {
@@ -5003,6 +5222,53 @@
         "6": "己方召唤单位",
         "7": "友方修仙者（不包括自己）",
         "8": "友方（自己,自己召唤物,盟军）"
+      }
+    },
+    "D8312509917213361": {
+      "id": "D8312509917213361",
+      "label": "怪物类型",
+      "entries": {
+        "1": "普通单位",
+        "2": "精英单位",
+        "3": "BOSS",
+        "10": "互动单位（只能进行互动，不可攻击）",
+        "11": "器型"
+      }
+    },
+    "D5852109845478039": {
+      "id": "D5852109845478039",
+      "label": "气运类型",
+      "entries": {
+        "1": "先天气运",
+        "2": "后天气运",
+        "3": "逆天改命",
+        "4": "仙人恩赐",
+        "5": "战前气运（算后天，只作用一场战斗）",
+        "6": "壶妖先天气运",
+        "11": "扩展的先天气运"
+      }
+    },
+    "D2919175535545341": {
+      "id": "D2919175535545341",
+      "label": "气运叠加类型",
+      "entries": {
+        "0": "不叠加时间，以最长的时间为准",
+        "1": "叠加时间",
+        "2": "若已存在此气运，则不再添加此气运",
+        "3": "叠加多个气运"
+      }
+    },
+    "D1514188210746093": {
+      "id": "D1514188210746093",
+      "label": "丹药类型",
+      "entries": {
+        "101": "对自己使用效果",
+        "102": "对鼠标位置使用武技",
+        "201": "战斗外使用（增加属性）",
+        "301": "突破用的丹药",
+        "302": "逃跑用的丹药",
+        "401": "兴趣道具",
+        "501": "战斗战败喂丹"
       }
     }
   },
