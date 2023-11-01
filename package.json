@@ -41,7 +41,7 @@
     "vue-tsc": "^1.2.0"
   },
   "dependencies": {
-    "@ant-design/icons-vue": "^6.1.0",
+    "@ant-design/icons-vue": "^7.0.1",
     "@surely-vue/table": "^4.0.8",
     "ant-design-vue": "4.x",
     "json5": "^2.2.3",
